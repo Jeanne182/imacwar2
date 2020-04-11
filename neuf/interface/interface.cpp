@@ -6,8 +6,8 @@ IMAC 1 - Projet Prog&Algo S1
 */
 
 #include <iostream>
-#include "unites.h"
-#include "grille.h"
+#include "./../unites.h"
+#include "interface.h"
 #include <stdlib.h>
 using namespace std;
 
@@ -70,7 +70,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
     }
 }
 
-int affichageGrille(){
+int affichageInterface(){
 
   /* Initialisation de la SDL */
     if(-1 == SDL_Init(SDL_INIT_VIDEO))
@@ -84,21 +84,10 @@ int affichageGrille(){
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
     SDL_Surface* surface;
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_Surface* image = IMG_Load("img/quadrillage.jpg");
+    GLuint textureMap ;
+    creationTexture(&textureMap, "img/quadrillage.jpg");
 
-    if(image==NULL){
-      printf("L'image de la carte n'a pas pu se charger");
-      exit(1);
-    }
 
-    GLuint texture ;
-    glGenTextures(1, &texture);
-
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->w, image->h, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
-    glBindTexture(GL_TEXTURE_2D, 0);
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     surface = SDL_SetVideoMode(
@@ -128,36 +117,7 @@ int affichageGrille(){
         glLoadIdentity();
         glTranslatef(-5, -5,0);
 
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        glBegin(GL_QUADS);
-
-        glTexCoord2f(1, 0);
-        glVertex2f(10, 10);
-
-        glTexCoord2f(0, 0); //angle haut gauche
-        glVertex2f(0,10);
-
-        glTexCoord2f(0, 1);
-        glVertex2f(0, 0);
-
-        glTexCoord2f(1, 1);
-        glVertex2f(10, 0);
-
-
-        glEnd();
-        glBindTexture(GL_TEXTURE_2D, 0);
-        glDisable(GL_TEXTURE_2D);
-
-        glBegin(GL_POLYGON);
-        glVertex2f(0.5, 0.5);
-        glVertex2f(-0.5,0.5);
-        glVertex2f(-0.5, -0.5);
-        glVertex2f(0.5, -0.5);
-
-
-        glEnd();
+        affichageTexture(textureMap,10,10);
 
         /* Echange du front et du back buffer : mise a jour de la fenetre */
         SDL_GL_SwapBuffers();
@@ -185,8 +145,8 @@ int affichageGrille(){
     }
 
     /* Liberation des ressources associees a la SDL */
-    glDeleteTextures(1, &texture);
-    SDL_FreeSurface(image);
+    glDeleteTextures(1, &textureMap);
+    //SDL_FreeSurface(image);
 
     SDL_Quit();
 
