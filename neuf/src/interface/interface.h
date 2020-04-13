@@ -5,8 +5,8 @@ Jeanne Lebigre
 IMAC 1 - Projet Prog&Algo S1
 */
 
-#ifndef GRILLE_H
-#define GRILLE_H
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 #include <SDL/SDL.h>
 #include <GL/gl.h>
@@ -21,7 +21,16 @@ IMAC 1 - Projet Prog&Algo S1
 
 // Prototypes des fonctions :
 
-int affichageGrille();
+/*grille.cpp*/
+void affichageTexture(GLuint texture, float longueur, float largeur);
+void creationTexture(GLuint *texture, char* chemin_image);
+
+/* interface.cpp */
+int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
+
+/* selection.cpp */
+void selectionCoordonnee(int* x, int* y, SDL_Event e, float aspectRatio, SDL_Surface* surface);
+
 
 #endif

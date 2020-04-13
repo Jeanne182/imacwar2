@@ -7,7 +7,7 @@ IMAC 1 - Projet Prog&Algo S1
 */
 
 #include <iostream>
-#include "./../unites.h"
+#include "./../unites/unites.h"
 #include "interface.h"
 #include <stdlib.h>
 using namespace std;
@@ -42,7 +42,7 @@ void creationTexture(GLuint *texture, char* chemin_image){
 
 }
 
-void affichageTexture(GLuint texture, int longueur, int largeur){
+void affichageTexture(GLuint texture, float longueur, float largeur){
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -59,6 +59,8 @@ void affichageTexture(GLuint texture, int longueur, int largeur){
 
   glTexCoord2f(1, 1);
   glVertex2f(longueur, 0);
+
+
 
 
   glEnd();

@@ -6,8 +6,9 @@ IMAC 1 - Projet Prog&Algo S1
 */
 
 #include <iostream>
-#include "unites.h"
-#include "grille.h"
+#include "./../unites/unites.h"
+#include "interface.h"
+#include "./../unites.h"
 #include <stdlib.h>
 using namespace std;
 
@@ -27,7 +28,7 @@ static const char WINDOW_TITLE[] = "Imacwar II";
 /* Nombre de bits par pixel de la fenetre */
 static const unsigned int BIT_PER_PIXEL = 32;
 static float aspectRatio;
-static const float GL_VIEW_SIZE =15.;
+static const float GL_VIEW_SIZE =1.;
 
 /* Nombre minimal de millisecondes separant le rendu de deux images */
 static const Uint32 FRAMERATE_MILLISECONDS = 1000 / 60;
@@ -59,18 +60,16 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
     if( aspectRatio > 1)
     {
         gluOrtho2D(
-        -GL_VIEW_SIZE / 2. * aspectRatio, GL_VIEW_SIZE / 2. * aspectRatio,
-        -GL_VIEW_SIZE / 2., GL_VIEW_SIZE / 2.);
+        0, GL_VIEW_SIZE * aspectRatio,
+         GL_VIEW_SIZE, 0);
     }
     else
     {
-        gluOrtho2D(
-        -GL_VIEW_SIZE / 2., GL_VIEW_SIZE / 2.,
-        -GL_VIEW_SIZE / 2. / aspectRatio, GL_VIEW_SIZE / 2. / aspectRatio);
+        gluOrtho2D( GL_VIEW_SIZE, 0, 0, GL_VIEW_SIZE * aspectRatio);
     }
 }
 
-int affichageGrille(){
+int affichageInterface(){
 
   /* Initialisation de la SDL */
     if(-1 == SDL_Init(SDL_INIT_VIDEO))
@@ -84,21 +83,10 @@ int affichageGrille(){
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
     SDL_Surface* surface;
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_Surface* image = IMG_Load("img/quadrillage.jpg");
+    GLuint textureMap ;
+    creationTexture(&textureMap, "src/img/quadrillage.jpg");
 
-    if(image==NULL){
-      printf("L'image de la carte n'a pas pu se charger");
-      exit(1);
-    }
 
-    GLuint texture ;
-    glGenTextures(1, &texture);
-
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->w, image->h, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
-    glBindTexture(GL_TEXTURE_2D, 0);
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     surface = SDL_SetVideoMode(
@@ -126,38 +114,9 @@ int affichageGrille(){
         glClear(GL_COLOR_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glTranslatef(-5, -5,0);
+        //glTranslatef(, -5,0);
 
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, texture);
-
-        glBegin(GL_QUADS);
-
-        glTexCoord2f(1, 0);
-        glVertex2f(10, 10);
-
-        glTexCoord2f(0, 0); //angle haut gauche
-        glVertex2f(0,10);
-
-        glTexCoord2f(0, 1);
-        glVertex2f(0, 0);
-
-        glTexCoord2f(1, 1);
-        glVertex2f(10, 0);
-
-
-        glEnd();
-        glBindTexture(GL_TEXTURE_2D, 0);
-        glDisable(GL_TEXTURE_2D);
-
-        glBegin(GL_POLYGON);
-        glVertex2f(0.5, 0.5);
-        glVertex2f(-0.5,0.5);
-        glVertex2f(-0.5, -0.5);
-        glVertex2f(0.5, -0.5);
-
-
-        glEnd();
+        affichageTexture(textureMap,1,1);
 
         /* Echange du front et du back buffer : mise a jour de la fenetre */
         SDL_GL_SwapBuffers();
@@ -172,7 +131,16 @@ int affichageGrille(){
                 loop = 0;
                 break;
             }
+            float aspectRatio = WINDOW_WIDTH / (float) WINDOW_HEIGHT;
+            switch(e.type) {
+              case SDL_MOUSEBUTTONUP:
 
+                selectionCoordonnee(0,0, e, aspectRatio, surface);
+                break;
+
+              default:
+                    break;
+            }
         }
 
         /* Calcul du temps ecoule */
@@ -185,8 +153,8 @@ int affichageGrille(){
     }
 
     /* Liberation des ressources associees a la SDL */
-    glDeleteTextures(1, &texture);
-    SDL_FreeSurface(image);
+    glDeleteTextures(1, &textureMap);
+    //SDL_FreeSurface(image);
 
     SDL_Quit();
 

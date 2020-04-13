@@ -2,21 +2,29 @@ CC = g++
 CFLAGS = -Wall -ansi
 LDFLAGS	= -lSDL -lSDL_image -lGLU -lGL -lm
 
-projetjeu: projetjeu.o unites.o interface.o grille.o
-		$(CC) -o $@ $^ $(LDFLAGS)
-		./$@ 
+BINDIR	= bin/
+SRCDIR	= src/
+OBJDIR	= obj/
 
-projetjeu.o: projetjeu.cpp unites.h interface/interface.h
+projetjeu: $(OBJDIR)projetjeu.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)grille.o $(OBJDIR)selection.o
+		$(CC) -o $(BINDIR)$@ $^ $(LDFLAGS)
+		./$(BINDIR)$@ 
+
+$(OBJDIR)projetjeu.o: src/imacwar2/projetjeu.cpp src/unites/unites.h src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-unites.o: unites.cpp unites.h
+$(OBJDIR)unites.o: src/unites/unites.cpp src/unites/unites.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-interface.o: interface/interface.cpp interface/interface.h
+$(OBJDIR)interface.o: src/interface/interface.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-grille.o: interface/grille.cpp interface/interface.h
+$(OBJDIR)grille.o: src/interface/grille.cpp src/interface/interface.h
+	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
+
+$(OBJDIR)selection.o: src/interface/selection.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 clean:
-	rm -rf *.o
+	rm -rf $(OBJDIR)*
+	rm -rf $(BINDIR)*
