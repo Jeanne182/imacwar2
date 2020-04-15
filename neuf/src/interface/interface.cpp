@@ -8,7 +8,6 @@ IMAC 1 - Projet Prog&Algo S1
 #include <iostream>
 #include "./../unites/unites.h"
 #include "interface.h"
-#include "./../unites.h"
 #include <stdlib.h>
 using namespace std;
 
@@ -20,14 +19,14 @@ using namespace std;
 #include <SDL/SDL_image.h>
 
 /* Dimensions de la fenetre */
-static const unsigned int WINDOW_WIDTH = 1500;
+static const unsigned int WINDOW_WIDTH = 900;
 static const unsigned int WINDOW_HEIGHT = 800;
 static const char WINDOW_TITLE[] = "Imacwar II";
 
 
 /* Nombre de bits par pixel de la fenetre */
 static const unsigned int BIT_PER_PIXEL = 32;
-static float aspectRatio;
+static float aspectRatio = WINDOW_WIDTH / (float) WINDOW_HEIGHT;
 static const float GL_VIEW_SIZE =1.;
 
 /* Nombre minimal de millisecondes separant le rendu de deux images */
@@ -69,7 +68,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
     }
 }
 
-int affichageInterface(){
+int initialisationSDL(GLuint* textureMap, SDL_Surface* surface){
 
   /* Initialisation de la SDL */
     if(-1 == SDL_Init(SDL_INIT_VIDEO))
@@ -81,10 +80,10 @@ int affichageInterface(){
     }
 
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
-    SDL_Surface* surface;
+
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
-    GLuint textureMap ;
-    creationTexture(&textureMap, "src/img/quadrillage.jpg");
+
+    creationTexture(textureMap, "src/img/quadrillage.jpg");
 
 
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -101,64 +100,65 @@ int affichageInterface(){
     }
     /* Initialisation du titre de la fenetre */
 	   SDL_WM_SetCaption(WINDOW_TITLE, NULL);
+     return 1;
+}
 
-    /* Boucle principale */
-    int loop = 1;
-    while(loop)
-    {
-        /* Recuperation du temps au debut de la boucle */
-        Uint32 startTime = SDL_GetTicks();
-
-        /* Placer ici le code de dessin */
-
-        glClear(GL_COLOR_BUFFER_BIT);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        //glTranslatef(, -5,0);
-
-        affichageTexture(textureMap,1,1);
-
-        /* Echange du front et du back buffer : mise a jour de la fenetre */
-        SDL_GL_SwapBuffers();
-
-        /* Boucle traitant les evenements */
-        SDL_Event e;
-        while(SDL_PollEvent(&e))
-        {
-            /* L'utilisateur ferme la fenetre : */
-            if(e.type == SDL_QUIT)
-            {
-                loop = 0;
-                break;
-            }
-            float aspectRatio = WINDOW_WIDTH / (float) WINDOW_HEIGHT;
-            switch(e.type) {
-              case SDL_MOUSEBUTTONUP:
-
-                selectionCoordonnee(0,0, e, aspectRatio, surface);
-                break;
-
-              default:
-                    break;
-            }
-        }
-
-        /* Calcul du temps ecoule */
-        Uint32 elapsedTime = SDL_GetTicks() - startTime;
-        /* Si trop peu de temps s'est ecoule, on met en pause le programme */
-        if(elapsedTime < FRAMERATE_MILLISECONDS)
-        {
-            SDL_Delay(FRAMERATE_MILLISECONDS - elapsedTime);
-        }
-    }
-
+int finProgrammeSDL(GLuint* textureMap){
     /* Liberation des ressources associees a la SDL */
-    glDeleteTextures(1, &textureMap);
+    glDeleteTextures(1, textureMap);
     //SDL_FreeSurface(image);
 
     SDL_Quit();
 
     return EXIT_SUCCESS;
+}
+
+void creationTexture(GLuint *texture, char* chemin_image){
+
+  SDL_Surface* image = IMG_Load(chemin_image);
+
+  if(image==NULL){
+    printf("L'image de la carte n'a pas pu se charger");
+    exit(1);
+  }
 
 
-} // fin de dessinerGrille()
+  glGenTextures(1, texture);
+
+  glBindTexture(GL_TEXTURE_2D, *texture);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->w, image->h, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
+  glBindTexture(GL_TEXTURE_2D, 0);
+
+
+}
+
+void affichageTexture(GLuint texture, float longueur, float largeur){
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture);
+
+  glBegin(GL_QUADS);
+
+  glTexCoord2f(1, 0);
+  glVertex2f(longueur, largeur);
+
+  glTexCoord2f(0, 0); //angle haut gauche
+  glVertex2f(0,largeur);
+
+  glTexCoord2f(0, 1);
+  glVertex2f(0, 0);
+
+  glTexCoord2f(1, 1);
+  glVertex2f(longueur, 0);
+
+  glEnd();
+  glBindTexture(GL_TEXTURE_2D, 0);
+  glDisable(GL_TEXTURE_2D);
+}
+
+
+void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
+  *x = (int)(1+10*(*x)*aspectRatio/(float)surface->w);
+  *y = (int)(1+10*(*y)/(float)surface->h);
+}

@@ -26,11 +26,18 @@ void affichageTexture(GLuint texture, float longueur, float largeur);
 void creationTexture(GLuint *texture, char* chemin_image);
 
 /* interface.cpp */
-int affichageInterface();
+//int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 
 /* selection.cpp */
 void selectionCoordonnee(int* x, int* y, SDL_Event e, float aspectRatio, SDL_Surface* surface);
 
+
+int initialisationSDL(GLuint* textureMap, SDL_Surface* surface);
+int finProgrammeSDL(GLuint* textureMap);
+
+void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte, SDL_Surface* surface);
+
+void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
 
 #endif

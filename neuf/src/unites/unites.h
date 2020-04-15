@@ -18,12 +18,12 @@ const int nombreUnitesMAX =15;
 // Déclaration des structures :
 
 typedef struct Unite{
-  int idUnite;
+  int id;
   int vie;
   int type;
   float force;
   float defense;
-  int coordUnite[MAX];
+  float coord[MAX];
   int distance;
   int zoneDeTir;
   int prix;
@@ -31,13 +31,16 @@ typedef struct Unite{
 } Unite;
 
 typedef struct Joueur{
-  int idJoueur;
+  int id;
   char couleur[10];
   char pseudo[MAX];
   int pieces;
   Unite unites[nombreUnitesMAX];
-  int nbUnitesJoueur;
+  int nbUnites;
   int nbUnitesInitial;
 } Joueur;
+
+void placementUnitesJoueurs(Joueur *joueur);
+void insertionCoordonnees(Unite* unite, int x, int y);
 
 #endif

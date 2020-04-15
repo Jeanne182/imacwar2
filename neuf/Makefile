@@ -6,7 +6,7 @@ BINDIR	= bin/
 SRCDIR	= src/
 OBJDIR	= obj/
 
-projetjeu: $(OBJDIR)projetjeu.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)grille.o $(OBJDIR)selection.o
+projetjeu: $(OBJDIR)projetjeu.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o
 		$(CC) -o $(BINDIR)$@ $^ $(LDFLAGS)
 		./$(BINDIR)$@ 
 
@@ -19,7 +19,7 @@ $(OBJDIR)unites.o: src/unites/unites.cpp src/unites/unites.h
 $(OBJDIR)interface.o: src/interface/interface.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-$(OBJDIR)grille.o: src/interface/grille.cpp src/interface/interface.h
+$(OBJDIR)sprites.o: src/interface/sprites.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 $(OBJDIR)selection.o: src/interface/selection.cpp src/interface/interface.h
