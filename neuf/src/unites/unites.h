@@ -9,6 +9,17 @@ IMAC 1 - Projet Prog&Algo S1
 #ifndef UNITES_H
 #define UNITES_H
 
+#include <iostream>
+#include <stdlib.h>
+#include <cstring>
+
+#include <SDL/SDL.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+using namespace std;
 // Declarations des constantes :
 
 const int MAX=256;
@@ -32,7 +43,6 @@ typedef struct Unite{
 
 typedef struct Joueur{
   int id;
-  char couleur[10];
   char pseudo[MAX];
   int pieces;
   Unite unites[nombreUnitesMAX];
@@ -40,7 +50,12 @@ typedef struct Joueur{
   int nbUnitesInitial;
 } Joueur;
 
-void placementUnitesJoueurs(Joueur *joueur);
+
 void insertionCoordonnees(Unite* unite, int x, int y);
+
+void placementUnite(Joueur *joueur, SDL_Event e, SDL_Surface* surface);
+void placementUnitesJoueurs(Joueur *joueur1, Joueur *joueur2, SDL_Event e, SDL_Surface* surface, int* tour);
+void deplacement(Joueur* joueur, int id, int xInitial, int yInitial, SDL_Event e, SDL_Surface* surface); 
+
 
 #endif

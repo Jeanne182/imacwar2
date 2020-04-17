@@ -9,8 +9,8 @@ IMAC 1 - Projet Prog&Algo S1
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
-#include "./../unites/unites.h"
-#include "./../interface/interface.h"
+#include "unites/unites.h"
+#include "interface/interface.h"
 using namespace std;
 
 #include <SDL/SDL.h>
@@ -43,9 +43,18 @@ int main(){
 
   Joueur joueur1;
   joueur1.nbUnites=0;
-  int id1=0;
-  Joueur joueur2;
+  joueur1.nbUnitesInitial=0;
+  joueur1.id = 1;
 
+  Joueur joueur2;
+  joueur2.nbUnites=0;
+  joueur2.nbUnitesInitial=0;
+  joueur2.id = 2;
+
+  int etapeJeu = 0 ; //0 pour préparation, 1 pour attaque/déplacement
+  int tour = 1;
+
+  int x , y;
   while(loop){
       /* Recuperation du temps au debut de la boucle */
       Uint32 startTime = SDL_GetTicks();
@@ -58,8 +67,7 @@ int main(){
       glColor3f(1,1,1);
       affichageTexture(textureMap,1,1);
       affichageUnite(joueur1, 10, 10, surface);
-
-
+      affichageUnite(joueur2, 10, 10, surface);
 
       /* Echange du front et du back buffer : mise a jour de la fenetre */
       SDL_GL_SwapBuffers();
@@ -77,18 +85,51 @@ int main(){
           float aspectRatio = WINDOW_WIDTH / (float) WINDOW_HEIGHT;
           switch(e.type) {
             case SDL_MOUSEBUTTONUP:
+              if (etapeJeu ==0){
+                placementUnitesJoueurs(&joueur1, &joueur2, e, surface, &tour);
+                if(joueur1.nbUnites==4 && joueur2.nbUnites==4){ //A CHANGER
+                  etapeJeu++;
+                }
+              }
 
-              Unite unite;
-              unite.id =id1;
+              else{
+                if(etapeJeu==1){
+                  selectionCoordonnee(&x,&y, e, surface);
+                  etapeJeu++;
+                }
+                else if(etapeJeu==2){
+                  if (tour == 1){
+                    int id1 = selectionIdUnite(x, y, joueur1);
+                    if (id1== -1){
+                      etapeJeu=1;
+                      break;
+                    }
+                    else if(id1 != -1){
+                      deplacement(&joueur1, id1, x, y, e, surface);
+                      tour = 2;
+                    }
 
-              int x , y;
-              selectionCoordonnee(&x,&y, e, aspectRatio, surface);
-              insertionCoordonnees(&unite, x, y);
-              joueur1.unites[id1] = unite;
-              joueur1.nbUnites ++;
-              cout<<joueur1.unites[id1].coord[0]<<endl;
-              cout<<joueur1.unites[id1].coord[1]<<endl;
-              id1++;
+                  }
+                  else{
+                    int id2 = selectionIdUnite(x, y, joueur2);
+                    /*if(id2 == -1){
+                      etapeJeu=1;
+                    }*/
+                    deplacement(&joueur2, id2, x, y, e, surface);
+                    tour = 1;
+                  }
+                  etapeJeu = 1;
+                }
+              }
+
+              /*for (int i = 0; i<=3; i++){
+                cout << i << " j1 = "<< joueur1.unites[i].coord[0]<<endl;
+                cout << i << " j1 = "<< joueur1.unites[i].coord[1]<<endl;
+              }
+              for (int i = 0; i<=3; i++){
+                cout << i << " j2 = "<< joueur2.unites[i].coord[0]<<endl;
+                cout << i << " j2 = "<< joueur2.unites[i].coord[1]<<endl;
+              }*/
 
               break;
 

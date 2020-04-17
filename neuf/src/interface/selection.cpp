@@ -1,19 +1,25 @@
-#include <iostream>
-#include "./../unites/unites.h"
-#include "interface.h"
-#include <stdlib.h>
+#include "unites/unites.h"
+#include "interface/interface.h"
 
-#include <SDL/SDL.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <SDL/SDL_image.h>
-using namespace std;
 
-void selectionCoordonnee(int* x, int* y, SDL_Event e, float aspectRatio, SDL_Surface* surface){
+
+void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
   *x = e.button.x;
   *y = e.button.y;
   conversionOpenGLRepere(x, y, surface);
   printf("clic en (%d, %d)\n", *x, *y);
+}
+
+void insertionCoordonnees(Unite* unite, int x, int y){
+  unite->coord[0]=x;
+  unite->coord[1]=y;
+}
+
+int selectionIdUnite(int x, int y, Joueur joueur){
+  for(int compteur = 0; compteur < joueur.nbUnitesInitial ; compteur++){
+      if (joueur.unites[compteur].coord[0]==x && joueur.unites[compteur].coord[1]==y){
+          return compteur;
+      }
+    }
+    return -1;
 }

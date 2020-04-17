@@ -5,18 +5,9 @@ Jeanne Lebigre
 IMAC 1 - Projet Prog&Algo S1
 */
 
-#include <iostream>
-#include "./../unites/unites.h"
-#include "interface.h"
-#include <stdlib.h>
-using namespace std;
+#include "unites/unites.h"
+#include "interface/interface.h"
 
-#include <SDL/SDL.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <SDL/SDL_image.h>
 
 /* Dimensions de la fenetre */
 static const unsigned int WINDOW_WIDTH = 900;
