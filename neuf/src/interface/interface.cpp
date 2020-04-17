@@ -74,7 +74,7 @@ int initialisationSDL(GLuint* textureMap, SDL_Surface* surface){
 
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    creationTexture(textureMap, "src/img/quadrillage.jpg");
+    creationTexture(textureMap, "src/img/mapNiveau1.jpg");
 
 
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -131,16 +131,16 @@ void affichageTexture(GLuint texture, float longueur, float largeur){
 
   glBegin(GL_QUADS);
 
-  glTexCoord2f(1, 0);
+  glTexCoord2f(1, 1);
   glVertex2f(longueur, largeur);
 
-  glTexCoord2f(0, 0); //angle haut gauche
+  glTexCoord2f(0, 1);
   glVertex2f(0,largeur);
 
-  glTexCoord2f(0, 1);
+  glTexCoord2f(0, 0);
   glVertex2f(0, 0);
 
-  glTexCoord2f(1, 1);
+  glTexCoord2f(1, 0);
   glVertex2f(longueur, 0);
 
   glEnd();

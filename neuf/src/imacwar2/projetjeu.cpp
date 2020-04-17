@@ -71,7 +71,6 @@ int main(){
 
       /* Echange du front et du back buffer : mise a jour de la fenetre */
       SDL_GL_SwapBuffers();
-      //glLoadIdentity();
       /* Boucle traitant les evenements */
       SDL_Event e;
       while(SDL_PollEvent(&e))
@@ -85,6 +84,7 @@ int main(){
           float aspectRatio = WINDOW_WIDTH / (float) WINDOW_HEIGHT;
           switch(e.type) {
             case SDL_MOUSEBUTTONUP:
+              //Première partie du jeu : placement des unités
               if (etapeJeu ==0){
                 placementUnitesJoueurs(&joueur1, &joueur2, e, surface, &tour);
                 if(joueur1.nbUnites==4 && joueur2.nbUnites==4){ //A CHANGER
@@ -92,29 +92,25 @@ int main(){
                 }
               }
 
+              //Partie du jeu où les joueurs attaquent et se déplacent
               else{
+                //sélection des coordonnées d'une unité du joueur dont c'est le tour
                 if(etapeJeu==1){
                   selectionCoordonnee(&x,&y, e, surface);
-                  etapeJeu++;
+                  if((tour ==1 && selectionIdUnite(x, y, joueur1) != -1)
+                          ||(tour ==2 && selectionIdUnite(x, y, joueur2) != -1)){
+                    etapeJeu++;
+                  }
                 }
+                //Le joueur choisi d'attquer ou de se déplacer
                 else if(etapeJeu==2){
                   if (tour == 1){
                     int id1 = selectionIdUnite(x, y, joueur1);
-                    if (id1== -1){
-                      etapeJeu=1;
-                      break;
-                    }
-                    else if(id1 != -1){
-                      deplacement(&joueur1, id1, x, y, e, surface);
+                    deplacement(&joueur1, id1, x, y, e, surface);
                       tour = 2;
-                    }
-
                   }
                   else{
                     int id2 = selectionIdUnite(x, y, joueur2);
-                    /*if(id2 == -1){
-                      etapeJeu=1;
-                    }*/
                     deplacement(&joueur2, id2, x, y, e, surface);
                     tour = 1;
                   }
