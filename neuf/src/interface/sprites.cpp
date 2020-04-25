@@ -10,10 +10,9 @@ IMAC 1 - Projet Prog&Algo S1
 #include "interface/interface.h"
 
 
-
 //-------------------------------------- Fonctions concernant la grille --------------------------------------//
 
-void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte, SDL_Surface* surface){
+void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte){
   if(joueur.nbUnites != 0){
     for(int i=0; i<joueur.nbUnites; i++){
       float x = joueur.unites[i].coord[0];

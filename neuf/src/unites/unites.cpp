@@ -8,8 +8,10 @@ IMAC 1 - Projet Prog&Algo S1
 
 #include "unites/unites.h"
 #include "interface/interface.h"
+#include "game/game.h"
 
-void placementUnite(Joueur *joueur, SDL_Event e, SDL_Surface* surface){
+
+void placementUnite(Joueur *joueur, SDL_Event e, Game* game){
 
     int id = joueur->nbUnites;
     if(joueur->nbUnites <= 3){
@@ -17,7 +19,7 @@ void placementUnite(Joueur *joueur, SDL_Event e, SDL_Surface* surface){
       unite.id =id;
 
       int x , y;
-      selectionCoordonnee(&x,&y, e, surface);
+      selectionCoordonnee(&x,&y, e, game->surface);
       insertionCoordonnees(&unite, x, y);
       joueur->unites[id] = unite;
       joueur->nbUnites ++;
@@ -26,14 +28,14 @@ void placementUnite(Joueur *joueur, SDL_Event e, SDL_Surface* surface){
 }
 
 
-void placementUnitesJoueurs(Joueur *joueur1, Joueur *joueur2, SDL_Event e, SDL_Surface* surface, int* tour){
-  if (*tour == 1){
-    placementUnite(joueur1, e, surface);
-    *tour = 2;
+void placementUnitesJoueurs(Game* game, SDL_Event e){
+  if (game->tour == 1){
+    placementUnite(&game->joueur1, e, game);
+    game->tour = 2;
   }
   else {
-    placementUnite(joueur2, e, surface);
-    *tour = 1;
+    placementUnite(&game->joueur2, e, game);
+    game->tour = 1;
   }
 }
 

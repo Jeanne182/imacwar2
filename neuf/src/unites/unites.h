@@ -19,6 +19,9 @@ IMAC 1 - Projet Prog&Algo S1
 #include <stdlib.h>
 #include <stdio.h>
 
+
+struct Game;
+
 using namespace std;
 // Declarations des constantes :
 
@@ -53,9 +56,9 @@ typedef struct Joueur{
 
 void insertionCoordonnees(Unite* unite, int x, int y);
 
-void placementUnite(Joueur *joueur, SDL_Event e, SDL_Surface* surface);
-void placementUnitesJoueurs(Joueur *joueur1, Joueur *joueur2, SDL_Event e, SDL_Surface* surface, int* tour);
-void deplacement(Joueur* joueur, int id, int xInitial, int yInitial, SDL_Event e, SDL_Surface* surface); 
+void placementUnite(Joueur *joueur, SDL_Event e, Game* game);
+void placementUnitesJoueurs(Game* game, SDL_Event e);
+void deplacement(Joueur* joueur, int id, int xInitial, int yInitial, SDL_Event e, SDL_Surface* surface);
 
 
 #endif

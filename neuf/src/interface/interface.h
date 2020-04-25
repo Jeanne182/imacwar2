@@ -1,6 +1,7 @@
 /*
 Fanny Joseph
 Jeanne Lebigre
+Mattéo Popoff
 
 IMAC 1 - Projet Prog&Algo S1
 */
@@ -20,6 +21,10 @@ IMAC 1 - Projet Prog&Algo S1
 #include <SDL/SDL_image.h>
 using namespace std;
 
+
+typedef struct Bouton{
+  float r, g, b, x, y, hauteur, longueur;
+} Bouton;
 //--------------------- Declarations des prototypes des fonctions concernant la grille -----------------------//
 
 
@@ -40,9 +45,11 @@ void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface);
 int initialisationSDL(GLuint* textureMap, SDL_Surface* surface);
 int finProgrammeSDL(GLuint* textureMap);
 
-void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte, SDL_Surface* surface);
+void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte);
 
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
-int selectionIdUnite(int x, int y, Joueur joueur); 
+int selectionIdUnite(int x, int y, Joueur joueur);
+
+void bouton(Bouton bouton);
 
 #endif
