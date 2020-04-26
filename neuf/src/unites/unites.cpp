@@ -39,10 +39,10 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
   }
 }
 
-void deplacement(Joueur* joueur, int id, int xInitial, int yInitial, SDL_Event e, SDL_Surface* surface){
+void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){ // il y avait xInitial et yInitial mais on ne s'en servait nul part donc j'ai enlevé
 
   int xNew, yNew;
-  selectionCoordonnee(&xNew,&yNew, e, surface);
+  selectionCoordonnee(&xNew,&yNew, e, game->surface);
   insertionCoordonnees(&joueur->unites[id], xNew, yNew);
 
 

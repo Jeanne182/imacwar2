@@ -13,6 +13,11 @@
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
+
+// Délacrations des variables
+
+// Déclarations des structures
+
 typedef struct Game {
   Joueur joueur1, joueur2;
   Bouton boutonDeplacement, boutonAttaque;
@@ -33,10 +38,15 @@ typedef struct Game {
   //A enlever ??
   int x , y;
 
-
 } Game;
 
+
+//----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
+
+/* initialisation.cpp */
 void initialisationGame(Game *game);
+
+/* clics.cpp */
 void gererClic(Game* game, SDL_Event e);
 
 #endif

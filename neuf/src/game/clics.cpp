@@ -25,12 +25,12 @@ void gererClic(Game* game, SDL_Event e){
     else if(game->etapeJeu==2){
       if (game->tour == 1){
         int id1 = selectionIdUnite(game->x, game->y, game->joueur1);
-        deplacement(&game->joueur1, id1, game->x, game->y, e, game->surface);
+        deplacement(&game->joueur1, id1, e, game);
           game->tour = 2;
       }
       else{
         int id2 = selectionIdUnite(game->x, game->y, game->joueur2);
-        deplacement(&game->joueur2, id2, game->x, game->y, e, game->surface);
+        deplacement(&game->joueur2, id2, e, game);
         game->tour = 1;
       }
       game->etapeJeu = 1;

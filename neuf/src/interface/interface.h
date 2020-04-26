@@ -19,44 +19,47 @@ IMAC 1 - Projet Prog&Algo S1
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL_image.h>
-using namespace std;
+
+// Déclarations des variables
+
+
+// Déclarations des structures
 
 typedef struct Bouton{
   float r, g, b, x, y, hauteur, longueur;
 } Bouton;
-//--------------------- Declarations des prototypes des fonctions concernant la grille -----------------------//
 
 // enum texturesCarte{
-//     PLAINE, 
-//     EAU, 
+//     PLAINE,
+//     EAU,
 //     ARBRE
 //   };
-  
 
-// Prototypes des fonctions :
 
-/*grille.cpp*/
+//----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
-void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
-void creationTexture(GLuint *texture, char* chemin_image);
 
 /* interface.cpp */
 //int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
+int initialisationSDL(GLuint* textureMap, SDL_Surface* surface);
+int finProgrammeSDL(GLuint* textureMap);
 //string texture_path(texturesCarte texture_value);
+void creationTexture(GLuint *texture, char* chemin_image);
+void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
+void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
+
 
 /* selection.cpp */
 void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface);
+int selectionIdUnite(int x, int y, Joueur joueur);
 
 
-int initialisationSDL(GLuint* textureMap, SDL_Surface* surface);
-int finProgrammeSDL(GLuint* textureMap);
 
 void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte);
 
-void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
-int selectionIdUnite(int x, int y, Joueur joueur);
 
+/* boutons.cpp */
 void bouton(Bouton bouton);
 
 #endif
