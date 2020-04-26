@@ -19,7 +19,7 @@ typedef struct Game {
   int etapeJeu;
   int tour;
   SDL_Surface* surface;
-  GLuint textureMap ;
+  GLuint textureMap;
 
   int longueurCarte, hauteurCarte;
   int window_width, window_height;
@@ -28,8 +28,11 @@ typedef struct Game {
 
   Uint32 framerate_milliseconds;
 
+  //int map[10][10];
+
   //A enlever ??
   int x , y;
+
 
 } Game;
 

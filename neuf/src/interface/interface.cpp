@@ -7,7 +7,7 @@ IMAC 1 - Projet Prog&Algo S1
 
 #include "unites/unites.h"
 #include "interface/interface.h"
-
+//#include "game/game.h"
 
 /* Dimensions de la fenetre */
 static const unsigned int WINDOW_WIDTH = 900;
@@ -75,6 +75,8 @@ int initialisationSDL(GLuint* textureMap, SDL_Surface* surface){
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     creationTexture(textureMap, "src/img/mapNiveau1.jpg");
+    // creationTexture(game.textureMap[EAU], "src/img/eau.png");
+    // creationTexture(game.textureMap[ARBRE], "src/img/arbre.png");
 
 
     reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -104,6 +106,22 @@ int finProgrammeSDL(GLuint* textureMap){
     return EXIT_SUCCESS;
 }
 
+
+
+// string texture_path(texturesCarte texture_value){
+//     switch(texture_value){
+//     case PLAINE:
+//         return "img/sol.jpg";
+//         break;
+//     case EAU:
+//         return "img/eau.png";
+//         break;
+//     case ARBRE:
+//         return "img/arbre.png";
+//         break;
+//     }
+// }
+
 void creationTexture(GLuint *texture, char* chemin_image){
 
   SDL_Surface* image = IMG_Load(chemin_image);
@@ -125,23 +143,23 @@ void creationTexture(GLuint *texture, char* chemin_image){
 
 }
 
-void affichageTexture(GLuint texture, float longueur, float largeur){
+void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture);
 
   glBegin(GL_QUADS);
 
   glTexCoord2f(1, 1);
-  glVertex2f(longueur, largeur);
+  glVertex2f(longueur + x, largeur + y);
 
   glTexCoord2f(0, 1);
-  glVertex2f(0,largeur);
+  glVertex2f(x,largeur + y);
 
   glTexCoord2f(0, 0);
-  glVertex2f(0, 0);
+  glVertex2f(x, y);
 
   glTexCoord2f(1, 0);
-  glVertex2f(longueur, 0);
+  glVertex2f(longueur + x, y);
 
   glEnd();
   glBindTexture(GL_TEXTURE_2D, 0);

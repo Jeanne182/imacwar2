@@ -21,22 +21,29 @@ IMAC 1 - Projet Prog&Algo S1
 #include <SDL/SDL_image.h>
 using namespace std;
 
-
 typedef struct Bouton{
   float r, g, b, x, y, hauteur, longueur;
 } Bouton;
 //--------------------- Declarations des prototypes des fonctions concernant la grille -----------------------//
 
+// enum texturesCarte{
+//     PLAINE, 
+//     EAU, 
+//     ARBRE
+//   };
+  
 
 // Prototypes des fonctions :
 
 /*grille.cpp*/
-void affichageTexture(GLuint texture, float longueur, float largeur);
+
+void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
 void creationTexture(GLuint *texture, char* chemin_image);
 
 /* interface.cpp */
 //int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
+//string texture_path(texturesCarte texture_value);
 
 /* selection.cpp */
 void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface);

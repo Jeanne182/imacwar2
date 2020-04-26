@@ -27,7 +27,27 @@ int main(){
       glMatrixMode(GL_MODELVIEW);
 
       glColor3f(1,1,1);
-      affichageTexture(game.textureMap,1,1);
+
+      // for(int i = 0; i<10; i++){
+      //   for(int j = 0; i<10; i++){
+      //     switch(game.map[i][j]){
+      //       case PLAINE:
+      //       //affichageTexture(game.textureMap[PLAINE],1,1,0,0);
+      //       break;
+
+      //       case EAU:
+      //       //affichageTexture(game.textureMap,1,1,0,0);
+      //       break;
+
+      //       case ARBRE:
+      //       //affichageTexture(game.textureMap,1,1,0,0);
+      //       break;
+      //     }
+          
+      //   }
+      // }
+
+      affichageTexture(game.textureMap,1,1,0,0);
       bouton(game.boutonDeplacement);
       affichageUnite(game.joueur1, game.longueurCarte, game.hauteurCarte);
       affichageUnite(game.joueur2, game.longueurCarte, game.hauteurCarte);
@@ -63,8 +83,8 @@ int main(){
           SDL_Delay(game.framerate_milliseconds - elapsedTime);
       }
   }
+  //finProgrammeSDL(&game.textureMap[PLAINE]);
   finProgrammeSDL(&game.textureMap);
-
 
   return 0;
 
