@@ -46,7 +46,7 @@ void initialisationGame(Game *game){
   game->map[1][2]=0;
   game->map[1][3]=0;
   game->map[1][4]=0;
-  game->map[1][5]=0;
+  game->map[1][5]=2;
   game->map[1][6]=0;
   game->map[1][7]=0;
   game->map[1][8]=0;
