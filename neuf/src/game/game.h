@@ -23,6 +23,7 @@ typedef struct Game {
   Bouton boutonDeplacement, boutonAttaque;
   int etapeJeu;
   int tour;
+
   SDL_Surface* surface;
 
   SDL_Surface* surfaceCases[3];

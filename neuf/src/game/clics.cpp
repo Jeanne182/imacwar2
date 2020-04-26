@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+using namespace std;
 
 void gererClic(Game* game, SDL_Event e){
   //Première partie du jeu : placement des unités
@@ -21,20 +22,46 @@ void gererClic(Game* game, SDL_Event e){
         game->etapeJeu++;
       }
     }
-    //Le joueur choisi d'attquer ou de se déplacer
+    //Le joueur choisi d'attaquer ou de se déplacer
     else if(game->etapeJeu==2){
       if (game->tour == 1){
-        int id1 = selectionIdUnite(game->x, game->y, game->joueur1);
-        deplacement(&game->joueur1, id1, e, game);
-          game->tour = 2;
+        switch(selectionBouton(game, e)){
+          case DEPLACEMENT:
+            game->tour = 3;
+            cout<<"tour de jeu:" <<game->tour<<endl;
+          break;
+        }
+
       }
-      else{
+
+      else if (game->tour ==2){
         int id2 = selectionIdUnite(game->x, game->y, game->joueur2);
         deplacement(&game->joueur2, id2, e, game);
+
         game->tour = 1;
+        cout<<"tour de jeu:" <<game->tour<<endl;
       }
       game->etapeJeu = 1;
     }
   }
 
 }
+/*if (game->tour == 1){
+  if(game->choix == 0){
+    if(selectionBouton(game, e) == DEPLACEMENT){
+      game->tour = 3;
+      game->choix = DEPLACEMENT;
+      cout<<"tour de jeu:" <<game->tour<<endl;
+    }
+  }
+
+  else if (game->choix == DEPLACEMENT){
+    int id1 = selectionIdUnite(game->x, game->y, game->joueur1);
+    deplacement(&game->joueur1, id1, e, game);
+
+    game->tour = 2;
+    cout<<"tour de jeu:" <<game->tour<<endl;
+    game->choix = 0;
+  }
+
+}*/

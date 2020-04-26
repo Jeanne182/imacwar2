@@ -163,21 +163,23 @@ void initialisationGame(Game *game){
 
 
   //Initialisation des boutons
-  game->boutonDeplacement.x = 1.1;
+  game->boutonDeplacement.x = 1.1; //Rose
   game->boutonDeplacement.y = 0.8;
   game->boutonDeplacement.longueur = 0.15;
   game->boutonDeplacement.hauteur = 0.05;
   game->boutonDeplacement.r = 1;
   game->boutonDeplacement.g = 0;
   game->boutonDeplacement.b = 1;
+  game->boutonDeplacement.valeur = DEPLACEMENT;
 
   game->boutonAttaque.x = 1.5;
   game->boutonAttaque.y = 0.8;
   game->boutonAttaque.longueur = 0.15;
   game->boutonAttaque.hauteur = 0.05;
-  game->boutonAttaque.r = 1;
+  game->boutonAttaque.r = 0; //bleu
   game->boutonAttaque.g = 0;
   game->boutonAttaque.b = 1;
+  game->boutonAttaque.valeur = ATTAQUE;
 
   game->etapeJeu = 0 ; //0 pour préparation, 1 pour attaque/déplacement
   game->tour = 1;

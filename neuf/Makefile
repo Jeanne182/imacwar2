@@ -6,7 +6,7 @@ BINDIR	= bin/
 SRCDIR	= src/
 OBJDIR	= obj/
 
-projetjeu: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o
+main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o
 		$(CC) -o $(BINDIR)$@ $^ $(LDFLAGS)
 		./$(BINDIR)$@ 
 

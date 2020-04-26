@@ -23,13 +23,20 @@ IMAC 1 - Projet Prog&Algo S1
 // Déclarations des structures
 
 typedef struct Bouton{
-  float r, g, b, x, y, hauteur, longueur;
+  float r, g, b, x, y, hauteur, longueur, valeur;
 } Bouton;
 
 enum texturesCarte{
     PLAINE,
     EAU,
     ARBRE
+  };
+
+enum boutons{
+    AUCUNESELECTION,
+    DEPLACEMENT,
+    ATTAQUE,
+    ABANDON
   };
 
 
@@ -53,5 +60,7 @@ void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte);
 
 /* boutons.cpp */
 void bouton(Bouton bouton);
+int testClicBouton(Game* game, Bouton bouton, SDL_Event e);
+int selectionBouton(Game* game, SDL_Event e);
 
 #endif
