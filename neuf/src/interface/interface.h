@@ -1,7 +1,4 @@
 /*
-Fanny Joseph
-Jeanne Lebigre
-Mattéo Popoff
 
 IMAC 1 - Projet Prog&Algo S1
 */
