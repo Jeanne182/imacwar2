@@ -28,26 +28,27 @@ int main(){
 
       glColor3f(1,1,1);
 
-      // for(int i = 0; i<10; i++){
-      //   for(int j = 0; i<10; i++){
-      //     switch(game.map[i][j]){
-      //       case PLAINE:
-      //       //affichageTexture(game.textureMap[PLAINE],1,1,0,0);
-      //       break;
+      for(int i = 0; i<10; i++){
+        for(int j = 0; j<10; j++){
+          switch(game.map[i][j]){
+            case PLAINE:
+            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            //affichageTexture(game.textureMap,(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            break;
 
-      //       case EAU:
-      //       //affichageTexture(game.textureMap,1,1,0,0);
-      //       break;
+            case EAU:
+            affichageTexture(game.textureCases[EAU],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            break;
 
-      //       case ARBRE:
-      //       //affichageTexture(game.textureMap,1,1,0,0);
-      //       break;
-      //     }
+            case ARBRE:
+            affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            break;
+          }
 
-      //   }
-      // }
+        }
+      }
 
-      affichageTexture(game.textureMap,1,1,0,0);
+      //affichageTexture(game.textureMap,1,1,0,0);
       bouton(game.boutonDeplacement);
       affichageUnite(game.joueur1, game.longueurCarte, game.hauteurCarte);
       affichageUnite(game.joueur2, game.longueurCarte, game.hauteurCarte);
@@ -84,7 +85,7 @@ int main(){
       }
   }
   //finProgrammeSDL(&game.textureMap[PLAINE]);
-  finProgrammeSDL(&game.textureMap);
+  finProgrammeSDL(&game);
 
   return 0;
 

@@ -10,6 +10,11 @@ void initialisationGame(Game *game){
   game->framerate_milliseconds = 1000/60;
   game->aspectRatio = game->window_width / (float) game->window_height;
 
+  //Initialisation textures
+  game->surfaceCases[PLAINE] = IMG_Load("src/img/sol.jpg");
+  game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
+  game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
+
   //Initialisation de la carte
   game->longueurCarte = 10;
   game->hauteurCarte = 10;
@@ -25,7 +30,7 @@ void initialisationGame(Game *game){
                       { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                       { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }};*/
 
-  /*game->map[0][0]=2;
+  game->map[0][0]=2;
   game->map[0][1]=2;
   game->map[0][2]=2;
   game->map[0][3]=0;
@@ -134,16 +139,16 @@ void initialisationGame(Game *game){
   game->map[9][8]=0;
   game->map[9][9]=0;
 
-  game->map[10][0]=0;
-  game->map[10][1]=0;
-  game->map[10][2]=1;
-  game->map[10][3]=1;
-  game->map[10][4]=1;
-  game->map[10][5]=1;
-  game->map[10][6]=1;
-  game->map[10][7]=1;
-  game->map[10][8]=1;
-  game->map[10][9]=1;*/
+  // game->map[10][0]=0;
+  // game->map[10][1]=0;
+  // game->map[10][2]=1;
+  // game->map[10][3]=1;
+  // game->map[10][4]=1;
+  // game->map[10][5]=1;
+  // game->map[10][6]=1;
+  // game->map[10][7]=1;
+  // game->map[10][8]=1;
+  // game->map[10][9]=1;
 
 
   //Initialisation des joueurs
@@ -171,7 +176,8 @@ void initialisationGame(Game *game){
 
 
 
-  initialisationSDL(&game->textureMap,game->surface);
+
+  initialisationSDL(game);
 
   reshape(&game->surface, game->window_width, game->window_height);
 }

@@ -7,7 +7,7 @@ IMAC 1 - Projet Prog&Algo S1
 
 #include "unites/unites.h"
 #include "interface/interface.h"
-//#include "game/game.h"
+#include "game/game.h"
 
 /* Dimensions de la fenetre */
 static const unsigned int WINDOW_WIDTH = 900;
@@ -59,7 +59,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
     }
 }
 
-int initialisationSDL(GLuint* textureMap, SDL_Surface* surface){
+int initialisationSDL(Game* game){
 
   /* Initialisation de la SDL */
     if(-1 == SDL_Init(SDL_INIT_VIDEO))
@@ -72,19 +72,18 @@ int initialisationSDL(GLuint* textureMap, SDL_Surface* surface){
 
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
 
-    reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
+    reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
+    creationTexture(&game->textureCases[PLAINE], game->surfaceCases[PLAINE]);
+    creationTexture(&game->textureCases[EAU], game->surfaceCases[EAU]);
+    creationTexture(&game->textureCases[ARBRE], game->surfaceCases[ARBRE]);
 
-    creationTexture(textureMap, "src/img/mapNiveau1.jpg");
-    // creationTexture(game.textureMap[EAU], "src/img/eau.png");
-    // creationTexture(game.textureMap[ARBRE], "src/img/arbre.png");
 
+    reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    reshape(&surface, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-    surface = SDL_SetVideoMode(
+    game->surface = SDL_SetVideoMode(
         WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL,
         SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
-    if(NULL == surface)
+    if(NULL == game->surface)
     {
         fprintf(
             stderr,
@@ -96,9 +95,9 @@ int initialisationSDL(GLuint* textureMap, SDL_Surface* surface){
      return 1;
 }
 
-int finProgrammeSDL(GLuint* textureMap){
+int finProgrammeSDL(Game* game){
     /* Liberation des ressources associees a la SDL */
-    glDeleteTextures(1, textureMap);
+    glDeleteTextures(1, &game->textureCases[PLAINE]);
     //SDL_FreeSurface(image);
 
     SDL_Quit();
@@ -122,9 +121,9 @@ int finProgrammeSDL(GLuint* textureMap){
 //     }
 // }
 
-void creationTexture(GLuint *texture, char* chemin_image){
+void creationTexture(GLuint *texture, SDL_Surface* image){
 
-  SDL_Surface* image = IMG_Load(chemin_image);
+  //SDL_Surface* image = IMG_Load(chemin_image);
 
   if(image==NULL){
     printf("L'image de la carte n'a pas pu se charger");

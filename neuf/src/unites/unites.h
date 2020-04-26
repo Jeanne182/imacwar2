@@ -55,12 +55,16 @@ typedef struct Joueur{
 
 
 /* selection.cpp */
+void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface);
+int selectionIdUnite(int x, int y, Joueur joueur);
 void insertionCoordonnees(Unite* unite, int x, int y);
 
 /* unites.cpp */
 void placementUnite(Joueur *joueur, SDL_Event e, Game* game);
 void placementUnitesJoueurs(Game* game, SDL_Event e);
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game);
+
+
 
 
 #endif

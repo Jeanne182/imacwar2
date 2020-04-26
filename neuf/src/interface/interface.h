@@ -29,11 +29,11 @@ typedef struct Bouton{
   float r, g, b, x, y, hauteur, longueur;
 } Bouton;
 
-// enum texturesCarte{
-//     PLAINE,
-//     EAU,
-//     ARBRE
-//   };
+enum texturesCarte{
+    PLAINE,
+    EAU,
+    ARBRE
+  };
 
 
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
@@ -42,20 +42,15 @@ typedef struct Bouton{
 /* interface.cpp */
 //int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
-int initialisationSDL(GLuint* textureMap, SDL_Surface* surface);
-int finProgrammeSDL(GLuint* textureMap);
+int initialisationSDL(Game* game);
+int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
-void creationTexture(GLuint *texture, char* chemin_image);
+void creationTexture(GLuint *texture, SDL_Surface* image);
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
 
 
-/* selection.cpp */
-void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface);
-int selectionIdUnite(int x, int y, Joueur joueur);
-
-
-
+/*sprites.cpp*/
 void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte);
 
 
