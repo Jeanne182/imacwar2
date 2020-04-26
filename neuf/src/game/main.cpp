@@ -42,6 +42,7 @@ int main(){
 
       //affichageTexture(game.textureMap,1,1,0,0);
       bouton(game.boutonDeplacement);
+      bouton(game.boutonAttaque);
       affichageUnite(game.joueur1, game.longueurCarte, game.hauteurCarte);
       affichageUnite(game.joueur2, game.longueurCarte, game.hauteurCarte);
 
