@@ -94,6 +94,8 @@ int initialisationSDL(Game* game){
 int finProgrammeSDL(Game* game){
     /* Liberation des ressources associees a la SDL */
     glDeleteTextures(1, &game->textureCases[PLAINE]);
+    glDeleteTextures(1, &game->textureCases[EAU]);
+    glDeleteTextures(1, &game->textureCases[ARBRE]);
     //SDL_FreeSurface(image);
 
     SDL_Quit();
@@ -126,39 +128,42 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
     exit(1);
   }
 
+    glGenTextures(1, texture);
 
-  glGenTextures(1, texture);
+    glBindTexture(GL_TEXTURE_2D, *texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-  glBindTexture(GL_TEXTURE_2D, *texture);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->w, image->h, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
-  glBindTexture(GL_TEXTURE_2D, 0);
-
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
 }
 
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
-  glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture);
+  glPushMatrix();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
-  glBegin(GL_QUADS);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture);
 
-  glTexCoord2f(1, 1);
-  glVertex2f(longueur + x, largeur + y);
+        glBegin(GL_QUADS);
 
-  glTexCoord2f(0, 1);
-  glVertex2f(x,largeur + y);
+        glTexCoord2f(1, 1);
+        glVertex2f(longueur + x, largeur + y);
 
-  glTexCoord2f(0, 0);
-  glVertex2f(x, y);
+        glTexCoord2f(0, 1);
+        glVertex2f(x,largeur + y);
 
-  glTexCoord2f(1, 0);
-  glVertex2f(longueur + x, y);
+        glTexCoord2f(0, 0);
+        glVertex2f(x, y);
 
-  glEnd();
-  glBindTexture(GL_TEXTURE_2D, 0);
-  glDisable(GL_TEXTURE_2D);
+        glTexCoord2f(1, 0);
+        glVertex2f(longueur + x, y);
+
+        glEnd();
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
 }
 
 

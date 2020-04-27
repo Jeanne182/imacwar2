@@ -33,6 +33,7 @@ int main(){
             break;
 
             case ARBRE:
+            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             break;
           }

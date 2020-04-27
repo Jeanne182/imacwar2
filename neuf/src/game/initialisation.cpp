@@ -13,7 +13,7 @@ void initialisationGame(Game *game){
 
   //Initialisation textures
 
-  game->surfaceCases[PLAINE] = IMG_Load("src/img/sol.jpg");
+  game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
 
@@ -76,6 +76,7 @@ void initialisationGame(Game *game){
   game->map[3][8]=0;
   game->map[3][9]=0;
 
+  game->map[4][0]=0;
   game->map[4][1]=0;
   game->map[4][2]=1;
   game->map[4][3]=0;
