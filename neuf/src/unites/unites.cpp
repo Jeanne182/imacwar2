@@ -18,7 +18,9 @@ void placementUnite(Joueur *joueur, SDL_Event e, Game* game){
       Unite unite;
       unite.id =id;
 
-      int x , y;
+      //MODIFIé AVEC STEEVE
+      int x=0;
+      int y=0;
       selectionCoordonnee(&x,&y, e, game->surface);
       insertionCoordonnees(&unite, x, y);
       joueur->unites[id] = unite;

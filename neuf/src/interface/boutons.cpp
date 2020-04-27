@@ -33,13 +33,13 @@ int testClicBouton(Game* game, Bouton bouton, SDL_Event e){
   if(newX >= bouton.x && newX <= bouton.x + bouton.longueur && newY >= bouton.y && newY <= bouton.y + bouton.hauteur){
     return bouton.valeur;
   }
-  return AUCUNESELECTION;
+  return RIEN;
 }
 
 int selectionBouton(Game* game, SDL_Event e){ //Penser à rajouter tous les nouveaux boutons ici
   int valeurBouton;
   valeurBouton = testClicBouton(game, game->boutonDeplacement, e);
-  if (valeurBouton == AUCUNESELECTION){
+  if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonAttaque, e);
   }
   return valeurBouton;

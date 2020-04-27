@@ -3,6 +3,7 @@
 #include "game/game.h"
 
 void initialisationGame(Game *game){
+   game->surface = NULL;
   //fenetre
   game->window_width = 1500;
   game->window_height = 800;
@@ -11,6 +12,7 @@ void initialisationGame(Game *game){
   game->aspectRatio = game->window_width / (float) game->window_height;
 
   //Initialisation textures
+
   game->surfaceCases[PLAINE] = IMG_Load("src/img/sol.jpg");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
@@ -181,8 +183,9 @@ void initialisationGame(Game *game){
   game->boutonAttaque.b = 1;
   game->boutonAttaque.valeur = ATTAQUE;
 
-  game->etapeJeu = 0 ; //0 pour préparation, 1 pour attaque/déplacement
-  game->tour = 1;
+  game->etapeJeu = PLACEMENT_UNITES; //0 pour préparation, 1 pour attaque/déplacement
+  game->tour = TOUR_JOUEUR1;
+  game->choix = RIEN;
 
 
 

@@ -7,7 +7,7 @@ void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
   *x = e.button.x;
   *y = e.button.y;
   conversionOpenGLRepere(x, y, surface);
-  printf("clic en (%d, %d)\n", *x, *y);
+  //printf("clic en (%d, %d)\n", *x, *y);
 }
 
 void insertionCoordonnees(Unite* unite, int x, int y){

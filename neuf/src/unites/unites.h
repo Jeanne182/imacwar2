@@ -28,7 +28,6 @@ const int nombreUnitesMAX =15;
 // Déclaration des structures :
 
 struct Game;
-
 typedef struct Unite{
   int id;
   int vie;

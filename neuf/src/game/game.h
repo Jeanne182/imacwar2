@@ -13,16 +13,24 @@
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
-
 // Délacrations des variables
 
 // Déclarations des structures
+enum etapesJeu{
+  PLACEMENT_UNITES,
+  TOURS_DE_JEU,
+  TOUR_JOUEUR1,
+  TOUR_JOUEUR2,
+  SELECTION_UNITE,
+  ACTIONS
+  };
 
 typedef struct Game {
   Joueur joueur1, joueur2;
   Bouton boutonDeplacement, boutonAttaque;
   int etapeJeu;
   int tour;
+  int choix;
 
   SDL_Surface* surface;
 
@@ -41,6 +49,7 @@ typedef struct Game {
 
   //A enlever ??
   int x , y;
+  int id1, id2; 
 
 } Game;
 

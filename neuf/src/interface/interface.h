@@ -32,8 +32,8 @@ enum texturesCarte{
     ARBRE
   };
 
-enum boutons{
-    AUCUNESELECTION,
+enum Boutons{
+    RIEN,
     DEPLACEMENT,
     ATTAQUE,
     ABANDON

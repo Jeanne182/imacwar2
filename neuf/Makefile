@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -ansi -Isrc
+CFLAGS = -Wall -ansi -Isrc -g
 LDFLAGS	= -lSDL -lSDL_image -lGLU -lGL -lm 
 
 BINDIR	= bin/

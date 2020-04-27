@@ -1,16 +1,9 @@
-/*
-Fanny Joseph
-Jeanne Lebigre
-
-IMAC 1 - Projet Prog&Algo S1
-*/
-
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
 
 /* Dimensions de la fenetre */
-static const unsigned int WINDOW_WIDTH = 900;
+static const unsigned int WINDOW_WIDTH = 1500;
 static const unsigned int WINDOW_HEIGHT = 800;
 static const char WINDOW_TITLE[] = "Imacwar II";
 
@@ -31,17 +24,17 @@ static const Uint32 FRAMERATE_MILLISECONDS = 1000 / 60;
 // Fonction qui dessine la grille et les unites presentes
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
 {
-    SDL_Surface* surface_temp = SDL_SetVideoMode(
+    /*SDL_Surface* surface_temp = SDL_SetVideoMode(
         width, height, BIT_PER_PIXEL,
-        SDL_OPENGL | SDL_GL_DOUBLEBUFFER | SDL_RESIZABLE);
-    if(NULL == surface_temp)
+        SDL_OPENGL | SDL_GL_DOUBLEBUFFER | SDL_RESIZABLE);*/
+    /*if(NULL == surface_temp)
     {
         fprintf(
             stderr,
             "Erreur lors du redimensionnement de la fenetre.\n");
         exit(EXIT_FAILURE);
-    }
-    *surface = surface_temp;
+    }*/
+    //*surface = surface_temp;
     aspectRatio = width / (float) height;
 
     glViewport(0, 0, (*surface)->w, (*surface)->h);
@@ -62,27 +55,30 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
 int initialisationSDL(Game* game){
 
   /* Initialisation de la SDL */
-    if(-1 == SDL_Init(SDL_INIT_VIDEO))
-    {
-        fprintf(
-            stderr,
-            "Impossible d'initialiser la SDL. Fin du programme.\n");
-        return EXIT_FAILURE;
-    }
+    //if(-1 == SDL_Init(SDL_INIT_VIDEO))
+//    {
+//        fprintf(
+//            stderr,
+//            "Impossible d'initialiser la SDL. Fin du programme.\n");
+//        return EXIT_FAILURE;
+//    }
 
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
 
+
+
+
+
+
+
+    game->surface = SDL_SetVideoMode(
+        WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL,
+        SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
     reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
     creationTexture(&game->textureCases[PLAINE], game->surfaceCases[PLAINE]);
     creationTexture(&game->textureCases[EAU], game->surfaceCases[EAU]);
     creationTexture(&game->textureCases[ARBRE], game->surfaceCases[ARBRE]);
 
-
-    reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-    game->surface = SDL_SetVideoMode(
-        WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL,
-        SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
     if(NULL == game->surface)
     {
         fprintf(
