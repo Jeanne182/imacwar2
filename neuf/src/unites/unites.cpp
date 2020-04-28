@@ -47,7 +47,15 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){ // il y avait
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
   insertionCoordonnees(&joueur->unites[id], xNew, yNew);
 
+  if(game->tour == TOUR_JOUEUR2){
+    game->tour = TOUR_JOUEUR1;
+  }
+  else{
+    game->tour = TOUR_JOUEUR2;
+  }
 
+  game->choix = RIEN;
+  game->etapeJeu = SELECTION_UNITE;
   // Vérifie que la case est libre
 
   //Vérifie que La créature a le droit de se déplacer à cet endroit là en fonction de ses caractéristiques

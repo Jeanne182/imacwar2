@@ -24,7 +24,6 @@ void gererClic(Game* game, SDL_Event e){
         case TOUR_JOUEUR1:
         cout <<"joueur1"<<endl;
           if(selectionIdUnite(game->x, game->y, game->joueur1) != -1){
-            selectionCoordonnee(&game->x,&game->y, e, game->surface);
             game->etapeJeu = ACTIONS;
             game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
             cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
@@ -33,7 +32,6 @@ void gererClic(Game* game, SDL_Event e){
 
         case TOUR_JOUEUR2:
           if(selectionIdUnite(game->x, game->y, game->joueur2) != -1){
-            selectionCoordonnee(&game->x,&game->y, e, game->surface);
             game->etapeJeu = ACTIONS;
             game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
             cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
@@ -62,10 +60,9 @@ void gererClic(Game* game, SDL_Event e){
 
             case DEPLACEMENT:
               deplacement(&game->joueur1, game->id1, e, game);
-              game->tour = TOUR_JOUEUR2;
+
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
-              game->choix = RIEN;
-              game->etapeJeu = SELECTION_UNITE;
+
               break;
           }
 
@@ -84,10 +81,7 @@ void gererClic(Game* game, SDL_Event e){
 
             case DEPLACEMENT:
               deplacement(&game->joueur2, game->id2, e, game);
-              game->tour = TOUR_JOUEUR1;
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
-              game->choix = RIEN;
-              game->etapeJeu = SELECTION_UNITE;
               break;
           }
           break;
