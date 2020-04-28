@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL_image.h>
+using namespace std;
 
 // Délacrations des variables
 
@@ -37,7 +38,6 @@ typedef struct Game {
   SDL_Surface* surfaceCases[3];
   GLuint textureCases[3];
 
-
   int longueurCarte, hauteurCarte;
   int window_width, window_height;
   int bit_per_pixel;
@@ -46,10 +46,12 @@ typedef struct Game {
   Uint32 framerate_milliseconds;
 
   int map[10][10];
+  int zonePlacement[10][10];
+
 
   //A enlever ??
   int x , y;
-  int id1, id2; 
+  int id1, id2;
 
 } Game;
 

@@ -1,13 +1,13 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
-
+#include "game/game.h"
+using namespace std;
 
 
 void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
   *x = e.button.x;
   *y = e.button.y;
   conversionOpenGLRepere(x, y, surface);
-  //printf("clic en (%d, %d)\n", *x, *y);
 }
 
 void insertionCoordonnees(Unite* unite, int x, int y){
@@ -22,4 +22,32 @@ int selectionIdUnite(int x, int y, Joueur joueur){
       }
     }
     return -1;
+}
+
+
+// Fonction qui, lors du placement des créatures en debut de partie, verifie que le joueur place bien ses créatures dans la zone qui lui est reservee
+bool verificationZone(Joueur joueur, int x, int y, Game* game){
+  if (joueur.id!=game->zonePlacement[x-1][y-1]){
+    return false;
+  }
+  return true;
+}
+
+// Fonction qui verifie que la case est libre pour qu'un joueur puisse y mettre une unite, autrement dit que les coordonees ne sont pas deja utilisees
+bool verificationCaseLibre(Joueur joueur, int x,int y){
+  for(int i=0; i<joueur.nbUnitesInitial; i++){
+    if (x==joueur.unites[i].coord[0] && y==joueur.unites[i].coord[1]){
+        return false;
+    }
+  }
+  return true;
+}
+
+
+// Vérifie que La créature a le droit de se déplacer à cet endroit là en fonction de ses caractéristiques
+bool verificationDistance(Joueur joueur, int x, int y, int id, Game* game){
+  if(abs(joueur.unites[id].coord[0]-(x-1))+abs(joueur.unites[id].coord[1]-(y-1))>joueur.unites[id].distance || joueur.unites[id].coord[0] <1 || joueur.unites[id].coord[1] <1 || joueur.unites[id].coord[0]> game->longueurCarte || joueur.unites[id].coord[1]> game->hauteurCarte){
+    return false;
+  }
+  return true;
 }

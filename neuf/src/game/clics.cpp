@@ -8,15 +8,18 @@ void gererClic(Game* game, SDL_Event e){
 
     //Première partie du jeu : placement des unités :
     case PLACEMENT_UNITES:
-      placementUnitesJoueurs(game, e);
+      if(placementUnitesJoueurs(game, e)==false){
+        cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
+      }
       cout<<game->etapeJeu<<endl;
-      if(game->joueur1.nbUnites==4 && game->joueur2.nbUnites==4){ //A CHANGER
+      if(game->joueur1.nbUnites==2 && game->joueur2.nbUnites==2){ //A CHANGER
         game->etapeJeu = SELECTION_UNITE;
       }
       break;
 
     //Partie du jeu où les joueurs sélectionnent l'unité avec laquelle ils vont agir
     case SELECTION_UNITE:
+
       //sélection des coordonnées d'une unité du joueur dont c'est le tour
       selectionCoordonnee(&game->x,&game->y, e, game->surface);
       switch(game->tour){
@@ -59,8 +62,8 @@ void gererClic(Game* game, SDL_Event e){
               break;
 
             case DEPLACEMENT:
-              deplacement(&game->joueur1, game->id1, e, game);
 
+              deplacement(&game->joueur1, game->id1, e, game);
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
 
               break;

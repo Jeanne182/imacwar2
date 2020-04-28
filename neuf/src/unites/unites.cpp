@@ -9,60 +9,66 @@ IMAC 1 - Projet Prog&Algo S1
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+using namespace std;
 
-
-void placementUnite(Joueur *joueur, SDL_Event e, Game* game){
+bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
 
     int id = joueur->nbUnites;
     if(joueur->nbUnites <= 3){
       Unite unite;
       unite.id =id;
+      unite.distance=3;
 
       //MODIFIé AVEC STEEVE
       int x=0;
       int y=0;
       selectionCoordonnee(&x,&y, e, game->surface);
-      insertionCoordonnees(&unite, x, y);
-      joueur->unites[id] = unite;
-      joueur->nbUnites ++;
-      joueur->nbUnitesInitial++;
+      cout << "x : " << x << " y : " << y << endl;
+      if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(*joueur, x, y)==true){
+        insertionCoordonnees(&unite, x, y);
+        joueur->unites[id] = unite;
+        joueur->nbUnites ++;
+        joueur->nbUnitesInitial++;
+        return true;
+      }
     }
+    return false;
 }
 
 
-void placementUnitesJoueurs(Game* game, SDL_Event e){
-  if (game->tour == 1){
-    placementUnite(&game->joueur1, e, game);
-    game->tour = 2;
+bool placementUnitesJoueurs(Game* game, SDL_Event e){
+  if (game->tour == TOUR_JOUEUR1){
+    if(placementUnite(&game->joueur1, e, game)==true){
+      game->tour = TOUR_JOUEUR2;
+      return true;
+    }
   }
   else {
-    placementUnite(&game->joueur2, e, game);
-    game->tour = 1;
+    if(placementUnite(&game->joueur2, e, game)==true){
+      game->tour = TOUR_JOUEUR1;
+      return true;
+    }
   }
+  return false;
 }
 
-void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){ // il y avait xInitial et yInitial mais on ne s'en servait nul part donc j'ai enlevé
+void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
 
   int xNew, yNew;
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
-  insertionCoordonnees(&joueur->unites[id], xNew, yNew);
-
-  if(game->tour == TOUR_JOUEUR2){
-    game->tour = TOUR_JOUEUR1;
+  if(verificationCaseLibre(game->joueur1, xNew, yNew)==true && verificationCaseLibre(game->joueur2, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
+    insertionCoordonnees(&joueur->unites[id], xNew, yNew);
+    cout << "case libre" << endl;
+    if(game->tour == TOUR_JOUEUR2){
+      game->tour = TOUR_JOUEUR1;
+    }
+    else{
+      game->tour = TOUR_JOUEUR2;
+    }
+    game->choix = RIEN;
+    game->etapeJeu = SELECTION_UNITE;
   }
   else{
-    game->tour = TOUR_JOUEUR2;
+    cout << "Cette case est déjà occupée, veuillez choisir une autre case OU Votre distance de déplacement n'est pas respectée" << endl;
   }
-
-  game->choix = RIEN;
-  game->etapeJeu = SELECTION_UNITE;
-  // Vérifie que la case est libre
-
-  //Vérifie que La créature a le droit de se déplacer à cet endroit là en fonction de ses caractéristiques
-
-  //if(abs(coordonneesJoueur[0]-*xInitial)+abs(coordonneesJoueur[1]-*yInitial)>joueurTour.unites[idUnite].distance || coordonneesJoueur[0] <1 || coordonneesJoueur[1] <1 || coordonneesJoueur[0]> tailleGrille || coordonneesJoueur[1]>tailleGrille){
-  //else{
-
-  //  }
-
-} // fin deplacement()
+}

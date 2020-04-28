@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+using namespace std;
 
 void initialisationGame(Game *game){
    game->surface = NULL;
@@ -21,7 +22,7 @@ void initialisationGame(Game *game){
   game->longueurCarte = 10;
   game->hauteurCarte = 10;
 
-  /*game->map[] = {{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
+/*  game->map = {{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
                       { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
                       { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
                       { 2, 2, 2, 0, 0, 0, 0, 0, 0, 0 },
@@ -31,6 +32,8 @@ void initialisationGame(Game *game){
                       { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
                       { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                       { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }};*/
+
+
 
   game->map[0][0]=2;
   game->map[0][1]=2;
@@ -142,16 +145,6 @@ void initialisationGame(Game *game){
   game->map[9][8]=0;
   game->map[9][9]=0;
 
-  // game->map[10][0]=0;
-  // game->map[10][1]=0;
-  // game->map[10][2]=1;
-  // game->map[10][3]=1;
-  // game->map[10][4]=1;
-  // game->map[10][5]=1;
-  // game->map[10][6]=1;
-  // game->map[10][7]=1;
-  // game->map[10][8]=1;
-  // game->map[10][9]=1;
 
 
   //Initialisation des joueurs
@@ -189,7 +182,117 @@ void initialisationGame(Game *game){
   game->choix = RIEN;
 
 
+//----------------- Zone de placement --------------//
 
+game->zonePlacement[0][0]=0;
+game->zonePlacement[0][1]=0;
+game->zonePlacement[0][2]=0;
+game->zonePlacement[0][3]=0;
+game->zonePlacement[0][4]=0;
+game->zonePlacement[0][5]=1;
+game->zonePlacement[0][6]=1;
+game->zonePlacement[0][7]=1;
+game->zonePlacement[0][8]=1;
+game->zonePlacement[0][9]=1;
+
+game->zonePlacement[1][0]=0;
+game->zonePlacement[1][1]=0;
+game->zonePlacement[1][2]=0;
+game->zonePlacement[1][3]=0;
+game->zonePlacement[1][4]=0;
+game->zonePlacement[1][5]=0;
+game->zonePlacement[1][6]=1;
+game->zonePlacement[1][7]=1;
+game->zonePlacement[1][8]=1;
+game->zonePlacement[1][9]=1;
+
+game->zonePlacement[2][0]=0;
+game->zonePlacement[2][1]=0;
+game->zonePlacement[2][2]=0;
+game->zonePlacement[2][3]=0;
+game->zonePlacement[2][4]=0;
+game->zonePlacement[2][5]=0;
+game->zonePlacement[2][6]=0;
+game->zonePlacement[2][7]=1;
+game->zonePlacement[2][8]=1;
+game->zonePlacement[2][9]=1;
+
+game->zonePlacement[3][0]=0;
+game->zonePlacement[3][1]=0;
+game->zonePlacement[3][2]=0;
+game->zonePlacement[3][3]=0;
+game->zonePlacement[3][4]=0;
+game->zonePlacement[3][5]=0;
+game->zonePlacement[3][6]=0;
+game->zonePlacement[3][7]=0;
+game->zonePlacement[3][8]=1;
+game->zonePlacement[3][9]=1;
+
+game->zonePlacement[4][0]=0;
+game->zonePlacement[4][1]=0;
+game->zonePlacement[4][2]=0;
+game->zonePlacement[4][3]=0;
+game->zonePlacement[4][4]=0;
+game->zonePlacement[4][5]=0;
+game->zonePlacement[4][6]=0;
+game->zonePlacement[4][7]=0;
+game->zonePlacement[4][8]=0;
+game->zonePlacement[4][9]=1;
+
+game->zonePlacement[5][0]=2;
+game->zonePlacement[5][1]=0;
+game->zonePlacement[5][2]=0;
+game->zonePlacement[5][3]=0;
+game->zonePlacement[5][4]=0;
+game->zonePlacement[5][5]=0;
+game->zonePlacement[5][6]=0;
+game->zonePlacement[5][7]=0;
+game->zonePlacement[5][8]=0;
+game->zonePlacement[5][9]=0;
+
+game->zonePlacement[6][0]=2;
+game->zonePlacement[6][1]=2;
+game->zonePlacement[6][2]=0;
+game->zonePlacement[6][3]=0;
+game->zonePlacement[6][4]=0;
+game->zonePlacement[6][5]=0;
+game->zonePlacement[6][6]=0;
+game->zonePlacement[6][7]=0;
+game->zonePlacement[6][8]=0;
+game->zonePlacement[6][9]=0;
+
+game->zonePlacement[7][0]=2;
+game->zonePlacement[7][1]=2;
+game->zonePlacement[7][2]=2;
+game->zonePlacement[7][3]=0;
+game->zonePlacement[7][4]=0;
+game->zonePlacement[7][5]=0;
+game->zonePlacement[7][6]=0;
+game->zonePlacement[7][7]=0;
+game->zonePlacement[7][8]=0;
+game->zonePlacement[7][9]=0;
+
+game->zonePlacement[8][0]=2;
+game->zonePlacement[8][1]=2;
+game->zonePlacement[8][2]=2;
+game->zonePlacement[8][3]=2;
+game->zonePlacement[8][4]=0;
+game->zonePlacement[8][5]=0;
+game->zonePlacement[8][6]=0;
+game->zonePlacement[8][7]=0;
+game->zonePlacement[8][8]=0;
+game->zonePlacement[8][9]=0;
+
+game->zonePlacement[9][0]=2;
+game->zonePlacement[9][1]=2;
+game->zonePlacement[9][2]=2;
+game->zonePlacement[9][3]=2;
+game->zonePlacement[9][4]=2;
+game->zonePlacement[9][5]=0;
+game->zonePlacement[9][6]=0;
+game->zonePlacement[9][7]=0;
+game->zonePlacement[9][8]=0;
+game->zonePlacement[9][9]=0;
 
   initialisationSDL(game);
 
