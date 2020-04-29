@@ -1,8 +1,3 @@
-/*
-
-IMAC 1 - Projet Prog&Algo S1
-*/
-
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
