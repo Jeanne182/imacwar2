@@ -14,6 +14,7 @@
 #include <SDL/SDL_image.h>
 using namespace std;
 
+struct Bouton; 
 // Délacrations des variables
 
 // Déclarations des structures

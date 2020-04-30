@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+#include "interface/text.h"
 
 
 int main(){
@@ -40,10 +41,14 @@ int main(){
 
         }
       }
+      Text texte;
+      font(&texte,"fonts/SummitAttack.ttf", 500, SDL_Color{0, 0, 255}, "Stp fonctionne");
+      //displayText(0, 0, &texte);
+      /*deleteText(&texte);*/
 
       //affichageTexture(game.textureMap,1,1,0,0);
-      bouton(game.boutonDeplacement);
-      bouton(game.boutonAttaque);
+      bouton(&game.boutonDeplacement);
+      bouton(&game.boutonAttaque);
       affichageUnite(game.joueur1, game.longueurCarte, game.hauteurCarte);
       affichageUnite(game.joueur2, game.longueurCarte, game.hauteurCarte);
 
@@ -62,6 +67,7 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONUP:
+
 
               gererClic(&game,e);
               break;

@@ -54,8 +54,8 @@ void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte);
 
 
 /* boutons.cpp */
-void bouton(Bouton bouton);
-int testClicBouton(Game* game, Bouton bouton, SDL_Event e);
+void bouton(Bouton *bouton);
+int testClicBouton(Game* game, Bouton *bouton, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
 
 #endif
