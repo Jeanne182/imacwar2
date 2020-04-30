@@ -1,3 +1,8 @@
+/*
+
+IMAC 1 - Projet Prog&Algo S1
+*/
+
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
@@ -34,7 +39,15 @@ enum Boutons{
     ABANDON
   };
 
-
+enum Unites{
+  HOBBIT,
+  ELFE,
+  NAIN,
+  ORQUE,
+  NAZGUL,
+  SMEAGOL,
+  HUMAN
+};
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 
@@ -44,18 +57,19 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
+//void initTextures(Game* game);
 void creationTexture(GLuint *texture, SDL_Surface* image);
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
 
 
 /*sprites.cpp*/
-void affichageUnite(Joueur joueur, int longueurCarte, int largeurCarte);
+void affichageUnite(Joueur joueur, Game* game);
 
 
 /* boutons.cpp */
-void bouton(Bouton *bouton);
-int testClicBouton(Game* game, Bouton *bouton, SDL_Event e);
+void bouton(Bouton bouton);
+int testClicBouton(Game* game, Bouton bouton, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
 
 #endif

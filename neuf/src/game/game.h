@@ -14,7 +14,6 @@
 #include <SDL/SDL_image.h>
 using namespace std;
 
-struct Bouton; 
 // Délacrations des variables
 
 // Déclarations des structures
@@ -38,6 +37,9 @@ typedef struct Game {
 
   SDL_Surface* surfaceCases[3];
   GLuint textureCases[3];
+  
+  SDL_Surface* surfaceUnites[10];
+  GLuint textureUnites[10];
 
   int longueurCarte, hauteurCarte;
   int window_width, window_height;

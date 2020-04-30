@@ -65,20 +65,16 @@ int initialisationSDL(Game* game){
 
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
 
-
-
-
-
-
-
     game->surface = SDL_SetVideoMode(
         WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL,
         SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
     reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
+    // initTextures(game);
     creationTexture(&game->textureCases[PLAINE], game->surfaceCases[PLAINE]);
     creationTexture(&game->textureCases[EAU], game->surfaceCases[EAU]);
     creationTexture(&game->textureCases[ARBRE], game->surfaceCases[ARBRE]);
-
+    creationTexture(&game->textureUnites[HUMAN], game->surfaceUnites[HUMAN]);
+    
     if(NULL == game->surface)
     {
         fprintf(

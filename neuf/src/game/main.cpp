@@ -3,7 +3,6 @@
 #include "game/game.h"
 #include "interface/text.h"
 
-
 int main(){
   Game game;
   initialisationGame(&game);
@@ -47,10 +46,16 @@ int main(){
       /*deleteText(&texte);*/
 
       //affichageTexture(game.textureMap,1,1,0,0);
-      bouton(&game.boutonDeplacement);
-      bouton(&game.boutonAttaque);
-      affichageUnite(game.joueur1, game.longueurCarte, game.hauteurCarte);
-      affichageUnite(game.joueur2, game.longueurCarte, game.hauteurCarte);
+      
+      bouton(game.boutonDeplacement);
+      bouton(game.boutonAttaque);
+
+      glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
+
+      affichageUnite(game.joueur1, &game);
+      affichageUnite(game.joueur2, &game);
+      
+
 
       /* Echange du front et du back buffer : mise a jour de la fenetre */
       SDL_GL_SwapBuffers();
@@ -67,7 +72,6 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONUP:
-
 
               gererClic(&game,e);
               break;

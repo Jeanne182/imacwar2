@@ -18,6 +18,8 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
       Unite unite;
       unite.id =id;
       unite.distance=3;
+      unite.type = HUMAN;
+
 
       //MODIFIé AVEC STEEVE
       int x=0;
