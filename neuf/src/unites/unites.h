@@ -48,6 +48,7 @@ typedef struct Joueur{
   Unite unites[nombreUnitesMAX];
   int nbUnites;
   int nbUnitesInitial;
+  int tour; 
 } Joueur;
 
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
@@ -56,7 +57,7 @@ typedef struct Joueur{
 /* selection.cpp */
 void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface);
 int selectionIdUnite(int x, int y, Joueur joueur);
-void insertionCoordonnees(Unite* unite, int x, int y);
+void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour);
 bool verificationZone(Joueur joueur, int x, int y, Game* game);
 bool verificationCaseLibre(Joueur joueur, int x,int y);
 bool verificationDistance(Joueur joueur, int x, int y, int id, Game* game);

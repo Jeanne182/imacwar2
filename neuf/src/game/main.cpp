@@ -6,7 +6,6 @@
 int main(){
   SDL_Surface *texte = NULL;
   TTF_Font *police = NULL;
-  SDL_Color couleurNoire = {0, 255, 0};
 
   Game game;
   initialisationGame(&game);
@@ -43,6 +42,15 @@ int main(){
             affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             break;
+
+            case JOUEUR1:
+            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            affichageTexture(game.textureUnites[HUMAN],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+
+            case JOUEUR2:
+            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            affichageTexture(game.textureUnites[HUMAN],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+
           }
 
         }
@@ -54,8 +62,8 @@ int main(){
 
       glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
 
-      affichageUnite(game.joueur1, &game);
-      affichageUnite(game.joueur2, &game);
+      //affichageUnite(game.joueur1, &game);
+      //affichageUnite(game.joueur2, &game);
 
       /* Echange du front et du back buffer : mise a jour de la fenetre */
       SDL_GL_SwapBuffers();

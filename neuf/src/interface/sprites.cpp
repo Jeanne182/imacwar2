@@ -32,7 +32,7 @@ void affichageUnite(Joueur joueur, Game* game){
       //   glEnd();
       //   glPopMatrix();
       //   //glColor3f(1,1,1);
-      
+
       affichageTexture(game->textureUnites[joueur.unites[i].type],(float)1/10,(float)1/10,(float)(x-1)/10,(float)(y-1)/10);
 
     }

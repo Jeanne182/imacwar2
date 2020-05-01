@@ -73,7 +73,7 @@ void gererClic(Game* game, SDL_Event e){
 
             case ATTAQUE:
 
-              attaque(&game_>joueur1, &game->joueur2, game->id1, e, game);
+              //attaque(&game_>joueur1, &game->joueur2, game->id1, e, game);
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
 

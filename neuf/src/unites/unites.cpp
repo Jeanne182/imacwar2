@@ -27,7 +27,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
       selectionCoordonnee(&x,&y, e, game->surface);
       cout << "x : " << x << " y : " << y << endl;
       if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(*joueur, x, y)==true){
-        insertionCoordonnees(&unite, x, y);
+        insertionCoordonnees(game, &unite, x, y, joueur->tour);
         joueur->unites[id] = unite;
         joueur->nbUnites ++;
         joueur->nbUnitesInitial++;
@@ -55,11 +55,10 @@ bool placementUnitesJoueurs(Game* game, SDL_Event e){
 }
 
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
-
   int xNew, yNew;
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
   if(verificationCaseLibre(game->joueur1, xNew, yNew)==true && verificationCaseLibre(game->joueur2, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
-    insertionCoordonnees(&joueur->unites[id], xNew, yNew);
+    insertionCoordonnees(game, &joueur->unites[id], xNew, yNew, joueur->tour);
     cout << "case libre" << endl;
     if(game->tour == TOUR_JOUEUR2){
       game->tour = TOUR_JOUEUR1;
@@ -75,13 +74,13 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
   }
 }
 
-void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, , SDL_Event e, Game* game){
+/*void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, , SDL_Event e, Game* game){
   int xAttaque, yAttaque;
   selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
 
   // Verifie que la créature selectionnee est bien une unite ennemie : A FAIRE EN FONCTION
 
-}
+}*/
 /*
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int *xSelection, int *ySelection, int tailleGrille){
 

@@ -39,11 +39,13 @@ void initialisationGame(Game *game){
   game->joueur1.nbUnites=0;
   game->joueur1.nbUnitesInitial=0;
   game->joueur1.id = 1;
+  game->joueur1.tour = JOUEUR1;
 
 
   game->joueur2.nbUnites=0;
   game->joueur2.nbUnitesInitial=0;
   game->joueur2.id = 2;
+  game->joueur2.tour = JOUEUR2; 
 
 
   //Initialisation des boutons

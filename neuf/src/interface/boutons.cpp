@@ -28,8 +28,6 @@ int testClicBouton(Game* game, Bouton bouton, SDL_Event e){
 
   float newX = (float)(game->x - 1)/10;
   float newY = (float)(game->y - 1)/10;
-  /*cout << newX <<endl;
-  cout << newY <<endl;*/
   if(newX >= bouton.x && newX <= bouton.x + bouton.longueur && newY >= bouton.y && newY <= bouton.y + bouton.hauteur){
     return bouton.valeur;
   }

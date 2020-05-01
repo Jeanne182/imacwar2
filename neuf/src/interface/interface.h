@@ -29,7 +29,9 @@ typedef struct Bouton{
 enum texturesCarte{
     PLAINE,
     EAU,
-    ARBRE
+    ARBRE,
+    JOUEUR1,
+    JOUEUR2
   };
 
 enum Boutons{

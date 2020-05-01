@@ -10,9 +10,16 @@ void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
   conversionOpenGLRepere(x, y, surface);
 }
 
-void insertionCoordonnees(Unite* unite, int x, int y){
+void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
+  if (game->etapeJeu != PLACEMENT_UNITES){
+    int xOld = unite->coord[0];
+    int yOld = unite->coord[1];
+    game->map[yOld-1][xOld-1] = PLAINE;
+  }
+
   unite->coord[0]=x;
   unite->coord[1]=y;
+  game->map[y-1][x-1] = tour;
 }
 
 int selectionIdUnite(int x, int y, Joueur joueur){
