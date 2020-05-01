@@ -19,10 +19,7 @@ typedef struct Text {
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 /*text.cpp*/
-
-void displayText(float posX, float posY, Text* text);
-void deleteText(Text* text);
-void font(Text*text,const char* fontPath, float size, SDL_Color color, const char* content);
+void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur);
 
 
 #endif

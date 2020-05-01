@@ -27,6 +27,7 @@ enum etapesJeu{
   };
 
 typedef struct Game {
+  Game();
   Joueur joueur1, joueur2;
   Bouton boutonDeplacement, boutonAttaque;
   int etapeJeu;
@@ -37,7 +38,7 @@ typedef struct Game {
 
   SDL_Surface* surfaceCases[3];
   GLuint textureCases[3];
-  
+
   SDL_Surface* surfaceUnites[10];
   GLuint textureUnites[10];
 
@@ -47,6 +48,7 @@ typedef struct Game {
   float aspectRatio;
 
   Uint32 framerate_milliseconds;
+
 
   int map[10][10];
   int zonePlacement[10][10];

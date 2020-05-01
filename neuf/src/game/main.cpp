@@ -4,8 +4,17 @@
 #include "interface/text.h"
 
 int main(){
+  SDL_Surface *texte = NULL;
+  TTF_Font *police = NULL;
+  SDL_Color couleurNoire = {0, 255, 0};
+
   Game game;
   initialisationGame(&game);
+  TTF_Init();
+
+  GLuint texture;
+
+  creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, "Steeve le BG", SDL_Color{0, 255, 0});
 
   int loop = 1;
 
@@ -14,7 +23,6 @@ int main(){
       Uint32 startTime = SDL_GetTicks();
 
       /* Placer ici le code de dessin */
-
       glClear(GL_COLOR_BUFFER_BIT);
       glMatrixMode(GL_MODELVIEW);
 
@@ -22,10 +30,9 @@ int main(){
 
       for(int i = 0; i<10; i++){
         for(int j = 0; j<10; j++){
-          switch(game.map[i][j]){
+          switch(game.map[j][i]){
             case PLAINE:
             affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            //affichageTexture(game.textureMap,(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             break;
 
             case EAU:
@@ -40,13 +47,8 @@ int main(){
 
         }
       }
-      Text texte;
-      font(&texte,"fonts/SummitAttack.ttf", 500, SDL_Color{0, 0, 255}, "Stp fonctionne");
-      //displayText(0, 0, &texte);
-      /*deleteText(&texte);*/
+      affichageTexture(texture, 1, 1,0,0);
 
-      //affichageTexture(game.textureMap,1,1,0,0);
-      
       bouton(game.boutonDeplacement);
       bouton(game.boutonAttaque);
 
@@ -54,8 +56,6 @@ int main(){
 
       affichageUnite(game.joueur1, &game);
       affichageUnite(game.joueur2, &game);
-      
-
 
       /* Echange du front et du back buffer : mise a jour de la fenetre */
       SDL_GL_SwapBuffers();
@@ -89,6 +89,11 @@ int main(){
       }
   }
   //finProgrammeSDL(&game.textureMap[PLAINE]);
+  glDisable(GL_TEXTURE_2D);
+  TTF_CloseFont(police);
+  TTF_Quit();
+
+  SDL_FreeSurface(texte);
   finProgrammeSDL(&game);
 
   return 0;

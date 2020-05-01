@@ -53,7 +53,6 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height)
 }
 
 int initialisationSDL(Game* game){
-
   /* Initialisation de la SDL */
     //if(-1 == SDL_Init(SDL_INIT_VIDEO))
 //    {
@@ -64,17 +63,20 @@ int initialisationSDL(Game* game){
 //    }
 
     /* Ouverture d'une fenetre et creation d'un contexte OpenGL */
-
     game->surface = SDL_SetVideoMode(
         WINDOW_WIDTH, WINDOW_HEIGHT, BIT_PER_PIXEL,
-        SDL_OPENGL | SDL_GL_DOUBLEBUFFER);
+        SDL_OPENGL | SDL_DOUBLEBUF); //SDL_GL_DOUBLEBUFFER //SDL_OPENGL
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_TEXTURE_2D);
     reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
     // initTextures(game);
-    creationTexture(&game->textureCases[PLAINE], game->surfaceCases[PLAINE]);
-    creationTexture(&game->textureCases[EAU], game->surfaceCases[EAU]);
-    creationTexture(&game->textureCases[ARBRE], game->surfaceCases[ARBRE]);
+    // creationTexture(&game->textureCases[PLAINE], game->surfaceCases[PLAINE]);
+    // creationTexture(&game->textureCases[EAU], game->surfaceCases[EAU]);
+    // creationTexture(&game->textureCases[ARBRE], game->surfaceCases[ARBRE]);
+    initialisationTextures(game->textureCases, game->surfaceCases);
     creationTexture(&game->textureUnites[HUMAN], game->surfaceUnites[HUMAN]);
-    
+
     if(NULL == game->surface)
     {
         fprintf(
@@ -86,6 +88,13 @@ int initialisationSDL(Game* game){
 	   SDL_WM_SetCaption(WINDOW_TITLE, NULL);
      return 1;
 }
+
+void initialisationTextures(GLuint textureCases[3], SDL_Surface* surfaceCases[3]){
+  creationTexture(&textureCases[PLAINE], surfaceCases[PLAINE]);
+  creationTexture(&textureCases[EAU], surfaceCases[EAU]);
+  creationTexture(&textureCases[ARBRE], surfaceCases[ARBRE]);
+}
+
 
 int finProgrammeSDL(Game* game){
     /* Liberation des ressources associees a la SDL */
@@ -136,10 +145,7 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
 
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
   glPushMatrix();
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texture);
 
         glBegin(GL_QUADS);
@@ -158,7 +164,7 @@ void affichageTexture(GLuint texture, float longueur, float largeur, float x, fl
 
         glEnd();
         glBindTexture(GL_TEXTURE_2D, 0);
-        glDisable(GL_TEXTURE_2D);
+
     glPopMatrix();
 }
 
