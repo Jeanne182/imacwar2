@@ -49,7 +49,7 @@ typedef struct Game {
 
   Uint32 framerate_milliseconds;
 
-
+  int mapInit[10][10];
   int map[10][10];
   int zonePlacement[10][10];
 

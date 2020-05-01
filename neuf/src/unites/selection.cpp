@@ -14,7 +14,7 @@ void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
   if (game->etapeJeu != PLACEMENT_UNITES){
     int xOld = unite->coord[0];
     int yOld = unite->coord[1];
-    game->map[yOld-1][xOld-1] = PLAINE;
+    game->map[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
   }
 
   unite->coord[0]=x;
@@ -34,26 +34,39 @@ int selectionIdUnite(int x, int y, Joueur joueur){
 
 // Fonction qui, lors du placement des créatures en debut de partie, verifie que le joueur place bien ses créatures dans la zone qui lui est reservee
 bool verificationZone(Joueur joueur, int x, int y, Game* game){
-  if (joueur.id!=game->zonePlacement[x-1][y-1]){
+  if (joueur.id!=game->zonePlacement[y-1][x-1]){
     return false;
   }
   return true;
 }
 
 // Fonction qui verifie que la case est libre pour qu'un joueur puisse y mettre une unite, autrement dit que les coordonees ne sont pas deja utilisees
-bool verificationCaseLibre(Joueur joueur, int x,int y){
-  for(int i=0; i<joueur.nbUnitesInitial; i++){
-    if (x==joueur.unites[i].coord[0] && y==joueur.unites[i].coord[1]){
-        return false;
-    }
+bool verificationCaseLibre(Game* game, int x,int y){
+  if (game->map[y-1][x-1]!=PLAINE){
+      return false;
   }
   return true;
 }
 
+// Vérifie que La créature à attaquer est bien une créature ennemie
+bool verifUniteEnnemie(int tour, Game* game, int x,int y){
+  if(game->map[y-1][x-1]!=tour){
+    return false;
+  }
+  return true;
+}
 
 // Vérifie que La créature a le droit de se déplacer à cet endroit là en fonction de ses caractéristiques
 bool verificationDistance(Joueur joueur, int x, int y, int id, Game* game){
-  if(abs(joueur.unites[id].coord[0]-(x-1))+abs(joueur.unites[id].coord[1]-(y-1))>joueur.unites[id].distance || joueur.unites[id].coord[0] <1 || joueur.unites[id].coord[1] <1 || joueur.unites[id].coord[0]> game->longueurCarte || joueur.unites[id].coord[1]> game->hauteurCarte){
+  if(abs(x-joueur.unites[id].coord[0])+abs(y-joueur.unites[id].coord[1])>joueur.unites[id].distance || x <1 || y <1 || x> game->longueurCarte || y> game->hauteurCarte){
+    return false;
+  }
+  return true;
+}
+
+// Vérifie que La créature a le droit d'attaquer à cet endroit là en fonction de ses caractéristiques
+bool verificationZoneTir(Joueur joueur, int x, int y, int id, Game* game){
+  if(abs(joueur.unites[id].coord[0]-(x-1))+abs(joueur.unites[id].coord[1]-(y-1))>joueur.unites[id].zoneDeTir){
     return false;
   }
   return true;

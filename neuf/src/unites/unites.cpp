@@ -18,7 +18,11 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
       Unite unite;
       unite.id =id;
       unite.distance=3;
+      unite.zoneDeTir=6;
       unite.type = HUMAN;
+      unite.vie = 25;
+      unite.force = 0.5;
+      unite.defense = 0.4;
 
 
       //MODIFIé AVEC STEEVE
@@ -26,7 +30,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
       int y=0;
       selectionCoordonnee(&x,&y, e, game->surface);
       cout << "x : " << x << " y : " << y << endl;
-      if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(*joueur, x, y)==true){
+      if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
         insertionCoordonnees(game, &unite, x, y, joueur->tour);
         joueur->unites[id] = unite;
         joueur->nbUnites ++;
@@ -57,9 +61,11 @@ bool placementUnitesJoueurs(Game* game, SDL_Event e){
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
   int xNew, yNew;
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
-  if(verificationCaseLibre(game->joueur1, xNew, yNew)==true && verificationCaseLibre(game->joueur2, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
+  if(verificationCaseLibre(game, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
     insertionCoordonnees(game, &joueur->unites[id], xNew, yNew, joueur->tour);
     cout << "case libre" << endl;
+
+    // Changement de tour
     if(game->tour == TOUR_JOUEUR2){
       game->tour = TOUR_JOUEUR1;
     }
@@ -74,120 +80,51 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
   }
 }
 
-/*void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, , SDL_Event e, Game* game){
-  int xAttaque, yAttaque;
+void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game){
+  int xAttaque, yAttaque, idEnnemi;
   selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
+  if(verifUniteEnnemie(joueurEnnemi->tour, game, xAttaque, yAttaque)==true && verificationZoneTir(*joueurTour, xAttaque, yAttaque, id, game)==true){//rajouter zone de tire
+    cout << "attaque gooo" << endl;
 
-  // Verifie que la créature selectionnee est bien une unite ennemie : A FAIRE EN FONCTION
+    // combat
+    idEnnemi = selectionIdUnite(xAttaque, yAttaque, *joueurEnnemi);
+    joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*100;
+    joueurEnnemi->unites[idEnnemi].force -= 0.1; //a changer
+    joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*100;
+    joueurTour->unites[id].force -= 0.1; //a changer
+    cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
+    cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
+    cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
+    cout << "vie unite tour = " << joueurTour->unites[id].vie<< endl;
 
-}*/
-/*
-void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int *xSelection, int *ySelection, int tailleGrille){
-
-
-  int idTour, idEnnemi;
-  int x, y;
-  char choix;
-
-
-
-  if(verifUniteEnnemie(*joueurTour, *joueurEnnemi, x, y)==0){
-    cout <<  joueurTour->couleur << "Voulez-vous finalement déplacer une créature (" << "\033[32m" << "tapez 0" << joueurTour->couleur << "), selectionner une autre creature ennemie à attaquer (" << "\033[32m" << "tapez 1" << joueurTour->couleur << ") ou alors ne rien faire (" << "\033[32m" << "tapez 2" << joueurTour->couleur << ") ?" << endl << endl;
-    char change;
-    cin >> change;
-
-    while(change!='0' && change!='1' && change!='2'){
-        messageErreur(13);
-        cout <<  joueurTour->couleur << "Voulez-vous finalement déplacer une créature (" << "\033[32m" << "tapez 0" << joueurTour->couleur << "), selectionner une autre creature ennemie à attaquer (" << "\033[32m" << "tapez 1" << joueurTour->couleur << ") ou alors ne rien faire (" << "\033[32m" << "tapez 2" << joueurTour->couleur << ") ?" << endl << endl;
-        cin >> change;
+    //-----------A OPTIMISER ?----------//
+    // Si une unite ennemie est tuee :
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      joueurEnnemi->nbUnites-=1;
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour); //A voir si on les mets vraiment en (0,0)
+      cout << "L'unite ennemie est morte" << endl;
     }
-    if(change=='0'){
-      deplacement(*joueurTour, *joueurEnnemi, xSelection, ySelection, idTour, tailleGrille);
-      dessinerGrille(tailleGrille, *joueurTour, *joueurEnnemi);
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+      joueurTour->unites[id].vie=0;
+      joueurTour->nbUnites-=1;
+      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
+
+      cout << "Votre unite est morte" << endl;
     }
-    else if (change=='1'){
-      attaque(joueurTour, joueurEnnemi, xSelection, ySelection, tailleGrille);
+
+    // Changement de tour
+    if(game->tour == TOUR_JOUEUR2){
+      game->tour = TOUR_JOUEUR1;
     }
+    else{
+      game->tour = TOUR_JOUEUR2;
+    }
+    game->choix = RIEN;
+    game->etapeJeu = SELECTION_UNITE;
   }
-
-  // Verifie si la créature respecte sa zone de tir
-
-  else if(abs(*xSelection-x)+abs(*ySelection-y)>joueurTour->unites[idTour].zoneDeTir){
-      cout <<  "\033[37m" << "La créature ne peut pas attaquer à cet endroit (zone de tir insuffisante)." << endl;
-      cout <<  joueurTour->couleur << "Voulez-vous déplacer cette créature (" << "\033[32m" << "tapez 0" << joueurTour->couleur << "), selectionner une autre creature ennemie à attaquer (" << "\033[32m" << "tapez 1" << joueurTour->couleur << ") ou alors ne rien faire (" << "\033[32m" << "tapez 2" << joueurTour->couleur << ") ?" << endl << endl;
-      cin >> choix;
-
-      while(choix!='0' && choix!='1' && choix!='2'){
-        messageErreur(13);
-        cout <<  joueurTour->couleur << "Voulez-vous déplacer cette créature (" << "\033[32m" << "tapez 0" << joueurTour->couleur << "), selectionner une autre creature ennemie à attaquer (" << "\033[32m" << "tapez 1" << joueurTour->couleur << ") ou alors ne rien faire (" << "\033[32m" << "tapez 2" << joueurTour->couleur << ") ?" << endl << endl;
-        cin >> choix;
-      }
-
-      if(choix=='0'){
-        deplacement(*joueurTour, *joueurEnnemi, xSelection, ySelection, idTour, tailleGrille);
-        dessinerGrille(tailleGrille, *joueurTour, *joueurEnnemi);
-      }
-      else if (choix=='1'){
-        attaque(joueurTour, joueurEnnemi, xSelection, ySelection, tailleGrille);
-      }
-    }
-
-    // Tout est ok : COMBAT
-
   else{
-
-    // Récupère l'identifiant de la créature ennemie
-
-    for(int i = 0; i < joueurTour->nbUnitesInitial ; i++){
-      if (joueurEnnemi->unites[i].coordUnite[0]==x && joueurEnnemi->unites[i].coordUnite[1]==y){
-        idEnnemi = i;
-      }
-    }
-
-    char fight;
-    cout << endl << "\033[37m" << "Etes-vous pret a combattre ? C'est parti !" << endl;
-    cout << "\033[32m" << "Tapez 0" << joueurTour->couleur <<" pour lancez l'attaque !" << endl;
-    cin >> fight;
-
-    while(fight!='0'){
-      messageErreur(13);
-      cout  << joueurTour->couleur <<"Lâche ! Vous avez peur du combat ?"<< "\033[32m" << "Tapez 0" << joueurTour->couleur <<" pour lancez l'attaque !" << endl;
-      cin >> fight;
-    }
-
-    // Fait perdre les points de vie aux créatures concernees en fonction de leurs caracteristiques
-
-    if (fight == '0'){
-      joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[idTour].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*100;
-      joueurTour->unites[idTour].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[idTour].defense))*100;
-
-      // Si une unite ennemie est tuee :
-
-      if (joueurEnnemi->unites[idEnnemi].vie<=0){
-        joueurEnnemi->unites[idEnnemi].vie=0; // Bloque le nombre de points de vie à zéro
-        joueurEnnemi->nbUnitesJoueur-=1; // Baisse le compteur du nombre d'unités
-        joueurEnnemi->unites[idEnnemi].coordUnite[0]=0;
-        joueurEnnemi->unites[idEnnemi].coordUnite[1]=0;
-        cout << joueurTour->couleur << "BRAVO "<<joueurTour->pseudo<< " vous avez aneanti la créature ennemie !"<<endl;
-      }
-
-      // Si une unite du joueur est tuee :
-
-      if (joueurTour->unites[idTour].vie<=0){
-        joueurTour->unites[idTour].vie=0; // Bloque le nombre de points de vie à zéro sinon renvoie des négatifs
-        joueurTour->nbUnitesJoueur-=1; // Baisse le compteur du nombre d'unités
-        joueurTour->unites[idTour].coordUnite[0]=0;
-        joueurTour->unites[idTour].coordUnite[1]=0;
-        cout << joueurTour->couleur << "Mince alors ! "<<joueurTour->pseudo<< " vous avez perdu votre créature durant le combat !"<<endl;
-      }
-    }
-
-    if(joueurTour->nbUnitesJoueur !=0 || joueurEnnemi->nbUnitesJoueur !=0){
-      cout << endl << "Voici les créatures qui sont sorties vivantes du combat :"<<endl<<endl;
-      etatUnites(*joueurTour,idTour);
-      etatUnites(*joueurEnnemi,idEnnemi);
-    }
+    cout << "Vous attaquez une de vos unites OU La distance de tir n'est pas respectée" << endl;
   }
-
-
-} // fin attaque()*/
+}
