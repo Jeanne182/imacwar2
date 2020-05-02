@@ -48,7 +48,7 @@ void initialisationGame(Game *game){
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
-  game->surfaceUnites[HUMAN] = IMG_Load("src/img/human.png");
+  game->surfaceUnites[HUMAN] = IMG_Load("src/img/Gandalf.png");
   //Initialisation de la carte
   game->longueurCarte = 10;
   game->hauteurCarte = 10;
