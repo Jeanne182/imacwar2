@@ -70,12 +70,11 @@ int initialisationSDL(Game* game){
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_TEXTURE_2D);
     reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
-    // initTextures(game);
-    // creationTexture(&game->textureCases[PLAINE], game->surfaceCases[PLAINE]);
-    // creationTexture(&game->textureCases[EAU], game->surfaceCases[EAU]);
-    // creationTexture(&game->textureCases[ARBRE], game->surfaceCases[ARBRE]);
-    initialisationTextures(game->textureCases, game->surfaceCases);
-    creationTexture(&game->textureUnites[HUMAN], game->surfaceUnites[HUMAN]);
+
+    initialisationTexturesCarte(game->textureCases, game->surfaceCases);
+    initialisationTexturesUnites(game->textureUnites, game->surfaceUnites, HUMAN); //à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
+
+    
 
     if(NULL == game->surface)
     {
@@ -89,12 +88,15 @@ int initialisationSDL(Game* game){
      return 1;
 }
 
-void initialisationTextures(GLuint textureCases[3], SDL_Surface* surfaceCases[3]){
-  creationTexture(&textureCases[PLAINE], surfaceCases[PLAINE]);
-  creationTexture(&textureCases[EAU], surfaceCases[EAU]);
-  creationTexture(&textureCases[ARBRE], surfaceCases[ARBRE]);
-}
+// void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]){
+//     creationTexture(&textureCases[PLAINE], surfaceCases[PLAINE]);
+//     creationTexture(&textureCases[EAU], surfaceCases[EAU]);
+//     creationTexture(&textureCases[ARBRE], surfaceCases[ARBRE]);
+// }
 
+// void initialisationTexturesUnites(GLuint textureUnites[3], SDL_Surface* surfaceUnites[3], EnumUnites unite){
+//     creationTexture(&textureUnites[unite], surfaceUnites[unite]);
+// }
 
 int finProgrammeSDL(Game* game){
     /* Liberation des ressources associees a la SDL */

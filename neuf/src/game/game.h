@@ -17,7 +17,7 @@ using namespace std;
 // Délacrations des variables
 
 // Déclarations des structures
-enum etapesJeu{
+enum EnumEtapesJeu{
   PLACEMENT_UNITES,
   TOURS_DE_JEU,
   TOUR_JOUEUR1,

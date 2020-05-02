@@ -18,7 +18,8 @@ IMAC 1 - Projet Prog&Algo S1
 #include <SDL/SDL_image.h>
 
 // Déclarations des variables
-
+struct Game;
+struct Joueur;
 
 // Déclarations des structures
 
@@ -26,7 +27,7 @@ typedef struct Bouton{
   float r, g, b, x, y, hauteur, longueur, valeur;
 } Bouton;
 
-enum texturesCarte{
+enum EnumTexturesCarte{
     PLAINE,
     EAU,
     ARBRE,
@@ -34,14 +35,14 @@ enum texturesCarte{
     JOUEUR2
   };
 
-enum Boutons{
+enum EnumBoutons{
     RIEN,
     DEPLACEMENT,
     ATTAQUE,
     ABANDON
   };
 
-enum Unites{
+enum EnumUnites{
   HOBBIT,
   ELFE,
   NAIN,
@@ -59,7 +60,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
-//void initTextures(Game* game);
+
 void creationTexture(GLuint *texture, SDL_Surface* image);
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
@@ -77,5 +78,6 @@ int selectionBouton(Game* game, SDL_Event e);
 
 
 
-void initialisationTextures(GLuint textureCases[3], SDL_Surface* surfaceCases[3]);  //à placer
+void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]);  //à placer
+void initialisationTexturesUnites(GLuint textureUnites[3], SDL_Surface* surfaceUnites[3], EnumUnites unite);
 #endif
