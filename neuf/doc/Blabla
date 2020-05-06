@@ -16,8 +16,6 @@ A FAIRE :
 
 
 - Fonction attaque :
--> Valider les formules (perte de force)
--> Valider où on met les unites mortes
 -> Optimiser peut etre ?
 -> Gérer attaque à distance : celui qui attaque à distance ne reçoit pas de blessures en retour (mais hyper puissant donc à voir si on garde)
 
@@ -28,3 +26,5 @@ A FAIRE :
 
 
 FAIT : 
+-> Valider les formules (perte de force)
+-> Valider où on met les unites mortes
