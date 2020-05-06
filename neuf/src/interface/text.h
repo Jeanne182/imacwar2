@@ -9,17 +9,18 @@
 #include <SDL/SDL_ttf.h>
 
 
-typedef struct Text {
+typedef struct Texte {
     TTF_Font *font; // Police de caractère
     SDL_Surface *text; // Contenu du texte
     SDL_Color color; // Couleur du texte
     GLuint texture;
-} Text;
+} Texte;
 
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 /*text.cpp*/
 void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur);
+void initialisationTextes(GLuint textes[100]);
 
 
 #endif
