@@ -11,9 +11,9 @@ int main(){
   initialisationGame(&game);
   TTF_Init();
 
-  GLuint texture;
-
-  creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, " ", SDL_Color{0, 255, 0});
+  //GLuint texture;
+  //creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, "Prout", SDL_Color{0, 255, 0});
+  creationTexte(&game.textes[0], "src/fonts/SummitAttack.ttf", 65, "Coucou", SDL_Color{0, 255, 0});
 
   int loop = 1;
 
@@ -55,7 +55,7 @@ int main(){
 
         }
       }
-      affichageTexture(texture, 1, 1,0,0);
+      //affichageTexture(game.textes[0], 1, 1,0,0);
 
       bouton(game.boutonDeplacement);
       bouton(game.boutonAttaque);

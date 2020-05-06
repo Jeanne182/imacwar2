@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+#include "interface/text.h"
 using namespace std;
 
 Game::Game():map{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
@@ -59,19 +60,80 @@ void initialisationGame(Game *game){
   game->joueur1.id = 1;
   game->joueur1.tour = JOUEUR1;
 
-
   game->joueur2.nbUnites=0;
   game->joueur2.nbUnitesInitial=0;
   game->joueur2.id = 2;
   game->joueur2.tour = JOUEUR2;
 
+  //Initialisation des unites
+  // Gentils :
+  game->Nain.force = 0.6;
+  game->Nain.defense = 0.3;
+  game->Nain.zoneDeTir = 1;
+  game->Nain.distance = 2;
+  game->Nain.prix = 20;
+
+  game->Hobbit.force = 0.4;
+  game->Hobbit.defense = 0.4;
+  game->Hobbit.zoneDeTir = 2;
+  game->Hobbit.distance = 2;
+  game->Hobbit.prix = 20;
+
+  game->Elfe.force = 0.3;
+  game->Elfe.defense = 0.6;
+  game->Elfe.zoneDeTir = 4;
+  game->Elfe.distance = 4;
+  game->Elfe.prix = 30;
+
+  game->Humain.force = 0.5;
+  game->Humain.defense = 0.5;
+  game->Humain.zoneDeTir = 1;
+  game->Humain.distance = 2;
+  game->Humain.prix = 30;
+
+  game->Gandalf.force = 0.6;
+  game->Gandalf.defense = 0.6;
+  game->Gandalf.zoneDeTir = 2;
+  game->Gandalf.distance = 2;
+  game->Gandalf.prix = 50;
+
+  //Mechants :
+  game->Orque.force = 0.6;
+  game->Orque.defense = 0.3;
+  game->Orque.zoneDeTir = 1;
+  game->Orque.distance = 2;
+  game->Orque.prix = 20;
+
+  game->Smeagol.force = 0.4;
+  game->Smeagol.defense = 0.4;
+  game->Smeagol.zoneDeTir = 2;
+  game->Smeagol.distance = 2;
+  game->Smeagol.prix = 20;
+
+  game->Urukhai.force = 0.3;
+  game->Urukhai.defense = 0.6;
+  game->Urukhai.zoneDeTir = 4;
+  game->Urukhai.distance = 4;
+  game->Urukhai.prix = 30;
+
+  game->Nazgul.force = 0.5;
+  game->Nazgul.defense = 0.5;
+  game->Nazgul.zoneDeTir = 1;
+  game->Nazgul.distance = 2;
+  game->Nazgul.prix = 30;
+
+  game->Saruman.force = 0.6;
+  game->Saruman.defense = 0.6;
+  game->Saruman.zoneDeTir = 2;
+  game->Saruman.distance = 2;
+  game->Saruman.prix = 50;
 
   //Initialisation des boutons
   game->boutonDeplacement.x = 1.1; //Rose
   game->boutonDeplacement.y = 0.8;
   game->boutonDeplacement.longueur = 0.15;
   game->boutonDeplacement.hauteur = 0.05;
-  game->boutonDeplacement.r = 0;
+  game->boutonDeplacement.r = 1;
   game->boutonDeplacement.g = 0;
   game->boutonDeplacement.b = 1;
   game->boutonDeplacement.valeur = DEPLACEMENT;
@@ -91,9 +153,9 @@ void initialisationGame(Game *game){
   game->tour = TOUR_JOUEUR1;
   game->choix = RIEN;
 
-
-
-
+  //Initialisation textes
+  //initialisationTextes(game->textes);
+  
   initialisationSDL(game);
 
   reshape(&game->surface, game->window_width, game->window_height);
