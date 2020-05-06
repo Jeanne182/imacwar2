@@ -42,6 +42,9 @@ typedef struct Game {
   SDL_Surface* surfaceUnites[10];
   GLuint textureUnites[10];
 
+  //Texte textes;
+  GLuint textes[10]; 
+
   int longueurCarte, hauteurCarte;
   int window_width, window_height;
   int bit_per_pixel;
