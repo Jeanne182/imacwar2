@@ -13,7 +13,7 @@ int main(){
 
   GLuint texture;
 
-  creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, " ", SDL_Color{0, 255, 0});
+  creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, "Prout", SDL_Color{0, 255, 0});
 
   int loop = 1;
 
