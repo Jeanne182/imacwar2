@@ -9,7 +9,7 @@ A FAIRE :
 - Afficher les etats des unites
 - Afficher zone placement en surbrillance
 - Clean variables de game
-- Gérer le fait que si on a cliqué sur un bouton mais qu'on change d'avis, ca change l'action
+
 - Boucle fin de jeu
 - Choix des différentes unités en début de partie
 - Surbrillance zone de déplacement et d'attaque
@@ -28,3 +28,7 @@ A FAIRE :
 FAIT : 
 -> Valider les formules (perte de force)
 -> Valider où on met les unites mortes
+
+- Gérer le fait que si on a cliqué sur un bouton mais qu'on change d'avis, ca change l'action
+- Nouvelles unites initialisées
+

@@ -67,11 +67,19 @@ void gererClic(Game* game, SDL_Event e){
 
             case DEPLACEMENT:
               deplacement(&game->joueur1, game->id1, e, game);
+              if(selectionBouton(game, e) == ATTAQUE){
+                game->choix = ATTAQUE;
+                cout<<"CHOIX : attaque"<<endl;
+              }
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
 
             case ATTAQUE:
               attaque(&game->joueur1, &game->joueur2, game->id1, e, game);
+              if(selectionBouton(game, e) == DEPLACEMENT){
+                game->choix = DEPLACEMENT;
+                cout<<"CHOIX : déplacement"<<endl;
+              }
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
 
@@ -95,11 +103,19 @@ void gererClic(Game* game, SDL_Event e){
 
             case DEPLACEMENT:
               deplacement(&game->joueur2, game->id2, e, game);
+              if(selectionBouton(game, e) == ATTAQUE){
+                game->choix = ATTAQUE;
+                cout<<"CHOIX : attaque"<<endl;
+              }
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
 
             case ATTAQUE:
               attaque(&game->joueur2, &game->joueur1, game->id2, e, game);
+              if(selectionBouton(game, e) == DEPLACEMENT){
+                game->choix = DEPLACEMENT;
+                cout<<"CHOIX : déplacement"<<endl;
+              }
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
           }
