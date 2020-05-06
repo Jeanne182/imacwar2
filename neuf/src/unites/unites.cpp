@@ -88,10 +88,9 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
 
     // combat
     idEnnemi = selectionIdUnite(xAttaque, yAttaque, *joueurEnnemi);
-    joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*100;
-    joueurEnnemi->unites[idEnnemi].force -= 0.1; //a changer
-    joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*100;
-    joueurTour->unites[id].force -= 0.1; //a changer
+    joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
+    //if(distance respectée)
+    joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
     cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
     cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
     cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
