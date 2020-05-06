@@ -71,7 +71,7 @@ void initialisationGame(Game *game){
   game->boutonDeplacement.y = 0.8;
   game->boutonDeplacement.longueur = 0.15;
   game->boutonDeplacement.hauteur = 0.05;
-  game->boutonDeplacement.r = 0.5;
+  game->boutonDeplacement.r = 0;
   game->boutonDeplacement.g = 0;
   game->boutonDeplacement.b = 1;
   game->boutonDeplacement.valeur = DEPLACEMENT;
