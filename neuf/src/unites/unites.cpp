@@ -12,7 +12,7 @@ IMAC 1 - Projet Prog&Algo S1
 #include "game/game.h"
 using namespace std;
 
-bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
+bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
 
     int id = joueur->nbUnites;
     if(joueur->nbUnites <= 3){
@@ -20,7 +20,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
       unite.id =id;
       unite.distance=3;
       unite.zoneDeTir=6;
-      unite.type = HUMAN;
+      unite.type = typeUnite;
       unite.vie = 25;
       unite.force = 0.5;
       unite.defense = 0.4;
@@ -44,14 +44,17 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game){
 
 
 bool placementUnitesJoueurs(Game* game, SDL_Event e){
+  int choixUnite;
   if (game->tour == TOUR_JOUEUR1){
-    if(placementUnite(&game->joueur1, e, game)==true){
+    choixUnite = selectioBoutonnUniteJ1(game, e);
+    if(placementUnite(&game->joueur1, e, game, choixUnite)==true){
       game->tour = TOUR_JOUEUR2;
       return true;
     }
   }
   else {
-    if(placementUnite(&game->joueur2, e, game)==true){
+    choixUnite = selectioBoutonnUniteJ2(game, e);
+    if(placementUnite(&game->joueur2, e, game, choixUnite)==true){
       game->tour = TOUR_JOUEUR1;
       return true;
     }

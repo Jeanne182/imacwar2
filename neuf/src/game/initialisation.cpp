@@ -158,13 +158,77 @@ void initialisationGame(Game *game){
   game->boutonAttaque.b = 1;
   game->boutonAttaque.valeur = ATTAQUE;
 
+  game->boutonHumain.x = 1.0;
+  game->boutonHumain.y = 0.1;
+  game->boutonHumain.longueur = 0.1;
+  game->boutonHumain.hauteur = 0.1;
+  //game->boutonHumain.r = 0;
+  //game->boutonHumain.g = 0;
+  //game->boutonHumain.b = 0;
+  game->boutonHumain.valeur = HUMAN;
+
+  game->boutonGandalf.x = 1.1;
+  game->boutonGandalf.y = 0.1;
+  game->boutonGandalf.longueur = 0.1;
+  game->boutonGandalf.hauteur = 0.1;
+  game->boutonGandalf.valeur = GANDALF;
+
+  game->boutonNain.x = 1.2;
+  game->boutonNain.y = 0.1;
+  game->boutonNain.longueur = 0.1;
+  game->boutonNain.hauteur = 0.1;
+  game->boutonNain.valeur = NAIN;
+
+  game->boutonElfe.x = 1.3;
+  game->boutonElfe.y = 0.1;
+  game->boutonElfe.longueur = 0.1;
+  game->boutonElfe.hauteur = 0.1;
+  game->boutonElfe.valeur = ELFE;
+
+  game->boutonHobbit.x = 1.4;
+  game->boutonHobbit.y = 0.1;
+  game->boutonHobbit.longueur = 0.1;
+  game->boutonHobbit.hauteur = 0.1;
+  game->boutonHobbit.valeur = HOBBIT;
+
+  game->boutonOrque.x = 1.0;
+  game->boutonOrque.y = 0.1;
+  game->boutonOrque.longueur = 0.1;
+  game->boutonOrque.hauteur = 0.1;
+  game->boutonOrque.valeur = ORQUE;
+
+  game->boutonSmeagol.x = 1.1;
+  game->boutonSmeagol.y = 0.1;
+  game->boutonSmeagol.longueur = 0.1;
+  game->boutonSmeagol.hauteur = 0.1;
+  game->boutonSmeagol.valeur = SMEAGOL;
+
+  game->boutonUrukhai.x = 1.2;
+  game->boutonUrukhai.y = 0.1;
+  game->boutonUrukhai.longueur = 0.1;
+  game->boutonUrukhai.hauteur = 0.1;
+  game->boutonUrukhai.valeur = URUK;
+
+  game->boutonNazgul.x = 1.3;
+  game->boutonNazgul.y = 0.1;
+  game->boutonNazgul.longueur = 0.1;
+  game->boutonNazgul.hauteur = 0.1;
+  game->boutonNazgul.valeur = NAZGUL;
+
+  game->boutonSaruman.x = 1.4;
+  game->boutonSaruman.y = 0.1;
+  game->boutonSaruman.longueur = 0.1;
+  game->boutonSaruman.hauteur = 0.1;
+  game->boutonSaruman.valeur = SAROUMANE;
+
+
   game->etapeJeu = PLACEMENT_UNITES; //0 pour préparation, 1 pour attaque/déplacement
   game->tour = TOUR_JOUEUR1;
   game->choix = RIEN;
 
   //Initialisation textes
   //initialisationTextes(game->textes);
-  
+
   initialisationSDL(game);
 
   reshape(&game->surface, game->window_width, game->window_height);

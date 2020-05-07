@@ -12,6 +12,7 @@ void gererClic(Game* game, SDL_Event e){
         cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
       }
       cout<<game->etapeJeu<<endl;
+
       if(game->joueur1.nbUnites==2 && game->joueur2.nbUnites==2){ //A CHANGER
         game->etapeJeu = SELECTION_UNITE;
       }

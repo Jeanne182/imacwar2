@@ -35,6 +35,7 @@ enum EnumTexturesCarte{
     JOUEUR2
   };
 
+//Pas ouf...
 enum EnumBoutons{
     RIEN,
     DEPLACEMENT,
@@ -76,12 +77,16 @@ void affichageUnite(Joueur joueur, Game* game);
 void bouton(Bouton bouton);
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
+int selectioBoutonnUniteJ1(Game* game, SDL_Event e);
+int selectioBoutonnUniteJ2(Game* game, SDL_Event e);
 
 void carre(float x, float y);
 void zoneSurbrillance(float x, float y);
 
+/*textures.cpp*/
+
 void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]);  //à placer
-void initialisationTexturesUnites(GLuint textureUnites[3], SDL_Surface* surfaceUnites[3], EnumUnites unite);
+void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]);
 void creationTexture(GLuint *texture, SDL_Surface* image);
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
 
