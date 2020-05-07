@@ -78,6 +78,7 @@ int main(){
       affichageTexture(descriptionNain, 1,0.1,1,0);
       //etatUnite();
 
+      zoneSurbrillance(6,6);
       glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
 
       //affichageUnite(game.joueur1, &game);

@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+#include "interface/text.h"
 using namespace std;
 
 Game::Game():map{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
@@ -141,7 +142,7 @@ void initialisationGame(Game *game){
   game->boutonDeplacement.y = 0.8;
   game->boutonDeplacement.longueur = 0.15;
   game->boutonDeplacement.hauteur = 0.05;
-  game->boutonDeplacement.r = 0;
+  game->boutonDeplacement.r = 1;
   game->boutonDeplacement.g = 0;
   game->boutonDeplacement.b = 1;
   game->boutonDeplacement.valeur = DEPLACEMENT;
@@ -161,9 +162,9 @@ void initialisationGame(Game *game){
   game->tour = TOUR_JOUEUR1;
   game->choix = RIEN;
 
-
-
-
+  //Initialisation textes
+  //initialisationTextes(game->textes);
+  
   initialisationSDL(game);
 
   reshape(&game->surface, game->window_width, game->window_height);

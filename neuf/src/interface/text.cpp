@@ -11,6 +11,9 @@ void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* con
     creationTexture(textureTexte, texte);
 }
 
+void initialisationTextes(GLuint textes[100]){ //changer la taille du tableau
+  creationTexte(&textes[0], "src/fonts/SummitAttack.ttf", 65, "Coucou", SDL_Color{0, 255, 0});
+}
 
 
 // void affichageTexte(){
@@ -19,4 +22,5 @@ void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* con
 //
 //
 // void deleteText(Text* text) {
+//
 // }
