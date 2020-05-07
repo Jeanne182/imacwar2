@@ -138,6 +138,43 @@ int finProgrammeSDL(Game* game){
 
 
 
+void carre(float x, float y){
+  glPushMatrix();
+    glTranslatef((x-1)/10,(y-1)/10,0);
+    glBegin(GL_POLYGON);
+    glColor4f(1,0,0,0.4);
+    // if (joueur.id == 1){
+    //   glColor3f(0,0,1);
+    // }
+    // else {glColor3f(1,0,0);}
+    glVertex2f(0.1, 0.1);
+    glVertex2f(0,0.1);
+    glVertex2f(0, 0);
+    glVertex2f(0.1, 0);
+    glEnd();
+    glPopMatrix();
+    //glColor3f(1,1,1);
+}
+
+void zoneSurbrillance(float x, float y){
+  // for(){
+  //   carre(i,y);
+  // }
+
+      carre(x,y);
+      carre(x,y+1);
+      carre(x,y+2);
+      carre(x+1,y);
+      carre(x+2,y);
+      carre(x-1,y);
+      carre(x-2,y);
+      carre(x,y-1);
+      carre(x,y-2);
+      carre(x-1,y+1);
+      carre(x-1,y-1);
+      carre(x+1,y+1);
+      carre(x+1,y-1);
+}
 
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
   *x = (int)(1+10*(*x)*aspectRatio/(float)surface->w);
