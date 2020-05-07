@@ -75,8 +75,8 @@ void bouton(Bouton bouton);
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
 
-
-
+void carre(float x, float y);
+void zoneSurbrillance(float x, float y);
 
 void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]);  //à placer
 void initialisationTexturesUnites(GLuint textureUnites[3], SDL_Surface* surfaceUnites[3], EnumUnites unite);
