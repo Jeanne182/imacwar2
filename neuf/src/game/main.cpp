@@ -95,7 +95,7 @@ int main(){
               loop = 0;
               break;
           }
-          etatUnite(e,&game); 
+          etatUnite(e,&game);
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
