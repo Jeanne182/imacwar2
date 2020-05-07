@@ -8,7 +8,7 @@ OBJDIR	= obj/
 
 main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o $(OBJDIR)textures.o $(OBJDIR)text.o
 		$(CC) -o $(BINDIR)$@ $^ $(LDFLAGS)
-		./$(BINDIR)$@ 
+		./$(BINDIR)$@
 
 $(OBJDIR)main.o: src/game/main.cpp src/unites/unites.h src/interface/interface.h src/game/game.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
@@ -35,10 +35,10 @@ $(OBJDIR)clics.o: src/game/clics.cpp src/unites/unites.h src/interface/interface
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 
-$(OBJDIR)textures.o: src/game/textures.cpp src/interface/interface.h 
+$(OBJDIR)textures.o: src/game/textures.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-$(OBJDIR)text.o: src/interface/text.cpp src/interface/text.h 
+$(OBJDIR)text.o: src/interface/text.cpp src/interface/text.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 clean:

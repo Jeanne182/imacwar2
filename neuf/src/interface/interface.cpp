@@ -72,7 +72,9 @@ int initialisationSDL(Game* game){
     reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     initialisationTexturesCarte(game->textureCases, game->surfaceCases);
-    initialisationTexturesUnites(game->textureUnites, game->surfaceUnites, HUMAN); //à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
+
+    initialisationTexturesUnites(game->textureUnites, game->surfaceUnites);//à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
+
 
 
 
