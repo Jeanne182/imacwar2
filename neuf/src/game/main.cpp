@@ -24,6 +24,8 @@ int main(){
   creationTexte(&descriptionNain, "src/fonts/SummitAttack.ttf", 100, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
 
 
+
+
   int loop = 1;
 
   while(loop){
@@ -74,6 +76,7 @@ int main(){
 
       affichageTexture(texteDeplacement, game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
       affichageTexture(descriptionNain, 1,0.1,1,0);
+      //etatUnite();
 
       glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
 
@@ -92,12 +95,16 @@ int main(){
               loop = 0;
               break;
           }
+          etatUnite(e,&game); 
 
           switch(e.type) {
-            case SDL_MOUSEBUTTONUP:
+            case SDL_MOUSEBUTTONDOWN:
 
               gererClic(&game,e);
               break;
+            // case SDL_MOUSEMOTION:
+            //   cout<<"Coucou"<<endl;
+            //   break;
 
             default:
                   break;

@@ -69,6 +69,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game);
 bool placementUnitesJoueurs(Game* game, SDL_Event e);
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game);
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game);
+void etatUnite(SDL_Event e, Game* game);
 
 
 
