@@ -8,6 +8,7 @@ IMAC 1 - Projet Prog&Algo S1
 
 #include "unites/unites.h"
 #include "interface/interface.h"
+#include "interface/text.h"
 #include "game/game.h"
 using namespace std;
 
@@ -126,4 +127,26 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   else{
     cout << "Vous attaquez une de vos unites OU La distance de tir n'est pas respectée" << endl;
   }
+}
+
+
+void etatUnite(SDL_Event e, Game* game){
+  int x = 0;
+  int y = 0;
+  selectionCoordonnee(&x, &y, e, game->surface);
+  int id = selectionIdUnite(y,x,game->joueur1);
+  if(id == -1){
+    id = selectionIdUnite(y,x,game->joueur2);
+  }
+  // if(id!=-1){
+  //   cout <<"x : "<< x<<" y : "<<y<<"id : "<<id<<endl;
+  // }
+  // if(x >= 0 && x<= 1){
+  //
+  // }
+
+  // GLuint vie;
+  // char* contenuTexteVie = "Vie : ";
+  // creationTexte(&vie, "src/fonts/SummitAttack.ttf", 65, contenuTexteVie, SDL_Color{0, 255, 0});
+  // affichageTexture(vie, 1,0.1,1,0);
 }

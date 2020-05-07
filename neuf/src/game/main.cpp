@@ -11,9 +11,20 @@ int main(){
   initialisationGame(&game);
   TTF_Init();
 
-  //GLuint texture;
-  //creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, "Prout", SDL_Color{0, 255, 0});
-  creationTexte(&game.textes[0], "src/fonts/SummitAttack.ttf", 65, "Coucou", SDL_Color{0, 255, 0});
+  GLuint texture;
+  creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, "Prout", SDL_Color{0, 255, 0});
+
+  GLuint texteDeplacement;
+  creationTexte(&texteDeplacement, "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
+
+  GLuint texteAttaque;
+  creationTexte(&texteAttaque, "src/fonts/SummitAttack.ttf", 100, "Attaque", SDL_Color{255,255,255});
+
+  GLuint descriptionNain;
+  creationTexte(&descriptionNain, "src/fonts/SummitAttack.ttf", 100, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
+
+
+
 
   int loop = 1;
 
@@ -55,10 +66,17 @@ int main(){
 
         }
       }
-      //affichageTexture(game.textes[0], 1, 1,0,0);
+      //affichageTexture(texteDeplacement, game.boutonDeplacement.longueur, game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
+
 
       bouton(game.boutonDeplacement);
       bouton(game.boutonAttaque);
+      glColor3f(1,1,1);
+      affichageTexture(texteAttaque, game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
+
+      affichageTexture(texteDeplacement, game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
+      affichageTexture(descriptionNain, 1,0.1,1,0);
+      //etatUnite();
 
       glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
 
@@ -77,12 +95,16 @@ int main(){
               loop = 0;
               break;
           }
+          etatUnite(e,&game);
 
           switch(e.type) {
-            case SDL_MOUSEBUTTONUP:
+            case SDL_MOUSEBUTTONDOWN:
 
               gererClic(&game,e);
               break;
+            // case SDL_MOUSEMOTION:
+            //   cout<<"Coucou"<<endl;
+            //   break;
 
             default:
                   break;

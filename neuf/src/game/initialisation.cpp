@@ -49,7 +49,16 @@ void initialisationGame(Game *game){
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
-  game->surfaceUnites[HUMAN] = IMG_Load("src/img/Gandalf.png");
+  game->surfaceUnites[HUMAN] = IMG_Load("src/img/human.png");
+  game->surfaceUnites[HOBBIT] = IMG_Load("src/img/hobbit.png");
+  game->surfaceUnites[ELFE] = IMG_Load("src/img/elfe.png");
+  game->surfaceUnites[NAIN] = IMG_Load("src/img/nain.png");
+  game->surfaceUnites[GANDALF] = IMG_Load("src/img/Gandalf.png");
+  game->surfaceUnites[URUK] = IMG_Load("src/img/uruk.png");
+  game->surfaceUnites[NAZGUL] = IMG_Load("src/img/nazgul.png");
+  game->surfaceUnites[SMEAGOL] = IMG_Load("src/img/smeagol.png");
+  game->surfaceUnites[SAROUMANE] = IMG_Load("src/img/saroumane.png");
+  game->surfaceUnites[ORQUE] = IMG_Load("src/img/herb.png");
   //Initialisation de la carte
   game->longueurCarte = 10;
   game->hauteurCarte = 10;
