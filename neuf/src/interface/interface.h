@@ -43,14 +43,17 @@ enum EnumBoutons{
   };
 
 enum EnumUnites{
-  HOBBIT,
-  ELFE,
-  NAIN,
-  ORQUE,
-  NAZGUL,
-  SMEAGOL,
-  HUMAN
-};
+    HUMAN,
+    HOBBIT,
+    NAIN,
+    ELFE,
+    GANDALF,
+    NAZGUL,
+    ORQUE,
+    URUK,
+    SMEAGOL,
+    SAROUMANE
+  };
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 
@@ -61,8 +64,7 @@ int initialisationSDL(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
 
-void creationTexture(GLuint *texture, SDL_Surface* image);
-void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
+
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
 
 
@@ -77,7 +79,10 @@ int selectionBouton(Game* game, SDL_Event e);
 
 
 
-
+/*textures.cpp*/
 void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]);  //à placer
 void initialisationTexturesUnites(GLuint textureUnites[3], SDL_Surface* surfaceUnites[3], EnumUnites unite);
+void creationTexture(GLuint *texture, SDL_Surface* image);
+void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
+
 #endif
