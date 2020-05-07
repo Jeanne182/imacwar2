@@ -9,3 +9,47 @@ void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCas
 void initialisationTexturesUnites(GLuint textureUnites[3], SDL_Surface* surfaceUnites[3], EnumUnites unite){
     creationTexture(&textureUnites[unite], surfaceUnites[unite]);
 }
+
+void creationTexture(GLuint *texture, SDL_Surface* image){
+
+  //SDL_Surface* image = IMG_Load(chemin_image);
+
+  if(image==NULL){
+    printf("L'image de la carte n'a pas pu se charger");
+    exit(1);
+  }
+
+    glGenTextures(1, texture);
+
+    glBindTexture(GL_TEXTURE_2D, *texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+}
+
+void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
+  glPushMatrix();
+
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        glBegin(GL_QUADS);
+
+        glTexCoord2f(1, 1);
+        glVertex2f(longueur + x, largeur + y);
+
+        glTexCoord2f(0, 1);
+        glVertex2f(x,largeur + y);
+
+        glTexCoord2f(0, 0);
+        glVertex2f(x, y);
+
+        glTexCoord2f(1, 0);
+        glVertex2f(longueur + x, y);
+
+        glEnd();
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+    glPopMatrix();
+}
