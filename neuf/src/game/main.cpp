@@ -133,8 +133,9 @@ int main(){
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
               if(game.joueur1.nbUnites != 0){
-                cout << "Type : "<< game.joueur1.unites[0].type<<endl;
               }
+                cout << "Type : "<< game.joueur1.unites[0].type<<endl;
+
 
               gererClic(&game,e);
               break;
