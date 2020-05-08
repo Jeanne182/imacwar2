@@ -110,12 +110,12 @@ int main(){
           affichageTexture(game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
 
           //Surbrillance
-          if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
-            zoneSurbrillance(game.joueur1);
-          }
-          if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
-            zoneSurbrillance(game.joueur2);
-          }
+          // if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
+          //   zoneSurbrillance(game.joueur1);
+          // }
+          // if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
+          //   zoneSurbrillance(game.joueur2);
+          // }
           break;
       }
 
