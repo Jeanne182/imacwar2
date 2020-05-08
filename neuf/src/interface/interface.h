@@ -80,8 +80,8 @@ int selectionBouton(Game* game, SDL_Event e);
 int selectioBoutonnUniteJ1(Game* game, SDL_Event e);
 int selectioBoutonnUniteJ2(Game* game, SDL_Event e);
 
-void carre(float x, float y);
-void zoneSurbrillance(float x, float y);
+void carre(float x, float y, Joueur joueur);
+void zoneSurbrillance(Joueur joueur);
 
 /*textures.cpp*/
 

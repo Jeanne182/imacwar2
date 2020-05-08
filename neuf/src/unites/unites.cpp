@@ -72,7 +72,9 @@ bool placementUnitesJoueurs(Game* game, SDL_Event e){
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
   int xNew, yNew;
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
+  
   if(verificationCaseLibre(game, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
+
     insertionCoordonnees(game, &joueur->unites[id], xNew, yNew, joueur->tour);
     cout << "case libre" << endl;
 

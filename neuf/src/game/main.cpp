@@ -108,8 +108,16 @@ int main(){
       affichageTexture(game.textureTextes[0], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
       affichageTexture(descriptionNain, 1,0.1,1,0);
       //etatUnite();
+      
+      if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
+        zoneSurbrillance(game.joueur1);
+      }
+      if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
+        zoneSurbrillance(game.joueur2);
+      }
 
-      zoneSurbrillance(6,6);
+
+
       glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
 
       //affichageUnite(game.joueur1, &game);
