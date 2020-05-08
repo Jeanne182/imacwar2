@@ -20,7 +20,7 @@ using namespace std;
 enum EnumEtapesJeu{
   PLACEMENT_UNITES,
   ACHAT_UNITE,
-  CHOIX_EMPLACEMENT, 
+  CHOIX_EMPLACEMENT,
   TOURS_DE_JEU,
   TOUR_JOUEUR1,
   TOUR_JOUEUR2,
@@ -60,6 +60,8 @@ typedef struct Game {
   int map[10][10];
   int zonePlacement[10][10];
 
+  //textes
+  GLuint textureTextes[100];
 
   //A enlever ??
   int x , y;
