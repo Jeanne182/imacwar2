@@ -61,7 +61,7 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               int id = selectionIdUnite(i+1, j+1, game.joueur1);
               affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-              cout << "type 1: "<<game.joueur1.unites[id].type << endl;
+              //cout << "type 1: "<<game.joueur1.unites[id].type << endl;
               break;
             }
 
@@ -70,7 +70,7 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               int id = selectionIdUnite(i+1, j+1, game.joueur2);
               affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-              cout << "type 2: "<<game.joueur2.unites[id].type << endl;
+              //cout << "type 2: "<<game.joueur2.unites[id].type << endl;
               break;
             }
 
@@ -116,7 +116,7 @@ int main(){
       affichageTexture(game.textureTextes[0], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
       affichageTexture(descriptionNain, 1,0.1,1,0);
       //etatUnite();
-      
+
       if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
         zoneSurbrillance(game.joueur1);
       }
