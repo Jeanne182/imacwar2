@@ -23,6 +23,24 @@ void bouton(Bouton bouton){
   glPopMatrix();
 }
 
+
+void initBoutonUnites(Bouton bouton){
+  float x = bouton.x;
+  float y = bouton.y;
+  float longueur = bouton.longueur;
+  float hauteur = bouton.hauteur;
+
+  glPushMatrix();
+    glBegin(GL_POLYGON);
+    glColor4f(0,0,0,0);
+    glVertex2f(x, y);
+    glVertex2f(x + longueur, y);
+    glVertex2f(x + longueur, y + hauteur);
+    glVertex2f(x, y + hauteur);
+    glEnd();
+  glPopMatrix();
+}
+
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e){
   selectionCoordonnee(&game->x, &game->y, e, game->surface);
 
@@ -35,8 +53,7 @@ int testClicBouton(Game* game, Bouton bouton, SDL_Event e){
 }
 
 int selectionBouton(Game* game, SDL_Event e){
-  int valeurBouton= 0;
-
+  int valeurBouton=RIEN;
   valeurBouton = testClicBouton(game, game->boutonDeplacement, e);
   if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonAttaque, e);
@@ -44,9 +61,8 @@ int selectionBouton(Game* game, SDL_Event e){
   return valeurBouton;
 }
 
-int selectioBoutonnUniteJ1(Game* game, SDL_Event e){
-  int valeurBouton;
-  cout<<"ClicBouton"<<endl; 
+int selectioBoutonUniteJ1(Game* game, SDL_Event e){
+  int valeurBouton = RIEN;
   valeurBouton = testClicBouton(game, game->boutonHumain, e);
   if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonNain, e);
@@ -63,8 +79,8 @@ int selectioBoutonnUniteJ1(Game* game, SDL_Event e){
   return valeurBouton;
 }
 
-int selectioBoutonnUniteJ2(Game* game, SDL_Event e){
-  int valeurBouton;
+int selectioBoutonUniteJ2(Game* game, SDL_Event e){
+  int valeurBouton=RIEN;
   valeurBouton = testClicBouton(game, game->boutonOrque, e);
   if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonSmeagol, e);

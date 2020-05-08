@@ -16,7 +16,8 @@ void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
     int yOld = unite->coord[1];
     game->map[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
   }
-
+  //cout << x << endl;
+  //cout << y << endl;
   unite->coord[0]=x;
   unite->coord[1]=y;
   game->map[y-1][x-1] = tour;

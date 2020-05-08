@@ -13,7 +13,7 @@ main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o 
 $(OBJDIR)main.o: src/game/main.cpp src/unites/unites.h src/interface/interface.h src/game/game.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-$(OBJDIR)unites.o: src/unites/unites.cpp src/unites/unites.h 
+$(OBJDIR)unites.o: src/unites/unites.cpp src/unites/unites.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 $(OBJDIR)interface.o: src/interface/interface.cpp src/interface/interface.h

@@ -53,7 +53,8 @@ enum EnumUnites{
     ORQUE,
     URUK,
     SMEAGOL,
-    SAROUMANE
+    SAROUMANE,
+    SANS_TYPE
   };
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
@@ -75,10 +76,11 @@ void affichageUnite(Joueur joueur, Game* game);
 
 /* boutons.cpp */
 void bouton(Bouton bouton);
+void initBoutonUnites(Bouton bouton);
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
-int selectioBoutonnUniteJ1(Game* game, SDL_Event e);
-int selectioBoutonnUniteJ2(Game* game, SDL_Event e);
+int selectioBoutonUniteJ1(Game* game, SDL_Event e);
+int selectioBoutonUniteJ2(Game* game, SDL_Event e);
 
 void carre(float x, float y, Joueur joueur);
 void zoneSurbrillance(Joueur joueur);

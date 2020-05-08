@@ -27,8 +27,8 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
 
 
       //MODIFIé AVEC STEEVE
-      int x=0;
-      int y=0;
+      int x=-1;
+      int y=-1;
 
       selectionCoordonnee(&x,&y, e, game->surface);
       cout << "x : " << x << " y : " << y << endl;
@@ -50,27 +50,54 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
 }
 
 bool placementUnitesJoueurs(Game* game, SDL_Event e){
-  int choixUnite;
-  if (game->tour == TOUR_JOUEUR1){
-    choixUnite = selectioBoutonnUniteJ1(game, e);
+  switch (game->etapeAchatUnite) {
+    case ACHAT_UNITE:
+      if (game->tour == TOUR_JOUEUR1){
+        game->achat_type = selectioBoutonUniteJ1(game, e);
+        cout << "achat type : " << game->achat_type << endl;
+        game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+        return true;
+      }
+      else {
+        game->achat_type = selectioBoutonUniteJ2(game, e);
+        cout << "achat type : " << game->achat_type << endl;
 
-    if(placementUnite(&game->joueur1, e, game, choixUnite)==true){
-      game->tour = TOUR_JOUEUR2;
-      return true;
-    }
+        game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+        return true;
+      }
+
+    break;
+
+      case CHOIX_EMPLACEMENT:
+        if (game->tour == TOUR_JOUEUR1){
+          if(placementUnite(&game->joueur1, e, game, game->achat_type)==true){
+            game->achat_type = SANS_TYPE;
+            game->tour = TOUR_JOUEUR2;
+            game->etapeAchatUnite = ACHAT_UNITE;
+            return true;
+          }
+        }
+        else {
+          if(placementUnite(&game->joueur2, e, game, game->achat_type)==true){
+            game->achat_type = SANS_TYPE;
+            game->tour = TOUR_JOUEUR1;
+            game->etapeAchatUnite = ACHAT_UNITE;
+            return true;
+          }
+        }
+      break;
+
+    default:
+      break;
   }
-  else {
-    choixUnite = selectioBoutonnUniteJ2(game, e);
-    if(placementUnite(&game->joueur2, e, game, choixUnite)==true){
-      game->tour = TOUR_JOUEUR1;
-      return true;
-    }
-  }
+
   return false;
 }
 
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
-  int xNew, yNew;
+  int xNew=-1;
+  int yNew=-1;
+
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
   
   if(verificationCaseLibre(game, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
@@ -94,7 +121,9 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
 }
 
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game){
-  int xAttaque, yAttaque, idEnnemi;
+  int xAttaque=-1;
+  int yAttaque=-1;
+  int idEnnemi=-1;
   selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
   if(verifUniteEnnemie(joueurEnnemi->tour, game, xAttaque, yAttaque)==true && verificationZoneTir(*joueurTour, xAttaque, yAttaque, id, game)==true){//rajouter zone de tire
     cout << "attaque gooo" << endl;

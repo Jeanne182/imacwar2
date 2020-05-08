@@ -37,6 +37,9 @@ typedef struct Game {
   int etapeJeu;
   int tour;
   int choix;
+  int etapeAchatUnite;
+  int achat_type;
+
 
   SDL_Surface* surface;
 

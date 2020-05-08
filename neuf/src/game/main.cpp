@@ -57,31 +57,39 @@ int main(){
             affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             break;
 
-            case JOUEUR1:
-            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            affichageTexture(game.textureUnites[game.joueur1.unites[0].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            break;
+            case JOUEUR1:{
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              int id = selectionIdUnite(i+1, j+1, game.joueur1);
+              affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              cout << "type 1: "<<game.joueur1.unites[id].type << endl;
+              break;
+            }
 
-            case JOUEUR2:
-            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            affichageTexture(game.textureUnites[GANDALF],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            break;
+
+            case JOUEUR2:{
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              int id = selectionIdUnite(i+1, j+1, game.joueur2);
+              affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              cout << "type 2: "<<game.joueur2.unites[id].type << endl;
+              break;
+            }
 
           }
 
         }
       }
+
       //affichageTexture(texteDeplacement, game.boutonDeplacement.longueur, game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
-      bouton(game.boutonHobbit);
-      bouton(game.boutonHumain);
-      bouton(game.boutonNain);
-      bouton(game.boutonElfe);
-      bouton(game.boutonGandalf);
-      bouton(game.boutonSmeagol);
-      bouton(game.boutonOrque);
-      bouton(game.boutonUrukhai);
-      bouton(game.boutonNazgul);
-      bouton(game.boutonSaruman);
+      initBoutonUnites(game.boutonHobbit);
+      initBoutonUnites(game.boutonHumain);
+      initBoutonUnites(game.boutonNain);
+      initBoutonUnites(game.boutonElfe);
+      initBoutonUnites(game.boutonGandalf);
+      initBoutonUnites(game.boutonSmeagol);
+      initBoutonUnites(game.boutonOrque);
+      initBoutonUnites(game.boutonUrukhai);
+      initBoutonUnites(game.boutonNazgul);
+      initBoutonUnites(game.boutonSaruman);
       glColor3f(1,1,1);
 
 
@@ -142,6 +150,7 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
+              cout << "couleur : "<< game.boutonNain.r<<endl;
               if(game.joueur1.nbUnites != 0){
               }
                 cout << "Type : "<< game.joueur1.unites[0].type<<endl;
