@@ -16,6 +16,8 @@ int main(){
 
   GLuint texteDeplacement;
   creationTexte(&texteDeplacement, "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
+  creationTexte(&game.textureTextes[0], "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
+  //initialisationTextes(game.textureTextes);
 
   GLuint texteAttaque;
   creationTexte(&texteAttaque, "src/fonts/SummitAttack.ttf", 100, "Attaque", SDL_Color{255,255,255});
@@ -103,7 +105,7 @@ int main(){
       glColor3f(1,1,1);
       affichageTexture(texteAttaque, game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
 
-      affichageTexture(texteDeplacement, game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
+      affichageTexture(game.textureTextes[0], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
       affichageTexture(descriptionNain, 1,0.1,1,0);
       //etatUnite();
 

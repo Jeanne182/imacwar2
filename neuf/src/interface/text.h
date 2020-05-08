@@ -8,6 +8,10 @@
 #include <string>
 #include <SDL/SDL_ttf.h>
 
+enum Enum_Textes{
+  BOUTON_DEPLACEMENT,
+  BOUTON_ATTAQUE
+  };
 
 typedef struct Texte {
     TTF_Font *font; // Police de caractère

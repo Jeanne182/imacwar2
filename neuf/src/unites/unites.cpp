@@ -49,7 +49,6 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
     return false;
 }
 
-
 bool placementUnitesJoueurs(Game* game, SDL_Event e){
   int choixUnite;
   if (game->tour == TOUR_JOUEUR1){
@@ -146,9 +145,16 @@ void etatUnite(SDL_Event e, Game* game){
   int y = 0;
   selectionCoordonnee(&x, &y, e, game->surface);
   int id = selectionIdUnite(y,x,game->joueur1);
-  if(id == -1){
-    id = selectionIdUnite(y,x,game->joueur2);
+  if(id != -1){
+    //cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
   }
+  else{
+    id = selectionIdUnite(y,x,game->joueur2);
+    if(id != -1){
+      //cout<<"Coordonnées unité J2: "<< game->joueur2.unites[id].coord[0] <<" "<< game->joueur2.unites[id].coord[1]<<endl;
+    }
+  }
+
   // if(id!=-1){
   //   cout <<"x : "<< x<<" y : "<<y<<"id : "<<id<<endl;
   // }

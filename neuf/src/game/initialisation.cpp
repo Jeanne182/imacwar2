@@ -227,6 +227,7 @@ void initialisationGame(Game *game){
   game->choix = RIEN;
 
   //Initialisation textes
+  //creationTexte(&game->textureTextes[1], "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
   //initialisationTextes(game->textes);
 
   initialisationSDL(game);
