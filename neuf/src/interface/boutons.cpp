@@ -35,7 +35,8 @@ int testClicBouton(Game* game, Bouton bouton, SDL_Event e){
 }
 
 int selectionBouton(Game* game, SDL_Event e){
-  int valeurBouton;
+  int valeurBouton= 0;
+
   valeurBouton = testClicBouton(game, game->boutonDeplacement, e);
   if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonAttaque, e);

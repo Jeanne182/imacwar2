@@ -31,6 +31,7 @@ void gererClic(Game* game, SDL_Event e){
             game->etapeJeu = ACTIONS;
             game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
             cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
+
           }
           break;
 
@@ -53,6 +54,7 @@ void gererClic(Game* game, SDL_Event e){
       switch(game->tour){
 
         case TOUR_JOUEUR1:
+        
           switch (game->choix){
 
             case RIEN:

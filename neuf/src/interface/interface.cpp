@@ -140,15 +140,14 @@ int finProgrammeSDL(Game* game){
 
 
 
-void carre(float x, float y){
+void carre(float x, float y, Joueur joueur){
   glPushMatrix();
     glTranslatef((x-1)/10,(y-1)/10,0);
     glBegin(GL_POLYGON);
-    glColor4f(1,0,0,0.4);
-    // if (joueur.id == 1){
-    //   glColor3f(0,0,1);
-    // }
-    // else {glColor3f(1,0,0);}
+    if (joueur.id == 1){
+      glColor4f(0,0,1,0.4);
+    }
+    else {glColor4f(1,0,0,0.4);}
     glVertex2f(0.1, 0.1);
     glVertex2f(0,0.1);
     glVertex2f(0, 0);
@@ -158,24 +157,33 @@ void carre(float x, float y){
     //glColor3f(1,1,1);
 }
 
-void zoneSurbrillance(float x, float y){
-  // for(){
-  //   carre(i,y);
-  // }
+void zoneSurbrillance(Joueur joueur){
+  int range = joueur.unites[0].distance;
+  for (int i = -range; i <= range; i++)
+  {
+      for (int j = -range; j <= range; j++)
+      {
+          if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
+          {
 
-      carre(x,y);
-      carre(x,y+1);
-      carre(x,y+2);
-      carre(x+1,y);
-      carre(x+2,y);
-      carre(x-1,y);
-      carre(x-2,y);
-      carre(x,y-1);
-      carre(x,y-2);
-      carre(x-1,y+1);
-      carre(x-1,y-1);
-      carre(x+1,y+1);
-      carre(x+1,y-1);
+              carre(joueur.unites[0].coord[0]+i,joueur.unites[0].coord[1]+j,joueur);
+          }
+      }
+  }
+
+      // carre(x,y);
+      // carre(x,y+1);
+      // carre(x,y+2);
+      // carre(x+1,y);
+      // carre(x+2,y);
+      // carre(x-1,y);
+      // carre(x-2,y);
+      // carre(x,y-1);
+      // carre(x,y-2);
+      // carre(x-1,y+1);
+      // carre(x-1,y-1);
+      // carre(x+1,y+1);
+      // carre(x+1,y-1);
 }
 
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
