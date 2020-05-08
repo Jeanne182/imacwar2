@@ -99,7 +99,7 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
   int yNew=-1;
 
   selectionCoordonnee(&xNew,&yNew, e, game->surface);
-  
+
   if(verificationCaseLibre(game, xNew, yNew)==true && verificationDistance(*joueur, xNew, yNew, id, game)==true){
 
     insertionCoordonnees(game, &joueur->unites[id], xNew, yNew, joueur->tour);
@@ -175,13 +175,15 @@ void etatUnite(SDL_Event e, Game* game){
   int x = 0;
   int y = 0;
   selectionCoordonnee(&x, &y, e, game->surface);
-  int id = selectionIdUnite(y,x,game->joueur1);
+  int id = selectionIdUnite(x,y,game->joueur1);
   if(id != -1){
+    zoneSurbrillance(game->joueur1,id);
     //cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
   }
   else{
-    id = selectionIdUnite(y,x,game->joueur2);
+    id = selectionIdUnite(x,y,game->joueur2);
     if(id != -1){
+      zoneSurbrillance(game->joueur2,id);
       //cout<<"Coordonnées unité J2: "<< game->joueur2.unites[id].coord[0] <<" "<< game->joueur2.unites[id].coord[1]<<endl;
     }
   }

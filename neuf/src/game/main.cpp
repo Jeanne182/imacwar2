@@ -117,12 +117,13 @@ int main(){
       affichageTexture(descriptionNain, 1,0.1,1,0);
       //etatUnite();
 
-      if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
-        zoneSurbrillance(game.joueur1);
-      }
-      if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
-        zoneSurbrillance(game.joueur2);
-      }
+
+      // if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
+      //   zoneSurbrillance(game.joueur1);
+      // }
+      // if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
+      //   zoneSurbrillance(game.joueur2);
+      // }
 
 
 

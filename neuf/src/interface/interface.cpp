@@ -157,8 +157,8 @@ void carre(float x, float y, Joueur joueur){
     //glColor3f(1,1,1);
 }
 
-void zoneSurbrillance(Joueur joueur){
-  int range = joueur.unites[0].distance;
+void zoneSurbrillance(Joueur joueur, int id){
+  int range = joueur.unites[id].distance;
   for (int i = -range; i <= range; i++)
   {
       for (int j = -range; j <= range; j++)
@@ -166,7 +166,7 @@ void zoneSurbrillance(Joueur joueur){
           if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
           {
 
-              carre(joueur.unites[0].coord[0]+i,joueur.unites[0].coord[1]+j,joueur);
+              carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur);
           }
       }
   }

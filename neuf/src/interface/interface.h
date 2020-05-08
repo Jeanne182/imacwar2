@@ -83,7 +83,7 @@ int selectioBoutonUniteJ1(Game* game, SDL_Event e);
 int selectioBoutonUniteJ2(Game* game, SDL_Event e);
 
 void carre(float x, float y, Joueur joueur);
-void zoneSurbrillance(Joueur joueur);
+void zoneSurbrillance(Joueur joueur, int id);
 
 /*textures.cpp*/
 
