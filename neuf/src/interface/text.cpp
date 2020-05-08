@@ -12,14 +12,16 @@ void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* con
 }
 
 void initialisationTextes(GLuint textes[100]){ //changer la taille du tableau
-  creationTexte(&textes[0], "src/fonts/SummitAttack.ttf", 65, "Déplacement", SDL_Color{255, 255, 255});
+  creationTexte(&textes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 65, "Déplacement", SDL_Color{255, 255, 255});
+  creationTexte(&textes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 100, "Attaque", SDL_Color{255,255,255});
 }
 
-// void affichageTexte(){
+// void affichageTextesStatiques(){
 //
 // }
-//
-//
+
+//void texteEtatUnite()
+
 // void deleteText(Text* text) {
 //
 // }

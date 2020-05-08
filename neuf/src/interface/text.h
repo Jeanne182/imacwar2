@@ -9,8 +9,8 @@
 #include <SDL/SDL_ttf.h>
 
 enum Enum_Textes{
-  BOUTON_DEPLACEMENT,
-  BOUTON_ATTAQUE
+  TEXTE_BOUTON_DEPLACEMENT,
+  TEXTE_BOUTON_ATTAQUE
   };
 
 typedef struct Texte {
