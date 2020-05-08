@@ -57,7 +57,7 @@ int main(){
 
             case JOUEUR1:
             affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            affichageTexture(game.textureUnites[HUMAN],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+            affichageTexture(game.textureUnites[game.joueur1.unites[0].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
             break;
 
             case JOUEUR2:
@@ -132,7 +132,9 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
-
+              if(game.joueur1.nbUnites != 0){
+                cout << "Type : "<< game.joueur1.unites[0].type<<endl;
+              }
 
               gererClic(&game,e);
               break;

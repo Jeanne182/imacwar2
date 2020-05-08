@@ -45,6 +45,7 @@ int selectionBouton(Game* game, SDL_Event e){
 
 int selectioBoutonnUniteJ1(Game* game, SDL_Event e){
   int valeurBouton;
+  cout<<"ClicBouton"<<endl; 
   valeurBouton = testClicBouton(game, game->boutonHumain, e);
   if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonNain, e);

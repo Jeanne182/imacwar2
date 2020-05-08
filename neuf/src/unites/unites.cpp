@@ -29,13 +29,20 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
       //MODIFIé AVEC STEEVE
       int x=0;
       int y=0;
+
       selectionCoordonnee(&x,&y, e, game->surface);
       cout << "x : " << x << " y : " << y << endl;
+
+      cout <<"choux 2 :"<<typeUnite<<endl;
       if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
+
         insertionCoordonnees(game, &unite, x, y, joueur->tour);
         joueur->unites[id] = unite;
+
         joueur->nbUnites ++;
         joueur->nbUnitesInitial++;
+
+        cout << "Type 2: "<< game->joueur1.unites[0].type<<endl;
         return true;
       }
     }
@@ -47,6 +54,7 @@ bool placementUnitesJoueurs(Game* game, SDL_Event e){
   int choixUnite;
   if (game->tour == TOUR_JOUEUR1){
     choixUnite = selectioBoutonnUniteJ1(game, e);
+
     if(placementUnite(&game->joueur1, e, game, choixUnite)==true){
       game->tour = TOUR_JOUEUR2;
       return true;

@@ -19,6 +19,8 @@ using namespace std;
 // Déclarations des structures
 enum EnumEtapesJeu{
   PLACEMENT_UNITES,
+  ACHAT_UNITE,
+  CHOIX_EMPLACEMENT, 
   TOURS_DE_JEU,
   TOUR_JOUEUR1,
   TOUR_JOUEUR2,
