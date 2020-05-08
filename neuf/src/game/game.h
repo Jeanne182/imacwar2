@@ -60,6 +60,8 @@ typedef struct Game {
   int map[10][10];
   int zonePlacement[10][10];
 
+  //textes
+  GLuint textureTextes[100];
 
   //A enlever ??
   int x , y;

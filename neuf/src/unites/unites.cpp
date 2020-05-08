@@ -146,12 +146,12 @@ void etatUnite(SDL_Event e, Game* game){
   selectionCoordonnee(&x, &y, e, game->surface);
   int id = selectionIdUnite(y,x,game->joueur1);
   if(id != -1){
-    cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
+    //cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
   }
   else{
     id = selectionIdUnite(y,x,game->joueur2);
     if(id != -1){
-      cout<<"Coordonnées unité J2: "<< game->joueur2.unites[id].coord[0] <<" "<< game->joueur2.unites[id].coord[1]<<endl;
+      //cout<<"Coordonnées unité J2: "<< game->joueur2.unites[id].coord[0] <<" "<< game->joueur2.unites[id].coord[1]<<endl;
     }
   }
 
