@@ -10,17 +10,7 @@ int main(){
   Game game;
   initialisationGame(&game);
   TTF_Init();
-
-  GLuint texture;
-  creationTexte(&texture, "src/fonts/SummitAttack.ttf", 65, "Prout", SDL_Color{0, 255, 0});
-
-  GLuint texteDeplacement;
-  creationTexte(&texteDeplacement, "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
-  creationTexte(&game.textureTextes[0], "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
-  //initialisationTextes(game.textureTextes);
-
-  GLuint texteAttaque;
-  creationTexte(&texteAttaque, "src/fonts/SummitAttack.ttf", 100, "Attaque", SDL_Color{255,255,255});
+  initialisationTextes(game.textureTextes);
 
   GLuint descriptionNain;
   creationTexte(&descriptionNain, "src/fonts/SummitAttack.ttf", 100, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
@@ -92,50 +82,46 @@ int main(){
       initBoutonUnites(game.boutonSaruman);
       glColor3f(1,1,1);
 
+      switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
+        case PLACEMENT_UNITES:
+          switch (game.tour) {
+            case TOUR_JOUEUR1:
+              affichageTexture(game.textureUnites[HOBBIT],game.boutonHobbit.longueur,game.boutonHobbit.hauteur,game.boutonHobbit.x,game.boutonHobbit.y);
+              affichageTexture(game.textureUnites[HUMAN],game.boutonHumain.longueur,game.boutonHumain.hauteur,game.boutonHumain.x,game.boutonHumain.y);
+              affichageTexture(game.textureUnites[NAIN],game.boutonNain.longueur,game.boutonNain.hauteur,game.boutonNain.x,game.boutonNain.y);
+              affichageTexture(game.textureUnites[ELFE],game.boutonElfe.longueur,game.boutonElfe.hauteur,game.boutonElfe.x,game.boutonElfe.y);
+              affichageTexture(game.textureUnites[GANDALF],game.boutonGandalf.longueur,game.boutonGandalf.hauteur,game.boutonGandalf.x,game.boutonGandalf.y);
+              break;
+            case TOUR_JOUEUR2:
+              affichageTexture(game.textureUnites[SMEAGOL],game.boutonSmeagol.longueur,game.boutonSmeagol.hauteur,game.boutonSmeagol.x,game.boutonSmeagol.y);
+              affichageTexture(game.textureUnites[ORQUE],game.boutonOrque.longueur,game.boutonOrque.hauteur,game.boutonOrque.x,game.boutonOrque.y);
+              affichageTexture(game.textureUnites[URUK],game.boutonUrukhai.longueur,game.boutonUrukhai.hauteur,game.boutonUrukhai.x,game.boutonUrukhai.y);
+              affichageTexture(game.textureUnites[NAZGUL],game.boutonNazgul.longueur,game.boutonNazgul.hauteur,game.boutonNazgul.x,game.boutonNazgul.y);
+              affichageTexture(game.textureUnites[SAROUMANE],game.boutonSaruman.longueur,game.boutonSaruman.hauteur,game.boutonSaruman.x,game.boutonSaruman.y);
+            break;
+          }
+          break;
 
-      if(game.etapeJeu == PLACEMENT_UNITES && game.tour == TOUR_JOUEUR1){
-        affichageTexture(game.textureUnites[HOBBIT],game.boutonHobbit.longueur,game.boutonHobbit.hauteur,game.boutonHobbit.x,game.boutonHobbit.y);
-        affichageTexture(game.textureUnites[HUMAN],game.boutonHumain.longueur,game.boutonHumain.hauteur,game.boutonHumain.x,game.boutonHumain.y);
-        affichageTexture(game.textureUnites[NAIN],game.boutonNain.longueur,game.boutonNain.hauteur,game.boutonNain.x,game.boutonNain.y);
-        affichageTexture(game.textureUnites[ELFE],game.boutonElfe.longueur,game.boutonElfe.hauteur,game.boutonElfe.x,game.boutonElfe.y);
-        affichageTexture(game.textureUnites[GANDALF],game.boutonGandalf.longueur,game.boutonGandalf.hauteur,game.boutonGandalf.x,game.boutonGandalf.y);
+        case ACTIONS:
+          bouton(game.boutonDeplacement);
+          bouton(game.boutonAttaque);
+          glColor3f(1,1,1);
+          affichageTexture(game.textureTextes[TEXTE_BOUTON_ATTAQUE], game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
+          affichageTexture(game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
+
+          //Surbrillance
+          if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
+            zoneSurbrillance(game.joueur1);
+          }
+          if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
+            zoneSurbrillance(game.joueur2);
+          }
+          break;
       }
-      if(game.etapeJeu == PLACEMENT_UNITES && game.tour == TOUR_JOUEUR2){
-        affichageTexture(game.textureUnites[SMEAGOL],game.boutonSmeagol.longueur,game.boutonSmeagol.hauteur,game.boutonSmeagol.x,game.boutonSmeagol.y);
-        affichageTexture(game.textureUnites[ORQUE],game.boutonOrque.longueur,game.boutonOrque.hauteur,game.boutonOrque.x,game.boutonOrque.y);
-        affichageTexture(game.textureUnites[URUK],game.boutonUrukhai.longueur,game.boutonUrukhai.hauteur,game.boutonUrukhai.x,game.boutonUrukhai.y);
-        affichageTexture(game.textureUnites[NAZGUL],game.boutonNazgul.longueur,game.boutonNazgul.hauteur,game.boutonNazgul.x,game.boutonNazgul.y);
-        affichageTexture(game.textureUnites[SAROUMANE],game.boutonSaruman.longueur,game.boutonSaruman.hauteur,game.boutonSaruman.x,game.boutonSaruman.y);
-      }
 
-      bouton(game.boutonDeplacement);
-      bouton(game.boutonAttaque);
-      glColor3f(1,1,1);
-      affichageTexture(texteAttaque, game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
-
-      affichageTexture(game.textureTextes[0], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
       affichageTexture(descriptionNain, 1,0.1,1,0);
-      //etatUnite();
-
-      if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
-        zoneSurbrillance(game.joueur1);
-      }
-      if(game.etapeJeu == ACTIONS && game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
-        zoneSurbrillance(game.joueur2);
-      }
-
-
-
-      glColor3f(1,1,1); //pour que les textures ne soient pas de couleur bizarre lol
-
-      //affichageUnite(game.joueur1, &game);
-      //affichageUnite(game.joueur2, &game);
-
-
 
       /* Boucle traitant les evenements */
-
-
       SDL_Event e;
 
       while(SDL_PollEvent(&e))
