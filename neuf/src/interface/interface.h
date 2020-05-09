@@ -66,6 +66,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
+void carre(float x, float y, Joueur joueur);
 
 
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
@@ -83,8 +84,7 @@ int selectionBouton(Game* game, SDL_Event e);
 int selectionBoutonUnite(Game* game, SDL_Event e);
 
 
-void carre(float x, float y, Joueur joueur);
-void zoneSurbrillance(Joueur joueur, int id);
+
 
 /*textures.cpp*/
 

@@ -66,6 +66,13 @@ int main(){
 
         }
       }
+      // for(int x=0; x<=10; x++){
+      //   for(int y=0; y<=10; y++){
+      //     if(game.map[y-1][x-1]==PLAINE){
+      //       carre(x,y,game.joueur1);
+      //     }
+      //   }
+      // }
 
       //affichageTexture(texteDeplacement, game.boutonDeplacement.longueur, game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
       initBoutonUnites(game.boutonHobbit);

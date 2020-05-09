@@ -157,34 +157,7 @@ void carre(float x, float y, Joueur joueur){
     //glColor3f(1,1,1);
 }
 
-void zoneSurbrillance(Joueur joueur, int id){
-  int range = joueur.unites[id].distance;
-  for (int i = -range; i <= range; i++)
-  {
-      for (int j = -range; j <= range; j++)
-      {
-          if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
-          {
 
-              carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur);
-          }
-      }
-  }
-
-      // carre(x,y);
-      // carre(x,y+1);
-      // carre(x,y+2);
-      // carre(x+1,y);
-      // carre(x+2,y);
-      // carre(x-1,y);
-      // carre(x-2,y);
-      // carre(x,y-1);
-      // carre(x,y-2);
-      // carre(x-1,y+1);
-      // carre(x-1,y-1);
-      // carre(x+1,y+1);
-      // carre(x+1,y-1);
-}
 
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
   *x = (int)(1+10*(*x)*aspectRatio/(float)surface->w);
