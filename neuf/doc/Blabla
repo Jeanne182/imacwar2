@@ -1,4 +1,4 @@
-A FAIRE : 
+A FAIRE :
 
 
 - Tester quelles bibliothèques sont nécéssaires
@@ -7,11 +7,10 @@ A FAIRE :
 - Clic droit / gauche
 
 - Afficher les etats des unites
-- Afficher zone placement en surbrillance
 - Clean variables de game
 
 - Boucle fin de jeu
-- Choix des différentes unités en début de partie
+
 - Surbrillance zone de déplacement et d'attaque
 
 - Trouver les fonts
@@ -21,16 +20,19 @@ A FAIRE :
 -> Optimiser peut etre ?
 -> Gérer attaque à distance : celui qui attaque à distance ne reçoit pas de blessures en retour (mais hyper puissant donc à voir si on garde)
 
-- Différentes unites : 
+- Différentes unites :
 -> Gérer les prix
 -> Affichage des sprites / matrice ?
 
+- Si clic pas sur une unité avant clic d'achat : place carré blanc
+- verfiier où on utilise unite.id
 
 
-FAIT : 
+
+FAIT :
 -> Valider les formules (perte de force)
 -> Valider où on met les unites mortes
+- Choix des différentes unités en début de partie
 
 - Gérer le fait que si on a cliqué sur un bouton mais qu'on change d'avis, ca change l'action
 - Nouvelles unites initialisées
-

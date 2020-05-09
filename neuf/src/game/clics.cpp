@@ -8,9 +8,8 @@ void gererClic(Game* game, SDL_Event e){
 
     //Première partie du jeu : placement des unités :
     case PLACEMENT_UNITES:
-      if(placementUnitesJoueurs(game, e)==false){
-        cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
-      }
+      placementUnitesJoueurs(game, e);
+
       cout<<game->etapeJeu<<endl;
 
       if(game->joueur1.nbUnites==2 && game->joueur2.nbUnites==2){ //A CHANGER
@@ -54,7 +53,7 @@ void gererClic(Game* game, SDL_Event e){
       switch(game->tour){
 
         case TOUR_JOUEUR1:
-        
+
           switch (game->choix){
 
             case RIEN:

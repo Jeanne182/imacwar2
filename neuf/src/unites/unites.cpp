@@ -17,14 +17,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
     int id = joueur->nbUnites;
     if(joueur->nbUnites <= 3){
       Unite unite;
-      unite.id =id;
-      unite.distance=3;
-      unite.zoneDeTir=6;
-      unite.type = typeUnite;
-      unite.vie = 25;
-      unite.force = 0.5;
-      unite.defense = 0.4;
-
+      unite = game->unites[typeUnite];
 
       //MODIFIé AVEC STEEVE
       int x=-1;
@@ -33,39 +26,31 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
       selectionCoordonnee(&x,&y, e, game->surface);
       cout << "x : " << x << " y : " << y << endl;
 
-      cout <<"choux 2 :"<<typeUnite<<endl;
       if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
 
         insertionCoordonnees(game, &unite, x, y, joueur->tour);
         joueur->unites[id] = unite;
-
         joueur->nbUnites ++;
         joueur->nbUnitesInitial++;
 
-        cout << "Type 2: "<< game->joueur1.unites[0].type<<endl;
         return true;
       }
     }
+    cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
     return false;
 }
 
-bool placementUnitesJoueurs(Game* game, SDL_Event e){
+void placementUnitesJoueurs(Game* game, SDL_Event e){
   switch (game->etapeAchatUnite) {
     case ACHAT_UNITE:
-      if (game->tour == TOUR_JOUEUR1){
-        game->achat_type = selectioBoutonUniteJ1(game, e);
-        cout << "achat type : " << game->achat_type << endl;
+      if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE){
+        cout<<"ETAPE : achat"<<endl;
         game->etapeAchatUnite = CHOIX_EMPLACEMENT;
-        return true;
       }
       else {
-        game->achat_type = selectioBoutonUniteJ2(game, e);
-        cout << "achat type : " << game->achat_type << endl;
-
-        game->etapeAchatUnite = CHOIX_EMPLACEMENT;
-        return true;
+        game->achat_type = selectionBoutonUnite(game, e);
       }
-
+      cout << "achat type : " << game->achat_type << endl;
     break;
 
       case CHOIX_EMPLACEMENT:
@@ -74,7 +59,7 @@ bool placementUnitesJoueurs(Game* game, SDL_Event e){
             game->achat_type = SANS_TYPE;
             game->tour = TOUR_JOUEUR2;
             game->etapeAchatUnite = ACHAT_UNITE;
-            return true;
+
           }
         }
         else {
@@ -82,16 +67,11 @@ bool placementUnitesJoueurs(Game* game, SDL_Event e){
             game->achat_type = SANS_TYPE;
             game->tour = TOUR_JOUEUR1;
             game->etapeAchatUnite = ACHAT_UNITE;
-            return true;
+
           }
         }
       break;
-
-    default:
-      break;
-  }
-
-  return false;
+    }
 }
 
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){

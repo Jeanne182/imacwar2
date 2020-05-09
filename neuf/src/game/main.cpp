@@ -51,7 +51,6 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               int id = selectionIdUnite(i+1, j+1, game.joueur1);
               affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-              //cout << "type 1: "<<game.joueur1.unites[id].type << endl;
               break;
             }
 
@@ -60,7 +59,6 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               int id = selectionIdUnite(i+1, j+1, game.joueur2);
               affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-              //cout << "type 2: "<<game.joueur2.unites[id].type << endl;
               break;
             }
 
@@ -84,6 +82,8 @@ int main(){
 
       switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
         case PLACEMENT_UNITES:
+        bouton(game.boutonAchat);
+        glColor3f(1,1,1);
           switch (game.tour) {
             case TOUR_JOUEUR1:
               affichageTexture(game.textureUnites[HOBBIT],game.boutonHobbit.longueur,game.boutonHobbit.hauteur,game.boutonHobbit.x,game.boutonHobbit.y);
@@ -136,12 +136,6 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
-              cout << "couleur : "<< game.boutonNain.r<<endl;
-              if(game.joueur1.nbUnites != 0){
-              }
-                cout << "Type : "<< game.joueur1.unites[0].type<<endl;
-
-
               gererClic(&game,e);
               break;
             // case SDL_MOUSEMOTION:
