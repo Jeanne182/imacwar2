@@ -76,66 +76,76 @@ void initialisationGame(Game *game){
 
   //Initialisation des unites
   // Gentils :
-  game->Nain.force = 0.6;
-  game->Nain.defense = 0.3;
-  game->Nain.zoneDeTir = 1;
-  game->Nain.distance = 2;
-  game->Nain.prix = 20;
+  game->unites[NAIN].force = 0.6;
+  game->unites[NAIN].defense = 0.3;
+  game->unites[NAIN].zoneDeTir = 1;
+  game->unites[NAIN].distance = 2;
+  game->unites[NAIN].prix = 20;
+  game->unites[NAIN].type = NAIN;
 
-  game->Hobbit.force = 0.4;
-  game->Hobbit.defense = 0.4;
-  game->Hobbit.zoneDeTir = 2;
-  game->Hobbit.distance = 2;
-  game->Hobbit.prix = 20;
+  game->unites[HOBBIT].force = 0.4;
+  game->unites[HOBBIT].defense = 0.4;
+  game->unites[HOBBIT].zoneDeTir = 2;
+  game->unites[HOBBIT].distance = 2;
+  game->unites[HOBBIT].prix = 20;
+  game->unites[HOBBIT].type = HOBBIT;
 
-  game->Elfe.force = 0.3;
-  game->Elfe.defense = 0.6;
-  game->Elfe.zoneDeTir = 4;
-  game->Elfe.distance = 4;
-  game->Elfe.prix = 30;
+  game->unites[ELFE].force = 0.3;
+  game->unites[ELFE].defense = 0.6;
+  game->unites[ELFE].zoneDeTir = 4;
+  game->unites[ELFE].distance = 4;
+  game->unites[ELFE].prix = 30;
+  game->unites[ELFE].type = ELFE;
 
-  game->Humain.force = 0.5;
-  game->Humain.defense = 0.5;
-  game->Humain.zoneDeTir = 1;
-  game->Humain.distance = 2;
-  game->Humain.prix = 30;
+  game->unites[HUMAN].force = 0.5;
+  game->unites[HUMAN].defense = 0.5;
+  game->unites[HUMAN].zoneDeTir = 1;
+  game->unites[HUMAN].distance = 2;
+  game->unites[HUMAN].prix = 30;
+  game->unites[HUMAN].type = HUMAN;
 
-  game->Gandalf.force = 0.6;
-  game->Gandalf.defense = 0.6;
-  game->Gandalf.zoneDeTir = 2;
-  game->Gandalf.distance = 2;
-  game->Gandalf.prix = 50;
+  game->unites[GANDALF].force = 0.6;
+  game->unites[GANDALF].defense = 0.6;
+  game->unites[GANDALF].zoneDeTir = 2;
+  game->unites[GANDALF].distance = 2;
+  game->unites[GANDALF].prix = 50;
+  game->unites[GANDALF].type = GANDALF;
 
   //Mechants :
-  game->Orque.force = 0.6;
-  game->Orque.defense = 0.3;
-  game->Orque.zoneDeTir = 1;
-  game->Orque.distance = 2;
-  game->Orque.prix = 20;
+  game->unites[ORQUE].force = 0.6;
+  game->unites[ORQUE].defense = 0.3;
+  game->unites[ORQUE].zoneDeTir = 1;
+  game->unites[ORQUE].distance = 2;
+  game->unites[ORQUE].prix = 20;
+  game->unites[ORQUE].type = ORQUE;
 
-  game->Smeagol.force = 0.4;
-  game->Smeagol.defense = 0.4;
-  game->Smeagol.zoneDeTir = 2;
-  game->Smeagol.distance = 2;
-  game->Smeagol.prix = 20;
+  game->unites[SMEAGOL].force = 0.4;
+  game->unites[SMEAGOL].defense = 0.4;
+  game->unites[SMEAGOL].zoneDeTir = 2;
+  game->unites[SMEAGOL].distance = 2;
+  game->unites[SMEAGOL].prix = 20;
+  game->unites[SMEAGOL].type = SMEAGOL;
 
-  game->Urukhai.force = 0.3;
-  game->Urukhai.defense = 0.6;
-  game->Urukhai.zoneDeTir = 4;
-  game->Urukhai.distance = 4;
-  game->Urukhai.prix = 30;
+  game->unites[URUK].force = 0.3;
+  game->unites[URUK].defense = 0.6;
+  game->unites[URUK].zoneDeTir = 4;
+  game->unites[URUK].distance = 4;
+  game->unites[URUK].prix = 30;
+  game->unites[URUK].type = URUK;
 
-  game->Nazgul.force = 0.5;
-  game->Nazgul.defense = 0.5;
-  game->Nazgul.zoneDeTir = 1;
-  game->Nazgul.distance = 2;
-  game->Nazgul.prix = 30;
+  game->unites[NAZGUL].force = 0.5;
+  game->unites[NAZGUL].defense = 0.5;
+  game->unites[NAZGUL].zoneDeTir = 1;
+  game->unites[NAZGUL].distance = 2;
+  game->unites[NAZGUL].prix = 30;
+  game->unites[NAZGUL].type = NAZGUL;
 
-  game->Saruman.force = 0.6;
-  game->Saruman.defense = 0.6;
-  game->Saruman.zoneDeTir = 2;
-  game->Saruman.distance = 2;
-  game->Saruman.prix = 50;
+  game->unites[SAROUMANE].force = 0.6;
+  game->unites[SAROUMANE].defense = 0.6;
+  game->unites[SAROUMANE].zoneDeTir = 2;
+  game->unites[SAROUMANE].distance = 2;
+  game->unites[SAROUMANE].prix = 50;
+  game->unites[SAROUMANE].type = SAROUMANE;
 
   //Initialisation des boutons
   game->boutonDeplacement.x = 1.1; //Rose
@@ -158,13 +168,21 @@ void initialisationGame(Game *game){
   game->boutonAttaque.b = 1;
   game->boutonAttaque.valeur = ATTAQUE;
 
+  game->boutonAchat.x = 1.3;
+  game->boutonAchat.y = 0.4;
+  //game->boutonAchat.x = 1.5;
+  //game->boutonAchat.y = 0.9;
+  game->boutonAchat.longueur = 0.15;
+  game->boutonAchat.hauteur = 0.05;
+  game->boutonAchat.r = 0; //bleu
+  game->boutonAchat.g = 1;
+  game->boutonAchat.b = 1;
+  game->boutonAchat.valeur = ACHAT;
+
   game->boutonHumain.x = 1.0;
   game->boutonHumain.y = 0.1;
   game->boutonHumain.longueur = 0.1;
   game->boutonHumain.hauteur = 0.1;
-  //game->boutonHumain.r = NULL;
-  //game->boutonHumain.g = 0;
-  //game->boutonHumain.b = 0;
   game->boutonHumain.valeur = HUMAN;
 
   game->boutonGandalf.x = 1.80;

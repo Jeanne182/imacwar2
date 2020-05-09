@@ -41,58 +41,63 @@ void initBoutonUnites(Bouton bouton){
   glPopMatrix();
 }
 
-int testClicBouton(Game* game, Bouton bouton, SDL_Event e){
+int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur){
   selectionCoordonnee(&game->x, &game->y, e, game->surface);
 
   float newX = (float)(game->x - 1)/10;
   float newY = (float)(game->y - 1)/10;
   if(newX >= bouton.x && newX <= bouton.x + bouton.longueur && newY >= bouton.y && newY <= bouton.y + bouton.hauteur){
+      cout << "test clic bouton :" << bouton.valeur << endl;
     return bouton.valeur;
   }
-  return RIEN;
+
+
+  return erreur;
 }
 
 int selectionBouton(Game* game, SDL_Event e){
   int valeurBouton=RIEN;
-  valeurBouton = testClicBouton(game, game->boutonDeplacement, e);
+  valeurBouton = testClicBouton(game, game->boutonDeplacement, e, RIEN);
   if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonAttaque, e);
+    valeurBouton = testClicBouton(game, game->boutonAttaque, e, RIEN);
+  }
+  if (valeurBouton == RIEN){
+    valeurBouton = testClicBouton(game, game->boutonAchat, e, RIEN);
   }
   return valeurBouton;
 }
 
-int selectioBoutonUniteJ1(Game* game, SDL_Event e){
-  int valeurBouton = RIEN;
-  valeurBouton = testClicBouton(game, game->boutonHumain, e);
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonNain, e);
+int selectionBoutonUnite(Game* game, SDL_Event e){
+  int valeurBouton = SANS_TYPE;
+  if(game->tour == TOUR_JOUEUR1){
+    valeurBouton = testClicBouton(game, game->boutonHumain, e, SANS_TYPE);
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonNain, e, SANS_TYPE);
+    }
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonHobbit, e, SANS_TYPE);
+    }
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonElfe, e, SANS_TYPE);
+    }
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonGandalf, e, SANS_TYPE);
+    }
   }
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonHobbit, e);
-  }
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonElfe, e);
-  }
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonGandalf, e);
-  }
-  return valeurBouton;
-}
-
-int selectioBoutonUniteJ2(Game* game, SDL_Event e){
-  int valeurBouton=RIEN;
-  valeurBouton = testClicBouton(game, game->boutonOrque, e);
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonSmeagol, e);
-  }
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonUrukhai, e);
-  }
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonNazgul, e);
-  }
-  if (valeurBouton == RIEN){
-    valeurBouton = testClicBouton(game, game->boutonSaruman, e);
+  else{
+    valeurBouton = testClicBouton(game, game->boutonOrque, e, SANS_TYPE);
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonSmeagol, e, SANS_TYPE);
+    }
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonUrukhai, e, SANS_TYPE);
+    }
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonNazgul, e, SANS_TYPE);
+    }
+    if (valeurBouton == SANS_TYPE){
+      valeurBouton = testClicBouton(game, game->boutonSaruman, e, SANS_TYPE);
+    }
   }
   return valeurBouton;
 }

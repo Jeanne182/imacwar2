@@ -66,7 +66,7 @@ bool verificationZoneTir(Joueur joueur, int x, int y, int id, Game* game);
 
 /* unites.cpp */
 bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite);
-bool placementUnitesJoueurs(Game* game, SDL_Event e);
+void placementUnitesJoueurs(Game* game, SDL_Event e);
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game);
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game);
 void etatUnite(SDL_Event e, Game* game);
