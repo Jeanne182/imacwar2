@@ -66,7 +66,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
-void carre(float x, float y, Joueur joueur);
+void carre(float x, float y, Joueur joueur, int choix);
 
 
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);

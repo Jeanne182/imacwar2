@@ -156,17 +156,17 @@ void etatUnite(SDL_Event e, Game* game){
   int y = 0;
   selectionCoordonnee(&x, &y, e, game->surface);
   int id = selectionIdUnite(x,y,game->joueur1);
-  if(id != -1){
-    zoneSurbrillance(game->joueur1,id, game->map);
-    //cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
-  }
-  else{
-    id = selectionIdUnite(x,y,game->joueur2);
-    if(id != -1){
-      zoneSurbrillance(game->joueur2,id, game->map);
-      //cout<<"Coordonnées unité J2: "<< game->joueur2.unites[id].coord[0] <<" "<< game->joueur2.unites[id].coord[1]<<endl;
-    }
-  }
+  // if(id != -1){
+  //   zoneSurbrillance(game->joueur1,id, game->map,DEPLACEMENT);
+  //   //cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
+  // }
+  // else{
+  //   id = selectionIdUnite(x,y,game->joueur2);
+  //   if(id != -1){
+  //     zoneSurbrillance(game->joueur2,id, game->map,DEPLACEMENT);
+  //     //cout<<"Coordonnées unité J2: "<< game->joueur2.unites[id].coord[0] <<" "<< game->joueur2.unites[id].coord[1]<<endl;
+  //   }
+  // }
 
   // if(id!=-1){
   //   cout <<"x : "<< x<<" y : "<<y<<"id : "<<id<<endl;
@@ -181,20 +181,38 @@ void etatUnite(SDL_Event e, Game* game){
   // affichageTexture(vie, 1,0.1,1,0);
 }
 
-void zoneSurbrillance(Joueur joueur, int id, int map[10][10]){
+void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
   int x = (int)joueur.unites[id].coord[0];
   int y = (int)joueur.unites[id].coord[1];
-  int range = joueur.unites[id].distance;
-  for (int i = -range; i <= range; i++)
-  {
-    for (int j = -range; j <= range; j++)
+  int range =joueur.unites[id].distance;
+  if(choix==ATTAQUE){
+    range=joueur.unites[id].zoneDeTir;
+    for (int i = -range; i <= range; i++)
     {
-      if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
+      for (int j = -range; j <= range; j++)
       {
-        if(map[y-1+j][ x-1 + i]==PLAINE && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
-          carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur);
+        if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
+        {
+          if(map[y-1+j][ x-1 + i]!=ARBRE && map[y-1+j][ x-1 + i]!=EAU&& x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+            carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
+          }
         }
       }
     }
   }
+  else{
+    for (int i = -range; i <= range; i++)
+    {
+      for (int j = -range; j <= range; j++)
+      {
+        if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
+        {
+          if(map[y-1+j][ x-1 + i]==PLAINE && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+            carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
+          }
+        }
+      }
+    }
+  }
+
 }

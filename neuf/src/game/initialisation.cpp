@@ -246,6 +246,11 @@ void initialisationGame(Game *game){
   game->etapeAchatUnite = ACHAT_UNITE;
   game->achat_type = SANS_TYPE;
 
+  game->id1=-1;
+  game->id2=-1;
+  game->idUniteSurvolee=-1;
+  game->xSurvol=-1;
+  game->ySurvol=-1;
   //Initialisation textes
   //creationTexte(&game->textureTextes[1], "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
   //initialisationTextes(game->textes);
