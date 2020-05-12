@@ -116,15 +116,33 @@ int main(){
           affichageTexture(game.textureTextes[TEXTE_BOUTON_ATTAQUE], game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
           affichageTexture(game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
 
-          //Surbrillance
-          // if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
-          //   zoneSurbrillance(game.joueur1);
-          // }
-          // if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
-          //   zoneSurbrillance(game.joueur2);
-          // }
+          if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
+            zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
+          }
+          if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
+            zoneSurbrillance(game.joueur2,game.id2, game.map, DEPLACEMENT);
+          }
+          if(game.tour == TOUR_JOUEUR1 && game.choix == ATTAQUE){
+            zoneSurbrillance(game.joueur1,game.id1, game.map, ATTAQUE);
+          }
+          if(game.tour == TOUR_JOUEUR2 && game.choix == ATTAQUE){
+            zoneSurbrillance(game.joueur2,game.id2, game.map, ATTAQUE);
+          }
+
           break;
       }
+
+      if(game.xSurvol!=-1 && game.ySurvol!=-1){
+        switch(game.map[game.ySurvol-1][game.xSurvol-1]){
+          case JOUEUR1:
+            zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
+            break;
+          case JOUEUR2:
+            zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.map, DEPLACEMENT);
+            break;
+        }
+      }
+
 
       affichageTexture(descriptionNain, 1,0.1,1,0);
 
@@ -138,6 +156,12 @@ int main(){
           {
               loop = 0;
               break;
+          }
+
+          selectionCoordonnee(&game.xSurvol, &game.ySurvol, e, game.surface);
+          game.idUniteSurvolee = selectionIdUnite(game.xSurvol, game.ySurvol,game.joueur1);
+          if(game.idUniteSurvolee==-1){
+            game.idUniteSurvolee = selectionIdUnite(game.xSurvol, game.ySurvol,game.joueur2);
           }
           etatUnite(e,&game);
 

@@ -124,30 +124,26 @@ int finProgrammeSDL(Game* game){
 
 
 
-// string texture_path(texturesCarte texture_value){
-//     switch(texture_value){
-//     case PLAINE:
-//         return "img/sol.jpg";
-//         break;
-//     case EAU:
-//         return "img/eau.png";
-//         break;
-//     case ARBRE:
-//         return "img/arbre.png";
-//         break;
-//     }
-// }
-
-
-
-void carre(float x, float y, Joueur joueur){
+void carre(float x, float y, Joueur joueur, int choix){
   glPushMatrix();
     glTranslatef((x-1)/10,(y-1)/10,0);
     glBegin(GL_POLYGON);
     if (joueur.id == 1){
-      glColor4f(0,0,1,0.4);
+      if(choix==ATTAQUE){
+        glColor4f(0.55, 0.42, 0.26,0.4);
+      }
+      else{
+        glColor4f(1,1,1,0.4);
+      }
     }
-    else {glColor4f(1,0,0,0.4);}
+    else {
+      if(choix==ATTAQUE){
+        glColor4f(0.55, 0.42, 0.26,0.4);
+      }
+      else{
+        glColor4f(0,0,0,0.4);
+      }
+    }
     glVertex2f(0.1, 0.1);
     glVertex2f(0,0.1);
     glVertex2f(0, 0);

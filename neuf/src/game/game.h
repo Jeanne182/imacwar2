@@ -68,7 +68,9 @@ typedef struct Game {
 
   //A enlever ??
   int x , y;
+  int xSurvol, ySurvol;
   int id1, id2;
+  int idUniteSurvolee;
 
 } Game;
 

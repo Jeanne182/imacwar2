@@ -70,7 +70,7 @@ void placementUnitesJoueurs(Game* game, SDL_Event e);
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game);
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game);
 void etatUnite(SDL_Event e, Game* game);
-void zoneSurbrillance(Joueur joueur, int id, int map[10][10]);
+void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix);
 
 
 
