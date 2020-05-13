@@ -68,11 +68,13 @@ void initialisationGame(Game *game){
   game->joueur1.nbUnitesInitial=0;
   game->joueur1.id = 1;
   game->joueur1.tour = JOUEUR1;
+  game->joueur1.pieces = 100;
 
   game->joueur2.nbUnites=0;
   game->joueur2.nbUnitesInitial=0;
   game->joueur2.id = 2;
   game->joueur2.tour = JOUEUR2;
+  game->joueur2.pieces = 100;
 
   //Initialisation des unites
   // Gentils :
@@ -170,15 +172,22 @@ void initialisationGame(Game *game){
 
   game->boutonAchat.x = 1.3;
   game->boutonAchat.y = 0.4;
-  //game->boutonAchat.x = 1.5;
-  //game->boutonAchat.y = 0.9;
   game->boutonAchat.longueur = 0.15;
   game->boutonAchat.hauteur = 0.05;
-  game->boutonAchat.r = 0; //bleu
+  game->boutonAchat.r = 0;
   game->boutonAchat.g = 1;
   game->boutonAchat.b = 1;
   game->boutonAchat.valeur = ACHAT;
-
+/*
+  game->boutonStopAchat.x = 1.3;
+  game->boutonStopAchat.y = 0.6;
+  game->boutonStopAchat.longueur = 0.15;
+  game->boutonStopAchat.hauteur = 0.05;
+  game->boutonStopAchat.r = 0.5;
+  game->boutonStopAchat.g = 1.5;
+  game->boutonStopAchat.b = 1;
+  game->boutonStopAchat.valeur = STOP_ACHAT;
+*/
   game->boutonHumain.x = 1.0;
   game->boutonHumain.y = 0.1;
   game->boutonHumain.longueur = 0.1;
