@@ -33,7 +33,6 @@ typedef struct Game {
   Joueur joueur1, joueur2;
   Unite unites[10];//Nain, Hobbit, Elfe, Humain, Gandalf, Orque, Smeagol, Urukhai, Nazgul, Saruman;
   Bouton boutonDeplacement, boutonAttaque, boutonAchat, boutonNain, boutonHobbit, boutonElfe, boutonHumain, boutonGandalf, boutonOrque, boutonSmeagol, boutonUrukhai, boutonNazgul, boutonSaruman;
-
   int etapeJeu;
   int tour;
   int choix;

@@ -8,11 +8,12 @@ void gererClic(Game* game, SDL_Event e){
 
     //Première partie du jeu : placement des unités :
     case PLACEMENT_UNITES:
+
       placementUnitesJoueurs(game, e);
 
       cout<<game->etapeJeu<<endl;
 
-      if(game->joueur1.nbUnites==2 && game->joueur2.nbUnites==2){ //A CHANGER
+      if(game->joueur1.pieces<=20 && game->joueur2.pieces<=20){ //A CHANGER
         game->etapeJeu = SELECTION_UNITE;
       }
       break;

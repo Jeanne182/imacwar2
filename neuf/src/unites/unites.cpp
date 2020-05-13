@@ -32,7 +32,8 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
         joueur->unites[id] = unite;
         joueur->nbUnites ++;
         joueur->nbUnitesInitial++;
-
+        joueur->pieces -= unite.prix;
+        cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
         return true;
       }
     }
@@ -43,13 +44,25 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
 void placementUnitesJoueurs(Game* game, SDL_Event e){
   switch (game->etapeAchatUnite) {
     case ACHAT_UNITE:
-      if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE){
-        cout<<"ETAPE : achat"<<endl;
-        game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+      if (game->tour == TOUR_JOUEUR1){
+        if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(game->joueur1, game->unites[game->achat_type])==true){
+          cout<<"ETAPE : achat"<<endl;
+          game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+        }
+        else {
+          game->achat_type = selectionBoutonUnite(game, e);
+        }
       }
       else {
-        game->achat_type = selectionBoutonUnite(game, e);
+        if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(game->joueur2, game->unites[game->achat_type])==true){
+          cout<<"ETAPE : achat"<<endl;
+          game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+        }
+        else {
+          game->achat_type = selectionBoutonUnite(game, e);
+        }
       }
+
       cout << "achat type : " << game->achat_type << endl;
     break;
 

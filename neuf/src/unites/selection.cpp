@@ -72,3 +72,11 @@ bool verificationZoneTir(Joueur joueur, int x, int y, int id, Game* game){
   }
   return true;
 }
+
+bool verificationPrix(Joueur joueur, Unite unite){
+  if(joueur.pieces - unite.prix >= 0){
+    return true;
+  }
+  cout << "Pas assez de pieces pour l'acheter" << endl;
+  return false;
+}

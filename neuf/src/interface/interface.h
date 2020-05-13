@@ -35,7 +35,7 @@ enum EnumTexturesCarte{
     JOUEUR2
   };
 
-//Pas ouf...
+
 enum EnumBoutons{
     RIEN,
     ACHAT,

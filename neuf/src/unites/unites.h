@@ -63,6 +63,7 @@ bool verificationCaseLibre(Game* game, int x,int y);
 bool verificationDistance(Joueur joueur, int x, int y, int id, Game* game);
 bool verifUniteEnnemie(int tour, Game* game, int x,int y);
 bool verificationZoneTir(Joueur joueur, int x, int y, int id, Game* game);
+bool verificationPrix(Joueur joueur, Unite unite);
 
 /* unites.cpp */
 bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite);
