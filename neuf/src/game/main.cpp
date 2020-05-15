@@ -6,16 +6,35 @@
 
 
 int main(){
-  SDL_Surface *texte = NULL;
+  TTF_Init();
+
+  // revoir peut etre comment mieux optimiser
+  Uint32 rmask, gmask, bmask, amask; // Déclaration des masks
+
+  #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+      rmask = 0xff000000;
+      gmask = 0x00ff0000;
+      bmask = 0x0000ff00;
+      amask = 0x000000ff;
+  #else
+      rmask = 0x000000ff;
+      gmask = 0x0000ff00;
+      bmask = 0x00ff0000;
+      amask = 0xff000000;
+  #endif
+  SDL_Surface *texte = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,
+                                         0,32,rmask,gmask,bmask,amask);;
+
   TTF_Font *police = NULL;
 
   Game game;
   initialisationGame(&game);
-  TTF_Init();
-  initialisationTextes(game.textureTextes);
+
+  //initialisationTextes(game.textureTextes);
 
   GLuint descriptionNain;
-  creationTexte(&descriptionNain, "src/fonts/SummitAttack.ttf", 100, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
+  //creationTexte(texte, police, &descriptionNain, "src/fonts/SummitAttack.ttf", 10, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
+  creationTexte(texte, police, &descriptionNain, "src/fonts/SummitAttack.ttf", 200, "BONJOUR", SDL_Color{255,255,255});
 
 
 
@@ -98,10 +117,10 @@ int main(){
         case PLACEMENT_UNITES:
         bouton(game.boutonAchat);
         glColor3f(1,1,1);
-        affichageTextureTextes(game.textureTextes[TEXTE_BOUTON_ACHAT], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
-        if(game.textureTextes[TEXTE_PV]!=NULL){
-          affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
-        }
+        // affichageTextureTextes(game.textureTextes[TEXTE_BOUTON_ACHAT], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+        // if(game.textureTextes[TEXTE_PV]!=NULL){
+        //   affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+        // }
           switch (game.tour) {
             case TOUR_JOUEUR1:
               affichageTexture(game.textureUnites[HOBBIT],game.boutonHobbit.longueur,game.boutonHobbit.hauteur,game.boutonHobbit.x,game.boutonHobbit.y);
@@ -124,8 +143,8 @@ int main(){
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
-          affichageTexture(game.textureTextes[TEXTE_BOUTON_ATTAQUE], game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
-          affichageTexture(game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
+          // affichageTexture(game.textureTextes[TEXTE_BOUTON_ATTAQUE], game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
+          // affichageTexture(game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
 
           if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
             zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
@@ -167,8 +186,8 @@ int main(){
         }
       }
 
-
-      affichageTexture(descriptionNain, 1,0.1,1,0);
+      glColor3f(1,1,1);
+      affichageTextureTextes(texte, descriptionNain, 1.5, 0.02, 0,0);
 
       /* Boucle traitant les evenements */
       SDL_Event e;
@@ -197,7 +216,7 @@ int main(){
               string b = to_string(a);
 
               char* pv = (char*)b.c_str();
-              creationTexte(&game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 100, pv, SDL_Color{255,0,0});
+              //creationTexte(&game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 100, pv, SDL_Color{255,0,0});
 
               break;
             // case SDL_MOUSEMOTION:

@@ -15,20 +15,20 @@ enum Enum_Textes{
   TEXTE_PV
   };
 
-typedef struct Texte {
-    TTF_Font *font; // Police de caractère
-    SDL_Surface *text; // Contenu du texte
-    SDL_Color color; // Couleur du texte
-    GLuint texture;
-} Texte;
+// typedef struct Texte {
+//     TTF_Font *font; // Police de caractère
+//     SDL_Surface *text; // Contenu du texte
+//     SDL_Color color; // Couleur du texte
+//     GLuint texture;
+// } Texte;
 
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 /*text.cpp*/
-void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur);
+void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur);
 void initialisationTextes(GLuint textes[100]);
 
-void affichageTextureTextes(GLuint texture, float longueur, float largeur, float x, float y);
+void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float longueur, float largeur, float x, float y);
 
 
 #endif

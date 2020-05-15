@@ -54,8 +54,8 @@ typedef struct Game {
   SDL_Surface* surfaceUnites[10];
   GLuint textureUnites[10];
 
-  //Texte textes;
-  GLuint textes[10];
+  //textes
+  GLuint textureTextes[100];
   SDL_Surface* surfaceTextes[100];
   TTF_Font* policeTextes[100];
 
@@ -70,8 +70,7 @@ typedef struct Game {
   int map[10][10];
   int zonePlacement[10][10];
 
-  //textes
-  GLuint textureTextes[100];
+
 
   //A enlever ??
   int x , y;
