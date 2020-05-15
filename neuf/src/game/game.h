@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+
 using namespace std;
 
 // Délacrations des variables
@@ -25,7 +27,8 @@ enum EnumEtapesJeu{
   TOUR_JOUEUR1,
   TOUR_JOUEUR2,
   SELECTION_UNITE,
-  ACTIONS
+  ACTIONS,
+  FIN_JEU
   };
 
 typedef struct Game {
@@ -50,6 +53,8 @@ typedef struct Game {
 
   //Texte textes;
   GLuint textes[10];
+  SDL_Surface* surfaceTextes[100];
+  TTF_Font* policeTextes[100];
 
   int longueurCarte, hauteurCarte;
   int window_width, window_height;

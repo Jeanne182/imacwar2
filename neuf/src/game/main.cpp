@@ -2,6 +2,8 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
+#include <cstring>
+
 
 int main(){
   SDL_Surface *texte = NULL;
@@ -91,6 +93,10 @@ int main(){
         case PLACEMENT_UNITES:
         bouton(game.boutonAchat);
         glColor3f(1,1,1);
+        affichageTextureTextes(game.textureTextes[TEXTE_BOUTON_ACHAT], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+        if(game.textureTextes[TEXTE_PV]!=NULL){
+          affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+        }
           switch (game.tour) {
             case TOUR_JOUEUR1:
               affichageTexture(game.textureUnites[HOBBIT],game.boutonHobbit.longueur,game.boutonHobbit.hauteur,game.boutonHobbit.x,game.boutonHobbit.y);
@@ -130,6 +136,19 @@ int main(){
           }
 
           break;
+
+          case FIN_JEU:
+
+            if(game.joueur1.nbUnites == 0 && game.joueur2.nbUnites != 0){
+              cout << "Gagnant : Joueur 2" << endl;
+            }
+            else if(game.joueur1.nbUnites != 0 && game.joueur2.nbUnites == 0){
+              cout << "Gagnant : Joueur 1" << endl;
+            }
+            else if(game.joueur1.nbUnites == 0 && game.joueur2.nbUnites == 0){
+              cout << "Les deux joueurs ont perdus" << endl;
+            }
+          break;
       }
 
       if(game.xSurvol!=-1 && game.ySurvol!=-1){
@@ -167,14 +186,21 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
+
               gererClic(&game,e);
+              int a = 3;
+              string b = to_string(a);
+
+              char* pv = (char*)b.c_str();
+              creationTexte(&game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 100, pv, SDL_Color{255,0,0});
+
               break;
             // case SDL_MOUSEMOTION:
             //   cout<<"Coucou"<<endl;
             //   break;
 
-            default:
-                  break;
+            // default:
+            //       break;
           }
       }
 
