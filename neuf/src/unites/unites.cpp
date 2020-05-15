@@ -69,16 +69,26 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
       case CHOIX_EMPLACEMENT:
         if (game->tour == TOUR_JOUEUR1){
           if(placementUnite(&game->joueur1, e, game, game->achat_type)==true){
+            if(game->joueur2.pieces==0){
+              game->tour = TOUR_JOUEUR1;
+            }
+            else{
+              game->tour = TOUR_JOUEUR2;
+            }
             game->achat_type = SANS_TYPE;
-            game->tour = TOUR_JOUEUR2;
             game->etapeAchatUnite = ACHAT_UNITE;
 
           }
         }
         else {
           if(placementUnite(&game->joueur2, e, game, game->achat_type)==true){
+            if(game->joueur1.pieces==0){
+              game->tour = TOUR_JOUEUR2;
+            }
+            else{
+              game->tour = TOUR_JOUEUR1;
+            }
             game->achat_type = SANS_TYPE;
-            game->tour = TOUR_JOUEUR1;
             game->etapeAchatUnite = ACHAT_UNITE;
 
           }
