@@ -18,7 +18,7 @@ A FAIRE :
 
 - Trouver les fonts
 - Delete textes
-
+- Pouvoir cliquer sur une autre unite meme si on a deja cliqué sur attaque ou déplacement (c'est possible pour l'instant seulement si on a pas encore choisi d'action) 
 - Fonction attaque :
 -> Optimiser peut etre ?
 -> Gérer attaque à distance : celui qui attaque à distance ne reçoit pas de blessures en retour (mais hyper puissant donc à voir si on garde)

@@ -53,6 +53,7 @@ bool verificationCaseLibre(Game* game, int x,int y){
 bool verifUniteEnnemie(int tour, Game* game, int x,int y){
   if(game->map[y-1][x-1]!=tour){
     return false;
+    cout << "probl vient unite ennemie" << endl;
   }
   return true;
 }
