@@ -15,28 +15,28 @@ using namespace std;
 bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
 
     int id = joueur->nbUnites;
-    if(joueur->nbUnites <= 3){
-      Unite unite;
-      unite = game->unites[typeUnite];
 
-      //MODIFIé AVEC STEEVE
-      int x=-1;
-      int y=-1;
+    Unite unite;
+    unite = game->unites[typeUnite];
 
-      selectionCoordonnee(&x,&y, e, game->surface);
-      cout << "x : " << x << " y : " << y << endl;
+    //MODIFIé AVEC STEEVE
+    int x=-1;
+    int y=-1;
 
-      if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
+    selectionCoordonnee(&x,&y, e, game->surface);
+    cout << "x : " << x << " y : " << y << endl;
 
-        insertionCoordonnees(game, &unite, x, y, joueur->tour);
-        joueur->unites[id] = unite;
-        joueur->nbUnites ++;
-        joueur->nbUnitesInitial++;
-        joueur->pieces -= unite.prix;
-        cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
-        return true;
-      }
+    if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
+
+      insertionCoordonnees(game, &unite, x, y, joueur->tour);
+      joueur->unites[id] = unite;
+      joueur->nbUnites ++;
+      joueur->nbUnitesInitial++;
+      joueur->pieces -= unite.prix;
+      cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
+      return true;
     }
+
     cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
     return false;
 }
@@ -121,19 +121,29 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
           }
 
           else{ /////JOUEUR = ORDI
-            int rand_unite = rand()%4 + 5;
-            while (verificationPrix(game->joueur2, game->unites[game->achat_type])==false){
-              rand_unite = rand()%4 + 5;
+            int rand_unite = rand()%5 + 5;
+            cout<<"rand_unite : "<< rand_unite<<endl;
+            while (verificationPrix(game->joueur2, game->unites[rand_unite])==false){
+              rand_unite = rand()%5 + 5;
+              cout<<"rand_unite : "<< rand_unite<<endl;
             }
-            int rand_x = rand()%9 + 1; //?
-            int rand_y = rand()%9 + 1; //?
+            int rand_x = rand()%10 + 1; //?
+            int rand_y = rand()%10 + 1; //?
+
             while(placementUniteOrdi(&game->joueur2, rand_x, rand_y, game, rand_unite)==false){
-              rand_x = rand()%9 + 1; //?
-              rand_y = rand()%9 + 1;
+              rand_x = rand()%10 + 1; //?
+              rand_y = rand()%10 + 1;
+              cout<<"x,y: "<< rand_x<< ", "<<rand_y<<" puis ";
+            }
+            cout<<endl;
+            if(game->joueur1.pieces==0){
+              game->tour = TOUR_JOUEUR2;
+            }
+            else{
+              game->tour = TOUR_JOUEUR1;
             }
             game->achat_type = SANS_TYPE;
             game->etapeAchatUnite = ACHAT_UNITE;
-            game->tour = TOUR_JOUEUR1;
 
           }
         }
