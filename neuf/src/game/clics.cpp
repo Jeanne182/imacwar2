@@ -123,10 +123,11 @@ void gererClic(Game* game, SDL_Event e){
             break;
           }
           break;
+
       }
-
-
       break;
+
+      
 
     default:
       break;

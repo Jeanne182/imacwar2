@@ -130,6 +130,19 @@ int main(){
           }
 
           break;
+
+          case FIN_JEU:
+
+            if(game.joueur1.nbUnites == 0 && game.joueur2.nbUnites != 0){
+              cout << "Gagnant : Joueur 2" << endl;
+            }
+            else if(game.joueur1.nbUnites != 0 && game.joueur2.nbUnites == 0){
+              cout << "Gagnant : Joueur 1" << endl;
+            }
+            else if(game.joueur1.nbUnites == 0 && game.joueur2.nbUnites == 0){
+              cout << "Les deux joueurs ont perdus" << endl;
+            }
+          break;
       }
 
       if(game.xSurvol!=-1 && game.ySurvol!=-1){

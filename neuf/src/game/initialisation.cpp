@@ -79,6 +79,7 @@ void initialisationGame(Game *game){
   //Initialisation des unites
   // Gentils :
   game->unites[NAIN].force = 0.6;
+  game->unites[NAIN].vie = 100;
   game->unites[NAIN].defense = 0.3;
   game->unites[NAIN].zoneDeTir = 1;
   game->unites[NAIN].distance = 2;
@@ -86,6 +87,7 @@ void initialisationGame(Game *game){
   game->unites[NAIN].type = NAIN;
 
   game->unites[HOBBIT].force = 0.4;
+  game->unites[HOBBIT].vie = 100;
   game->unites[HOBBIT].defense = 0.4;
   game->unites[HOBBIT].zoneDeTir = 2;
   game->unites[HOBBIT].distance = 2;
@@ -93,6 +95,7 @@ void initialisationGame(Game *game){
   game->unites[HOBBIT].type = HOBBIT;
 
   game->unites[ELFE].force = 0.3;
+  game->unites[ELFE].vie = 100;
   game->unites[ELFE].defense = 0.6;
   game->unites[ELFE].zoneDeTir = 4;
   game->unites[ELFE].distance = 4;
@@ -100,6 +103,7 @@ void initialisationGame(Game *game){
   game->unites[ELFE].type = ELFE;
 
   game->unites[HUMAN].force = 0.5;
+  game->unites[HUMAN].vie = 100;
   game->unites[HUMAN].defense = 0.5;
   game->unites[HUMAN].zoneDeTir = 1;
   game->unites[HUMAN].distance = 2;
@@ -107,6 +111,7 @@ void initialisationGame(Game *game){
   game->unites[HUMAN].type = HUMAN;
 
   game->unites[GANDALF].force = 0.6;
+  game->unites[GANDALF].vie = 100;
   game->unites[GANDALF].defense = 0.6;
   game->unites[GANDALF].zoneDeTir = 2;
   game->unites[GANDALF].distance = 2;
@@ -115,13 +120,15 @@ void initialisationGame(Game *game){
 
   //Mechants :
   game->unites[ORQUE].force = 0.6;
+  game->unites[ORQUE].vie = 100;
   game->unites[ORQUE].defense = 0.3;
   game->unites[ORQUE].zoneDeTir = 1;
   game->unites[ORQUE].distance = 2;
-  game->unites[ORQUE].prix = 20;
+  game->unites[ORQUE].prix =20;
   game->unites[ORQUE].type = ORQUE;
 
   game->unites[SMEAGOL].force = 0.4;
+  game->unites[SMEAGOL].vie = 100;
   game->unites[SMEAGOL].defense = 0.4;
   game->unites[SMEAGOL].zoneDeTir = 2;
   game->unites[SMEAGOL].distance = 2;
@@ -129,6 +136,7 @@ void initialisationGame(Game *game){
   game->unites[SMEAGOL].type = SMEAGOL;
 
   game->unites[URUK].force = 0.3;
+  game->unites[URUK].vie = 100;
   game->unites[URUK].defense = 0.6;
   game->unites[URUK].zoneDeTir = 4;
   game->unites[URUK].distance = 4;
@@ -136,6 +144,7 @@ void initialisationGame(Game *game){
   game->unites[URUK].type = URUK;
 
   game->unites[NAZGUL].force = 0.5;
+  game->unites[NAZGUL].vie = 100;
   game->unites[NAZGUL].defense = 0.5;
   game->unites[NAZGUL].zoneDeTir = 1;
   game->unites[NAZGUL].distance = 2;
@@ -143,6 +152,7 @@ void initialisationGame(Game *game){
   game->unites[NAZGUL].type = NAZGUL;
 
   game->unites[SAROUMANE].force = 0.6;
+  game->unites[SAROUMANE].vie = 100;
   game->unites[SAROUMANE].defense = 0.6;
   game->unites[SAROUMANE].zoneDeTir = 2;
   game->unites[SAROUMANE].distance = 2;
@@ -178,16 +188,7 @@ void initialisationGame(Game *game){
   game->boutonAchat.g = 1;
   game->boutonAchat.b = 1;
   game->boutonAchat.valeur = ACHAT;
-/*
-  game->boutonStopAchat.x = 1.3;
-  game->boutonStopAchat.y = 0.6;
-  game->boutonStopAchat.longueur = 0.15;
-  game->boutonStopAchat.hauteur = 0.05;
-  game->boutonStopAchat.r = 0.5;
-  game->boutonStopAchat.g = 1.5;
-  game->boutonStopAchat.b = 1;
-  game->boutonStopAchat.valeur = STOP_ACHAT;
-*/
+
   game->boutonHumain.x = 1.0;
   game->boutonHumain.y = 0.1;
   game->boutonHumain.longueur = 0.1;

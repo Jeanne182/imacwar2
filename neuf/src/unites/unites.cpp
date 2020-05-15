@@ -149,14 +149,21 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
     }
 
     // Changement de tour
-    if(game->tour == TOUR_JOUEUR2){
-      game->tour = TOUR_JOUEUR1;
+
+    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
+      game->etapeJeu = FIN_JEU;
     }
     else{
-      game->tour = TOUR_JOUEUR2;
+      if(game->tour == TOUR_JOUEUR2){
+        game->tour = TOUR_JOUEUR1;
+      }
+      else{
+        game->tour = TOUR_JOUEUR2;
+      }
+      game->choix = RIEN;
+      game->etapeJeu = SELECTION_UNITE;
     }
-    game->choix = RIEN;
-    game->etapeJeu = SELECTION_UNITE;
+
   }
   else{
     cout << "Vous attaquez une de vos unites OU La distance de tir n'est pas respectée" << endl;
