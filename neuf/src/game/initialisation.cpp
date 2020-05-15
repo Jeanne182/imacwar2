@@ -91,7 +91,7 @@ void initialisationGame(Game *game){
   game->unites[HOBBIT].defense = 0.4;
   game->unites[HOBBIT].zoneDeTir = 2;
   game->unites[HOBBIT].distance = 2;
-  game->unites[HOBBIT].prix = 20;
+  game->unites[HOBBIT].prix = 10;
   game->unites[HOBBIT].type = HOBBIT;
 
   game->unites[ELFE].force = 0.3;
@@ -132,7 +132,7 @@ void initialisationGame(Game *game){
   game->unites[SMEAGOL].defense = 0.4;
   game->unites[SMEAGOL].zoneDeTir = 2;
   game->unites[SMEAGOL].distance = 2;
-  game->unites[SMEAGOL].prix = 20;
+  game->unites[SMEAGOL].prix = 10;
   game->unites[SMEAGOL].type = SMEAGOL;
 
   game->unites[URUK].force = 0.3;

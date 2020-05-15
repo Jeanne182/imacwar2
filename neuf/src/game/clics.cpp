@@ -13,8 +13,9 @@ void gererClic(Game* game, SDL_Event e){
 
       cout<<game->etapeJeu<<endl;
 
-      if(game->joueur1.pieces<=20 && game->joueur2.pieces<=20){ //A CHANGER
+      if(game->joueur1.pieces==0 && game->joueur2.pieces==0){
         game->etapeJeu = SELECTION_UNITE;
+        game->tour = TOUR_JOUEUR1;
       }
       break;
 
@@ -127,7 +128,7 @@ void gererClic(Game* game, SDL_Event e){
       }
       break;
 
-      
+
 
     default:
       break;
