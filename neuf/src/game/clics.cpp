@@ -59,6 +59,9 @@ void gererClic(Game* game, SDL_Event e){
           switch (game->choix){
 
             case RIEN:
+              if(game->id1 != selectionIdUnite(game->x, game->y, game->joueur1)){
+                game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
+              }
               if(selectionBouton(game, e) == DEPLACEMENT){
                 game->choix = DEPLACEMENT;
                 cout<<"CHOIX : déplacement"<<endl;
@@ -95,6 +98,9 @@ void gererClic(Game* game, SDL_Event e){
           switch (game->choix){
 
             case RIEN:
+              if(game->id2 != selectionIdUnite(game->x, game->y, game->joueur2)){
+                game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
+              }
               if(selectionBouton(game, e) == DEPLACEMENT){
                 game->choix = DEPLACEMENT;
                 cout<<"CHOIX : déplacement"<<endl;
