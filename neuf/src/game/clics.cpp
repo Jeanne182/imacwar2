@@ -5,6 +5,16 @@ using namespace std;
 
 void gererClic(Game* game, SDL_Event e){
   switch(game->etapeJeu){
+    case MENU:
+      if(selectionBoutonMenu(game, e) == MULTIJOUEURS){
+        game->etapeJeu = PLACEMENT_UNITES;
+        game->modeJeu = MULTIJOUEURS;
+      }
+      if(selectionBoutonMenu(game, e) == ORDI_MODE){
+        game->etapeJeu = PLACEMENT_UNITES;
+        game->modeJeu = ORDI_MODE;
+      }
+      break;
 
     //Première partie du jeu : placement des unités :
     case PLACEMENT_UNITES:

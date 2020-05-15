@@ -41,7 +41,9 @@ enum EnumBoutons{
     ACHAT,
     DEPLACEMENT,
     ATTAQUE,
-    ABANDON
+    ABANDON,
+    MULTIJOUEURS,
+    ORDI_MODE
   };
 
 enum EnumUnites{
@@ -80,6 +82,7 @@ void affichageUnite(Joueur joueur, Game* game);
 void bouton(Bouton bouton);
 void initBoutonUnites(Bouton bouton);
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur);
+int selectionBoutonMenu(Game* game, SDL_Event e); 
 int selectionBouton(Game* game, SDL_Event e);
 int selectionBoutonUnite(Game* game, SDL_Event e);
 

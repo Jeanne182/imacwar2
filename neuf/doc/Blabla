@@ -12,7 +12,6 @@ A FAIRE :
 - Afficher les etats des unites
 - Clean variables de game
 
-- Boucle fin de jeu
 
 - Surbrillance zone de déplacement et d'attaque
 
@@ -28,7 +27,10 @@ A FAIRE :
 -> Affichage des sprites / matrice ?
 
 - verfiier où on utilise unite.id
+- Quand on clique sur déplacer ou attaquer, désactiver la surbrillance de l'autre joueur
+- Gérer toutes les unités en un tour
 
+- Modifier les fonctions qui prennent e en paramètre (Assez urgent)
 
 
 FAIT :
@@ -38,3 +40,4 @@ FAIT :
 
 - Gérer le fait que si on a cliqué sur un bouton mais qu'on change d'avis, ca change l'action
 - Nouvelles unites initialisées
+- Boucle fin de jeu

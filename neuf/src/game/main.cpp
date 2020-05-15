@@ -32,40 +32,41 @@ int main(){
 
       glColor3f(1,1,1);
 
-
-      for(int i = 0; i<10; i++){
-        for(int j = 0; j<10; j++){
-          switch(game.map[j][i]){
-            case PLAINE:
-            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            break;
-
-            case EAU:
-            affichageTexture(game.textureCases[EAU],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            break;
-
-            case ARBRE:
-            affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-            break;
-
-            case JOUEUR1:{
+      if(game.etapeJeu != MENU){
+        for(int i = 0; i<10; i++){
+          for(int j = 0; j<10; j++){
+            switch(game.map[j][i]){
+              case PLAINE:
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-              int id = selectionIdUnite(i+1, j+1, game.joueur1);
-              affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
-            }
 
+              case EAU:
+              affichageTexture(game.textureCases[EAU],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
 
-            case JOUEUR2:{
+              case ARBRE:
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-              int id = selectionIdUnite(i+1, j+1, game.joueur2);
-              affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
+
+              case JOUEUR1:{
+                affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                int id = selectionIdUnite(i+1, j+1, game.joueur1);
+                affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                break;
+              }
+
+
+              case JOUEUR2:{
+                affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                int id = selectionIdUnite(i+1, j+1, game.joueur2);
+                affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                break;
+              }
+
             }
 
           }
-
         }
       }
       // for(int x=0; x<=10; x++){
@@ -90,6 +91,10 @@ int main(){
       glColor3f(1,1,1);
 
       switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
+        case MENU:
+          bouton(game.bouton1Joueur);
+          bouton(game.bouton2Joueurs);
+          break;
         case PLACEMENT_UNITES:
         bouton(game.boutonAchat);
         glColor3f(1,1,1);
@@ -151,7 +156,7 @@ int main(){
           break;
       }
 
-      if(game.xSurvol!=-1 && game.ySurvol!=-1){
+      if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10){
         switch(game.map[game.ySurvol-1][game.xSurvol-1]){
           case JOUEUR1:
             zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
