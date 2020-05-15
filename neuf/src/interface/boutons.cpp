@@ -67,6 +67,15 @@ int selectionBouton(Game* game, SDL_Event e){
   return valeurBouton;
 }
 
+int selectionBoutonMenu(Game* game, SDL_Event e){
+  int valeurBouton=RIEN;
+  valeurBouton = testClicBouton(game, game->bouton1Joueur, e, RIEN);
+  if (valeurBouton == RIEN){
+    valeurBouton = testClicBouton(game, game->bouton2Joueurs, e, RIEN);
+  }
+  return valeurBouton;
+}
+
 int selectionBoutonUnite(Game* game, SDL_Event e){
   int valeurBouton = SANS_TYPE;
   if(game->tour == TOUR_JOUEUR1){

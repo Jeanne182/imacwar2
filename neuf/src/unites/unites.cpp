@@ -41,6 +41,28 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
     return false;
 }
 
+bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite){
+
+    int id = joueur->nbUnites;
+    if(joueur->nbUnites <= 3){
+      Unite unite;
+      unite = game->unites[typeUnite];
+
+      if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
+
+        insertionCoordonnees(game, &unite, x, y, joueur->tour);
+        joueur->unites[id] = unite;
+        joueur->nbUnites ++;
+        joueur->nbUnitesInitial++;
+        joueur->pieces -= unite.prix;
+        cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
+        return true;
+      }
+    }
+    cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
+    return false;
+}
+
 void placementUnitesJoueurs(Game* game, SDL_Event e){
   switch (game->etapeAchatUnite) {
     case ACHAT_UNITE:
@@ -54,13 +76,16 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
         }
       }
       else {
-        if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(game->joueur2, game->unites[game->achat_type])==true){
-          cout<<"ETAPE : achat"<<endl;
-          game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+        if(game->modeJeu ==MULTIJOUEURS){
+          if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(game->joueur2, game->unites[game->achat_type])==true){
+            cout<<"ETAPE : achat"<<endl;
+            game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+          }
+          else {
+            game->achat_type = selectionBoutonUnite(game, e);
+          }
         }
-        else {
-          game->achat_type = selectionBoutonUnite(game, e);
-        }
+        else {game->etapeAchatUnite = CHOIX_EMPLACEMENT;}
       }
 
       cout << "achat type : " << game->achat_type << endl;
@@ -76,7 +101,26 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
           }
         }
         else {
-          if(placementUnite(&game->joueur2, e, game, game->achat_type)==true){
+          if(game->modeJeu == MULTIJOUEURS){
+            if(placementUnite(&game->joueur2, e, game, game->achat_type)==true){
+              game->achat_type = SANS_TYPE;
+              game->tour = TOUR_JOUEUR1;
+              game->etapeAchatUnite = ACHAT_UNITE;
+
+            }
+          }
+
+          else{ /////JOUEUR = ORDI
+            int rand_unite = rand()%4 + 5;
+            while (verificationPrix(game->joueur2, game->unites[game->achat_type])==false){
+              rand_unite = rand()%4 + 5;
+            }
+            int rand_x = rand()%9 + 1; //?
+            int rand_y = rand()%9 + 1; //?
+            while(placementUniteOrdi(&game->joueur2, rand_x, rand_y, game, rand_unite)==false){
+              rand_x = rand()%9 + 1; //?
+              rand_y = rand()%9 + 1;
+            }
             game->achat_type = SANS_TYPE;
             game->tour = TOUR_JOUEUR1;
             game->etapeAchatUnite = ACHAT_UNITE;

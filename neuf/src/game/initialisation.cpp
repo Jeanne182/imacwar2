@@ -150,6 +150,26 @@ void initialisationGame(Game *game){
   game->unites[SAROUMANE].type = SAROUMANE;
 
   //Initialisation des boutons
+
+  game->bouton1Joueur.x = 0.7; //Rose
+  game->bouton1Joueur.y = 0.5;
+  game->bouton1Joueur.longueur = 0.15;
+  game->bouton1Joueur.hauteur = 0.05;
+  game->bouton1Joueur.r = 1;
+  game->bouton1Joueur.g = 0;
+  game->bouton1Joueur.b = 0;
+  game->bouton1Joueur.valeur = ORDI_MODE;
+
+  game->bouton2Joueurs.x = 0.7; //Rose
+  game->bouton2Joueurs.y = 0.8;
+  game->bouton2Joueurs.longueur = 0.15;
+  game->bouton2Joueurs.hauteur = 0.05;
+  game->bouton2Joueurs.r = 1;
+  game->bouton2Joueurs.g = 0;
+  game->bouton2Joueurs.b = 1;
+  game->bouton2Joueurs.valeur = MULTIJOUEURS;
+
+
   game->boutonDeplacement.x = 1.1; //Rose
   game->boutonDeplacement.y = 0.8;
   game->boutonDeplacement.longueur = 0.15;
@@ -249,7 +269,8 @@ void initialisationGame(Game *game){
   game->boutonSaruman.valeur = SAROUMANE;
 
 
-  game->etapeJeu = PLACEMENT_UNITES; //0 pour préparation, 1 pour attaque/déplacement
+  game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement
+  game->modeJeu = ORDI_MODE;
   game->tour = TOUR_JOUEUR1;
   game->choix = RIEN;
   game->etapeAchatUnite = ACHAT_UNITE;
