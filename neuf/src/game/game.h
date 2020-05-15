@@ -25,7 +25,8 @@ enum EnumEtapesJeu{
   TOUR_JOUEUR1,
   TOUR_JOUEUR2,
   SELECTION_UNITE,
-  ACTIONS
+  ACTIONS,
+  FIN_JEU
   };
 
 typedef struct Game {
