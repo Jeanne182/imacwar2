@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+
 using namespace std;
 
 // Délacrations des variables
@@ -51,6 +53,8 @@ typedef struct Game {
 
   //Texte textes;
   GLuint textes[10];
+  SDL_Surface* surfaceTextes[100];
+  TTF_Font* policeTextes[100];
 
   int longueurCarte, hauteurCarte;
   int window_width, window_height;

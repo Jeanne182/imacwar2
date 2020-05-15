@@ -264,7 +264,8 @@ void initialisationGame(Game *game){
   //Initialisation textes
   //creationTexte(&game->textureTextes[1], "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
   //initialisationTextes(game->textes);
-
+  //game->textureTextes[TEXTE_PV]=NULL;
+  game->surfaceTextes[TEXTE_PV]=NULL;
   initialisationSDL(game);
 
   reshape(&game->surface, game->window_width, game->window_height);

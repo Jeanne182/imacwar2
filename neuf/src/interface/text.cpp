@@ -14,6 +14,32 @@ void creationTexte(GLuint *textureTexte, char* cheminFont, int taille, char* con
 void initialisationTextes(GLuint textes[100]){ //changer la taille du tableau
   creationTexte(&textes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 65, "Déplacement", SDL_Color{255, 255, 255});
   creationTexte(&textes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 100, "Attaque", SDL_Color{255,255,255});
+  creationTexte(&textes[TEXTE_BOUTON_ACHAT], "src/fonts/SummitAttack.ttf", 100, "Achat", SDL_Color{255,255,255});
+}
+
+void affichageTextureTextes(GLuint texture, float longueur, float largeur, float x, float y){
+  glPushMatrix();
+
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        glBegin(GL_QUADS);
+
+        glTexCoord2f(1, 1);
+        glVertex2f(longueur + x, largeur + y);
+
+        glTexCoord2f(0, 1);
+        glVertex2f(x,largeur + y);
+
+        glTexCoord2f(0, 0);
+        glVertex2f(x, y);
+
+        glTexCoord2f(1, 0);
+        glVertex2f(longueur + x, y);
+
+        glEnd();
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+    glPopMatrix();
 }
 
 // void affichageTextesStatiques(){
