@@ -58,6 +58,8 @@ typedef struct Game {
   GLuint textureTextes[100];
   SDL_Surface* surfaceTextes[100];
   TTF_Font* policeTextes[100];
+  // SDL_Surface *texte;
+  // TTF_Font *police;
 
   int longueurCarte, hauteurCarte;
   int window_width, window_height;

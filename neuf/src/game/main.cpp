@@ -7,34 +7,17 @@
 
 int main(){
   TTF_Init();
-
-  // revoir peut etre comment mieux optimiser
-  Uint32 rmask, gmask, bmask, amask; // Déclaration des masks
-
-  #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-      rmask = 0xff000000;
-      gmask = 0x00ff0000;
-      bmask = 0x0000ff00;
-      amask = 0x000000ff;
-  #else
-      rmask = 0x000000ff;
-      gmask = 0x0000ff00;
-      bmask = 0x00ff0000;
-      amask = 0xff000000;
-  #endif
-  SDL_Surface *texte = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,
-                                         0,32,rmask,gmask,bmask,amask);;
-
-  TTF_Font *police = NULL;
-
   Game game;
   initialisationGame(&game);
 
-  //initialisationTextes(game.textureTextes);
+  //initialisationTextes(game.surfaceTextes[100], game.policeTextes[100], game.textureTextes);
 
-  GLuint descriptionNain;
+
   //creationTexte(texte, police, &descriptionNain, "src/fonts/SummitAttack.ttf", 10, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
-  creationTexte(texte, police, &descriptionNain, "src/fonts/SummitAttack.ttf", 200, "BONJOUR", SDL_Color{255,255,255});
+  creationTexte(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.policeTextes[TEXTE_BOUTON_DEPLACEMENT], &game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 30, "Déplacement", SDL_Color{255,255,255});
+  creationTexte(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.policeTextes[TEXTE_BOUTON_ATTAQUE], &game.textureTextes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 30, "Attaque", SDL_Color{255,255,255});
+  creationTexte(game.surfaceTextes[TEXTE_BOUTON1J], game.policeTextes[TEXTE_BOUTON1J], &game.textureTextes[TEXTE_BOUTON1J], "src/fonts/SummitAttack.ttf", 30, "1 joueur", SDL_Color{255,255,255});
+  creationTexte(game.surfaceTextes[TEXTE_BOUTON2J], game.policeTextes[TEXTE_BOUTON2J], &game.textureTextes[TEXTE_BOUTON2J], "src/fonts/SummitAttack.ttf", 30, "2 joueurs", SDL_Color{255,255,255});
 
 
 
@@ -113,11 +96,14 @@ int main(){
         case MENU:
           bouton(game.bouton1Joueur);
           bouton(game.bouton2Joueurs);
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON1J], game.textureTextes[TEXTE_BOUTON1J], (float)game.bouton1Joueur.x+0.02, (float)game.bouton1Joueur.y);
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON2J], game.textureTextes[TEXTE_BOUTON2J], (float)game.bouton2Joueurs.x+0.02, (float)game.bouton2Joueurs.y);
+
           break;
         case PLACEMENT_UNITES:
         bouton(game.boutonAchat);
         glColor3f(1,1,1);
-        // affichageTextureTextes(game.textureTextes[TEXTE_BOUTON_ACHAT], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+        //affichageTexture(descriptionNain, game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
         // if(game.textureTextes[TEXTE_PV]!=NULL){
         //   affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
         // }
@@ -143,8 +129,8 @@ int main(){
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
-          // affichageTexture(game.textureTextes[TEXTE_BOUTON_ATTAQUE], game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
-          // affichageTexture(game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game.boutonDeplacement.x+0.02, (float)game.boutonDeplacement.y); //, 1.5, 0.02, 0,0
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game.boutonAttaque.x+0.02, (float)game.boutonAttaque.y); //, 1.5, 0.02, 0,0
 
           if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
             zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
@@ -187,7 +173,10 @@ int main(){
       }
 
       glColor3f(1,1,1);
-      affichageTextureTextes(texte, descriptionNain, 1.5, 0.02, 0,0);
+
+      //affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], 7, 7); //, 1.5, 0.02, 0,0
+
+      //affichageTexture(descriptionNain, 1,0.1,1,0);
 
       /* Boucle traitant les evenements */
       SDL_Event e;
@@ -241,10 +230,10 @@ int main(){
   }
   //finProgrammeSDL(&game.textureMap[PLAINE]);
   glDisable(GL_TEXTURE_2D);
-  TTF_CloseFont(police);
+  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON_DEPLACEMENT]);
   TTF_Quit();
 
-  SDL_FreeSurface(texte);
+  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT]);
   finProgrammeSDL(&game);
 
   return 0;

@@ -283,10 +283,25 @@ void initialisationGame(Game *game){
   game->xSurvol=-1;
   game->ySurvol=-1;
   //Initialisation textes
-  //creationTexte(&game->textureTextes[1], "src/fonts/SummitAttack.ttf", 100, "Déplacement", SDL_Color{255,255,255});
-  //initialisationTextes(game->textes);
-  //game->textureTextes[TEXTE_PV]=NULL;
-  //game->surfaceTextes[TEXTE_PV]=NULL;
+
+  // game->texte = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
+  // game->police = NULL;
+  game->surfaceTextes[TEXTE_BOUTON_DEPLACEMENT] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
+  game->policeTextes[TEXTE_BOUTON_DEPLACEMENT] = NULL;
+  game->textureTextes[TEXTE_BOUTON_DEPLACEMENT] = NULL;
+
+  game->surfaceTextes[TEXTE_BOUTON_ATTAQUE] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
+  game->policeTextes[TEXTE_BOUTON_ATTAQUE] = NULL;
+  game->textureTextes[TEXTE_BOUTON_ATTAQUE] = NULL;
+
+  game->surfaceTextes[TEXTE_BOUTON1J] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
+  game->policeTextes[TEXTE_BOUTON1J] = NULL;
+  game->textureTextes[TEXTE_BOUTON1J] = NULL;
+
+  game->surfaceTextes[TEXTE_BOUTON2J] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
+  game->policeTextes[TEXTE_BOUTON2J] = NULL;
+  game->textureTextes[TEXTE_BOUTON2J] = NULL;
+
   initialisationSDL(game);
 
   reshape(&game->surface, game->window_width, game->window_height);
