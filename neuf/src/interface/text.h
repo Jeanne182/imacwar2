@@ -12,7 +12,9 @@ enum Enum_Textes{
   TEXTE_BOUTON_DEPLACEMENT,
   TEXTE_BOUTON_ATTAQUE,
   TEXTE_BOUTON_ACHAT,
-  TEXTE_PV
+  TEXTE_PV,
+  TEXTE_BOUTON1J,
+  TEXTE_BOUTON2J
   };
 
 // typedef struct Texte {
@@ -26,9 +28,9 @@ enum Enum_Textes{
 
 /*text.cpp*/
 void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur);
-void initialisationTextes(GLuint textes[100]);
+void initialisationTextes(SDL_Surface* surfaceTextes, TTF_Font* police, GLuint textureTextes[100]);
 
-void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float longueur, float largeur, float x, float y);
+void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y); //, float longueur, float largeur, float x, float y
 
 
 #endif
