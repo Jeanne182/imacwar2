@@ -165,24 +165,24 @@ void initialisationGame(Game *game){
   game->bouton1Joueur.y = 0.5;
   game->bouton1Joueur.longueur = 0.15;
   game->bouton1Joueur.hauteur = 0.05;
-  game->bouton1Joueur.r = 1;
-  game->bouton1Joueur.g = 0;
-  game->bouton1Joueur.b = 0;
+  game->bouton1Joueur.r = 0.035;
+  game->bouton1Joueur.g = 0.32;
+  game->bouton1Joueur.b = 0.15;
   game->bouton1Joueur.valeur = ORDI_MODE;
 
   game->bouton2Joueurs.x = 0.7; //Rose
   game->bouton2Joueurs.y = 0.8;
   game->bouton2Joueurs.longueur = 0.15;
   game->bouton2Joueurs.hauteur = 0.05;
-  game->bouton2Joueurs.r = 1;
-  game->bouton2Joueurs.g = 0;
-  game->bouton2Joueurs.b = 1;
+  game->bouton2Joueurs.r = 0.035;
+  game->bouton2Joueurs.g = 0.32;
+  game->bouton2Joueurs.b = 0.15;
   game->bouton2Joueurs.valeur = MULTIJOUEURS;
 
 
   game->boutonDeplacement.x = 1.1; //Rose
   game->boutonDeplacement.y = 0.8;
-  game->boutonDeplacement.longueur = 0.15;
+  game->boutonDeplacement.longueur = 0.2;
   game->boutonDeplacement.hauteur = 0.05;
   game->boutonDeplacement.r = 1;
   game->boutonDeplacement.g = 0;
@@ -193,7 +193,7 @@ void initialisationGame(Game *game){
   //game->boutonAttaque.y = 0.8;
   game->boutonAttaque.x = 1.1;
   game->boutonAttaque.y = 0.5;
-  game->boutonAttaque.longueur = 0.15;
+  game->boutonAttaque.longueur = 0.2;
   game->boutonAttaque.hauteur = 0.05;
   game->boutonAttaque.r = 0; //bleu
   game->boutonAttaque.g = 0;
@@ -301,6 +301,10 @@ void initialisationGame(Game *game){
   game->surfaceTextes[TEXTE_BOUTON2J] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
   game->policeTextes[TEXTE_BOUTON2J] = NULL;
   game->textureTextes[TEXTE_BOUTON2J] = NULL;
+
+  game->surfaceTextes[TEXTE_PV] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
+  game->policeTextes[TEXTE_PV] = NULL;
+  game->textureTextes[TEXTE_PV] = NULL;
 
   initialisationSDL(game);
 
