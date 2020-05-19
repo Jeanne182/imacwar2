@@ -1,7 +1,9 @@
+
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "interface/text.h"
 #include <iostream>
+
 using namespace std;
 
 void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur) {
@@ -16,7 +18,7 @@ void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, c
     police = TTF_OpenFont(cheminFont,taille);
 
     SDL_Surface* sText =  TTF_RenderUTF8_Blended(police, contenu, couleur);
-
+    //
     if (sText == NULL){
       fprintf(stderr, "Echec de la création du texte");
       exit(EXIT_FAILURE);
@@ -39,18 +41,21 @@ void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, c
     creationTexture(textureTexte, sText);
 
     texte->w = sText->w; texte->h = sText->h;
-    cout<<texte->h<<endl;
-    cout<<texte->w<<endl;
 
 
-    SDL_FreeSurface( sText );
+
+    SDL_FreeSurface(sText);
 
 }
 
-void initialisationTextes(SDL_Surface* surfaceTextes, TTF_Font* police, GLuint textureTextes[100]){ //changer la taille du tableau
-  //creationTexte(surfaceTextes, police, &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 10, "Déplacement", SDL_Color{255, 255, 255});
+void initialisationTextes(SDL_Surface* surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]){ //changer la taille du tableau
+  // creationTexte(surfaceTextes, police, &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 10, "Déplacement", SDL_Color{255, 255, 255});
   // creationTexte(&textes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 10, "Attaque", SDL_Color{255,255,255});
   // creationTexte(&textes[TEXTE_BOUTON_ACHAT], "src/fonts/SummitAttack.ttf", 10, "Achat", SDL_Color{255,255,255});
+  creationTexte( surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], policeTextes[TEXTE_BOUTON_DEPLACEMENT], &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/anirm.ttf", 20, "Déplacement", SDL_Color{255,255,255});
+  creationTexte( surfaceTextes[TEXTE_BOUTON_ATTAQUE],  policeTextes[TEXTE_BOUTON_ATTAQUE], &textureTextes[TEXTE_BOUTON_ATTAQUE], "src/fonts/anirm.ttf", 20, "Attaque", SDL_Color{255,255,255});
+  creationTexte( surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TEXTE_BOUTON1J], &textureTextes[TEXTE_BOUTON1J], "src/fonts/anirm.ttf", 20, "1 joueur", SDL_Color{255,255,255});
+  creationTexte( surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TEXTE_BOUTON2J], &textureTextes[TEXTE_BOUTON2J], "src/fonts/anirm.ttf", 20, "2 joueurs", SDL_Color{255,255,255});
 }
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){ //, float longueur, float largeur, float x, float y
@@ -81,12 +86,19 @@ void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float
     glPopMatrix();
 }
 
-// char* conversionTexteDyna(char* text[]){
-//   int a = 3;
-//   string b = to_string(a);
-//
-//   char* text = (char*)b.c_str();
-// }
+char* conversionTexteDyna(int valeur, char* phrase){
+    // string str_valeur = to_string(valeur);
+    // char* pv = (char*)str_valeur.c_str();
+    //
+    //
+    //
+    // char * result;
+    // result=(char*)malloc(strlen(pv)+1+strlen(phrase)+1);
+    // strcpy(result,phrase);
+    // strcat(result, pv);
+    // return result;
+
+}
 
 // void affichageTextesStatiques(){
 //

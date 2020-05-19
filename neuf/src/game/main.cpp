@@ -2,6 +2,7 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
+#include "interface/text.h"
 #include <cstring>
 
 
@@ -10,15 +11,7 @@ int main(){
   Game game;
   initialisationGame(&game);
 
-  //initialisationTextes(game.surfaceTextes[100], game.policeTextes[100], game.textureTextes);
-
-
-  //creationTexte(texte, police, &descriptionNain, "src/fonts/SummitAttack.ttf", 10, "Petit mais puissant ! Le nain possède une puissance et une défense de 50%. Ses petites jambes lui permettent de se déplacer de deux cases, et ses coups de hache peuvent attaquer à une case de distance. \nPRIX : 30 pieces.", SDL_Color{255,255,255});
-  creationTexte(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.policeTextes[TEXTE_BOUTON_DEPLACEMENT], &game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 30, "Déplacement", SDL_Color{255,255,255});
-  creationTexte(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.policeTextes[TEXTE_BOUTON_ATTAQUE], &game.textureTextes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 30, "Attaque", SDL_Color{255,255,255});
-  creationTexte(game.surfaceTextes[TEXTE_BOUTON1J], game.policeTextes[TEXTE_BOUTON1J], &game.textureTextes[TEXTE_BOUTON1J], "src/fonts/SummitAttack.ttf", 30, "1 joueur", SDL_Color{255,255,255});
-  creationTexte(game.surfaceTextes[TEXTE_BOUTON2J], game.policeTextes[TEXTE_BOUTON2J], &game.textureTextes[TEXTE_BOUTON2J], "src/fonts/SummitAttack.ttf", 30, "2 joueurs", SDL_Color{255,255,255});
-
+  initialisationTextes(game.surfaceTextes, game.policeTextes, game.textureTextes);
 
 
 
@@ -96,8 +89,8 @@ int main(){
         case MENU:
           bouton(game.bouton1Joueur);
           bouton(game.bouton2Joueurs);
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON1J], game.textureTextes[TEXTE_BOUTON1J], (float)game.bouton1Joueur.x+0.02, (float)game.bouton1Joueur.y);
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON2J], game.textureTextes[TEXTE_BOUTON2J], (float)game.bouton2Joueurs.x+0.02, (float)game.bouton2Joueurs.y);
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON1J], game.textureTextes[TEXTE_BOUTON1J], (float)game.bouton1Joueur.x+0.023, (float)game.bouton1Joueur.y+0.002);
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON2J], game.textureTextes[TEXTE_BOUTON2J], (float)game.bouton2Joueurs.x+0.015, (float)game.bouton2Joueurs.y+0.002);
 
           break;
         case PLACEMENT_UNITES:
@@ -129,8 +122,8 @@ int main(){
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game.boutonDeplacement.x+0.02, (float)game.boutonDeplacement.y); //, 1.5, 0.02, 0,0
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game.boutonAttaque.x+0.02, (float)game.boutonAttaque.y); //, 1.5, 0.02, 0,0
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game.boutonDeplacement.x+0.008, (float)game.boutonDeplacement.y+0.004); //, 1.5, 0.02, 0,0
+          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game.boutonAttaque.x+0.04, (float)game.boutonAttaque.y+0.004); //, 1.5, 0.02, 0,0
 
           if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
             zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
@@ -174,9 +167,8 @@ int main(){
 
       glColor3f(1,1,1);
 
-      //affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], 7, 7); //, 1.5, 0.02, 0,0
 
-      //affichageTexture(descriptionNain, 1,0.1,1,0);
+
 
       /* Boucle traitant les evenements */
       SDL_Event e;
@@ -201,11 +193,15 @@ int main(){
             case SDL_MOUSEBUTTONDOWN:
 
               gererClic(&game,e);
-              int a = 3;
-              string b = to_string(a);
-
-              char* pv = (char*)b.c_str();
-              //creationTexte(&game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 100, pv, SDL_Color{255,0,0});
+              // if(game.policeTextes[TEXTE_PV]!=NULL){
+              //   glDeleteTextures(1, &game.textureTextes[TEXTE_PV]);
+              //   TTF_CloseFont(game.policeTextes[TEXTE_PV]);
+              //   SDL_FreeSurface(game.surfaceTextes[TEXTE_PV]);
+              // }
+              //
+              // char* pv = conversionTexteDyna(20, "pv : ");
+              // creationTexte(game.surfaceTextes[TEXTE_PV], game.policeTextes[TEXTE_PV], &game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 20, pv, SDL_Color{255,255,255});
+              // affichageTextureTextes(game.surfaceTextes[TEXTE_PV], game.textureTextes[TEXTE_PV], 1.1, 0.5);
 
               break;
             // case SDL_MOUSEMOTION:
@@ -230,10 +226,17 @@ int main(){
   }
   //finProgrammeSDL(&game.textureMap[PLAINE]);
   glDisable(GL_TEXTURE_2D);
+
   TTF_CloseFont(game.policeTextes[TEXTE_BOUTON_DEPLACEMENT]);
+  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON_ATTAQUE]);
+  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON1J]);
+  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON2J]);
   TTF_Quit();
 
   SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT]);
+  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE]);
+  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON1J]);
+  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON2J]);
   finProgrammeSDL(&game);
 
   return 0;

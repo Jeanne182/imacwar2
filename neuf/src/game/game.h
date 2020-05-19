@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <cstring>
+
 
 #include <SDL/SDL.h>
 #include <GL/gl.h>
