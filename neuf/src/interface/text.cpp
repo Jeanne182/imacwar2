@@ -87,10 +87,9 @@ void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float
 }
 
 char* conversionTexteDyna(int valeur, char* phrase){
+
     // string str_valeur = to_string(valeur);
     // char* pv = (char*)str_valeur.c_str();
-    //
-    //
     //
     // char * result;
     // result=(char*)malloc(strlen(pv)+1+strlen(phrase)+1);

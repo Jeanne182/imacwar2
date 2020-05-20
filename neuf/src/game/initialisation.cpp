@@ -59,6 +59,7 @@ void initialisationGame(Game *game){
   game->surfaceUnites[SMEAGOL] = IMG_Load("src/img/smeagol.png");
   game->surfaceUnites[SAROUMANE] = IMG_Load("src/img/saroumane.png");
   game->surfaceUnites[ORQUE] = IMG_Load("src/img/herb.png");
+
   //Initialisation de la carte
   game->longueurCarte = 10;
   game->hauteurCarte = 10;

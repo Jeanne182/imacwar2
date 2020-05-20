@@ -2,7 +2,7 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
-#include "interface/text.h"
+
 #include <cstring>
 
 
@@ -167,9 +167,17 @@ int main(){
 
       glColor3f(1,1,1);
 
-
-
-
+      // if(game.policeTextes[TEXTE_PV]!=NULL){
+      //   glDeleteTextures(1, &game.textureTextes[TEXTE_PV]);
+      //   TTF_CloseFont(game.policeTextes[TEXTE_PV]);
+      //   SDL_FreeSurface(game.surfaceTextes[TEXTE_PV]);
+      //
+      // }
+      //
+      // char* pv = conversionTexteDyna(20, "pv : ");
+      // creationTexte(game.surfaceTextes[TEXTE_PV], game.policeTextes[TEXTE_PV], &game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 20, pv, SDL_Color{255,255,255});
+      // affichageTextureTextes(game.surfaceTextes[TEXTE_PV], game.textureTextes[TEXTE_PV], 1.1, 0.5);
+      // free(pv);
       /* Boucle traitant les evenements */
       SDL_Event e;
 
@@ -193,15 +201,7 @@ int main(){
             case SDL_MOUSEBUTTONDOWN:
 
               gererClic(&game,e);
-              // if(game.policeTextes[TEXTE_PV]!=NULL){
-              //   glDeleteTextures(1, &game.textureTextes[TEXTE_PV]);
-              //   TTF_CloseFont(game.policeTextes[TEXTE_PV]);
-              //   SDL_FreeSurface(game.surfaceTextes[TEXTE_PV]);
-              // }
-              //
-              // char* pv = conversionTexteDyna(20, "pv : ");
-              // creationTexte(game.surfaceTextes[TEXTE_PV], game.policeTextes[TEXTE_PV], &game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 20, pv, SDL_Color{255,255,255});
-              // affichageTextureTextes(game.surfaceTextes[TEXTE_PV], game.textureTextes[TEXTE_PV], 1.1, 0.5);
+
 
               break;
             // case SDL_MOUSEMOTION:

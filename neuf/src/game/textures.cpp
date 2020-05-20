@@ -39,7 +39,7 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
     glTexImage2D(GL_TEXTURE_2D, 0, mode, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
-    
+
 }
 
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
