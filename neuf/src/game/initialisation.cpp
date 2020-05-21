@@ -33,10 +33,10 @@ Game::Game():map{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
                           { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
                           { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
                           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
-                          { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }}{}
+                          { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }},xSurvol(0),ySurvol(0){} //Steeve a dit de rajouter ca
 
 void initialisationGame(Game *game){
-   game->surface = NULL;
+    initialisationSDL(game);//Steeve a dit de le mettre la ca
   //fenetre
   game->window_width = 1500;
   game->window_height = 800;
@@ -45,7 +45,7 @@ void initialisationGame(Game *game){
   game->aspectRatio = game->window_width / (float) game->window_height;
 
   //Initialisation textures
-
+  game->surffond = IMG_Load("src/img/fond.png");
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
@@ -285,29 +285,32 @@ void initialisationGame(Game *game){
   game->ySurvol=-1;
   //Initialisation textes
 
-  // game->texte = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
-  // game->police = NULL;
-  game->surfaceTextes[TEXTE_BOUTON_DEPLACEMENT] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
   game->policeTextes[TEXTE_BOUTON_DEPLACEMENT] = NULL;
   game->textureTextes[TEXTE_BOUTON_DEPLACEMENT] = NULL;
 
-  game->surfaceTextes[TEXTE_BOUTON_ATTAQUE] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
   game->policeTextes[TEXTE_BOUTON_ATTAQUE] = NULL;
   game->textureTextes[TEXTE_BOUTON_ATTAQUE] = NULL;
 
-  game->surfaceTextes[TEXTE_BOUTON1J] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
   game->policeTextes[TEXTE_BOUTON1J] = NULL;
   game->textureTextes[TEXTE_BOUTON1J] = NULL;
 
-  game->surfaceTextes[TEXTE_BOUTON2J] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
   game->policeTextes[TEXTE_BOUTON2J] = NULL;
   game->textureTextes[TEXTE_BOUTON2J] = NULL;
 
-  game->surfaceTextes[TEXTE_PV] = SDL_CreateRGBSurface(SDL_HWSURFACE|SDL_SRCALPHA,0,0,32,0,0,0,0);
   game->policeTextes[TEXTE_PV] = NULL;
   game->textureTextes[TEXTE_PV] = NULL;
 
-  initialisationSDL(game);
+
+  game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
+
+
 
   reshape(&game->surface, game->window_width, game->window_height);
+
+  initialisationTexturesCarte(game->textureCases, game->surfaceCases); //Steeve a dit de mettre ce deux fonctions ici car avant on le faisait ailleurs, ce qui est pas super logique au final je crois
+
+  initialisationTexturesUnites(game->textureUnites, game->surfaceUnites);//à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
+
+
+
 }

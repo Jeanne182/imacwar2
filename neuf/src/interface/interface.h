@@ -28,7 +28,7 @@ typedef struct Bouton{
 } Bouton;
 
 enum EnumTexturesCarte{
-    PLAINE,
+    PLAINE=0, //Steeve a dit d'init toutes les premieres enums a 0
     EAU,
     ARBRE,
     JOUEUR1,
@@ -37,7 +37,7 @@ enum EnumTexturesCarte{
 
 
 enum EnumBoutons{
-    RIEN,
+    RIEN=0,//Steeve a dit d'init toutes les premieres enums a 0
     ACHAT,
     DEPLACEMENT,
     ATTAQUE,
@@ -47,7 +47,7 @@ enum EnumBoutons{
   };
 
 enum EnumUnites{
-    HUMAN,
+    HUMAN=0,//Steeve a dit d'init toutes les premieres enums a 0 
     HOBBIT,
     NAIN,
     ELFE,
@@ -82,7 +82,7 @@ void affichageUnite(Joueur joueur, Game* game);
 void bouton(Bouton bouton);
 void initBoutonUnites(Bouton bouton);
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur);
-int selectionBoutonMenu(Game* game, SDL_Event e); 
+int selectionBoutonMenu(Game* game, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
 int selectionBoutonUnite(Game* game, SDL_Event e);
 

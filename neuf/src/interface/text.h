@@ -8,17 +8,25 @@
 #include <string>
 #include <SDL/SDL_ttf.h>
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 
 using namespace std;
 
 enum Enum_Textes{
-  TEXTE_BOUTON_DEPLACEMENT,
+  TEXTE_BOUTON_DEPLACEMENT = 0, //Steeve a dit d'init toutes les premieres enums a 0
   TEXTE_BOUTON_ATTAQUE,
   TEXTE_BOUTON_ACHAT,
-  TEXTE_PV,
   TEXTE_BOUTON1J,
-  TEXTE_BOUTON2J
+  TEXTE_BOUTON2J,
+  TEXTE_PV,
+  TEXTE_FORCE,
+  TEXTE_ZONE,
+  TEXTE_RANGE
+  };
+
+  enum Polices{
+    TITRES=0, //Steeve a dit d'init toutes les premieres enums a 0 
+    NORMAL
   };
 
 // typedef struct Texte {
@@ -31,8 +39,8 @@ enum Enum_Textes{
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 /*text.cpp*/
-void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur);
-void initialisationTextes(SDL_Surface* surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]);
+void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* contenu, SDL_Color couleur);
+void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]);
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y); //, float longueur, float largeur, float x, float y
 char* conversionTexteDyna(int valeur, char* phrase);

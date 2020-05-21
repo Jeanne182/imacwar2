@@ -21,7 +21,7 @@ using namespace std;
 // Déclarations des structures
 enum EnumEtapesJeu{
   //MENU
-  PLACEMENT_UNITES,
+  PLACEMENT_UNITES=0, //Steeve a dit d'init toutes les premieres enums a 0 
   ACHAT_UNITE,
   CHOIX_EMPLACEMENT,
   TOURS_DE_JEU,
@@ -48,6 +48,9 @@ typedef struct Game {
 
   SDL_Surface* surface;
 
+  SDL_Surface* surffond;
+  GLuint textfond;
+
   SDL_Surface* surfaceCases[3];
   GLuint textureCases[3];
 
@@ -56,7 +59,7 @@ typedef struct Game {
 
   //textes
   GLuint textureTextes[100];
-  SDL_Surface* surfaceTextes[100];
+  SDL_Surface surfaceTextes[100]; // parce que steevaditquevallaitmieux que ce soit pas un pointeur de surface
   TTF_Font* policeTextes[100];
   // SDL_Surface *texte;
   // TTF_Font *police;

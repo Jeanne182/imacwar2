@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -ansi -Isrc -g
-LDFLAGS	= -lSDL -lSDL_image -lGLU -lGL -lm -lSDL_ttf -std=c++11 
+LDFLAGS	= -lSDL -lSDL_image -lGLU -lGL -lm -lSDL_ttf -std=c++11
 
 BINDIR	= bin/
 SRCDIR	= src/
