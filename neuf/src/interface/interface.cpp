@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+#include "interface/text.h"
 
 /* Dimensions de la fenetre */
 static const unsigned int WINDOW_WIDTH = 1500;
@@ -71,12 +72,6 @@ int initialisationSDL(Game* game){
     glEnable(GL_TEXTURE_2D);
     reshape(&game->surface, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-    initialisationTexturesCarte(game->textureCases, game->surfaceCases);
-
-    initialisationTexturesUnites(game->textureUnites, game->surfaceUnites);//à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
-
-
-
 
     if(NULL == game->surface)
     {
@@ -87,6 +82,7 @@ int initialisationSDL(Game* game){
     }
     /* Initialisation du titre de la fenetre */
 	   SDL_WM_SetCaption(WINDOW_TITLE, NULL);
+     TTF_Init();
      return 1;
 }
 
@@ -115,6 +111,11 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureUnites[URUK]);
     glDeleteTextures(1, &game->textureUnites[NAZGUL]);
     glDeleteTextures(1, &game->textureUnites[SAROUMANE]);
+
+    glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON_DEPLACEMENT]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON_ATTAQUE]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON1J]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON2J]);
     //SDL_FreeSurface(image);
 
     SDL_Quit();

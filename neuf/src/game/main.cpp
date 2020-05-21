@@ -7,13 +7,13 @@
 
 
 int main(){
-  TTF_Init();
+
   Game game;
   initialisationGame(&game);
 
   initialisationTextes(game.surfaceTextes, game.policeTextes, game.textureTextes);
 
-
+  creationTexture(&game.textfond,game.surffond);
 
   int loop = 1;
 
@@ -87,10 +87,11 @@ int main(){
 
       switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
         case MENU:
+          affichageTexture(game.textfond,game.aspectRatio,1,0,0);
           bouton(game.bouton1Joueur);
           bouton(game.bouton2Joueurs);
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON1J], game.textureTextes[TEXTE_BOUTON1J], (float)game.bouton1Joueur.x+0.023, (float)game.bouton1Joueur.y+0.002);
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON2J], game.textureTextes[TEXTE_BOUTON2J], (float)game.bouton2Joueurs.x+0.015, (float)game.bouton2Joueurs.y+0.002);
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON1J], game.textureTextes[TEXTE_BOUTON1J], (float)game.bouton1Joueur.x+0.023, (float)game.bouton1Joueur.y+0.002);
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON2J], game.textureTextes[TEXTE_BOUTON2J], (float)game.bouton2Joueurs.x+0.015, (float)game.bouton2Joueurs.y+0.002);
 
           break;
         case PLACEMENT_UNITES:
@@ -122,8 +123,8 @@ int main(){
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game.boutonDeplacement.x+0.008, (float)game.boutonDeplacement.y+0.004); //, 1.5, 0.02, 0,0
-          affichageTextureTextes(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game.boutonAttaque.x+0.04, (float)game.boutonAttaque.y+0.004); //, 1.5, 0.02, 0,0
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game.boutonDeplacement.x+0.008, (float)game.boutonDeplacement.y+0.004); //, 1.5, 0.02, 0,0
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game.boutonAttaque.x+0.04, (float)game.boutonAttaque.y+0.004); //, 1.5, 0.02, 0,0
 
           if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
             zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
@@ -167,17 +168,46 @@ int main(){
 
       glColor3f(1,1,1);
 
-      // if(game.policeTextes[TEXTE_PV]!=NULL){
-      //   glDeleteTextures(1, &game.textureTextes[TEXTE_PV]);
-      //   TTF_CloseFont(game.policeTextes[TEXTE_PV]);
-      //   SDL_FreeSurface(game.surfaceTextes[TEXTE_PV]);
-      //
-      // }
-      //
-      // char* pv = conversionTexteDyna(20, "pv : ");
-      // creationTexte(game.surfaceTextes[TEXTE_PV], game.policeTextes[TEXTE_PV], &game.textureTextes[TEXTE_PV], "src/fonts/SummitAttack.ttf", 20, pv, SDL_Color{255,255,255});
-      // affichageTextureTextes(game.surfaceTextes[TEXTE_PV], game.textureTextes[TEXTE_PV], 1.1, 0.5);
-      // free(pv);
+      if(game.textureTextes[TEXTE_PV]!=NULL){
+        glDeleteTextures(1, &game.textureTextes[TEXTE_PV]);
+
+
+      }
+      if(game.textureTextes[TEXTE_FORCE]!=NULL){
+        glDeleteTextures(1, &game.textureTextes[TEXTE_FORCE]);
+
+      }
+      if(game.textureTextes[TEXTE_ZONE]!=NULL){
+        glDeleteTextures(1, &game.textureTextes[TEXTE_ZONE]);
+
+      }
+      if(game.textureTextes[TEXTE_RANGE]!=NULL){
+        glDeleteTextures(1, &game.textureTextes[TEXTE_RANGE]);
+      }
+
+      char* pv = conversionTexteDyna(20, "Points de vie : ");
+      char* force = conversionTexteDyna(70, "Force : ");
+      char* zone = conversionTexteDyna(20, "Zone de tir : ");
+      char* deplacement = conversionTexteDyna(20, "Distance de déplacement : ");
+
+      creationTexte(&game.surfaceTextes[TEXTE_PV], game.policeTextes[TITRES], &game.textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
+      affichageTextureTextes(&game.surfaceTextes[TEXTE_PV], game.textureTextes[TEXTE_PV], 1.4, 0.5);
+
+      creationTexte(&game.surfaceTextes[TEXTE_FORCE], game.policeTextes[TITRES], &game.textureTextes[TEXTE_FORCE], force, SDL_Color{255,255,255});
+      affichageTextureTextes(&game.surfaceTextes[TEXTE_FORCE], game.textureTextes[TEXTE_FORCE], 1.4, 0.6);
+
+      creationTexte(&game.surfaceTextes[TEXTE_ZONE], game.policeTextes[TITRES], &game.textureTextes[TEXTE_ZONE], zone, SDL_Color{255,255,255});
+      affichageTextureTextes(&game.surfaceTextes[TEXTE_ZONE], game.textureTextes[TEXTE_ZONE], 1.4, 0.7);
+
+      creationTexte(&game.surfaceTextes[TEXTE_RANGE], game.policeTextes[TITRES], &game.textureTextes[TEXTE_RANGE], deplacement, SDL_Color{255,255,255});
+      affichageTextureTextes(&game.surfaceTextes[TEXTE_RANGE], game.textureTextes[TEXTE_RANGE], 1.4, 0.8);
+
+
+
+      free(deplacement);
+      free(zone);
+      free(force);
+      free(pv);
       /* Boucle traitant les evenements */
       SDL_Event e;
 
@@ -227,16 +257,19 @@ int main(){
   //finProgrammeSDL(&game.textureMap[PLAINE]);
   glDisable(GL_TEXTURE_2D);
 
-  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON_DEPLACEMENT]);
-  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON_ATTAQUE]);
-  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON1J]);
-  TTF_CloseFont(game.policeTextes[TEXTE_BOUTON2J]);
-  TTF_Quit();
+  TTF_CloseFont(game.policeTextes[TITRES]);
 
-  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT]);
-  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON_ATTAQUE]);
-  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON1J]);
-  SDL_FreeSurface(game.surfaceTextes[TEXTE_BOUTON2J]);
+  // je comprends pas pq quand on enleve tout ca il met plus free() invalid pointer
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON_ATTAQUE]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON1J]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON2J]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_PV]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_FORCE]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_ZONE]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_RANGE]);
+
+
   finProgrammeSDL(&game);
 
   return 0;

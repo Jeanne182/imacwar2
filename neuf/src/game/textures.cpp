@@ -36,7 +36,7 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
     if(image->format->BytesPerPixel == 4) mode = GL_RGBA;
     else mode = GL_RGB;
 
-    glTexImage2D(GL_TEXTURE_2D, 0, mode, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, mode, image->w, image->h, 0, mode, GL_UNSIGNED_BYTE, image->pixels);
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
 

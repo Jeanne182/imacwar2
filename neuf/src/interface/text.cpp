@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* cheminFont, int taille, char* contenu, SDL_Color couleur) {
+void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* contenu, SDL_Color couleur) { //char* cheminFont, int taille,
     // /* Chargement de la police */
     // police = TTF_OpenFont(cheminFont,taille);
     // /* Écriture du texte dans la SDL_Surface texte en mode Blended (optimal) */
@@ -15,7 +15,7 @@ void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, c
     // cout<<texte->h<<endl;
     /* Chargement de la police */
 
-    police = TTF_OpenFont(cheminFont,taille);
+
 
     SDL_Surface* sText =  TTF_RenderUTF8_Blended(police, contenu, couleur);
     //
@@ -42,20 +42,19 @@ void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, c
 
     texte->w = sText->w; texte->h = sText->h;
 
-
-
     SDL_FreeSurface(sText);
+
 
 }
 
-void initialisationTextes(SDL_Surface* surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]){ //changer la taille du tableau
+void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]){ //changer la taille du tableau
   // creationTexte(surfaceTextes, police, &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 10, "Déplacement", SDL_Color{255, 255, 255});
   // creationTexte(&textes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 10, "Attaque", SDL_Color{255,255,255});
   // creationTexte(&textes[TEXTE_BOUTON_ACHAT], "src/fonts/SummitAttack.ttf", 10, "Achat", SDL_Color{255,255,255});
-  creationTexte( surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], policeTextes[TEXTE_BOUTON_DEPLACEMENT], &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/anirm.ttf", 20, "Déplacement", SDL_Color{255,255,255});
-  creationTexte( surfaceTextes[TEXTE_BOUTON_ATTAQUE],  policeTextes[TEXTE_BOUTON_ATTAQUE], &textureTextes[TEXTE_BOUTON_ATTAQUE], "src/fonts/anirm.ttf", 20, "Attaque", SDL_Color{255,255,255});
-  creationTexte( surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TEXTE_BOUTON1J], &textureTextes[TEXTE_BOUTON1J], "src/fonts/anirm.ttf", 20, "1 joueur", SDL_Color{255,255,255});
-  creationTexte( surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TEXTE_BOUTON2J], &textureTextes[TEXTE_BOUTON2J], "src/fonts/anirm.ttf", 20, "2 joueurs", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], policeTextes[TITRES], &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "Déplacement", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_BOUTON_ATTAQUE],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON_ATTAQUE], "Attaque", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON1J], "1 joueur", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON2J], "2 joueurs", SDL_Color{255,255,255});
 }
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){ //, float longueur, float largeur, float x, float y
@@ -88,14 +87,15 @@ void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float
 
 char* conversionTexteDyna(int valeur, char* phrase){
 
-    // string str_valeur = to_string(valeur);
-    // char* pv = (char*)str_valeur.c_str();
-    //
-    // char * result;
-    // result=(char*)malloc(strlen(pv)+1+strlen(phrase)+1);
-    // strcpy(result,phrase);
-    // strcat(result, pv);
-    // return result;
+    string str_valeur = to_string(valeur);
+    char* pv = (char*)str_valeur.c_str();
+
+    char * result;
+
+    result=(char*)malloc(strlen(pv)+1+strlen(phrase)+1);
+    strcpy(result,phrase);
+    strcat(result, pv);
+    return result;
 
 }
 
