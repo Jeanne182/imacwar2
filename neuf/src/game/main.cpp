@@ -2,6 +2,7 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
+#include "game/a_star.h"
 
 #include <cstring>
 
@@ -16,6 +17,14 @@ int main(){
   creationTexture(&game.textfond,game.surffond);
 
   int loop = 1;
+  Unite unitetest;
+  unitetest.coord[0]= 5;
+  unitetest.coord[1]= 5;
+
+  Unite unitetestcible;
+  unitetestcible.coord[0]= 9;
+  unitetestcible.coord[1]= 5;
+  a_star(&unitetest, &unitetestcible);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */

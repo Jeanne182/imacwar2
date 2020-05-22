@@ -6,7 +6,7 @@ BINDIR	= bin/
 SRCDIR	= src/
 OBJDIR	= obj/
 
-main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o $(OBJDIR)textures.o $(OBJDIR)text.o
+main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o $(OBJDIR)textures.o $(OBJDIR)text.o $(OBJDIR)a_star.o
 		$(CC) -o $(BINDIR)$@ $^ $(LDFLAGS)
 		./$(BINDIR)$@
 
@@ -39,6 +39,9 @@ $(OBJDIR)textures.o: src/game/textures.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 $(OBJDIR)text.o: src/interface/text.cpp src/interface/text.h
+	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
+
+$(OBJDIR)a_star.o: src/game/a_star.cpp src/game/a_star.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 clean:
