@@ -20,12 +20,16 @@ enum Enum_Textes{
   TEXTE_BOUTON2J,
   TEXTE_PV,
   TEXTE_FORCE,
+  TEXTE_DEFENSE,
   TEXTE_ZONE,
-  TEXTE_RANGE
+  TEXTE_RANGE,
+  TEXTE_PRIX,
+  TEXTE_PIECESJ1,
+  TEXTE_PIECESJ2
   };
 
   enum Polices{
-    TITRES=0, //Steeve a dit d'init toutes les premieres enums a 0 
+    TITRES=0, //Steeve a dit d'init toutes les premieres enums a 0
     NORMAL
   };
 

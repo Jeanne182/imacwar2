@@ -91,6 +91,9 @@ int main(){
 
         case PLACEMENT_UNITES:
         bouton(game.boutonAchat);
+
+
+        //etatUnite(2, &game);
         glColor3f(1,1,1);
         surbrillanceAchat(game.achat_type, game);
 
@@ -121,18 +124,32 @@ int main(){
         // }
           switch (game.tour) {
             case TOUR_JOUEUR1:
+              {if(game.textureTextes[TEXTE_PIECESJ1]!=NULL){
+                glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ1]);
+              }
+              char* piecesj1 = conversionTexteDyna(game.joueur1.pieces, "Pièces joueur 1 : ");
+              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[TITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ1], game.textureTextes[TEXTE_PIECESJ1], 1.05, 0.02);
               affichageTexture(game.textureUnites[VIKINGWOMAN],game.boutonVikingWoman.longueur,game.boutonVikingWoman.hauteur,game.boutonVikingWoman.x,game.boutonVikingWoman.y);
               affichageTexture(game.textureUnites[VIKINGMAN],game.boutonVikingMan.longueur,game.boutonVikingMan.hauteur,game.boutonVikingMan.x,game.boutonVikingMan.y);
               affichageTexture(game.textureUnites[VIKINGBEAST],game.boutonVikingBeast.longueur,game.boutonVikingBeast.hauteur,game.boutonVikingBeast.x,game.boutonVikingBeast.y);
               affichageTexture(game.textureUnites[VIKINGWIZARD],game.boutonVikingWizard.longueur,game.boutonVikingWizard.hauteur,game.boutonVikingWizard.x,game.boutonVikingWizard.y);
               affichageTexture(game.textureUnites[VIKINGCHIEF],game.boutonVikingChief.longueur,game.boutonVikingChief.hauteur,game.boutonVikingChief.x,game.boutonVikingChief.y);
+              free(piecesj1);}
               break;
             case TOUR_JOUEUR2:
+              {if(game.textureTextes[TEXTE_PIECESJ2]!=NULL){
+                glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
+              }
+              char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
+              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[TITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ2], game.textureTextes[TEXTE_PIECESJ2], 1.05, 0.02);
               affichageTexture(game.textureUnites[DEADKNIGHT],game.boutonDeadKnight.longueur,game.boutonDeadKnight.hauteur,game.boutonDeadKnight.x,game.boutonDeadKnight.y);
               affichageTexture(game.textureUnites[DEADBEAST],game.boutonDeadBeast.longueur,game.boutonDeadBeast.hauteur,game.boutonDeadBeast.x,game.boutonDeadBeast.y);
               affichageTexture(game.textureUnites[DEADWIZARD],game.boutonDeadWizard.longueur,game.boutonDeadWizard.hauteur,game.boutonDeadWizard.x,game.boutonDeadWizard.y);
               affichageTexture(game.textureUnites[DEADMAN],game.boutonDeadMan.longueur,game.boutonDeadMan.hauteur,game.boutonDeadMan.x,game.boutonDeadMan.y);
               affichageTexture(game.textureUnites[DEADCHIEF],game.boutonDeadChief.longueur,game.boutonDeadChief.hauteur,game.boutonDeadChief.x,game.boutonDeadChief.y);
+              free(piecesj2);}
             break;
           }
           break;
@@ -241,52 +258,8 @@ int main(){
         }
       }
 
-
-
-      glColor3f(1,1,1);
-
-      if(game.textureTextes[TEXTE_PV]!=NULL){
-        glDeleteTextures(1, &game.textureTextes[TEXTE_PV]);
-
-
-      }
-      if(game.textureTextes[TEXTE_FORCE]!=NULL){
-        glDeleteTextures(1, &game.textureTextes[TEXTE_FORCE]);
-
-      }
-      if(game.textureTextes[TEXTE_ZONE]!=NULL){
-        glDeleteTextures(1, &game.textureTextes[TEXTE_ZONE]);
-
-      }
-      if(game.textureTextes[TEXTE_RANGE]!=NULL){
-        glDeleteTextures(1, &game.textureTextes[TEXTE_RANGE]);
-      }
-
-      char* pv = conversionTexteDyna(20, "Points de vie : ");
-      char* force = conversionTexteDyna(70, "Force : ");
-      char* zone = conversionTexteDyna(20, "Zone de tir : ");
-      char* deplacement = conversionTexteDyna(20, "Distance de déplacement : ");
-
-      creationTexte(&game.surfaceTextes[TEXTE_PV], game.policeTextes[TITRES], &game.textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
-      affichageTextureTextes(&game.surfaceTextes[TEXTE_PV], game.textureTextes[TEXTE_PV], 1.4, 0.5);
-
-      creationTexte(&game.surfaceTextes[TEXTE_FORCE], game.policeTextes[TITRES], &game.textureTextes[TEXTE_FORCE], force, SDL_Color{255,255,255});
-      affichageTextureTextes(&game.surfaceTextes[TEXTE_FORCE], game.textureTextes[TEXTE_FORCE], 1.4, 0.6);
-
-      creationTexte(&game.surfaceTextes[TEXTE_ZONE], game.policeTextes[TITRES], &game.textureTextes[TEXTE_ZONE], zone, SDL_Color{255,255,255});
-      affichageTextureTextes(&game.surfaceTextes[TEXTE_ZONE], game.textureTextes[TEXTE_ZONE], 1.4, 0.7);
-
-      creationTexte(&game.surfaceTextes[TEXTE_RANGE], game.policeTextes[TITRES], &game.textureTextes[TEXTE_RANGE], deplacement, SDL_Color{255,255,255});
-      affichageTextureTextes(&game.surfaceTextes[TEXTE_RANGE], game.textureTextes[TEXTE_RANGE], 1.4, 0.8);
-
-
-
-      free(deplacement);
-      free(zone);
-      free(force);
-      free(pv);
       /* Boucle traitant les evenements */
-      SDL_Event e;
+    
 
       while(SDL_PollEvent(&e))
       {
@@ -302,7 +275,15 @@ int main(){
           if(game.idUniteSurvolee==-1){
             game.idUniteSurvolee = selectionIdUnite(game.xSurvol, game.ySurvol,game.joueur2);
           }
-          etatUnite(e,&game);
+
+          // int xCoord = 0;
+          // int yCoord = 0;
+          // selectionCoordonnee(&xCoord, &yCoord, e, game.surface);
+          // int id = selectionIdUnite(xCoord,yCoord,game.joueur1);
+          // Unite uniteCoord = game.joueur1.unites[id];
+          // if(id!=-1){
+          //   etatUnite(uniteCoord, &game);
+          // }
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:

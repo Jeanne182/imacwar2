@@ -302,6 +302,7 @@ void initialisationGame(Game *game){
 
 
   game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
+  game->policeTextes[NORMAL] = TTF_OpenFont("src/fonts/normal.ttf", 25);
 
 
 
