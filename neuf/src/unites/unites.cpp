@@ -73,7 +73,7 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
         }
         else {
           game->achat_type = selectionBoutonUnite(game, e);
-          
+
 
         }
       }
@@ -281,9 +281,10 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     char* zone = conversionTexteDyna(unite.zoneDeTir, "Zone de tir (cases) : ");
     char* deplacement = conversionTexteDyna(unite.distance, "Distance de déplacement (cases) : ");
 
-    creationTexte(&game->surfaceTextes[TEXTE_PRIX], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PRIX], prix, SDL_Color{255,255,255});
-    affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.4, 0.5);
-
+    if(game->etapeJeu == PLACEMENT_UNITES){
+      creationTexte(&game->surfaceTextes[TEXTE_PRIX], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PRIX], prix, SDL_Color{255,255,255});
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.4, 0.5);
+    }
     creationTexte(&game->surfaceTextes[TEXTE_PV], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
     affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.4, 0.55);
 

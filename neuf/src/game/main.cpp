@@ -96,6 +96,11 @@ int main(){
         //etatUnite(2, &game);
         glColor3f(1,1,1);
         surbrillanceAchat(game.achat_type, game);
+        if(game.achat_type!=SANS_TYPE){
+          etatUnite(game.unites[game.achat_type], &game);
+        }
+
+
 
         if(game.tour == TOUR_JOUEUR1){
           for(int i = 0; i<10; i++){
@@ -198,13 +203,37 @@ int main(){
           //   zoneSurbrillance(game.joueur2,game.id2, game.map, ATTAQUE);
           // }
 
-          if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10){
+          // if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10){
+          //   switch(game.map[game.ySurvol-1][game.xSurvol-1]){
+          //     case JOUEUR1:
+          //       zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
+          //       break;
+          //     case JOUEUR2:
+          //       zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.map, DEPLACEMENT);
+          //       break;
+          //   }
+          // }
+
+          if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10 && game.etapeJeu!= PLACEMENT_UNITES){
             switch(game.map[game.ySurvol-1][game.xSurvol-1]){
-              case JOUEUR1:
+              case JOUEUR1:{
                 zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
+                // int xCoord = 0;
+                // int yCoord = 0;
+                // selectionCoordonnee(&xCoord, &yCoord, e, game.surface);
+                // int id = selectionIdUnite(xCoord,yCoord,game.joueur1);
+                  Unite uniteCoord = game.joueur1.unites[game.idUniteSurvolee];
+                  if(game.idUniteSurvolee!=-1){
+                    etatUnite(uniteCoord, &game);
+                  }
+                }
                 break;
               case JOUEUR2:
                 zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.map, DEPLACEMENT);
+                Unite uniteCoord = game.joueur2.unites[game.idUniteSurvolee];
+                if(game.idUniteSurvolee!=-1){
+                  etatUnite(uniteCoord, &game);
+                }
                 break;
             }
           }
@@ -258,8 +287,9 @@ int main(){
         }
       }
 
+
       /* Boucle traitant les evenements */
-    
+      SDL_Event e;
 
       while(SDL_PollEvent(&e))
       {
