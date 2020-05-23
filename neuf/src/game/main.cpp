@@ -44,20 +44,13 @@ int main(){
               affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
-              case JOUEUR1:{
-                affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-                int id = selectionIdUnite(i+1, j+1, game.joueur1);
-                affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-                break;
-              }
+              case JOUEUR1:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
 
-
-              case JOUEUR2:{
-                affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-                int id = selectionIdUnite(i+1, j+1, game.joueur2);
-                affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-                break;
-              }
+              case JOUEUR2:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
 
             }
 
@@ -73,16 +66,16 @@ int main(){
       // }
 
       //affichageTexture(texteDeplacement, game.boutonDeplacement.longueur, game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
-      initBoutonUnites(game.boutonVikingWoman);
-      initBoutonUnites(game.boutonVikingMan);
-      initBoutonUnites(game.boutonVikingBeast);
-      initBoutonUnites(game.boutonVikingWizard);
-      initBoutonUnites(game.boutonVikingChief);
-      initBoutonUnites(game.boutonDeadKnight);
-      initBoutonUnites(game.boutonDeadBeast);
-      initBoutonUnites(game.boutonDeadWizard);
-      initBoutonUnites(game.boutonDeadMan);
-      initBoutonUnites(game.boutonDeadChief);
+      initBoutonUnites(game.boutonVikingWoman, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonVikingMan, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonVikingBeast, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonVikingWizard, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonVikingChief, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonDeadKnight, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonDeadBeast, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonDeadWizard, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonDeadMan, 0, 0, 0, 0);
+      initBoutonUnites(game.boutonDeadChief, 0, 0, 0, 0);
       glColor3f(1,1,1);
 
       switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
@@ -94,9 +87,34 @@ int main(){
           affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON2J], game.textureTextes[TEXTE_BOUTON2J], (float)game.bouton2Joueurs.x+0.015, (float)game.bouton2Joueurs.y+0.002);
 
           break;
+
+
         case PLACEMENT_UNITES:
         bouton(game.boutonAchat);
         glColor3f(1,1,1);
+        surbrillanceAchat(game.achat_type, game);
+
+        if(game.tour == TOUR_JOUEUR1){
+          for(int i = 0; i<10; i++){
+            for(int j = 0; j<10; j++){
+                if(game.zonePlacement[j][i]==1){
+                  carre(i+1,j+1, game.joueur1, ACHAT_UNITE);
+                }
+            }
+          }
+        }
+        else{
+          for(int i = 0; i<10; i++){
+            for(int j = 0; j<10; j++){
+                if(game.zonePlacement[j][i]==2){
+                  carre(i+1,j+1, game.joueur2, ACHAT_UNITE);
+                }
+            }
+          }
+        }
+        glColor3f(1,1,1);
+
+
         //affichageTexture(descriptionVikingBeast, game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
         // if(game.textureTextes[TEXTE_PV]!=NULL){
         //   affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
@@ -119,24 +137,59 @@ int main(){
           }
           break;
 
+        // case SELECTION_UNITE:
+        // carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
+
         case ACTIONS:
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
+
           affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game.textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game.boutonDeplacement.x+0.008, (float)game.boutonDeplacement.y+0.004); //, 1.5, 0.02, 0,0
           affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON_ATTAQUE], game.textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game.boutonAttaque.x+0.04, (float)game.boutonAttaque.y+0.004); //, 1.5, 0.02, 0,0
 
-          if(game.tour == TOUR_JOUEUR1 && game.choix == DEPLACEMENT){
-            zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
+
+          if(game.tour == TOUR_JOUEUR1){
+            //if(game.choix == RIEN){
+              //carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
+
+            //}
+
+              if(game.choix == DEPLACEMENT){
+                zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
+              }
+              else if(game.choix == ATTAQUE){
+                zoneSurbrillance(game.joueur1,game.id1, game.map, ATTAQUE);
+              }
           }
-          if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
-            zoneSurbrillance(game.joueur2,game.id2, game.map, DEPLACEMENT);
+          if(game.tour == TOUR_JOUEUR2){
+            //carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
+              if(game.choix == DEPLACEMENT){
+                zoneSurbrillance(game.joueur2,game.id2, game.map, DEPLACEMENT);
+              }
+              else if(game.choix == ATTAQUE){
+                zoneSurbrillance(game.joueur2,game.id2, game.map, ATTAQUE);
+              }
           }
-          if(game.tour == TOUR_JOUEUR1 && game.choix == ATTAQUE){
-            zoneSurbrillance(game.joueur1,game.id1, game.map, ATTAQUE);
-          }
-          if(game.tour == TOUR_JOUEUR2 && game.choix == ATTAQUE){
-            zoneSurbrillance(game.joueur2,game.id2, game.map, ATTAQUE);
+          // if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
+          //   zoneSurbrillance(game.joueur2,game.id2, game.map, DEPLACEMENT);
+          // }
+          // if(game.tour == TOUR_JOUEUR1 && game.choix == ATTAQUE){
+          //   zoneSurbrillance(game.joueur1,game.id1, game.map, ATTAQUE);
+          // }
+          // if(game.tour == TOUR_JOUEUR2 && game.choix == ATTAQUE){
+          //   zoneSurbrillance(game.joueur2,game.id2, game.map, ATTAQUE);
+          // }
+
+          if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10){
+            switch(game.map[game.ySurvol-1][game.xSurvol-1]){
+              case JOUEUR1:
+                zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
+                break;
+              case JOUEUR2:
+                zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.map, DEPLACEMENT);
+                break;
+            }
           }
 
           break;
@@ -155,16 +208,40 @@ int main(){
           break;
       }
 
-      if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10){
-        switch(game.map[game.ySurvol-1][game.xSurvol-1]){
-          case JOUEUR1:
-            zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
-            break;
-          case JOUEUR2:
-            zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.map, DEPLACEMENT);
-            break;
+      glColor3f(1,1,1);
+
+      if(game.etapeJeu != MENU){
+        for(int i = 0; i<10; i++){
+          for(int j = 0; j<10; j++){
+            switch(game.map[j][i]){
+
+
+              case JOUEUR1:{
+                if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR1)){
+                  affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                }
+                int id = selectionIdUnite(i+1, j+1, game.joueur1);
+                affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                break;
+              }
+
+
+              case JOUEUR2:{
+                if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR2)){
+                  affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                }
+                int id = selectionIdUnite(i+1, j+1, game.joueur2);
+                affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                break;
+              }
+
+            }
+
+          }
         }
       }
+
+
 
       glColor3f(1,1,1);
 
@@ -229,9 +306,9 @@ int main(){
 
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
-
-              gererClic(&game,e);
-
+              if (e.button.button == SDL_BUTTON_LEFT){
+                gererClic(&game,e);
+              }
 
               break;
             // case SDL_MOUSEMOTION:

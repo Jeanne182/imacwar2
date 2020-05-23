@@ -133,16 +133,22 @@ void carre(float x, float y, Joueur joueur, int choix){
       if(choix==ATTAQUE){
         glColor4f(0.5, 0.42, 0.26,0.4);
       }
-      else{
+      else if(choix==DEPLACEMENT || choix==ACHAT_UNITE){
         glColor4f(0.78, 0.27, 0.003,0.4);
+      }
+      else if(choix==CLIC){
+        glColor4f(0.78, 0.27, 0.003,0.7);
       }
     }
     else {
       if(choix==ATTAQUE){
         glColor4f(0.55, 0.42, 0.26,0.4);
       }
-      else{
+      else if(choix==DEPLACEMENT || choix==ACHAT_UNITE){
         glColor4f(0.40,0.01,0.33,0.4);
+      }
+      else if(choix==CLIC){
+        glColor4f(0.40,0.01,0.33,0.7);
       }
     }
     glVertex2f(0.1, 0.1);
@@ -159,4 +165,38 @@ void carre(float x, float y, Joueur joueur, int choix){
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
   *x = (int)(1+10*(*x)*aspectRatio/(float)surface->w);
   *y = (int)(1+10*(*y)/(float)surface->h);
+}
+
+
+void surbrillanceAchat(int type, Game game){
+  if(type==VIKINGMAN){
+    initBoutonUnites(game.boutonVikingMan,0.78, 0.27, 0.003,0.4);
+  }
+  if(type==VIKINGCHIEF){
+    initBoutonUnites(game.boutonVikingChief,0.78, 0.27, 0.003,0.4);
+  }
+  if(type==VIKINGBEAST){
+    initBoutonUnites(game.boutonVikingBeast,0.78, 0.27, 0.003,0.4);
+  }
+  if(type==VIKINGWIZARD){
+    initBoutonUnites(game.boutonVikingWizard,0.78, 0.27, 0.003,0.4);
+  }
+  if(type==VIKINGWOMAN){
+    initBoutonUnites(game.boutonVikingWoman,0.78, 0.27, 0.003,0.4);
+  }
+  if(type==DEADBEAST){
+    initBoutonUnites(game.boutonDeadBeast,0.40,0.01,0.33,0.4);
+  }
+  if(type==DEADKNIGHT){
+    initBoutonUnites(game.boutonDeadKnight,0.40,0.01,0.33,0.4);
+  }
+  if(type==DEADWIZARD){
+    initBoutonUnites(game.boutonDeadWizard,0.40,0.01,0.33,0.4);
+  }
+  if(type==DEADMAN){
+    initBoutonUnites(game.boutonDeadMan,0.40,0.01,0.33,0.4);
+  }
+  if(type==DEADCHIEF){
+    initBoutonUnites(game.boutonDeadChief,0.40,0.01,0.33,0.4);
+  }
 }

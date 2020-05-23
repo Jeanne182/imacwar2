@@ -73,6 +73,8 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
         }
         else {
           game->achat_type = selectionBoutonUnite(game, e);
+          
+
         }
       }
       else {
@@ -284,7 +286,7 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
       }
     }
   }
-  else{
+  else if (choix==DEPLACEMENT){
     for (int i = -range; i <= range; i++)
     {
       for (int j = -range; j <= range; j++)
