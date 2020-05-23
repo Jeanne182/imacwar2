@@ -38,7 +38,7 @@ typedef struct Unite{
   int distance;
   int zoneDeTir;
   int prix;
-  //img
+
 } Unite;
 
 typedef struct Joueur{
@@ -70,9 +70,12 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite);
 void placementUnitesJoueurs(Game* game, SDL_Event e);
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game);
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game);
-void etatUnite(SDL_Event e, Game* game);
+//void etatUnite(SDL_Event e, Game* game);
+// void etatUnite(int id, Game* game);
+void etatUnite(Unite unite, Game* game);
+
 void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix);
-bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite); 
+bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite);
 
 
 
