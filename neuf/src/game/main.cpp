@@ -176,7 +176,7 @@ int main(){
 
 
 
-      if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10 && game.etapeJeu!= PLACEMENT_UNITES){
+      if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10 ){//&& game.etapeJeu!= PLACEMENT_UNITES
         switch(game.map[game.ySurvol-1][game.xSurvol-1]){
           case JOUEUR1:{
             zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
@@ -201,41 +201,7 @@ int main(){
       }
 
       /* Boucle traitant les evenements */
-      SDL_Event e;
-      int boutonUnite = selectionBoutonUnite(&game, e);
-      switch (boutonUnite) {
-        case VIKINGMAN:
-        etatUnite(game.unites[VIKINGMAN], &game);
-        break;
-        case VIKINGWOMAN:
-        etatUnite(game.unites[VIKINGWOMAN], &game);
-        break;
-        case VIKINGBEAST:
-        etatUnite(game.unites[VIKINGBEAST], &game);
-        break;
-        case VIKINGWIZARD:
-        etatUnite(game.unites[VIKINGWIZARD], &game);
-        break;
-        case VIKINGCHIEF:
-        etatUnite(game.unites[VIKINGCHIEF], &game);
-        break;
-        case DEADMAN:
-        etatUnite(game.unites[VIKINGMAN], &game);
-        break;
-        case DEADKNIGHT:
-        etatUnite(game.unites[VIKINGWOMAN], &game);
-        break;
-        case DEADBEAST:
-        etatUnite(game.unites[VIKINGBEAST], &game);
-        break;
-        case DEADWIZARD:
-        etatUnite(game.unites[VIKINGWIZARD], &game);
-        break;
-        case DEADCHIEF:
-        etatUnite(game.unites[VIKINGCHIEF], &game);
-        break;
-      }
-
+    
 
       while(SDL_PollEvent(&e))
       {
