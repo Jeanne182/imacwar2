@@ -49,16 +49,16 @@ void initialisationGame(Game *game){
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
-  game->surfaceUnites[HUMAN] = IMG_Load("src/img/human.png");
-  game->surfaceUnites[HOBBIT] = IMG_Load("src/img/hobbit.png");
-  game->surfaceUnites[ELFE] = IMG_Load("src/img/elfe.png");
-  game->surfaceUnites[NAIN] = IMG_Load("src/img/nain.png");
-  game->surfaceUnites[GANDALF] = IMG_Load("src/img/Gandalf.png");
-  game->surfaceUnites[URUK] = IMG_Load("src/img/uruk.png");
-  game->surfaceUnites[NAZGUL] = IMG_Load("src/img/nazgul.png");
-  game->surfaceUnites[SMEAGOL] = IMG_Load("src/img/smeagol.png");
-  game->surfaceUnites[SAROUMANE] = IMG_Load("src/img/saroumane.png");
-  game->surfaceUnites[ORQUE] = IMG_Load("src/img/herb.png");
+  game->surfaceUnites[VIKINGMAN] = IMG_Load("src/img/vikingman.png");
+  game->surfaceUnites[VIKINGWOMAN] = IMG_Load("src/img/vikingwoman.png");
+  game->surfaceUnites[VIKINGWIZARD] = IMG_Load("src/img/vikingwizard.png");
+  game->surfaceUnites[VIKINGBEAST] = IMG_Load("src/img/vikingbeast.png");
+  game->surfaceUnites[VIKINGCHIEF] = IMG_Load("src/img/vikingchief.png");
+  game->surfaceUnites[DEADWIZARD] = IMG_Load("src/img/deadwizard.png");
+  game->surfaceUnites[DEADMAN] = IMG_Load("src/img/deadman.png");
+  game->surfaceUnites[DEADKNIGHT] = IMG_Load("src/img/deadknight.png");
+  game->surfaceUnites[DEADCHIEF] = IMG_Load("src/img/deadchief.png");
+  game->surfaceUnites[DEADBEAST] = IMG_Load("src/img/deadbeast.png");
 
   //Initialisation de la carte
   game->longueurCarte = 10;
@@ -79,86 +79,86 @@ void initialisationGame(Game *game){
 
   //Initialisation des unites
   // Gentils :
-  game->unites[NAIN].force = 0.6;
-  game->unites[NAIN].vie = 100;
-  game->unites[NAIN].defense = 0.3;
-  game->unites[NAIN].zoneDeTir = 1;
-  game->unites[NAIN].distance = 2;
-  game->unites[NAIN].prix = 20;
-  game->unites[NAIN].type = NAIN;
+  game->unites[VIKINGBEAST].force = 0.6;
+  game->unites[VIKINGBEAST].vie = 100;
+  game->unites[VIKINGBEAST].defense = 0.3;
+  game->unites[VIKINGBEAST].zoneDeTir = 1;
+  game->unites[VIKINGBEAST].distance = 2;
+  game->unites[VIKINGBEAST].prix = 20;
+  game->unites[VIKINGBEAST].type = VIKINGBEAST;
 
-  game->unites[HOBBIT].force = 0.4;
-  game->unites[HOBBIT].vie = 100;
-  game->unites[HOBBIT].defense = 0.4;
-  game->unites[HOBBIT].zoneDeTir = 2;
-  game->unites[HOBBIT].distance = 2;
-  game->unites[HOBBIT].prix = 10;
-  game->unites[HOBBIT].type = HOBBIT;
+  game->unites[VIKINGWOMAN].force = 0.4;
+  game->unites[VIKINGWOMAN].vie = 100;
+  game->unites[VIKINGWOMAN].defense = 0.4;
+  game->unites[VIKINGWOMAN].zoneDeTir = 2;
+  game->unites[VIKINGWOMAN].distance = 2;
+  game->unites[VIKINGWOMAN].prix = 10;
+  game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
 
-  game->unites[ELFE].force = 0.3;
-  game->unites[ELFE].vie = 100;
-  game->unites[ELFE].defense = 0.6;
-  game->unites[ELFE].zoneDeTir = 4;
-  game->unites[ELFE].distance = 4;
-  game->unites[ELFE].prix = 30;
-  game->unites[ELFE].type = ELFE;
+  game->unites[VIKINGWIZARD].force = 0.3;
+  game->unites[VIKINGWIZARD].vie = 100;
+  game->unites[VIKINGWIZARD].defense = 0.6;
+  game->unites[VIKINGWIZARD].zoneDeTir = 4;
+  game->unites[VIKINGWIZARD].distance = 4;
+  game->unites[VIKINGWIZARD].prix = 30;
+  game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
-  game->unites[HUMAN].force = 0.5;
-  game->unites[HUMAN].vie = 100;
-  game->unites[HUMAN].defense = 0.5;
-  game->unites[HUMAN].zoneDeTir = 1;
-  game->unites[HUMAN].distance = 2;
-  game->unites[HUMAN].prix = 30;
-  game->unites[HUMAN].type = HUMAN;
+  game->unites[VIKINGMAN].force = 0.5;
+  game->unites[VIKINGMAN].vie = 100;
+  game->unites[VIKINGMAN].defense = 0.5;
+  game->unites[VIKINGMAN].zoneDeTir = 1;
+  game->unites[VIKINGMAN].distance = 2;
+  game->unites[VIKINGMAN].prix = 30;
+  game->unites[VIKINGMAN].type = VIKINGMAN;
 
-  game->unites[GANDALF].force = 0.6;
-  game->unites[GANDALF].vie = 100;
-  game->unites[GANDALF].defense = 0.6;
-  game->unites[GANDALF].zoneDeTir = 2;
-  game->unites[GANDALF].distance = 2;
-  game->unites[GANDALF].prix = 50;
-  game->unites[GANDALF].type = GANDALF;
+  game->unites[VIKINGCHIEF].force = 0.6;
+  game->unites[VIKINGCHIEF].vie = 100;
+  game->unites[VIKINGCHIEF].defense = 0.6;
+  game->unites[VIKINGCHIEF].zoneDeTir = 2;
+  game->unites[VIKINGCHIEF].distance = 2;
+  game->unites[VIKINGCHIEF].prix = 50;
+  game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
 
   //Mechants :
-  game->unites[ORQUE].force = 0.6;
-  game->unites[ORQUE].vie = 100;
-  game->unites[ORQUE].defense = 0.3;
-  game->unites[ORQUE].zoneDeTir = 1;
-  game->unites[ORQUE].distance = 2;
-  game->unites[ORQUE].prix =20;
-  game->unites[ORQUE].type = ORQUE;
+  game->unites[DEADBEAST].force = 0.6;
+  game->unites[DEADBEAST].vie = 100;
+  game->unites[DEADBEAST].defense = 0.3;
+  game->unites[DEADBEAST].zoneDeTir = 1;
+  game->unites[DEADBEAST].distance = 2;
+  game->unites[DEADBEAST].prix =20;
+  game->unites[DEADBEAST].type = DEADBEAST;
 
-  game->unites[SMEAGOL].force = 0.4;
-  game->unites[SMEAGOL].vie = 100;
-  game->unites[SMEAGOL].defense = 0.4;
-  game->unites[SMEAGOL].zoneDeTir = 2;
-  game->unites[SMEAGOL].distance = 2;
-  game->unites[SMEAGOL].prix = 10;
-  game->unites[SMEAGOL].type = SMEAGOL;
+  game->unites[DEADKNIGHT].force = 0.4;
+  game->unites[DEADKNIGHT].vie = 100;
+  game->unites[DEADKNIGHT].defense = 0.4;
+  game->unites[DEADKNIGHT].zoneDeTir = 2;
+  game->unites[DEADKNIGHT].distance = 2;
+  game->unites[DEADKNIGHT].prix = 10;
+  game->unites[DEADKNIGHT].type = DEADKNIGHT;
 
-  game->unites[URUK].force = 0.3;
-  game->unites[URUK].vie = 100;
-  game->unites[URUK].defense = 0.6;
-  game->unites[URUK].zoneDeTir = 4;
-  game->unites[URUK].distance = 4;
-  game->unites[URUK].prix = 30;
-  game->unites[URUK].type = URUK;
+  game->unites[DEADWIZARD].force = 0.3;
+  game->unites[DEADWIZARD].vie = 100;
+  game->unites[DEADWIZARD].defense = 0.6;
+  game->unites[DEADWIZARD].zoneDeTir = 4;
+  game->unites[DEADWIZARD].distance = 4;
+  game->unites[DEADWIZARD].prix = 30;
+  game->unites[DEADWIZARD].type = DEADWIZARD;
 
-  game->unites[NAZGUL].force = 0.5;
-  game->unites[NAZGUL].vie = 100;
-  game->unites[NAZGUL].defense = 0.5;
-  game->unites[NAZGUL].zoneDeTir = 1;
-  game->unites[NAZGUL].distance = 2;
-  game->unites[NAZGUL].prix = 30;
-  game->unites[NAZGUL].type = NAZGUL;
+  game->unites[DEADMAN].force = 0.5;
+  game->unites[DEADMAN].vie = 100;
+  game->unites[DEADMAN].defense = 0.5;
+  game->unites[DEADMAN].zoneDeTir = 1;
+  game->unites[DEADMAN].distance = 2;
+  game->unites[DEADMAN].prix = 30;
+  game->unites[DEADMAN].type = DEADMAN;
 
-  game->unites[SAROUMANE].force = 0.6;
-  game->unites[SAROUMANE].vie = 100;
-  game->unites[SAROUMANE].defense = 0.6;
-  game->unites[SAROUMANE].zoneDeTir = 2;
-  game->unites[SAROUMANE].distance = 2;
-  game->unites[SAROUMANE].prix = 50;
-  game->unites[SAROUMANE].type = SAROUMANE;
+  game->unites[DEADCHIEF].force = 0.6;
+  game->unites[DEADCHIEF].vie = 100;
+  game->unites[DEADCHIEF].defense = 0.6;
+  game->unites[DEADCHIEF].zoneDeTir = 2;
+  game->unites[DEADCHIEF].distance = 2;
+  game->unites[DEADCHIEF].prix = 50;
+  game->unites[DEADCHIEF].type = DEADCHIEF;
 
   //Initialisation des boutons
 
@@ -210,65 +210,65 @@ void initialisationGame(Game *game){
   game->boutonAchat.b = 1;
   game->boutonAchat.valeur = ACHAT;
 
-  game->boutonHumain.x = 1.0;
-  game->boutonHumain.y = 0.1;
-  game->boutonHumain.longueur = 0.1;
-  game->boutonHumain.hauteur = 0.1;
-  game->boutonHumain.valeur = HUMAN;
+  game->boutonVikingMan.x = 1.0;
+  game->boutonVikingMan.y = 0.1;
+  game->boutonVikingMan.longueur = 0.1;
+  game->boutonVikingMan.hauteur = 0.1;
+  game->boutonVikingMan.valeur = VIKINGMAN;
 
-  game->boutonGandalf.x = 1.80;
-  game->boutonGandalf.y = 0.1;
-  game->boutonGandalf.longueur = 0.1;
-  game->boutonGandalf.hauteur = 0.1;
-  game->boutonGandalf.valeur = GANDALF;
+  game->boutonVikingChief.x = 1.80;
+  game->boutonVikingChief.y = 0.1;
+  game->boutonVikingChief.longueur = 0.1;
+  game->boutonVikingChief.hauteur = 0.1;
+  game->boutonVikingChief.valeur = VIKINGCHIEF;
 
-  game->boutonNain.x = 1.40;
-  game->boutonNain.y = 0.1;
-  game->boutonNain.longueur = 0.1;
-  game->boutonNain.hauteur = 0.1;
-  game->boutonNain.valeur = NAIN;
+  game->boutonVikingBeast.x = 1.40;
+  game->boutonVikingBeast.y = 0.1;
+  game->boutonVikingBeast.longueur = 0.1;
+  game->boutonVikingBeast.hauteur = 0.1;
+  game->boutonVikingBeast.valeur = VIKINGBEAST;
 
-  game->boutonElfe.x = 1.60;
-  game->boutonElfe.y = 0.1;
-  game->boutonElfe.longueur = 0.1;
-  game->boutonElfe.hauteur = 0.1;
-  game->boutonElfe.valeur = ELFE;
+  game->boutonVikingWizard.x = 1.60;
+  game->boutonVikingWizard.y = 0.1;
+  game->boutonVikingWizard.longueur = 0.1;
+  game->boutonVikingWizard.hauteur = 0.1;
+  game->boutonVikingWizard.valeur = VIKINGWIZARD;
 
-  game->boutonHobbit.x = 1.20;
-  game->boutonHobbit.y = 0.1;
-  game->boutonHobbit.longueur = 0.1;
-  game->boutonHobbit.hauteur = 0.1;
-  game->boutonHobbit.valeur = HOBBIT;
+  game->boutonVikingWoman.x = 1.20;
+  game->boutonVikingWoman.y = 0.1;
+  game->boutonVikingWoman.longueur = 0.1;
+  game->boutonVikingWoman.hauteur = 0.1;
+  game->boutonVikingWoman.valeur = VIKINGWOMAN;
 
-  game->boutonOrque.x = 1.20;
-  game->boutonOrque.y = 0.1;
-  game->boutonOrque.longueur = 0.1;
-  game->boutonOrque.hauteur = 0.1;
-  game->boutonOrque.valeur = ORQUE;
+  game->boutonDeadBeast.x = 1.40;
+  game->boutonDeadBeast.y = 0.1;
+  game->boutonDeadBeast.longueur = 0.1;
+  game->boutonDeadBeast.hauteur = 0.1;
+  game->boutonDeadBeast.valeur = DEADBEAST;
 
-  game->boutonSmeagol.x = 1.60;
-  game->boutonSmeagol.y = 0.1;
-  game->boutonSmeagol.longueur = 0.1;
-  game->boutonSmeagol.hauteur = 0.1;
-  game->boutonSmeagol.valeur = SMEAGOL;
+  game->boutonDeadKnight.x = 1.20;
+  game->boutonDeadKnight.y = 0.1;
+  game->boutonDeadKnight.longueur = 0.1;
+  game->boutonDeadKnight.hauteur = 0.1;
+  game->boutonDeadKnight.valeur = DEADKNIGHT;
 
-  game->boutonUrukhai.x = 1.40;
-  game->boutonUrukhai.y = 0.1;
-  game->boutonUrukhai.longueur = 0.1;
-  game->boutonUrukhai.hauteur = 0.1;
-  game->boutonUrukhai.valeur = URUK;
+  game->boutonDeadWizard.x = 1.60;
+  game->boutonDeadWizard.y = 0.1;
+  game->boutonDeadWizard.longueur = 0.1;
+  game->boutonDeadWizard.hauteur = 0.1;
+  game->boutonDeadWizard.valeur = DEADWIZARD;
 
-  game->boutonNazgul.x = 1.0;
-  game->boutonNazgul.y = 0.1;
-  game->boutonNazgul.longueur = 0.1;
-  game->boutonNazgul.hauteur = 0.1;
-  game->boutonNazgul.valeur = NAZGUL;
+  game->boutonDeadMan.x = 1.0;
+  game->boutonDeadMan.y = 0.1;
+  game->boutonDeadMan.longueur = 0.1;
+  game->boutonDeadMan.hauteur = 0.1;
+  game->boutonDeadMan.valeur = DEADMAN;
 
-  game->boutonSaruman.x = 1.80;
-  game->boutonSaruman.y = 0.1;
-  game->boutonSaruman.longueur = 0.1;
-  game->boutonSaruman.hauteur = 0.1;
-  game->boutonSaruman.valeur = SAROUMANE;
+  game->boutonDeadChief.x = 1.80;
+  game->boutonDeadChief.y = 0.1;
+  game->boutonDeadChief.longueur = 0.1;
+  game->boutonDeadChief.hauteur = 0.1;
+  game->boutonDeadChief.valeur = DEADCHIEF;
 
 
   game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement

@@ -79,33 +79,33 @@ int selectionBoutonMenu(Game* game, SDL_Event e){
 int selectionBoutonUnite(Game* game, SDL_Event e){
   int valeurBouton = SANS_TYPE;
   if(game->tour == TOUR_JOUEUR1){
-    valeurBouton = testClicBouton(game, game->boutonHumain, e, SANS_TYPE);
+    valeurBouton = testClicBouton(game, game->boutonVikingMan, e, SANS_TYPE);
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonNain, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonVikingBeast, e, SANS_TYPE);
     }
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonHobbit, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonVikingWoman, e, SANS_TYPE);
     }
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonElfe, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonVikingWizard, e, SANS_TYPE);
     }
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonGandalf, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonVikingChief, e, SANS_TYPE);
     }
   }
   else{
-    valeurBouton = testClicBouton(game, game->boutonOrque, e, SANS_TYPE);
+    valeurBouton = testClicBouton(game, game->boutonDeadBeast, e, SANS_TYPE);
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonSmeagol, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonDeadKnight, e, SANS_TYPE);
     }
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonUrukhai, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonDeadWizard, e, SANS_TYPE);
     }
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonNazgul, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonDeadMan, e, SANS_TYPE);
     }
     if (valeurBouton == SANS_TYPE){
-      valeurBouton = testClicBouton(game, game->boutonSaruman, e, SANS_TYPE);
+      valeurBouton = testClicBouton(game, game->boutonDeadChief, e, SANS_TYPE);
     }
   }
   return valeurBouton;

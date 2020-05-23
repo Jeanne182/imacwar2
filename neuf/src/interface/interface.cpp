@@ -101,16 +101,16 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureCases[PLAINE]);
     glDeleteTextures(1, &game->textureCases[EAU]);
     glDeleteTextures(1, &game->textureCases[ARBRE]);
-    glDeleteTextures(1, &game->textureUnites[HUMAN]);
-    glDeleteTextures(1, &game->textureUnites[HOBBIT]);
-    glDeleteTextures(1, &game->textureUnites[NAIN]);
-    glDeleteTextures(1, &game->textureUnites[ELFE]);
-    glDeleteTextures(1, &game->textureUnites[GANDALF]);
-    glDeleteTextures(1, &game->textureUnites[ORQUE]);
-    glDeleteTextures(1, &game->textureUnites[SMEAGOL]);
-    glDeleteTextures(1, &game->textureUnites[URUK]);
-    glDeleteTextures(1, &game->textureUnites[NAZGUL]);
-    glDeleteTextures(1, &game->textureUnites[SAROUMANE]);
+    glDeleteTextures(1, &game->textureUnites[VIKINGMAN]);
+    glDeleteTextures(1, &game->textureUnites[VIKINGWOMAN]);
+    glDeleteTextures(1, &game->textureUnites[VIKINGBEAST]);
+    glDeleteTextures(1, &game->textureUnites[VIKINGWIZARD]);
+    glDeleteTextures(1, &game->textureUnites[VIKINGCHIEF]);
+    glDeleteTextures(1, &game->textureUnites[DEADBEAST]);
+    glDeleteTextures(1, &game->textureUnites[DEADKNIGHT]);
+    glDeleteTextures(1, &game->textureUnites[DEADWIZARD]);
+    glDeleteTextures(1, &game->textureUnites[DEADMAN]);
+    glDeleteTextures(1, &game->textureUnites[DEADCHIEF]);
 
     glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON_DEPLACEMENT]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON_ATTAQUE]);
@@ -131,10 +131,10 @@ void carre(float x, float y, Joueur joueur, int choix){
     glBegin(GL_POLYGON);
     if (joueur.id == 1){
       if(choix==ATTAQUE){
-        glColor4f(0.55, 0.42, 0.26,0.4);
+        glColor4f(0.5, 0.42, 0.26,0.4);
       }
       else{
-        glColor4f(1,1,1,0.4);
+        glColor4f(0.78, 0.27, 0.003,0.4);
       }
     }
     else {
@@ -142,7 +142,7 @@ void carre(float x, float y, Joueur joueur, int choix){
         glColor4f(0.55, 0.42, 0.26,0.4);
       }
       else{
-        glColor4f(0,0,0,0.4);
+        glColor4f(0.40,0.01,0.33,0.4);
       }
     }
     glVertex2f(0.1, 0.1);

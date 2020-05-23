@@ -21,7 +21,7 @@ using namespace std;
 // Déclarations des structures
 enum EnumEtapesJeu{
   //MENU
-  PLACEMENT_UNITES=0, //Steeve a dit d'init toutes les premieres enums a 0 
+  PLACEMENT_UNITES=0, //Steeve a dit d'init toutes les premieres enums a 0
   ACHAT_UNITE,
   CHOIX_EMPLACEMENT,
   TOURS_DE_JEU,
@@ -38,7 +38,7 @@ typedef struct Game {
   Joueur joueur1, joueur2;
   Unite unites[10];//Nain, Hobbit, Elfe, Humain, Gandalf, Orque, Smeagol, Urukhai, Nazgul, Saruman;
   Bouton boutonDeplacement, boutonAttaque, boutonAchat, bouton1Joueur, bouton2Joueurs;
-  Bouton boutonNain, boutonHobbit, boutonElfe, boutonHumain, boutonGandalf, boutonOrque, boutonSmeagol, boutonUrukhai, boutonNazgul, boutonSaruman;
+  Bouton boutonVikingBeast, boutonVikingWoman, boutonVikingWizard, boutonVikingMan, boutonVikingChief, boutonDeadBeast, boutonDeadKnight, boutonDeadWizard, boutonDeadMan, boutonDeadChief;
   int etapeJeu, modeJeu;
   int tour;
   int choix;
