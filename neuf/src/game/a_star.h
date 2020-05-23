@@ -16,7 +16,9 @@ typedef struct Noeud{
 } Noeud;
 
 
-bool verificationDansListe(list<Noeud*> liste, Noeud noeud);
-list<Noeud*> a_star(Unite* uniteOrdi, Unite* uniteCible);
+bool verificationDansListe(list<Noeud> liste, Noeud noeud);
+void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]);
+void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud> chemin);
+list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible); 
 
 #endif
