@@ -24,7 +24,7 @@ void bouton(Bouton bouton){
 }
 
 
-void initBoutonUnites(Bouton bouton){
+void initBoutonUnites(Bouton bouton, float r, float g, float b, float a){
   float x = bouton.x;
   float y = bouton.y;
   float longueur = bouton.longueur;
@@ -32,7 +32,7 @@ void initBoutonUnites(Bouton bouton){
 
   glPushMatrix();
     glBegin(GL_POLYGON);
-    glColor4f(0,0,0,0);
+    glColor4f(r,g,b,a);
     glVertex2f(x, y);
     glVertex2f(x + longueur, y);
     glVertex2f(x + longueur, y + hauteur);
@@ -50,10 +50,9 @@ int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur){
       cout << "test clic bouton :" << bouton.valeur << endl;
     return bouton.valeur;
   }
-
-
   return erreur;
 }
+
 
 int selectionBouton(Game* game, SDL_Event e){
   int valeurBouton=RIEN;

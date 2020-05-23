@@ -33,7 +33,7 @@ enum EnumTexturesCarte{
     ARBRE,
     JOUEUR1,
     JOUEUR2,
-    
+
   };
 
 
@@ -44,7 +44,8 @@ enum EnumBoutons{
     ATTAQUE,
     ABANDON,
     MULTIJOUEURS,
-    ORDI_MODE
+    ORDI_MODE,
+    CLIC
   };
 
 enum EnumUnites{
@@ -70,10 +71,8 @@ int initialisationSDL(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
 void carre(float x, float y, Joueur joueur, int choix);
-
-
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
-
+void surbrillanceAchat(int type, Game game);
 
 /*sprites.cpp*/
 void affichageUnite(Joueur joueur, Game* game);
@@ -81,7 +80,7 @@ void affichageUnite(Joueur joueur, Game* game);
 
 /* boutons.cpp */
 void bouton(Bouton bouton);
-void initBoutonUnites(Bouton bouton);
+void initBoutonUnites(Bouton bouton, float r, float g, float b, float a);
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur);
 int selectionBoutonMenu(Game* game, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
