@@ -32,7 +32,8 @@ enum EnumTexturesCarte{
     EAU,
     ARBRE,
     JOUEUR1,
-    JOUEUR2
+    JOUEUR2,
+    
   };
 
 
@@ -47,16 +48,16 @@ enum EnumBoutons{
   };
 
 enum EnumUnites{
-    HUMAN=0,//Steeve a dit d'init toutes les premieres enums a 0 
-    HOBBIT,
-    NAIN,
-    ELFE,
-    GANDALF,
-    NAZGUL,
-    ORQUE,
-    URUK,
-    SMEAGOL,
-    SAROUMANE,
+    VIKINGMAN=0,//Steeve a dit d'init toutes les premieres enums a 0
+    VIKINGWOMAN,
+    VIKINGBEAST,
+    VIKINGWIZARD,
+    VIKINGCHIEF,
+    DEADMAN,
+    DEADBEAST,
+    DEADWIZARD,
+    DEADKNIGHT,
+    DEADCHIEF,
     SANS_TYPE
   };
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//

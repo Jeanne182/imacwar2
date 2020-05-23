@@ -7,16 +7,16 @@ void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCas
 }
 
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]){
-    creationTexture(&textureUnites[HUMAN], surfaceUnites[HUMAN]);
-    creationTexture(&textureUnites[NAIN], surfaceUnites[NAIN]);
-    creationTexture(&textureUnites[HOBBIT], surfaceUnites[HOBBIT]);
-    creationTexture(&textureUnites[ELFE], surfaceUnites[ELFE]);
-    creationTexture(&textureUnites[GANDALF], surfaceUnites[GANDALF]);
-    creationTexture(&textureUnites[ORQUE], surfaceUnites[ORQUE]);
-    creationTexture(&textureUnites[SMEAGOL], surfaceUnites[SMEAGOL]);
-    creationTexture(&textureUnites[URUK], surfaceUnites[URUK]);
-    creationTexture(&textureUnites[NAZGUL], surfaceUnites[NAZGUL]);
-    creationTexture(&textureUnites[SAROUMANE], surfaceUnites[SAROUMANE]);
+    creationTexture(&textureUnites[VIKINGMAN], surfaceUnites[VIKINGMAN]);
+    creationTexture(&textureUnites[VIKINGBEAST], surfaceUnites[VIKINGBEAST]);
+    creationTexture(&textureUnites[VIKINGWOMAN], surfaceUnites[VIKINGWOMAN]);
+    creationTexture(&textureUnites[VIKINGWIZARD], surfaceUnites[VIKINGWIZARD]);
+    creationTexture(&textureUnites[VIKINGCHIEF], surfaceUnites[VIKINGCHIEF]);
+    creationTexture(&textureUnites[DEADBEAST], surfaceUnites[DEADBEAST]);
+    creationTexture(&textureUnites[DEADKNIGHT], surfaceUnites[DEADKNIGHT]);
+    creationTexture(&textureUnites[DEADWIZARD], surfaceUnites[DEADWIZARD]);
+    creationTexture(&textureUnites[DEADMAN], surfaceUnites[DEADMAN]);
+    creationTexture(&textureUnites[DEADCHIEF], surfaceUnites[DEADCHIEF]);
 }
 
 void creationTexture(GLuint *texture, SDL_Surface* image){
