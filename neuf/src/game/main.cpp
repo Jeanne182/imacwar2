@@ -2,6 +2,7 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
+#include "game/a_star.h"
 
 #include <cstring>
 
@@ -16,6 +17,14 @@ int main(){
   creationTexture(&game.textfond,game.surffond);
 
   int loop = 1;
+
+  int xDepart = 2;
+  int yDepart = 5;
+
+  int xCible= 7;
+  int yCible= 8;
+  list<Noeud> chemin = a_star(xDepart, yDepart, xCible, yCible);
+  caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */
