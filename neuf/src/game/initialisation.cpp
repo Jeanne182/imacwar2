@@ -8,22 +8,22 @@ Game::Game():map{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
                  { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
                  { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
                  { 2, 2, 2, 0, 0, 0, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+                 { 0, 0, 0, 0, 3, 1, 4, 0, 0, 0 },
+                 { 0, 0, 0, 0, 1, 1, 5, 0, 0, 0 },
                  { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
+                 { 0, 0, 0, 0, 6, 5, 0, 0, 0, 0 },
                  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }},
+                 { 0, 0, 0, 0, 0, 3, 4, 0, 0, 0 }},
             mapInit{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
                     { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
                     { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
                     { 2, 2, 2, 0, 0, 0, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+                    { 0, 0, 0, 0, 3, 1, 4, 0, 0, 0 },
+                    { 0, 0, 0, 0, 1, 1, 5, 0, 0, 0 },
                     { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
+                    { 0, 0, 0, 0, 6, 5, 0, 0, 0, 0 },
                     { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 }},
+                    { 0, 0, 0, 0, 0, 3, 4, 0, 0, 0 }},
             zonePlacement{{ 0, 0, 0, 0, 0, 2, 2, 2, 2, 2 },
                           { 0, 0, 0, 0, 0, 0, 2, 2, 2, 2 },
                           { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2 },
@@ -49,6 +49,10 @@ void initialisationGame(Game *game){
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
+  game->surfaceCases[EAUHG] = IMG_Load("src/img/eauhg.png");
+  game->surfaceCases[EAUHD] = IMG_Load("src/img/eauhd.png");
+  game->surfaceCases[EAUBG] = IMG_Load("src/img/eaubg.png");
+  game->surfaceCases[EAUBD] = IMG_Load("src/img/eaubd.png");
   game->surfaceUnites[VIKINGMAN] = IMG_Load("src/img/vikingman.png");
   game->surfaceUnites[VIKINGWOMAN] = IMG_Load("src/img/vikingwoman.png");
   game->surfaceUnites[VIKINGWIZARD] = IMG_Load("src/img/vikingwizard.png");
@@ -87,13 +91,13 @@ void initialisationGame(Game *game){
   game->unites[VIKINGBEAST].prix = 20;
   game->unites[VIKINGBEAST].type = VIKINGBEAST;
 
-  game->unites[VIKINGWOMAN].force = 0.4;
-  game->unites[VIKINGWOMAN].vie = 100;
-  game->unites[VIKINGWOMAN].defense = 0.4;
-  game->unites[VIKINGWOMAN].zoneDeTir = 2;
-  game->unites[VIKINGWOMAN].distance = 2;
-  game->unites[VIKINGWOMAN].prix = 10;
-  game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
+  game->unites[VIKINGMAN].force = 0.4;
+  game->unites[VIKINGMAN].vie = 100;
+  game->unites[VIKINGMAN].defense = 0.4;
+  game->unites[VIKINGMAN].zoneDeTir = 2;
+  game->unites[VIKINGMAN].distance = 2;
+  game->unites[VIKINGMAN].prix = 10;
+  game->unites[VIKINGMAN].type = VIKINGWOMAN;
 
   game->unites[VIKINGWIZARD].force = 0.3;
   game->unites[VIKINGWIZARD].vie = 100;
@@ -103,13 +107,13 @@ void initialisationGame(Game *game){
   game->unites[VIKINGWIZARD].prix = 30;
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
-  game->unites[VIKINGMAN].force = 0.5;
-  game->unites[VIKINGMAN].vie = 100;
-  game->unites[VIKINGMAN].defense = 0.5;
-  game->unites[VIKINGMAN].zoneDeTir = 1;
-  game->unites[VIKINGMAN].distance = 2;
-  game->unites[VIKINGMAN].prix = 30;
-  game->unites[VIKINGMAN].type = VIKINGMAN;
+  game->unites[VIKINGWOMAN].force = 0.5;
+  game->unites[VIKINGWOMAN].vie = 100;
+  game->unites[VIKINGWOMAN].defense = 0.5;
+  game->unites[VIKINGWOMAN].zoneDeTir = 1;
+  game->unites[VIKINGWOMAN].distance = 2;
+  game->unites[VIKINGWOMAN].prix = 30;
+  game->unites[VIKINGWOMAN].type = VIKINGMAN;
 
   game->unites[VIKINGCHIEF].force = 0.6;
   game->unites[VIKINGCHIEF].vie = 100;
@@ -203,30 +207,30 @@ void initialisationGame(Game *game){
 
   game->boutonAchat.x = 1.3;
   game->boutonAchat.y = 0.4;
-  game->boutonAchat.longueur = 0.15;
-  game->boutonAchat.hauteur = 0.05;
+  game->boutonAchat.longueur = 0.2;
+  game->boutonAchat.hauteur = 0.1;
   game->boutonAchat.r = 0;
   game->boutonAchat.g = 1;
   game->boutonAchat.b = 1;
   game->boutonAchat.valeur = ACHAT;
 
-  game->boutonVikingMan.x = 1.0;
+  game->boutonVikingMan.x = 1.;
   game->boutonVikingMan.y = 0.1;
   game->boutonVikingMan.longueur = 0.1;
   game->boutonVikingMan.hauteur = 0.1;
   game->boutonVikingMan.valeur = VIKINGMAN;
 
-  game->boutonVikingChief.x = 1.80;
-  game->boutonVikingChief.y = 0.1;
-  game->boutonVikingChief.longueur = 0.1;
-  game->boutonVikingChief.hauteur = 0.1;
-  game->boutonVikingChief.valeur = VIKINGCHIEF;
-
-  game->boutonVikingBeast.x = 1.40;
+  game->boutonVikingBeast.x = 1.20;
   game->boutonVikingBeast.y = 0.1;
   game->boutonVikingBeast.longueur = 0.1;
   game->boutonVikingBeast.hauteur = 0.1;
   game->boutonVikingBeast.valeur = VIKINGBEAST;
+
+  game->boutonVikingWoman.x = 1.40;
+  game->boutonVikingWoman.y = 0.1;
+  game->boutonVikingWoman.longueur = 0.1;
+  game->boutonVikingWoman.hauteur = 0.1;
+  game->boutonVikingWoman.valeur = VIKINGWOMAN;
 
   game->boutonVikingWizard.x = 1.60;
   game->boutonVikingWizard.y = 0.1;
@@ -234,19 +238,19 @@ void initialisationGame(Game *game){
   game->boutonVikingWizard.hauteur = 0.1;
   game->boutonVikingWizard.valeur = VIKINGWIZARD;
 
-  game->boutonVikingWoman.x = 1.20;
-  game->boutonVikingWoman.y = 0.1;
-  game->boutonVikingWoman.longueur = 0.1;
-  game->boutonVikingWoman.hauteur = 0.1;
-  game->boutonVikingWoman.valeur = VIKINGWOMAN;
+  game->boutonVikingChief.x = 1.8;
+  game->boutonVikingChief.y = 0.1;
+  game->boutonVikingChief.longueur = 0.1;
+  game->boutonVikingChief.hauteur = 0.1;
+  game->boutonVikingChief.valeur = VIKINGCHIEF;
 
-  game->boutonDeadBeast.x = 1.40;
+  game->boutonDeadBeast.x = 1.20;
   game->boutonDeadBeast.y = 0.1;
   game->boutonDeadBeast.longueur = 0.1;
   game->boutonDeadBeast.hauteur = 0.1;
   game->boutonDeadBeast.valeur = DEADBEAST;
 
-  game->boutonDeadKnight.x = 1.20;
+  game->boutonDeadKnight.x = 1.0;
   game->boutonDeadKnight.y = 0.1;
   game->boutonDeadKnight.longueur = 0.1;
   game->boutonDeadKnight.hauteur = 0.1;
@@ -258,7 +262,7 @@ void initialisationGame(Game *game){
   game->boutonDeadWizard.hauteur = 0.1;
   game->boutonDeadWizard.valeur = DEADWIZARD;
 
-  game->boutonDeadMan.x = 1.0;
+  game->boutonDeadMan.x = 1.4;
   game->boutonDeadMan.y = 0.1;
   game->boutonDeadMan.longueur = 0.1;
   game->boutonDeadMan.hauteur = 0.1;
