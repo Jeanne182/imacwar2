@@ -51,8 +51,8 @@ typedef struct Game {
   SDL_Surface* surffond;
   GLuint textfond;
 
-  SDL_Surface* surfaceCases[3];
-  GLuint textureCases[3];
+  SDL_Surface* surfaceCases[10];
+  GLuint textureCases[10];
 
   SDL_Surface* surfaceUnites[10];
   GLuint textureUnites[10];

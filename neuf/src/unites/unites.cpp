@@ -384,7 +384,7 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
       {
         if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
         {
-          if(map[y-1+j][ x-1 + i]!=ARBRE && map[y-1+j][ x-1 + i]!=EAU&& x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+          if(map[y-1+j][ x-1 + i]!=ARBRE && map[y-1+j][ x-1 + i]!=EAU  && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
             carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           }
         }

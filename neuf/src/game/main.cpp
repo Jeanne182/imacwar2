@@ -53,6 +53,26 @@ int main(){
               affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
+              case EAUBD:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUBD],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case EAUBG:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUBG],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case EAUHG:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUHG],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case EAUHD:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUHD],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
               case JOUEUR1:
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
@@ -60,6 +80,8 @@ int main(){
               case JOUEUR2:
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
+
+
 
             }
 

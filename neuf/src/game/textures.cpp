@@ -1,9 +1,13 @@
 #include "interface/interface.h"
 using namespace std;
-void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]){
+void initialisationTexturesCarte(GLuint textureCases[10], SDL_Surface* surfaceCases[10]){
     creationTexture(&textureCases[PLAINE], surfaceCases[PLAINE]);
     creationTexture(&textureCases[EAU], surfaceCases[EAU]);
     creationTexture(&textureCases[ARBRE], surfaceCases[ARBRE]);
+    creationTexture(&textureCases[EAUBD], surfaceCases[EAUBD]);
+    creationTexture(&textureCases[EAUBG], surfaceCases[EAUBG]);
+    creationTexture(&textureCases[EAUHG], surfaceCases[EAUHG]);
+    creationTexture(&textureCases[EAUHD], surfaceCases[EAUHD]);
 }
 
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]){

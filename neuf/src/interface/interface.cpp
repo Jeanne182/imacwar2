@@ -101,6 +101,11 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureCases[PLAINE]);
     glDeleteTextures(1, &game->textureCases[EAU]);
     glDeleteTextures(1, &game->textureCases[ARBRE]);
+    glDeleteTextures(1, &game->textureCases[EAUBD]);
+    glDeleteTextures(1, &game->textureCases[EAUBG]);
+    glDeleteTextures(1, &game->textureCases[EAUHD]);
+    glDeleteTextures(1, &game->textureCases[EAUHG]);
+
     glDeleteTextures(1, &game->textureUnites[VIKINGMAN]);
     glDeleteTextures(1, &game->textureUnites[VIKINGWOMAN]);
     glDeleteTextures(1, &game->textureUnites[VIKINGBEAST]);
