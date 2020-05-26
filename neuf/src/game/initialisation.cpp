@@ -4,26 +4,26 @@
 #include "interface/text.h"
 using namespace std;
 
-Game::Game():map{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
-                 { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
-                 { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
-                 { 2, 2, 2, 0, 0, 0, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 3, 1, 4, 0, 0, 0 },
-                 { 0, 0, 0, 0, 1, 1, 5, 0, 0, 0 },
-                 { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 6, 5, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                 { 0, 0, 0, 0, 0, 3, 4, 0, 0, 0 }},
-            mapInit{{ 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
-                    { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
-                    { 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
-                    { 2, 2, 2, 0, 0, 0, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 3, 1, 4, 0, 0, 0 },
-                    { 0, 0, 0, 0, 1, 1, 5, 0, 0, 0 },
-                    { 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 6, 5, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                    { 0, 0, 0, 0, 0, 3, 4, 0, 0, 0 }},
+Game::Game():map{{ ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAU, EAUHD, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, EAUBD, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, PLAINE, PLAINE, PLAINE }},
+            mapInit{{ ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAU, EAUHD, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, EAUBD, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, PLAINE, PLAINE, PLAINE }},
             zonePlacement{{ 0, 0, 0, 0, 0, 2, 2, 2, 2, 2 },
                           { 0, 0, 0, 0, 0, 0, 2, 2, 2, 2 },
                           { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2 },
@@ -45,7 +45,8 @@ void initialisationGame(Game *game){
   game->aspectRatio = game->window_width / (float) game->window_height;
 
   //Initialisation textures
-  game->surffond = IMG_Load("src/img/fond.png");
+  game->surffond[MENUDEBUT] = IMG_Load("src/img/fond.png");
+  game->surffond[MENUNORMAL] = IMG_Load("src/img/fondlat.png");
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
   game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
@@ -83,6 +84,14 @@ void initialisationGame(Game *game){
 
   //Initialisation des unites
   // Gentils :
+  game->unites[VIKINGMAN].force = 0.4;
+  game->unites[VIKINGMAN].vie = 100;
+  game->unites[VIKINGMAN].defense = 0.4;
+  game->unites[VIKINGMAN].zoneDeTir = 2;
+  game->unites[VIKINGMAN].distance = 2;
+  game->unites[VIKINGMAN].prix = 10;
+  game->unites[VIKINGMAN].type = VIKINGMAN;
+
   game->unites[VIKINGBEAST].force = 0.6;
   game->unites[VIKINGBEAST].vie = 100;
   game->unites[VIKINGBEAST].defense = 0.3;
@@ -91,13 +100,13 @@ void initialisationGame(Game *game){
   game->unites[VIKINGBEAST].prix = 20;
   game->unites[VIKINGBEAST].type = VIKINGBEAST;
 
-  game->unites[VIKINGMAN].force = 0.4;
-  game->unites[VIKINGMAN].vie = 100;
-  game->unites[VIKINGMAN].defense = 0.4;
-  game->unites[VIKINGMAN].zoneDeTir = 2;
-  game->unites[VIKINGMAN].distance = 2;
-  game->unites[VIKINGMAN].prix = 10;
-  game->unites[VIKINGMAN].type = VIKINGWOMAN;
+  game->unites[VIKINGWOMAN].force = 0.5;
+  game->unites[VIKINGWOMAN].vie = 100;
+  game->unites[VIKINGWOMAN].defense = 0.5;
+  game->unites[VIKINGWOMAN].zoneDeTir = 1;
+  game->unites[VIKINGWOMAN].distance = 2;
+  game->unites[VIKINGWOMAN].prix = 30;
+  game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
 
   game->unites[VIKINGWIZARD].force = 0.3;
   game->unites[VIKINGWIZARD].vie = 100;
@@ -106,14 +115,6 @@ void initialisationGame(Game *game){
   game->unites[VIKINGWIZARD].distance = 4;
   game->unites[VIKINGWIZARD].prix = 30;
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
-
-  game->unites[VIKINGWOMAN].force = 0.5;
-  game->unites[VIKINGWOMAN].vie = 100;
-  game->unites[VIKINGWOMAN].defense = 0.5;
-  game->unites[VIKINGWOMAN].zoneDeTir = 1;
-  game->unites[VIKINGWOMAN].distance = 2;
-  game->unites[VIKINGWOMAN].prix = 30;
-  game->unites[VIKINGWOMAN].type = VIKINGMAN;
 
   game->unites[VIKINGCHIEF].force = 0.6;
   game->unites[VIKINGCHIEF].vie = 100;
@@ -124,6 +125,14 @@ void initialisationGame(Game *game){
   game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
 
   //Mechants :
+  game->unites[DEADMAN].force = 0.4;
+  game->unites[DEADMAN].vie = 100;
+  game->unites[DEADMAN].defense = 0.4;
+  game->unites[DEADMAN].zoneDeTir = 2;
+  game->unites[DEADMAN].distance = 2;
+  game->unites[DEADMAN].prix = 10;
+  game->unites[DEADMAN].type = DEADMAN;
+
   game->unites[DEADBEAST].force = 0.6;
   game->unites[DEADBEAST].vie = 100;
   game->unites[DEADBEAST].defense = 0.3;
@@ -132,12 +141,12 @@ void initialisationGame(Game *game){
   game->unites[DEADBEAST].prix =20;
   game->unites[DEADBEAST].type = DEADBEAST;
 
-  game->unites[DEADKNIGHT].force = 0.4;
+  game->unites[DEADKNIGHT].force = 0.5;
   game->unites[DEADKNIGHT].vie = 100;
-  game->unites[DEADKNIGHT].defense = 0.4;
-  game->unites[DEADKNIGHT].zoneDeTir = 2;
+  game->unites[DEADKNIGHT].defense = 0.5;
+  game->unites[DEADKNIGHT].zoneDeTir = 1;
   game->unites[DEADKNIGHT].distance = 2;
-  game->unites[DEADKNIGHT].prix = 10;
+  game->unites[DEADKNIGHT].prix = 30;
   game->unites[DEADKNIGHT].type = DEADKNIGHT;
 
   game->unites[DEADWIZARD].force = 0.3;
@@ -148,14 +157,6 @@ void initialisationGame(Game *game){
   game->unites[DEADWIZARD].prix = 30;
   game->unites[DEADWIZARD].type = DEADWIZARD;
 
-  game->unites[DEADMAN].force = 0.5;
-  game->unites[DEADMAN].vie = 100;
-  game->unites[DEADMAN].defense = 0.5;
-  game->unites[DEADMAN].zoneDeTir = 1;
-  game->unites[DEADMAN].distance = 2;
-  game->unites[DEADMAN].prix = 30;
-  game->unites[DEADMAN].type = DEADMAN;
-
   game->unites[DEADCHIEF].force = 0.6;
   game->unites[DEADCHIEF].vie = 100;
   game->unites[DEADCHIEF].defense = 0.6;
@@ -165,20 +166,19 @@ void initialisationGame(Game *game){
   game->unites[DEADCHIEF].type = DEADCHIEF;
 
   //Initialisation des boutons
-
-  game->bouton1Joueur.x = 0.7; //Rose
-  game->bouton1Joueur.y = 0.5;
-  game->bouton1Joueur.longueur = 0.15;
-  game->bouton1Joueur.hauteur = 0.05;
+  game->bouton1Joueur.x = 0.8;
+  game->bouton1Joueur.y = 0.6;
+  game->bouton1Joueur.longueur = 0.3;
+  game->bouton1Joueur.hauteur = 0.1;
   game->bouton1Joueur.r = 0.035;
   game->bouton1Joueur.g = 0.32;
   game->bouton1Joueur.b = 0.15;
   game->bouton1Joueur.valeur = ORDI_MODE;
 
-  game->bouton2Joueurs.x = 0.7; //Rose
+  game->bouton2Joueurs.x = 0.8; //Rose
   game->bouton2Joueurs.y = 0.8;
-  game->bouton2Joueurs.longueur = 0.15;
-  game->bouton2Joueurs.hauteur = 0.05;
+  game->bouton2Joueurs.longueur = 0.3;
+  game->bouton2Joueurs.hauteur = 0.1;
   game->bouton2Joueurs.r = 0.035;
   game->bouton2Joueurs.g = 0.32;
   game->bouton2Joueurs.b = 0.15;
@@ -186,9 +186,9 @@ void initialisationGame(Game *game){
 
 
   game->boutonDeplacement.x = 1.1; //Rose
-  game->boutonDeplacement.y = 0.8;
-  game->boutonDeplacement.longueur = 0.2;
-  game->boutonDeplacement.hauteur = 0.05;
+  game->boutonDeplacement.y = 0.5;
+  game->boutonDeplacement.longueur = 0.3;
+  game->boutonDeplacement.hauteur = 0.1;
   game->boutonDeplacement.r = 1;
   game->boutonDeplacement.g = 0;
   game->boutonDeplacement.b = 1;
@@ -196,84 +196,92 @@ void initialisationGame(Game *game){
 
   //game->boutonAttaque.x = 1.5;
   //game->boutonAttaque.y = 0.8;
-  game->boutonAttaque.x = 1.1;
+  game->boutonAttaque.x = 1.48;
   game->boutonAttaque.y = 0.5;
-  game->boutonAttaque.longueur = 0.2;
-  game->boutonAttaque.hauteur = 0.05;
+  game->boutonAttaque.longueur = 0.3;
+  game->boutonAttaque.hauteur = 0.1;
   game->boutonAttaque.r = 0; //bleu
   game->boutonAttaque.g = 0;
   game->boutonAttaque.b = 1;
   game->boutonAttaque.valeur = ATTAQUE;
 
+  game->boutonPasser.x = 1.29;
+  game->boutonPasser.y = 0.65;
+  game->boutonPasser.longueur =0.3;
+  game->boutonPasser.hauteur =0.1;
+  game->boutonPasser.r = 1;
+  game->boutonPasser.g = 0;
+  game->boutonPasser.b = 0;
+  game->boutonPasser.valeur = PASSER;
+
   game->boutonAchat.x = 1.3;
-  game->boutonAchat.y = 0.4;
-  game->boutonAchat.longueur = 0.2;
+  game->boutonAchat.y = 0.8;
+  game->boutonAchat.longueur = 0.3;
   game->boutonAchat.hauteur = 0.1;
   game->boutonAchat.r = 0;
   game->boutonAchat.g = 1;
   game->boutonAchat.b = 1;
   game->boutonAchat.valeur = ACHAT;
 
-  game->boutonVikingMan.x = 1.;
-  game->boutonVikingMan.y = 0.1;
-  game->boutonVikingMan.longueur = 0.1;
-  game->boutonVikingMan.hauteur = 0.1;
+  game->boutonVikingMan.x = 1.1;
+  game->boutonVikingMan.y = 0.15;
+  game->boutonVikingMan.longueur = 0.15;
+  game->boutonVikingMan.hauteur = 0.15;
   game->boutonVikingMan.valeur = VIKINGMAN;
 
-  game->boutonVikingBeast.x = 1.20;
-  game->boutonVikingBeast.y = 0.1;
-  game->boutonVikingBeast.longueur = 0.1;
-  game->boutonVikingBeast.hauteur = 0.1;
+  game->boutonVikingBeast.x = 1.36;
+  game->boutonVikingBeast.y = 0.15;
+  game->boutonVikingBeast.longueur = 0.15;
+  game->boutonVikingBeast.hauteur = 0.15;
   game->boutonVikingBeast.valeur = VIKINGBEAST;
 
-  game->boutonVikingWoman.x = 1.40;
-  game->boutonVikingWoman.y = 0.1;
-  game->boutonVikingWoman.longueur = 0.1;
-  game->boutonVikingWoman.hauteur = 0.1;
+  game->boutonVikingWoman.x = 1.62;
+  game->boutonVikingWoman.y = 0.15;
+  game->boutonVikingWoman.longueur = 0.15;
+  game->boutonVikingWoman.hauteur = 0.15;
   game->boutonVikingWoman.valeur = VIKINGWOMAN;
 
-  game->boutonVikingWizard.x = 1.60;
-  game->boutonVikingWizard.y = 0.1;
-  game->boutonVikingWizard.longueur = 0.1;
-  game->boutonVikingWizard.hauteur = 0.1;
+  game->boutonVikingWizard.x = 1.1;
+  game->boutonVikingWizard.y = 0.35;
+  game->boutonVikingWizard.longueur = 0.15;
+  game->boutonVikingWizard.hauteur = 0.15;
   game->boutonVikingWizard.valeur = VIKINGWIZARD;
 
-  game->boutonVikingChief.x = 1.8;
-  game->boutonVikingChief.y = 0.1;
-  game->boutonVikingChief.longueur = 0.1;
-  game->boutonVikingChief.hauteur = 0.1;
+  game->boutonVikingChief.x = 1.36;
+  game->boutonVikingChief.y = 0.35;
+  game->boutonVikingChief.longueur = 0.15;
+  game->boutonVikingChief.hauteur = 0.15;
   game->boutonVikingChief.valeur = VIKINGCHIEF;
 
-  game->boutonDeadBeast.x = 1.20;
-  game->boutonDeadBeast.y = 0.1;
-  game->boutonDeadBeast.longueur = 0.1;
-  game->boutonDeadBeast.hauteur = 0.1;
-  game->boutonDeadBeast.valeur = DEADBEAST;
-
-  game->boutonDeadKnight.x = 1.0;
-  game->boutonDeadKnight.y = 0.1;
-  game->boutonDeadKnight.longueur = 0.1;
-  game->boutonDeadKnight.hauteur = 0.1;
-  game->boutonDeadKnight.valeur = DEADKNIGHT;
-
-  game->boutonDeadWizard.x = 1.60;
-  game->boutonDeadWizard.y = 0.1;
-  game->boutonDeadWizard.longueur = 0.1;
-  game->boutonDeadWizard.hauteur = 0.1;
-  game->boutonDeadWizard.valeur = DEADWIZARD;
-
-  game->boutonDeadMan.x = 1.4;
-  game->boutonDeadMan.y = 0.1;
-  game->boutonDeadMan.longueur = 0.1;
-  game->boutonDeadMan.hauteur = 0.1;
+  game->boutonDeadMan.x = 1.1;
+  game->boutonDeadMan.y = 0.15;
+  game->boutonDeadMan.longueur = 0.15;
+  game->boutonDeadMan.hauteur = 0.15;
   game->boutonDeadMan.valeur = DEADMAN;
 
-  game->boutonDeadChief.x = 1.80;
-  game->boutonDeadChief.y = 0.1;
-  game->boutonDeadChief.longueur = 0.1;
-  game->boutonDeadChief.hauteur = 0.1;
-  game->boutonDeadChief.valeur = DEADCHIEF;
+  game->boutonDeadBeast.x = 1.36;
+  game->boutonDeadBeast.y = 0.15;
+  game->boutonDeadBeast.longueur = 0.15;
+  game->boutonDeadBeast.hauteur = 0.15;
+  game->boutonDeadBeast.valeur = DEADBEAST;
 
+  game->boutonDeadKnight.x = 1.62;
+  game->boutonDeadKnight.y = 0.15;
+  game->boutonDeadKnight.longueur = 0.15;
+  game->boutonDeadKnight.hauteur = 0.15;
+  game->boutonDeadKnight.valeur = DEADKNIGHT;
+
+  game->boutonDeadWizard.x = 1.1;
+  game->boutonDeadWizard.y = 0.35;
+  game->boutonDeadWizard.longueur = 0.15;
+  game->boutonDeadWizard.hauteur = 0.15;
+  game->boutonDeadWizard.valeur = DEADWIZARD;
+
+  game->boutonDeadChief.x = 1.36;
+  game->boutonDeadChief.y = 0.35;
+  game->boutonDeadChief.longueur = 0.15;
+  game->boutonDeadChief.hauteur = 0.15;
+  game->boutonDeadChief.valeur = DEADCHIEF;
 
   game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement
   game->modeJeu = ORDI_MODE;
@@ -289,23 +297,9 @@ void initialisationGame(Game *game){
   game->ySurvol=-1;
   //Initialisation textes
 
-  game->policeTextes[TEXTE_BOUTON_DEPLACEMENT] = NULL;
-  game->textureTextes[TEXTE_BOUTON_DEPLACEMENT] = NULL;
 
-  game->policeTextes[TEXTE_BOUTON_ATTAQUE] = NULL;
-  game->textureTextes[TEXTE_BOUTON_ATTAQUE] = NULL;
-
-  game->policeTextes[TEXTE_BOUTON1J] = NULL;
-  game->textureTextes[TEXTE_BOUTON1J] = NULL;
-
-  game->policeTextes[TEXTE_BOUTON2J] = NULL;
-  game->textureTextes[TEXTE_BOUTON2J] = NULL;
-
-  game->policeTextes[TEXTE_PV] = NULL;
-  game->textureTextes[TEXTE_PV] = NULL;
-
-
-  game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
+  game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 35);
+  game->policeTextes[SOUSTITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
   game->policeTextes[NORMAL] = TTF_OpenFont("src/fonts/normal.ttf", 25);
 
 

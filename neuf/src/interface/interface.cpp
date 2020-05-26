@@ -121,6 +121,10 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON_ATTAQUE]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON1J]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_BOUTON2J]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_PRIX]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ1]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ2]);
+
     //SDL_FreeSurface(image);
 
     SDL_Quit();
@@ -170,6 +174,7 @@ void carre(float x, float y, Joueur joueur, int choix){
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
   *x = (int)(1+10*(*x)*aspectRatio/(float)surface->w);
   *y = (int)(1+10*(*y)/(float)surface->h);
+
 }
 
 

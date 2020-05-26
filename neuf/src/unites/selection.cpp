@@ -55,6 +55,7 @@ bool verifUniteEnnemie(int tour, Game* game, int x,int y){
     return false;
     cout << "probl vient unite ennemie" << endl;
   }
+  cout<<"unite ennemie selectionnee"<<endl;
   return true;
 }
 
@@ -69,8 +70,11 @@ bool verificationDistance(Joueur joueur, int x, int y, int id, Game* game){
 // Vérifie que La créature a le droit d'attaquer à cet endroit là en fonction de ses caractéristiques
 bool verificationZoneTir(Joueur joueur, int x, int y, int id, Game* game){
   if(abs(joueur.unites[id].coord[0]-(x-1))+abs(joueur.unites[id].coord[1]-(y-1))>joueur.unites[id].zoneDeTir){
+    cout<<"zone de tir fausse"<<endl;
     return false;
+
   }
+  cout<<"zone de tir bonne"<<endl;
   return true;
 }
 
