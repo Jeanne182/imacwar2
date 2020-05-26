@@ -24,9 +24,7 @@ void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surface
 }
 
 void creationTexture(GLuint *texture, SDL_Surface* image){
-
   //SDL_Surface* image = IMG_Load(chemin_image);
-
   if(image==NULL){
     printf("L'image de la carte n'a pas pu se charger");
     exit(1);

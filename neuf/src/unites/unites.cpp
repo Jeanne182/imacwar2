@@ -184,6 +184,12 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   int yAttaque=-1;
   int idEnnemi=-1;
   selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
+
+  //ERREUR D'ARRONDI REGLEE AVEC CA
+
+  // xAttaque = (float)((e.button.x)*game->aspectRatio/(float)game->surface->w);
+  // yAttaque = (float)((e.button.y)/(float)game->surface->h);
+
   if(verifUniteEnnemie(joueurEnnemi->tour, game, xAttaque, yAttaque)==true && verificationZoneTir(*joueurTour, xAttaque, yAttaque, id, game)==true){//rajouter zone de tire
     cout << "attaque gooo" << endl;
 
@@ -279,26 +285,30 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     char* force = conversionTexteDyna(unite.force*100, "Force (%) : ");
     char* defense = conversionTexteDyna(unite.defense*100, "Défense (%) : ");
     char* zone = conversionTexteDyna(unite.zoneDeTir, "Zone de tir (cases) : ");
-    char* deplacement = conversionTexteDyna(unite.distance, "Distance de déplacement (cases) : ");
+    char* deplacement = conversionTexteDyna(unite.distance, "Capacité de déplacement (cases) : ");
+
+    creationTexte(&game->surfaceTextes[TEXTE_PV], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_FORCE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_FORCE], force, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_DEFENSE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_DEFENSE], defense, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_ZONE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_ZONE], zone, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_RANGE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_RANGE], deplacement, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_PRIX], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PRIX], prix, SDL_Color{255,255,255});
 
     if(game->etapeJeu == PLACEMENT_UNITES){
-      creationTexte(&game->surfaceTextes[TEXTE_PRIX], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PRIX], prix, SDL_Color{255,255,255});
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.4, 0.5);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.1, 0.55);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.58);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.61);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.64);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.67);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.70);
     }
-    creationTexte(&game->surfaceTextes[TEXTE_PV], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
-    affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.4, 0.55);
-
-    creationTexte(&game->surfaceTextes[TEXTE_FORCE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_FORCE], force, SDL_Color{255,255,255});
-    affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.4, 0.6);
-
-    creationTexte(&game->surfaceTextes[TEXTE_DEFENSE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_DEFENSE], defense, SDL_Color{255,255,255});
-    affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.4, 0.65);
-
-    creationTexte(&game->surfaceTextes[TEXTE_ZONE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_ZONE], zone, SDL_Color{255,255,255});
-    affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.4, 0.7);
-
-    creationTexte(&game->surfaceTextes[TEXTE_RANGE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_RANGE], deplacement, SDL_Color{255,255,255});
-    affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.4, 0.75);
+    else{
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.4, 0.63);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.4, 0.66);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.4, 0.69);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.4, 0.72);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.4, 0.75);
+    }
 
     free(deplacement);
     free(zone);
@@ -384,7 +394,13 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
       {
         if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
         {
-          if(map[y-1+j][ x-1 + i]!=ARBRE && map[y-1+j][ x-1 + i]!=EAU  && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+          if(map[y-1+j][ x-1 + i]!=ARBRE &&
+             map[y-1+j][ x-1 + i]!=EAU &&
+             map[y-1+j][ x-1 + i]!=EAUHG &&
+             map[y-1+j][ x-1 + i]!=EAUHD &&
+             map[y-1+j][ x-1 + i]!=EAUBG &&
+             map[y-1+j][ x-1 + i]!=EAUBD &&
+             x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
             carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           }
         }

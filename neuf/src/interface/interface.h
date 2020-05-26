@@ -27,26 +27,29 @@ typedef struct Bouton{
   float r, g, b, x, y, hauteur, longueur, valeur;
 } Bouton;
 
+enum EnumFonds{
+    MENUDEBUT=0,
+    MENUNORMAL
+  };
+
 enum EnumTexturesCarte{
     PLAINE=0, //Steeve a dit d'init toutes les premieres enums a 0
     EAU,
-    ARBRE,
     EAUHG,
     EAUHD,
     EAUBD,
     EAUBG,
+    ARBRE,
     JOUEUR1,
     JOUEUR2
-
   };
-
 
 enum EnumBoutons{
     RIEN=0,//Steeve a dit d'init toutes les premieres enums a 0
     ACHAT,
     DEPLACEMENT,
     ATTAQUE,
-    ABANDON,
+    PASSER,
     MULTIJOUEURS,
     ORDI_MODE,
     CLIC
