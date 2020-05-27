@@ -33,7 +33,8 @@ A FAIRE :
 
 - Modifier les fonctions qui prennent e en paramètre (Assez urgent)
 
-
+- Ne faire afficher la zone de surbrillance pour la zone de placement que lorsque le joueur a appuyé sur "achat"
+- Attaque impossible quand l'unité est sur la case du dessus ou d'à côté (quel côté ?)
 FAIT :
 -> Valider les formules (perte de force)
 -> Valider où on met les unites mortes

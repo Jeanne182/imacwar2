@@ -24,13 +24,13 @@ void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
     for(int j=0; j<10; j++){
       if(map[j][i]==JOUEUR1){
         if(xOptimal==-1){
-          xOptimal = j+1;
-          yOptimal = i+1;
+          xOptimal = i+1;
+          yOptimal = j+1;
         }
         else{
-          if(abs(xOptimal-xOrdi)+abs(yOptimal-yOrdi)>abs(j+1-xOrdi)+abs(i+1-yOrdi)){
-            xOptimal = j+1;
-            yOptimal = i+1;
+          if(abs(xOptimal-xOrdi)+abs(yOptimal-yOrdi)>abs(i+1-xOrdi)+abs(j+1-yOrdi)){
+            xOptimal = i+1;
+            yOptimal = j+1;
           }
         }
       }
@@ -47,9 +47,10 @@ void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud> ch
   int yChemin = chemin.back().y;
   cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
   while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
-    chemin.pop_back();
+
     xChemin = chemin.back().x;
     yChemin = chemin.back().y;
+    chemin.pop_back();
     cout<<"X3 : " << xChemin <<" Y3 : " << yChemin <<endl;
   }
   *x = xChemin;
@@ -57,10 +58,7 @@ void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud> ch
   cout << "x et y séléctionnés : " << *x <<" , "<<*y<<endl;
 }
 
-list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible){
-
-  //Regarder noeuds voisins
-
+list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
   Noeud startNode;
   Noeud endNode;
   Noeud currentNode;
@@ -84,10 +82,10 @@ list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible){
   closeList.push_back(currentNode);
 
   //On place les noeuds voisins dans l'openList
-  Noeud noeudHaut;
-  Noeud noeudBas;
-  Noeud noeudDroite;
-  Noeud noeudGauche;
+
+
+
+
   Noeud noeudFin;
 
   Noeud noeudQualite;
@@ -96,34 +94,53 @@ list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible){
   while(currentNode.x != xCible || currentNode.y != yCible) {
     i++;
 
-    noeudHaut.x = currentNode.x;
-    noeudHaut.y = currentNode.y - 1;
-
-    noeudBas.x = currentNode.x;
-    noeudBas.y = currentNode.y + 1;
-
-    noeudDroite.x = currentNode.x + 1;
-    noeudDroite.y = currentNode.y;
-
-    noeudGauche.x = currentNode.x - 1;
-    noeudGauche.y = currentNode.y;
-
-    //On vérifie que les noeuds ne sont dans aucune liste
-    if(!verificationDansListe(openList, noeudHaut) && !verificationDansListe(closeList, noeudHaut)){
-      cout<<"yes"<<endl;
-      openList.push_back(noeudHaut);
+    if(currentNode.x >0 && currentNode.x<=10 && currentNode.y-1>0 && currentNode.y-1<=10){
+      Noeud noeudHaut;
+      cout<<"Noeud haut"<<endl;
+      noeudHaut.x = currentNode.x;
+      noeudHaut.y = currentNode.y - 1;
+      noeudHaut.terrain = map[noeudHaut.x-1][noeudHaut.y-1];
+      if(!verificationDansListe(openList, noeudHaut) && !verificationDansListe(closeList, noeudHaut) && noeudHaut.terrain == PLAINE){
+        cout<<"Noeud haut"<<endl;
+        openList.push_back(noeudHaut);
+      }
     }
 
-    if(!verificationDansListe(openList, noeudBas) && !verificationDansListe(closeList, noeudBas)){
-      openList.push_back(noeudBas);
+    if(currentNode.x >0 && currentNode.x<=10 && currentNode.y+1>0 && currentNode.y+1<=10){
+      cout<<"Noeud bas"<<endl;
+      Noeud noeudBas;
+      noeudBas.x = currentNode.x;
+      noeudBas.y = currentNode.y + 1;
+      noeudBas.terrain = map[noeudBas.x-1][noeudBas.y-1];
+      if(!verificationDansListe(openList, noeudBas) && !verificationDansListe(closeList, noeudBas) && noeudBas.terrain == PLAINE){
+        cout<<"Noeud bas"<<endl;
+        openList.push_back(noeudBas);
+      }
     }
 
-    if(!verificationDansListe(openList, noeudGauche) && !verificationDansListe(closeList, noeudGauche))/* && noeudHaut.terrain == PLAINE*/{
-      openList.push_back(noeudGauche);
+
+    if(currentNode.x+1 >0 && currentNode.x+1<=10 && currentNode.y>0 && currentNode.y<=10){
+      cout<<"Noeud droite"<<endl;
+      Noeud noeudDroite;
+      noeudDroite.x = currentNode.x + 1;
+      noeudDroite.y = currentNode.y;
+      noeudDroite.terrain = map[noeudDroite.x-1][noeudDroite.y-1];
+      if(!verificationDansListe(openList, noeudDroite)&& !verificationDansListe(closeList, noeudDroite) && noeudDroite.terrain == PLAINE){
+        cout<<"Noeud droite"<<endl;
+        openList.push_back(noeudDroite);
+      }
     }
 
-    if(!verificationDansListe(openList, noeudDroite)&& !verificationDansListe(closeList, noeudDroite)){
-      openList.push_back(noeudDroite);
+    if(currentNode.x-1 >0 && currentNode.x-1<=10 && currentNode.y>0 && currentNode.y<=10){
+      cout<<"Noeud gauche"<<endl;
+      Noeud noeudGauche;
+      noeudGauche.x = currentNode.x - 1;
+      noeudGauche.y = currentNode.y;
+      noeudGauche.terrain = map[noeudGauche.x-1][noeudGauche.y-1];
+      if(!verificationDansListe(openList, noeudGauche) && !verificationDansListe(closeList, noeudGauche) && noeudGauche.terrain == PLAINE)/* && noeudHaut.terrain == PLAINE*/{
+        cout<<"Noeud gauche"<<endl;
+        openList.push_back(noeudGauche);
+      }
     }
 
     if(openList.empty()){

@@ -19,6 +19,6 @@ typedef struct Noeud{
 bool verificationDansListe(list<Noeud> liste, Noeud noeud);
 void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]);
 void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud> chemin);
-list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible); 
+list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]);
 
 #endif

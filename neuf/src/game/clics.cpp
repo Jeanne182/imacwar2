@@ -1,6 +1,7 @@
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "game/game.h"
+#include "game/a_star.h"
 using namespace std;
 
 void gererClic(Game* game, SDL_Event e){
@@ -104,39 +105,62 @@ void gererClic(Game* game, SDL_Event e){
           break;
 
         case TOUR_JOUEUR2:
-          switch (game->choix){
-
-            case RIEN:
-              if(game->id2 != selectionIdUnite(game->x, game->y, game->joueur2)){
-                game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
+          switch(game->modeJeu){
+            case ORDI_MODE:{
+              for(int idOrdi=0; idOrdi<game->joueur2.nbUnitesInitial; idOrdi++){
+                int xCible = -1;
+                int yCible = -1;
+                int xOrdi = game->joueur2.unites[idOrdi].coord[0];
+                int yOrdi = game->joueur2.unites[idOrdi].coord[1];
+                if(game->joueur2.unites[idOrdi].vie!=0){
+                  choixCible(xOrdi, yOrdi,&xCible,&yCible, game->map);
+                  list<Noeud> chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->map);
+                  caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
+                  insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+                }
               }
-              if(selectionBouton(game, e) == DEPLACEMENT){
-                game->choix = DEPLACEMENT;
-                cout<<"CHOIX : déplacement"<<endl;
-              }
-              else if(selectionBouton(game, e) == ATTAQUE){
-                game->choix = ATTAQUE;
-                cout<<"CHOIX : attaque"<<endl;
+              // game->joueur2.unites[idOrdi].coord[0] = xOrdi;
+              // game->joueur2.unites[idOrdi].coord[1] = yOrdi;
+              // game->map[yOrdi-1][xOrdi-1]= JOUEUR2;
               }
               break;
 
-            case DEPLACEMENT:
-              deplacement(&game->joueur2, game->id2, e, game);
-              if(selectionBouton(game, e) == ATTAQUE){
-                game->choix = ATTAQUE;
-                cout<<"CHOIX : attaque"<<endl;
-              }
-              cout<<"Prochain tour de jeu:" <<game->tour<<endl;
-            break;
+            case MULTIJOUEURS:
+              switch (game->choix){
 
-            case ATTAQUE:
-              attaque(&game->joueur2, &game->joueur1, game->id2, e, game);
-              if(selectionBouton(game, e) == DEPLACEMENT){
-                game->choix = DEPLACEMENT;
-                cout<<"CHOIX : déplacement"<<endl;
+                case RIEN:
+                  if(game->id2 != selectionIdUnite(game->x, game->y, game->joueur2)){
+                    game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
+                  }
+                  if(selectionBouton(game, e) == DEPLACEMENT){
+                    game->choix = DEPLACEMENT;
+                    cout<<"CHOIX : déplacement"<<endl;
+                  }
+                  else if(selectionBouton(game, e) == ATTAQUE){
+                    game->choix = ATTAQUE;
+                    cout<<"CHOIX : attaque"<<endl;
+                  }
+                  break;
+
+                case DEPLACEMENT:
+                  deplacement(&game->joueur2, game->id2, e, game);
+                  if(selectionBouton(game, e) == ATTAQUE){
+                    game->choix = ATTAQUE;
+                    cout<<"CHOIX : attaque"<<endl;
+                  }
+                  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+                break;
+
+                case ATTAQUE:
+                  attaque(&game->joueur2, &game->joueur1, game->id2, e, game);
+                  if(selectionBouton(game, e) == DEPLACEMENT){
+                    game->choix = DEPLACEMENT;
+                    cout<<"CHOIX : déplacement"<<endl;
+                  }
+                  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+                break;
               }
-              cout<<"Prochain tour de jeu:" <<game->tour<<endl;
-            break;
+              break;
           }
           break;
 

@@ -17,13 +17,14 @@ int main(){
   creationTexture(&game.textfond,game.surffond);
 
   int loop = 1;
-
+  //Test a-star;
   int xDepart = 2;
   int yDepart = 5;
 
   int xCible= 7;
   int yCible= 8;
-  list<Noeud> chemin = a_star(xDepart, yDepart, xCible, yCible);
+
+  list<Noeud> chemin = a_star(xDepart, yDepart, xCible, yCible, game.map);
   caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
 
   while(loop){
