@@ -39,16 +39,16 @@ void gererClic(Game* game, SDL_Event e){
         case TOUR_JOUEUR1:
         cout <<"joueur1"<<endl;
           if(selectionIdUnite(game->x, game->y, game->joueur1) != -1){
-            game->etapeJeu = ACTIONS;
             game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
+            game->etapeJeu = ACTIONS;
             cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
           }
           break;
 
         case TOUR_JOUEUR2:
           if(selectionIdUnite(game->x, game->y, game->joueur2) != -1){
-            game->etapeJeu = ACTIONS;
             game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
+            game->etapeJeu = ACTIONS;
             cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
           }
           break;
@@ -68,9 +68,12 @@ void gererClic(Game* game, SDL_Event e){
           switch (game->choix){
 
             case RIEN:
+
               if(game->id1 != selectionIdUnite(game->x, game->y, game->joueur1)){
                 game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
+
               }
+              cout << "game id 1 : " << game->id1 << endl;
               if(selectionBouton(game, e) == DEPLACEMENT){
                 game->choix = DEPLACEMENT;
                 cout<<"CHOIX : déplacement"<<endl;
