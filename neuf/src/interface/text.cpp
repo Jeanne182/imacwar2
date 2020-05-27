@@ -28,6 +28,15 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
   creationTexte(&surfaceTextes[TEXTE_BOUTON_PASSER],  policeTextes[TITRES_BOUTONS], &textureTextes[TEXTE_BOUTON_PASSER], "Passer", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON1J], "1 joueur", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON2J], "2 joueurs", SDL_Color{63,63,63});
+  creationTexte(&surfaceTextes[TEXTE_CHOIX],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_CHOIX], "Veuillez constituer votre armée", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_PLACEMENT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_PLACEMENT], "Placez votre guerrier", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_SELECTION],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_SELECTION], "Sélectionnez un de vos guerriers", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_ACTION],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_ACTION], "Choisissez une action à effectuer", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_JOUEUR1_GAGNANT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_JOUEUR1_GAGNANT], "Bravo, votre place est assurée au Valhalla, vous vous êtes bien battus guerriers", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_JOUEUR2_GAGNANT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_JOUEUR2_GAGNANT], "L'armée des morts a triomphé sur le Bien, Loki se repaît de cette victoire", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_EGALITE],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_EGALITE], "Personne ne gagne aujourd'hui", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_CARACTERISTIQUES],  policeTextes[TITRE_MEDIUM], &textureTextes[TEXTE_CARACTERISTIQUES], "Caractéristiques de l'unité", SDL_Color{255,255,255});
+
 }
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){ //, float longueur, float largeur, float x, float y

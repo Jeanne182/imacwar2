@@ -174,9 +174,11 @@ int main(){
 
         case PLACEMENT_UNITES:
 
+
         switch (game.etapeAchatUnite) {
 
           case ACHAT_UNITE:
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_CHOIX], game.textureTextes[TEXTE_CHOIX], 1.21, 0.12);
           bouton(game.boutonAchat);
           affichageTexture(game.texturebouton,game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
           affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON_ACHAT], game.textureTextes[TEXTE_BOUTON_ACHAT], (float)game.boutonAchat.x+0.07, (float)game.boutonAchat.y+0.01);
@@ -212,7 +214,6 @@ int main(){
                 if(game.textureTextes[TEXTE_PIECESJ2]!=NULL){
                   glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
                 }
-
                 affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.05);
                 char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
                 creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
@@ -226,13 +227,18 @@ int main(){
               break;
             }
 
-            // case SELECTION_UNITE:
+
+
+
+
             // carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
 
 
           break;
 
+
           case CHOIX_EMPLACEMENT:
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_PLACEMENT], game.textureTextes[TEXTE_PLACEMENT], 1.28, 0.12);
           if(game.tour == TOUR_JOUEUR1){
             glColor3f(1,1,1);
             affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.05);
@@ -260,12 +266,27 @@ int main(){
 
         }
         break;
+        case SELECTION_UNITE:
+          switch (game.tour){
+            case TOUR_JOUEUR1:
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_SELECTION], game.textureTextes[TEXTE_SELECTION], 1.2, 0.5);
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.4);
+            break;
+            case TOUR_JOUEUR2:
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_SELECTION], game.textureTextes[TEXTE_SELECTION], 1.2, 0.5);
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.4);
+            break;
+
+          }
+
+        break;
 
         case ACTIONS:
           bouton(game.boutonPasser);
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_ACTION], game.textureTextes[TEXTE_ACTION], 1.2, 0.2);
           affichageTexture(game.texturebouton,game.boutonAttaque.longueur,game.boutonAttaque.hauteur,game.boutonAttaque.x,game.boutonAttaque.y);
           affichageTexture(game.texturebouton,game.boutonDeplacement.longueur,game.boutonDeplacement.hauteur,game.boutonDeplacement.x,game.boutonDeplacement.y);
           affichageTexture(game.texturebouton,game.boutonPasser.longueur,game.boutonPasser.hauteur,game.boutonPasser.x,game.boutonPasser.y);
@@ -375,7 +396,7 @@ int main(){
                 if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR1)){
                   affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 }
-                
+
                 int id = selectionIdUnite(i+1, j+1, game.joueur1);
                 affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 break;

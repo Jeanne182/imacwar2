@@ -2,6 +2,7 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "game/a_star.h"
+#include "interface/text.h"
 using namespace std;
 
 void gererClic(Game* game, SDL_Event e){
@@ -32,13 +33,13 @@ void gererClic(Game* game, SDL_Event e){
 
     //Partie du jeu où les joueurs sélectionnent l'unité avec laquelle ils vont agir
     case SELECTION_UNITE:
-
       //sélection des coordonnées d'une unité du joueur dont c'est le tour
       selectionCoordonnee(&game->x,&game->y, e, game->surface);
       switch(game->tour){
 
         case TOUR_JOUEUR1:
         cout <<"joueur1"<<endl;
+        
           if(selectionIdUnite(game->x, game->y, game->joueur1) != -1){
             game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
             game->etapeJeu = ACTIONS;
