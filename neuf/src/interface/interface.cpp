@@ -136,6 +136,16 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR1]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR2]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_NOM_UNIT]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_PLACEMENT]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_CHOIX]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_SELECTION]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_ACTION]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR1_GAGNANT]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR2_GAGNANT]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_EGALITE]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_CARACTERISTIQUES]);
+
+
 
     glDeleteTextures(1,&game->textfond[MENUDEBUT]);
     glDeleteTextures(1,&game->textfond[MENUNORMAL]);

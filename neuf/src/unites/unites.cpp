@@ -310,12 +310,13 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
       affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.73);
     }
     else{
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_NOM_UNIT], game->textureTextes[TEXTE_NOM_UNIT], 1.1, 0.1);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.15);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.18);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.21);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.24);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.27);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_CARACTERISTIQUES], game->textureTextes[TEXTE_CARACTERISTIQUES], 1.1, 0.63);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_NOM_UNIT], game->textureTextes[TEXTE_NOM_UNIT], 1.1, 0.7);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.75);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.78);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.81);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.84);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.87);
     }
 
 

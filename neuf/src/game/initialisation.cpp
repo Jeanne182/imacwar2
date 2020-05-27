@@ -221,7 +221,7 @@ void initialisationGame(Game *game){
 
 
   game->boutonDeplacement.x = 1.1; //Rose
-  game->boutonDeplacement.y = 0.5;
+  game->boutonDeplacement.y = 0.3;
   game->boutonDeplacement.longueur = 0.3;
   game->boutonDeplacement.hauteur = 0.1;
   game->boutonDeplacement.r = 1;
@@ -233,7 +233,7 @@ void initialisationGame(Game *game){
   //game->boutonAttaque.x = 1.5;
   //game->boutonAttaque.y = 0.8;
   game->boutonAttaque.x = 1.48;
-  game->boutonAttaque.y = 0.5;
+  game->boutonAttaque.y = 0.3;
   game->boutonAttaque.longueur = 0.3;
   game->boutonAttaque.hauteur = 0.1;
   game->boutonAttaque.r = 0; //bleu
@@ -243,7 +243,7 @@ void initialisationGame(Game *game){
   game->boutonAttaque.valeur = ATTAQUE;
 
   game->boutonPasser.x = 1.29;
-  game->boutonPasser.y = 0.65;
+  game->boutonPasser.y = 0.45;
   game->boutonPasser.longueur =0.3;
   game->boutonPasser.hauteur =0.1;
   game->boutonPasser.r = 1;
@@ -262,64 +262,64 @@ void initialisationGame(Game *game){
   game->boutonAchat.a = 0;
   game->boutonAchat.valeur = ACHAT;
 
-  game->boutonVikingMan.x = 1.1;
-  game->boutonVikingMan.y = 0.15;
-  game->boutonVikingMan.longueur = 0.15;
-  game->boutonVikingMan.hauteur = 0.15;
+  game->boutonVikingMan.x = 1.15;
+  game->boutonVikingMan.y = 0.2;
+  game->boutonVikingMan.longueur = 0.12;
+  game->boutonVikingMan.hauteur = 0.12;
   game->boutonVikingMan.valeur = VIKINGMAN;
 
-  game->boutonVikingBeast.x = 1.36;
-  game->boutonVikingBeast.y = 0.15;
-  game->boutonVikingBeast.longueur = 0.15;
-  game->boutonVikingBeast.hauteur = 0.15;
+  game->boutonVikingBeast.x = 1.385;
+  game->boutonVikingBeast.y = 0.2;
+  game->boutonVikingBeast.longueur = 0.12;
+  game->boutonVikingBeast.hauteur = 0.12;
   game->boutonVikingBeast.valeur = VIKINGBEAST;
 
   game->boutonVikingWoman.x = 1.62;
-  game->boutonVikingWoman.y = 0.15;
-  game->boutonVikingWoman.longueur = 0.15;
-  game->boutonVikingWoman.hauteur = 0.15;
+  game->boutonVikingWoman.y = 0.2;
+  game->boutonVikingWoman.longueur = 0.12;
+  game->boutonVikingWoman.hauteur = 0.12;
   game->boutonVikingWoman.valeur = VIKINGWOMAN;
 
-  game->boutonVikingWizard.x = 1.1;
+  game->boutonVikingWizard.x = 1.15;
   game->boutonVikingWizard.y = 0.35;
-  game->boutonVikingWizard.longueur = 0.15;
-  game->boutonVikingWizard.hauteur = 0.15;
+  game->boutonVikingWizard.longueur = 0.12;
+  game->boutonVikingWizard.hauteur = 0.12;
   game->boutonVikingWizard.valeur = VIKINGWIZARD;
 
-  game->boutonVikingChief.x = 1.36;
+  game->boutonVikingChief.x = 1.385;
   game->boutonVikingChief.y = 0.35;
-  game->boutonVikingChief.longueur = 0.15;
-  game->boutonVikingChief.hauteur = 0.15;
+  game->boutonVikingChief.longueur = 0.12;
+  game->boutonVikingChief.hauteur = 0.12;
   game->boutonVikingChief.valeur = VIKINGCHIEF;
 
-  game->boutonDeadMan.x = 1.1;
-  game->boutonDeadMan.y = 0.15;
-  game->boutonDeadMan.longueur = 0.15;
-  game->boutonDeadMan.hauteur = 0.15;
+  game->boutonDeadMan.x = 1.15;
+  game->boutonDeadMan.y = 0.2;
+  game->boutonDeadMan.longueur = 0.12;
+  game->boutonDeadMan.hauteur = 0.12;
   game->boutonDeadMan.valeur = DEADMAN;
 
-  game->boutonDeadBeast.x = 1.36;
-  game->boutonDeadBeast.y = 0.15;
-  game->boutonDeadBeast.longueur = 0.15;
-  game->boutonDeadBeast.hauteur = 0.15;
+  game->boutonDeadBeast.x = 1.385;
+  game->boutonDeadBeast.y = 0.2;
+  game->boutonDeadBeast.longueur = 0.12;
+  game->boutonDeadBeast.hauteur = 0.12;
   game->boutonDeadBeast.valeur = DEADBEAST;
 
   game->boutonDeadKnight.x = 1.62;
-  game->boutonDeadKnight.y = 0.15;
-  game->boutonDeadKnight.longueur = 0.15;
-  game->boutonDeadKnight.hauteur = 0.15;
+  game->boutonDeadKnight.y = 0.2;
+  game->boutonDeadKnight.longueur = 0.12;
+  game->boutonDeadKnight.hauteur = 0.12;
   game->boutonDeadKnight.valeur = DEADKNIGHT;
 
-  game->boutonDeadWizard.x = 1.1;
+  game->boutonDeadWizard.x = 1.15;
   game->boutonDeadWizard.y = 0.35;
-  game->boutonDeadWizard.longueur = 0.15;
-  game->boutonDeadWizard.hauteur = 0.15;
+  game->boutonDeadWizard.longueur = 0.12;
+  game->boutonDeadWizard.hauteur = 0.12;
   game->boutonDeadWizard.valeur = DEADWIZARD;
 
-  game->boutonDeadChief.x = 1.36;
+  game->boutonDeadChief.x = 1.385;
   game->boutonDeadChief.y = 0.35;
-  game->boutonDeadChief.longueur = 0.15;
-  game->boutonDeadChief.hauteur = 0.15;
+  game->boutonDeadChief.longueur = 0.12;
+  game->boutonDeadChief.hauteur = 0.12;
   game->boutonDeadChief.valeur = DEADCHIEF;
 
   game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement
@@ -338,8 +338,8 @@ void initialisationGame(Game *game){
 
 
   game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 35);
+  game->policeTextes[TITRE_MEDIUM] = TTF_OpenFont("src/fonts/anirm.ttf", 30);
   game->policeTextes[TITRES_BOUTONS] = TTF_OpenFont("src/fonts/anirm.ttf", 25);
-
   game->policeTextes[SOUSTITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
   game->policeTextes[NORMAL] = TTF_OpenFont("src/fonts/normal.ttf", 25);
 
