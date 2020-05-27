@@ -30,6 +30,7 @@ enum Enum_Textes{
 
   enum Polices{
     TITRES=0, //Steeve a dit d'init toutes les premieres enums a 0
+    SOUSTITRES,
     NORMAL
   };
 

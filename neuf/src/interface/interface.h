@@ -27,22 +27,29 @@ typedef struct Bouton{
   float r, g, b, x, y, hauteur, longueur, valeur;
 } Bouton;
 
+enum EnumFonds{
+    MENUDEBUT=0,
+    MENUNORMAL
+  };
+
 enum EnumTexturesCarte{
     PLAINE=0, //Steeve a dit d'init toutes les premieres enums a 0
     EAU,
+    EAUHG,
+    EAUHD,
+    EAUBD,
+    EAUBG,
     ARBRE,
     JOUEUR1,
-    JOUEUR2,
-
+    JOUEUR2
   };
-
 
 enum EnumBoutons{
     RIEN=0,//Steeve a dit d'init toutes les premieres enums a 0
     ACHAT,
     DEPLACEMENT,
     ATTAQUE,
-    ABANDON,
+    PASSER,
     MULTIJOUEURS,
     ORDI_MODE,
     CLIC
@@ -91,7 +98,7 @@ int selectionBoutonUnite(Game* game, SDL_Event e);
 
 /*textures.cpp*/
 
-void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]);  //à placer
+void initialisationTexturesCarte(GLuint textureCases[10], SDL_Surface* surfaceCases[10]);  //à placer
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]);
 void creationTexture(GLuint *texture, SDL_Surface* image);
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);

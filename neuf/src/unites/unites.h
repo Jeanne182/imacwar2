@@ -38,7 +38,6 @@ typedef struct Unite{
   int distance;
   int zoneDeTir;
   int prix;
-
 } Unite;
 
 typedef struct Joueur{

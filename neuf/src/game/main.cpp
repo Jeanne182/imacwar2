@@ -9,23 +9,24 @@
 
 int main(){
 
+
   Game game;
   initialisationGame(&game);
 
   initialisationTextes(game.surfaceTextes, game.policeTextes, game.textureTextes);
 
-  creationTexture(&game.textfond,game.surffond);
+  creationTexture(&game.textfond[MENUDEBUT],game.surffond[MENUDEBUT]);
+  creationTexture(&game.textfond[MENUNORMAL],game.surffond[MENUNORMAL]);
 
   int loop = 1;
-  //Test a-star;
-  int xDepart = 2;
-  int yDepart = 5;
-
-  int xCible= 7;
-  int yCible= 8;
-
-  list<Noeud> chemin = a_star(xDepart, yDepart, xCible, yCible, game.map);
-  caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
+  //
+  // int xDepart = 2;
+  // int yDepart = 5;
+  //
+  // int xCible= 7;
+  // int yCible= 8;
+  // list<Noeud> chemin = a_star(xDepart, yDepart, xCible, yCible);
+  // caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */
@@ -38,6 +39,7 @@ int main(){
       glColor3f(1,1,1);
 
       if(game.etapeJeu != MENU){
+        affichageTexture(game.textfond[MENUNORMAL],0.875,1,1,0);
         for(int i = 0; i<10; i++){
           for(int j = 0; j<10; j++){
             switch(game.map[j][i]){
@@ -54,6 +56,26 @@ int main(){
               affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
+              case EAUBD:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUBD],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case EAUBG:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUBG],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case EAUHG:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUHG],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case EAUHD:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[EAUHD],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
               case JOUEUR1:
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
@@ -62,11 +84,15 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
+
+
             }
 
           }
         }
       }
+
+
       // for(int x=0; x<=10; x++){
       //   for(int y=0; y<=10; y++){
       //     if(game.map[y-1][x-1]==PLAINE){
@@ -90,7 +116,7 @@ int main(){
 
       switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
         case MENU:
-          affichageTexture(game.textfond,game.aspectRatio,1,0,0);
+          affichageTexture(game.textfond[MENUDEBUT],game.aspectRatio,1,0,0);
           bouton(game.bouton1Joueur);
           bouton(game.bouton2Joueurs);
           affichageTextureTextes(&game.surfaceTextes[TEXTE_BOUTON1J], game.textureTextes[TEXTE_BOUTON1J], (float)game.bouton1Joueur.x+0.023, (float)game.bouton1Joueur.y+0.002);
@@ -133,6 +159,7 @@ int main(){
         glColor3f(1,1,1);
 
 
+
         //affichageTexture(descriptionVikingBeast, game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
         // if(game.textureTextes[TEXTE_PV]!=NULL){
         //   affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
@@ -143,8 +170,8 @@ int main(){
                 glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ1]);
               }
               char* piecesj1 = conversionTexteDyna(game.joueur1.pieces, "Pièces joueur 1 : ");
-              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[TITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
-              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ1], game.textureTextes[TEXTE_PIECESJ1], 1.05, 0.02);
+              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ1], game.textureTextes[TEXTE_PIECESJ1], 1.06, 0.05);
               affichageTexture(game.textureUnites[VIKINGWOMAN],game.boutonVikingWoman.longueur,game.boutonVikingWoman.hauteur,game.boutonVikingWoman.x,game.boutonVikingWoman.y);
               affichageTexture(game.textureUnites[VIKINGMAN],game.boutonVikingMan.longueur,game.boutonVikingMan.hauteur,game.boutonVikingMan.x,game.boutonVikingMan.y);
               affichageTexture(game.textureUnites[VIKINGBEAST],game.boutonVikingBeast.longueur,game.boutonVikingBeast.hauteur,game.boutonVikingBeast.x,game.boutonVikingBeast.y);
@@ -157,8 +184,8 @@ int main(){
                 glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
               }
               char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
-              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[TITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
-              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ2], game.textureTextes[TEXTE_PIECESJ2], 1.05, 0.02);
+              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ2], game.textureTextes[TEXTE_PIECESJ2], 1.06, 0.05);
               affichageTexture(game.textureUnites[DEADKNIGHT],game.boutonDeadKnight.longueur,game.boutonDeadKnight.hauteur,game.boutonDeadKnight.x,game.boutonDeadKnight.y);
               affichageTexture(game.textureUnites[DEADBEAST],game.boutonDeadBeast.longueur,game.boutonDeadBeast.hauteur,game.boutonDeadBeast.x,game.boutonDeadBeast.y);
               affichageTexture(game.textureUnites[DEADWIZARD],game.boutonDeadWizard.longueur,game.boutonDeadWizard.hauteur,game.boutonDeadWizard.x,game.boutonDeadWizard.y);
@@ -173,6 +200,7 @@ int main(){
         // carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
 
         case ACTIONS:
+          bouton(game.boutonPasser);
           bouton(game.boutonDeplacement);
           bouton(game.boutonAttaque);
           glColor3f(1,1,1);
@@ -328,6 +356,15 @@ int main(){
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
               if (e.button.button == SDL_BUTTON_LEFT){
+                cout<<"e.button " <<e.button.x<<" "<<e.button.y<<endl<<endl;
+                // float xTest = 0;
+                // float yTest = 0;
+                // //selectionCoordonnee(&xTest, &yTest, e, game.surface);
+                // //cout<<"Test"<<xTest<<" "<<yTest<<endl;
+                // xTest = (float)(1+10*(e.button.x)*game.aspectRatio/(float)game.surface->w);
+                // yTest = (float)(1+10*(e.button.y)/(float)game.surface->h);
+                // cout<<"Test"<<xTest<<" "<<yTest<<endl<<endl;
+
                 gererClic(&game,e);
               }
 
@@ -356,7 +393,8 @@ int main(){
   glDisable(GL_TEXTURE_2D);
 
   TTF_CloseFont(game.policeTextes[TITRES]);
-
+  TTF_CloseFont(game.policeTextes[SOUSTITRES]);
+  TTF_CloseFont(game.policeTextes[NORMAL]);
   // je comprends pas pq quand on enleve tout ca il met plus free() invalid pointer
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON_ATTAQUE]);
@@ -366,6 +404,10 @@ int main(){
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_FORCE]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_ZONE]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_RANGE]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_PRIX]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ1]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ2]);
+
 
 
   finProgrammeSDL(&game);

@@ -48,10 +48,7 @@ void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, c
 }
 
 void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]){ //changer la taille du tableau
-  // creationTexte(surfaceTextes, police, &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "src/fonts/SummitAttack.ttf", 10, "Déplacement", SDL_Color{255, 255, 255});
-  // creationTexte(&textes[TEXTE_BOUTON_ATTAQUE], "src/fonts/SummitAttack.ttf", 10, "Attaque", SDL_Color{255,255,255});
-  // creationTexte(&textes[TEXTE_BOUTON_ACHAT], "src/fonts/SummitAttack.ttf", 10, "Achat", SDL_Color{255,255,255});
-  creationTexte(&surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], policeTextes[TITRES], &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "Déplacement", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], policeTextes[TITRES], &textureTextes[TEXTE_BOUTON_DEPLACEMENT], "Déplacement", SDL_Color{0,255,255});
   creationTexte(&surfaceTextes[TEXTE_BOUTON_ATTAQUE],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON_ATTAQUE], "Attaque", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON1J], "1 joueur", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON2J], "2 joueurs", SDL_Color{255,255,255});

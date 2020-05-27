@@ -1,9 +1,13 @@
 #include "interface/interface.h"
 using namespace std;
-void initialisationTexturesCarte(GLuint textureCases[3], SDL_Surface* surfaceCases[3]){
+void initialisationTexturesCarte(GLuint textureCases[10], SDL_Surface* surfaceCases[10]){
     creationTexture(&textureCases[PLAINE], surfaceCases[PLAINE]);
     creationTexture(&textureCases[EAU], surfaceCases[EAU]);
     creationTexture(&textureCases[ARBRE], surfaceCases[ARBRE]);
+    creationTexture(&textureCases[EAUBD], surfaceCases[EAUBD]);
+    creationTexture(&textureCases[EAUBG], surfaceCases[EAUBG]);
+    creationTexture(&textureCases[EAUHG], surfaceCases[EAUHG]);
+    creationTexture(&textureCases[EAUHD], surfaceCases[EAUHD]);
 }
 
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]){
@@ -20,9 +24,7 @@ void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surface
 }
 
 void creationTexture(GLuint *texture, SDL_Surface* image){
-
   //SDL_Surface* image = IMG_Load(chemin_image);
-
   if(image==NULL){
     printf("L'image de la carte n'a pas pu se charger");
     exit(1);

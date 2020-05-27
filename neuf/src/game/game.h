@@ -37,7 +37,7 @@ typedef struct Game {
   Game();
   Joueur joueur1, joueur2;
   Unite unites[10];//Nain, Hobbit, Elfe, Humain, Gandalf, Orque, Smeagol, Urukhai, Nazgul, Saruman;
-  Bouton boutonDeplacement, boutonAttaque, boutonAchat, bouton1Joueur, bouton2Joueurs;
+  Bouton boutonDeplacement, boutonAttaque, boutonPasser, boutonAchat, bouton1Joueur, bouton2Joueurs;
   Bouton boutonVikingBeast, boutonVikingWoman, boutonVikingWizard, boutonVikingMan, boutonVikingChief, boutonDeadBeast, boutonDeadKnight, boutonDeadWizard, boutonDeadMan, boutonDeadChief;
   int etapeJeu, modeJeu;
   int tour;
@@ -48,11 +48,11 @@ typedef struct Game {
 
   SDL_Surface* surface;
 
-  SDL_Surface* surffond;
-  GLuint textfond;
+  SDL_Surface* surffond[3];
+  GLuint textfond[3];
 
-  SDL_Surface* surfaceCases[3];
-  GLuint textureCases[3];
+  SDL_Surface* surfaceCases[10];
+  GLuint textureCases[10];
 
   SDL_Surface* surfaceUnites[10];
   GLuint textureUnites[10];

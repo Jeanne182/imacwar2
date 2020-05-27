@@ -42,10 +42,19 @@ void initBoutonUnites(Bouton bouton, float r, float g, float b, float a){
 }
 
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur){
-  selectionCoordonnee(&game->x, &game->y, e, game->surface);
+  //selectionCoordonnee(&game->x, &game->y, e, game->surface);
+  //ERREUR D'ARRONDI REGLEE AVEC CA
+  float newX = 0;
+  float newY = 0;
+  //selectionCoordonnee(&xTest, &yTest, e, game.surface);
 
-  float newX = (float)(game->x - 1)/10;
-  float newY = (float)(game->y - 1)/10;
+  newX = (float)((e.button.x)*game->aspectRatio/(float)game->surface->w);
+  newY = (float)((e.button.y)/(float)game->surface->h);
+
+
+  // float newX = (float)(game->x - 1)/10;
+  // float newY = (float)(game->y - 1)/10;
+
   if(newX >= bouton.x && newX <= bouton.x + bouton.longueur && newY >= bouton.y && newY <= bouton.y + bouton.hauteur){
       cout << "test clic bouton :" << bouton.valeur << endl;
     return bouton.valeur;
