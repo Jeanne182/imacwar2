@@ -47,6 +47,10 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
+              case PLAINECHG:
+              affichageTexture(game.textureCases[PLAINECHG],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
               case EAU:
               affichageTexture(game.textureCases[EAU],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
@@ -54,6 +58,46 @@ int main(){
               case ARBRE:
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               affichageTexture(game.textureCases[ARBRE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE1:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE1],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE2:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE2],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE4:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE4],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE5:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE5],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE6:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE6],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE7:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE7],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE8:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE8],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              break;
+
+              case ARBRE9:
+              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[ARBRE9],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
               case EAUBD:
@@ -77,11 +121,11 @@ int main(){
               break;
 
               case JOUEUR1:
-              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[game.mapInit[j][i]],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
               case JOUEUR2:
-              affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+              affichageTexture(game.textureCases[game.mapInit[j][i]],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
 
 
@@ -226,29 +270,29 @@ int main(){
 
           if(game.tour == TOUR_JOUEUR1){
 
-            if(game.choix == RIEN){
+            //if(game.choix == RIEN){
               carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
 
-            }
+            //}
 
               if(game.choix == DEPLACEMENT){
-                zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
+                zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, DEPLACEMENT);
               }
               else if(game.choix == ATTAQUE){
-                zoneSurbrillance(game.joueur1,game.id1, game.map, ATTAQUE);
+                zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, ATTAQUE);
               }
           }
           if(game.tour == TOUR_JOUEUR2){
 
-            if(game.choix == RIEN){
+            //if(game.choix == RIEN){
               carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
 
-            }
+            //}
               if(game.choix == DEPLACEMENT){
-                zoneSurbrillance(game.joueur2,game.id2, game.map, DEPLACEMENT);
+                zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, DEPLACEMENT);
               }
               else if(game.choix == ATTAQUE){
-                zoneSurbrillance(game.joueur2,game.id2, game.map, ATTAQUE);
+                zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, ATTAQUE);
               }
           }
           // if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
@@ -275,7 +319,7 @@ int main(){
           if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10 && game.etapeJeu!= PLACEMENT_UNITES){
             switch(game.map[game.ySurvol-1][game.xSurvol-1]){
               case JOUEUR1:{
-                zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.map, DEPLACEMENT);
+                zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT);
                 // int xCoord = 0;
                 // int yCoord = 0;
                 // selectionCoordonnee(&xCoord, &yCoord, e, game.surface);
@@ -287,7 +331,7 @@ int main(){
                 }
                 break;
               case JOUEUR2:
-                zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.map, DEPLACEMENT);
+                zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT);
                 Unite uniteCoord = game.joueur2.unites[game.idUniteSurvolee];
                 if(game.idUniteSurvolee!=-1){
                   etatUnite(uniteCoord, &game);
@@ -324,6 +368,7 @@ int main(){
                 if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR1)){
                   affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 }
+                
                 int id = selectionIdUnite(i+1, j+1, game.joueur1);
                 affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 break;
@@ -333,6 +378,9 @@ int main(){
               case JOUEUR2:{
                 if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR2)){
                   affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+                }
+                else{
+                  affichageTexture(game.textureCases[game.mapInit[j][i]],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 }
                 int id = selectionIdUnite(i+1, j+1, game.joueur2);
                 affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);

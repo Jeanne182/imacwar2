@@ -70,11 +70,6 @@ void gererClic(Game* game, SDL_Event e){
 
             case RIEN:
 
-              if(game->id1 != selectionIdUnite(game->x, game->y, game->joueur1)){
-                game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
-
-              }
-              cout << "game id 1 : " << game->id1 << endl;
               if(selectionBouton(game, e) == DEPLACEMENT){
                 game->choix = DEPLACEMENT;
                 cout<<"CHOIX : déplacement"<<endl;
@@ -82,6 +77,13 @@ void gererClic(Game* game, SDL_Event e){
               else if(selectionBouton(game, e) == ATTAQUE){
                 game->choix = ATTAQUE;
                 cout<<"CHOIX : attaque"<<endl;
+              }
+              else{
+                selectionCoordonnee(&game->x,&game->y, e, game->surface);
+                if(game->id1 != selectionIdUnite(game->x, game->y, game->joueur1)){
+                  game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
+
+                }
               }
               break;
 
@@ -132,9 +134,7 @@ void gererClic(Game* game, SDL_Event e){
               switch (game->choix){
 
                 case RIEN:
-                  if(game->id2 != selectionIdUnite(game->x, game->y, game->joueur2)){
-                    game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
-                  }
+
                   if(selectionBouton(game, e) == DEPLACEMENT){
                     game->choix = DEPLACEMENT;
                     cout<<"CHOIX : déplacement"<<endl;
@@ -142,6 +142,12 @@ void gererClic(Game* game, SDL_Event e){
                   else if(selectionBouton(game, e) == ATTAQUE){
                     game->choix = ATTAQUE;
                     cout<<"CHOIX : attaque"<<endl;
+                  }
+                  else{
+                    selectionCoordonnee(&game->x,&game->y, e, game->surface);
+                    if(game->id2 != selectionIdUnite(game->x, game->y, game->joueur2)){
+                      game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
+                    }
                   }
                   break;
 

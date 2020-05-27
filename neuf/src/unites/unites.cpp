@@ -394,13 +394,16 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
       {
         if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
         {
-          if(map[y-1+j][ x-1 + i]!=ARBRE &&
-             map[y-1+j][ x-1 + i]!=EAU &&
-             map[y-1+j][ x-1 + i]!=EAUHG &&
-             map[y-1+j][ x-1 + i]!=EAUHD &&
-             map[y-1+j][ x-1 + i]!=EAUBG &&
-             map[y-1+j][ x-1 + i]!=EAUBD &&
-             x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+          // if(map[y-1+j][ x-1 + i]!=ARBRE &&
+          //    map[y-1+j][ x-1 + i]!=EAU &&
+          //    map[y-1+j][ x-1 + i]!=EAUHG &&
+          //    map[y-1+j][ x-1 + i]!=EAUHD &&
+          //    map[y-1+j][ x-1 + i]!=EAUBG &&
+          //    map[y-1+j][ x-1 + i]!=EAUBD &&
+          //    x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+          //   carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
+          // }
+          if(map[y-1+j][ x-1 + i]!=OBSTACLE && x-1+i<10 && y-1+j<10){
             carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           }
         }
@@ -414,7 +417,7 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
       {
         if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
         {
-          if(map[y-1+j][ x-1 + i]==PLAINE && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
+          if(map[y-1+j][ x-1 + i]==VIDE && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
             carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           }
         }

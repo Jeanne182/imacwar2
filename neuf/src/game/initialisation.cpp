@@ -4,36 +4,47 @@
 #include "interface/text.h"
 using namespace std;
 
-Game::Game():map{{ ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE },
-                 { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                 { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                 { ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                 { PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAU, EAUHD, PLAINE, PLAINE, PLAINE },
-                 { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, EAUBD, PLAINE, PLAINE, PLAINE },
-                 { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, PLAINE, PLAINE, PLAINE, PLAINE },
-                 { PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE, PLAINE },
+Game::Game():map{{ EAU, EAU, PLAINECHG, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { EAU, PLAINECHG, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINECHG, PLAINE, ARBRE1, ARBRE2, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, ARBRE4, ARBRE6, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, ARBRE7, ARBRE9, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, ARBRE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE },
                  { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                 { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, PLAINE, PLAINE, PLAINE }},
-            mapInit{{ ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE },
-                    { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                    { ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                    { ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-                    { PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAU, EAUHD, PLAINE, PLAINE, PLAINE },
-                    { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, EAUBD, PLAINE, PLAINE, PLAINE },
-                    { PLAINE, PLAINE, PLAINE, PLAINE, EAU, EAU, PLAINE, PLAINE, PLAINE, PLAINE },
-                    { PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE, PLAINE },
+                 { PLAINE, PLAINE, PLAINE, PLAINE, ARBRE, EAUHG, EAUHD, PLAINE, PLAINE, PLAINE }},
+            mapInit{{ EAU, EAU, PLAINECHG, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { EAU, PLAINECHG, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINECHG, PLAINE, ARBRE1, ARBRE2, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, ARBRE4, ARBRE6, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, ARBRE7, ARBRE9, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, ARBRE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE },
+                    { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE },
                     { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
                     { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, PLAINE, PLAINE, PLAINE }},
-            zonePlacement{{ 0, 0, 0, 0, 0, 2, 2, 2, 2, 2 },
-                          { 0, 0, 0, 0, 0, 0, 2, 2, 2, 2 },
-                          { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2 },
-                          { 0, 0, 0, 0, 0, 0, 0, 0, 2, 2 },
-                          { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
-                          { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                          { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
-                          { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
-                          { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
-                          { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }},xSurvol(0),ySurvol(0){} //Steeve a dit de rajouter ca
+                mapObstacles{{ OBSTACLE, OBSTACLE, VIDE, VIDE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                            { OBSTACLE, VIDE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, OBSTACLE, OBSTACLE, VIDE, VIDE },
+                            { VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                            { VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE }},
+                            zonePlacement{{ 0, 0, 0, 0, 0, 2, 2, 2, 2, 2 },
+                                          { 0, 0, 0, 0, 0, 0, 2, 2, 2, 2 },
+                                          { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2 },
+                                          { 0, 0, 0, 0, 0, 0, 0, 0, 2, 2 },
+                                          { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
+                                          { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                                          { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+                                          { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
+                                          { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
+                                          { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }},xSurvol(0),ySurvol(0){} //Steeve a dit de rajouter ca
+
 
 void initialisationGame(Game *game){
     initialisationSDL(game);//Steeve a dit de le mettre la ca
@@ -48,8 +59,17 @@ void initialisationGame(Game *game){
   game->surffond[MENUDEBUT] = IMG_Load("src/img/fond.png");
   game->surffond[MENUNORMAL] = IMG_Load("src/img/fondlat.png");
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
+  game->surfaceCases[PLAINECHG] = IMG_Load("src/img/plainechg.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
-  game->surfaceCases[ARBRE] = IMG_Load("src/img/arbre.png");
+  game->surfaceCases[ARBRE] = IMG_Load("src/img/arbres/arbre.png");
+  game->surfaceCases[ARBRE1] = IMG_Load("src/img/arbres/arbre1.png");
+  game->surfaceCases[ARBRE2] = IMG_Load("src/img/arbres/arbre2.png");
+  game->surfaceCases[ARBRE4] = IMG_Load("src/img/arbres/arbre4.png");
+  game->surfaceCases[ARBRE5] = IMG_Load("src/img/arbres/arbre5.png");
+  game->surfaceCases[ARBRE6] = IMG_Load("src/img/arbres/arbre6.png");
+  game->surfaceCases[ARBRE7] = IMG_Load("src/img/arbres/arbre7.png");
+  game->surfaceCases[ARBRE8] = IMG_Load("src/img/arbres/arbre8.png");
+  game->surfaceCases[ARBRE9] = IMG_Load("src/img/arbres/arbre9.png");
   game->surfaceCases[EAUHG] = IMG_Load("src/img/eauhg.png");
   game->surfaceCases[EAUHD] = IMG_Load("src/img/eauhd.png");
   game->surfaceCases[EAUBG] = IMG_Load("src/img/eaubg.png");

@@ -99,8 +99,17 @@ int initialisationSDL(Game* game){
 int finProgrammeSDL(Game* game){
     /* Liberation des ressources associees a la SDL */
     glDeleteTextures(1, &game->textureCases[PLAINE]);
+    glDeleteTextures(1, &game->textureCases[PLAINECHG]);
     glDeleteTextures(1, &game->textureCases[EAU]);
     glDeleteTextures(1, &game->textureCases[ARBRE]);
+    glDeleteTextures(1, &game->textureCases[ARBRE1]);
+    glDeleteTextures(1, &game->textureCases[ARBRE2]);
+    glDeleteTextures(1, &game->textureCases[ARBRE4]);
+    glDeleteTextures(1, &game->textureCases[ARBRE5]);
+    glDeleteTextures(1, &game->textureCases[ARBRE6]);
+    glDeleteTextures(1, &game->textureCases[ARBRE7]);
+    glDeleteTextures(1, &game->textureCases[ARBRE8]);
+    glDeleteTextures(1, &game->textureCases[ARBRE9]);
     glDeleteTextures(1, &game->textureCases[EAUBD]);
     glDeleteTextures(1, &game->textureCases[EAUBG]);
     glDeleteTextures(1, &game->textureCases[EAUHD]);
@@ -148,7 +157,7 @@ void carre(float x, float y, Joueur joueur, int choix){
         glColor4f(0.78, 0.27, 0.003,0.4);
       }
       else if(choix==CLIC){
-        glColor4f(0.78, 0.27, 0.003,0.7);
+        glColor4f(0.78, 0.27, 0.003,0.55);
       }
     }
     else {
@@ -159,7 +168,7 @@ void carre(float x, float y, Joueur joueur, int choix){
         glColor4f(0.40,0.01,0.33,0.4);
       }
       else if(choix==CLIC){
-        glColor4f(0.40,0.01,0.33,0.7);
+        glColor4f(0.40,0.01,0.33,0.55);
       }
     }
     glVertex2f(0.1, 0.1);
