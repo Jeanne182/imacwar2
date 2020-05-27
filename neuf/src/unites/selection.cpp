@@ -15,12 +15,14 @@ void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
     int xOld = unite->coord[0];
     int yOld = unite->coord[1];
     game->map[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
+    //game->mapObstacles[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
   }
   //cout << x << endl;
   //cout << y << endl;
   unite->coord[0]=x;
   unite->coord[1]=y;
   game->map[y-1][x-1] = tour;
+  //game->mapObstacles[y-1][x-1] = tour;
 }
 
 int selectionIdUnite(int x, int y, Joueur joueur){
@@ -43,7 +45,7 @@ bool verificationZone(Joueur joueur, int x, int y, Game* game){
 
 // Fonction qui verifie que la case est libre pour qu'un joueur puisse y mettre une unite, autrement dit que les coordonees ne sont pas deja utilisees
 bool verificationCaseLibre(Game* game, int x,int y){
-  if (game->map[y-1][x-1]!=PLAINE){
+  if (game->mapObstacles[y-1][x-1]!=VIDE){
       return false;
   }
   return true;

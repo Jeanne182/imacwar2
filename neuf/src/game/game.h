@@ -51,8 +51,8 @@ typedef struct Game {
   SDL_Surface* surffond[3];
   GLuint textfond[3];
 
-  SDL_Surface* surfaceCases[10];
-  GLuint textureCases[10];
+  SDL_Surface* surfaceCases[20];
+  GLuint textureCases[20];
 
   SDL_Surface* surfaceUnites[10];
   GLuint textureUnites[10];
@@ -74,6 +74,7 @@ typedef struct Game {
   int mapInit[10][10];
   int map[10][10];
   int zonePlacement[10][10];
+  int mapObstacles[10][10];
 
 
 
