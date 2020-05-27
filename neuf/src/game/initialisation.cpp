@@ -36,7 +36,7 @@ Game::Game():map{{ ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, ARBRE, PLAINE, PLAINE, PLA
                           { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }},xSurvol(0),ySurvol(0){} //Steeve a dit de rajouter ca
 
 void initialisationGame(Game *game){
-    initialisationSDL(game);//Steeve a dit de le mettre la ca
+  initialisationSDL(game);//Steeve a dit de le mettre la ca
   //fenetre
   game->window_width = 1500;
   game->window_height = 800;
@@ -45,6 +45,7 @@ void initialisationGame(Game *game){
   game->aspectRatio = game->window_width / (float) game->window_height;
 
   //Initialisation textures
+  game->surfacebouton = IMG_Load("src/img/bouton.png");
   game->surffond[MENUDEBUT] = IMG_Load("src/img/fond.png");
   game->surffond[MENUNORMAL] = IMG_Load("src/img/fondlat.png");
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
@@ -92,6 +93,7 @@ void initialisationGame(Game *game){
   game->unites[VIKINGMAN].zoneDeTir = 2;
   game->unites[VIKINGMAN].distance = 2;
   game->unites[VIKINGMAN].prix = 10;
+  game->unites[VIKINGMAN].nom = "Guerrier fauve";
   game->unites[VIKINGMAN].type = VIKINGMAN;
 
   game->unites[VIKINGBEAST].force = 0.6;
@@ -100,6 +102,7 @@ void initialisationGame(Game *game){
   game->unites[VIKINGBEAST].zoneDeTir = 1;
   game->unites[VIKINGBEAST].distance = 2;
   game->unites[VIKINGBEAST].prix = 20;
+  game->unites[VIKINGBEAST].nom = "Ours des montagnes";
   game->unites[VIKINGBEAST].type = VIKINGBEAST;
 
   game->unites[VIKINGWOMAN].force = 0.5;
@@ -108,6 +111,7 @@ void initialisationGame(Game *game){
   game->unites[VIKINGWOMAN].zoneDeTir = 1;
   game->unites[VIKINGWOMAN].distance = 2;
   game->unites[VIKINGWOMAN].prix = 30;
+  game->unites[VIKINGWOMAN].nom = "Guerrière sanguinaire";
   game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
 
   game->unites[VIKINGWIZARD].force = 0.3;
@@ -116,6 +120,7 @@ void initialisationGame(Game *game){
   game->unites[VIKINGWIZARD].zoneDeTir = 4;
   game->unites[VIKINGWIZARD].distance = 4;
   game->unites[VIKINGWIZARD].prix = 30;
+  game->unites[VIKINGWIZARD].nom = "Mage de feu";
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
   game->unites[VIKINGCHIEF].force = 0.6;
@@ -124,6 +129,7 @@ void initialisationGame(Game *game){
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
   game->unites[VIKINGCHIEF].distance = 2;
   game->unites[VIKINGCHIEF].prix = 50;
+  game->unites[VIKINGCHIEF].nom = "Chef viking";
   game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
 
   //Mechants :
@@ -133,6 +139,7 @@ void initialisationGame(Game *game){
   game->unites[DEADMAN].zoneDeTir = 2;
   game->unites[DEADMAN].distance = 2;
   game->unites[DEADMAN].prix = 10;
+  game->unites[DEADMAN].nom = "Marcheur noir";
   game->unites[DEADMAN].type = DEADMAN;
 
   game->unites[DEADBEAST].force = 0.6;
@@ -141,6 +148,7 @@ void initialisationGame(Game *game){
   game->unites[DEADBEAST].zoneDeTir = 1;
   game->unites[DEADBEAST].distance = 2;
   game->unites[DEADBEAST].prix =20;
+  game->unites[DEADBEAST].nom = "Loup des glaces";
   game->unites[DEADBEAST].type = DEADBEAST;
 
   game->unites[DEADKNIGHT].force = 0.5;
@@ -149,6 +157,7 @@ void initialisationGame(Game *game){
   game->unites[DEADKNIGHT].zoneDeTir = 1;
   game->unites[DEADKNIGHT].distance = 2;
   game->unites[DEADKNIGHT].prix = 30;
+  game->unites[DEADKNIGHT].nom = "Chevalier noir";
   game->unites[DEADKNIGHT].type = DEADKNIGHT;
 
   game->unites[DEADWIZARD].force = 0.3;
@@ -157,6 +166,7 @@ void initialisationGame(Game *game){
   game->unites[DEADWIZARD].zoneDeTir = 4;
   game->unites[DEADWIZARD].distance = 4;
   game->unites[DEADWIZARD].prix = 30;
+  game->unites[DEADWIZARD].nom = "Mage noir";
   game->unites[DEADWIZARD].type = DEADWIZARD;
 
   game->unites[DEADCHIEF].force = 0.6;
@@ -165,6 +175,7 @@ void initialisationGame(Game *game){
   game->unites[DEADCHIEF].zoneDeTir = 2;
   game->unites[DEADCHIEF].distance = 2;
   game->unites[DEADCHIEF].prix = 50;
+  game->unites[DEADCHIEF].nom = "Agent de la mort";
   game->unites[DEADCHIEF].type = DEADCHIEF;
 
   //Initialisation des boutons
@@ -175,6 +186,7 @@ void initialisationGame(Game *game){
   game->bouton1Joueur.r = 0.035;
   game->bouton1Joueur.g = 0.32;
   game->bouton1Joueur.b = 0.15;
+  game->bouton1Joueur.a = 0;
   game->bouton1Joueur.valeur = ORDI_MODE;
 
   game->bouton2Joueurs.x = 0.8; //Rose
@@ -184,6 +196,7 @@ void initialisationGame(Game *game){
   game->bouton2Joueurs.r = 0.035;
   game->bouton2Joueurs.g = 0.32;
   game->bouton2Joueurs.b = 0.15;
+  game->bouton2Joueurs.a = 0;
   game->bouton2Joueurs.valeur = MULTIJOUEURS;
 
 
@@ -194,6 +207,7 @@ void initialisationGame(Game *game){
   game->boutonDeplacement.r = 1;
   game->boutonDeplacement.g = 0;
   game->boutonDeplacement.b = 1;
+  game->boutonDeplacement.a = 0;
   game->boutonDeplacement.valeur = DEPLACEMENT;
 
   //game->boutonAttaque.x = 1.5;
@@ -205,6 +219,7 @@ void initialisationGame(Game *game){
   game->boutonAttaque.r = 0; //bleu
   game->boutonAttaque.g = 0;
   game->boutonAttaque.b = 1;
+  game->boutonAttaque.a = 0;
   game->boutonAttaque.valeur = ATTAQUE;
 
   game->boutonPasser.x = 1.29;
@@ -214,15 +229,17 @@ void initialisationGame(Game *game){
   game->boutonPasser.r = 1;
   game->boutonPasser.g = 0;
   game->boutonPasser.b = 0;
+  game->boutonPasser.a = 0;
   game->boutonPasser.valeur = PASSER;
 
-  game->boutonAchat.x = 1.3;
-  game->boutonAchat.y = 0.8;
-  game->boutonAchat.longueur = 0.3;
-  game->boutonAchat.hauteur = 0.1;
+  game->boutonAchat.x = 1.31;
+  game->boutonAchat.y = 0.82;
+  game->boutonAchat.longueur = 0.25;
+  game->boutonAchat.hauteur = 0.08;
   game->boutonAchat.r = 0;
-  game->boutonAchat.g = 1;
-  game->boutonAchat.b = 1;
+  game->boutonAchat.g = 0;
+  game->boutonAchat.b = 0;
+  game->boutonAchat.a = 0;
   game->boutonAchat.valeur = ACHAT;
 
   game->boutonVikingMan.x = 1.1;
@@ -301,6 +318,8 @@ void initialisationGame(Game *game){
 
 
   game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 35);
+  game->policeTextes[TITRES_BOUTONS] = TTF_OpenFont("src/fonts/anirm.ttf", 25);
+
   game->policeTextes[SOUSTITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
   game->policeTextes[NORMAL] = TTF_OpenFont("src/fonts/normal.ttf", 25);
 

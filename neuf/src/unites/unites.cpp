@@ -10,6 +10,8 @@ IMAC 1 - Projet Prog&Algo S1
 #include "interface/interface.h"
 #include "interface/text.h"
 #include "game/game.h"
+#include <iostream>
+
 using namespace std;
 
 bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
@@ -260,6 +262,9 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     // zoneSurbrillance(game->joueur1,id, game->map,DEPLACEMENT);
     // cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
 
+    if(game->textureTextes[TEXTE_NOM_UNIT]!=NULL){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_NOM_UNIT]);
+    }
     if(game->textureTextes[TEXTE_PRIX]!=NULL){
       glDeleteTextures(1, &game->textureTextes[TEXTE_PRIX]);
     }
@@ -279,7 +284,7 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
       glDeleteTextures(1, &game->textureTextes[TEXTE_RANGE]);
     }
 
-
+    char* nom = concatenation(unite.nom, "");;
     char* prix = conversionTexteDyna(unite.prix, "Prix : ");
     char* pv = conversionTexteDyna(unite.vie, "Points de vie : ");
     char* force = conversionTexteDyna(unite.force*100, "Force (%) : ");
@@ -287,6 +292,7 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     char* zone = conversionTexteDyna(unite.zoneDeTir, "Zone de tir (cases) : ");
     char* deplacement = conversionTexteDyna(unite.distance, "Capacité de déplacement (cases) : ");
 
+    creationTexte(&game->surfaceTextes[TEXTE_NOM_UNIT], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_NOM_UNIT], nom, SDL_Color{255,255,255});
     creationTexte(&game->surfaceTextes[TEXTE_PV], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
     creationTexte(&game->surfaceTextes[TEXTE_FORCE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_FORCE], force, SDL_Color{255,255,255});
     creationTexte(&game->surfaceTextes[TEXTE_DEFENSE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_DEFENSE], defense, SDL_Color{255,255,255});
@@ -295,20 +301,23 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     creationTexte(&game->surfaceTextes[TEXTE_PRIX], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PRIX], prix, SDL_Color{255,255,255});
 
     if(game->etapeJeu == PLACEMENT_UNITES){
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.1, 0.55);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.58);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.61);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.64);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.67);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.70);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_NOM_UNIT], game->textureTextes[TEXTE_NOM_UNIT], 1.1, 0.53);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.1, 0.58);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.61);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.64);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.67);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.70);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.73);
     }
     else{
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.1);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.13);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.16);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.19);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.22);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_NOM_UNIT], game->textureTextes[TEXTE_NOM_UNIT], 1.1, 0.1);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.15);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.18);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.21);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.24);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.27);
     }
+
 
     free(deplacement);
     free(zone);
@@ -316,6 +325,7 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     free(force);
     free(pv);
     free(prix);
+    free(nom);
   }
   // else{
   //   if(unite != SANS_TYPE){

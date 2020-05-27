@@ -24,7 +24,7 @@ struct Joueur;
 // Déclarations des structures
 
 typedef struct Bouton{
-  float r, g, b, x, y, hauteur, longueur, valeur;
+  float r, g, b, a, x, y, hauteur, longueur, valeur;
 } Bouton;
 
 enum EnumFonds{

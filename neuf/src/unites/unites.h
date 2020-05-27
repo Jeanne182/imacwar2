@@ -12,13 +12,14 @@ IMAC 1 - Projet Prog&Algo S1
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
-
 #include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <stdlib.h>
 #include <stdio.h>
 
+
+using namespace std;
 // Declarations des constantes :
 
 const int MAX=256;
@@ -38,6 +39,7 @@ typedef struct Unite{
   int distance;
   int zoneDeTir;
   int prix;
+  char* nom;
 } Unite;
 
 typedef struct Joueur{

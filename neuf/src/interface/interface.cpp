@@ -126,9 +126,17 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ2]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR1]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR2]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_NOM_UNIT]);
 
-    //SDL_FreeSurface(image);
+    glDeleteTextures(1,&game->textfond[MENUDEBUT]);
+    glDeleteTextures(1,&game->textfond[MENUNORMAL]);
+    glDeleteTextures(1,&game->texturebouton);
 
+    TTF_CloseFont(game->policeTextes[TITRES]);
+    TTF_CloseFont(game->policeTextes[SOUSTITRES]);
+    TTF_CloseFont(game->policeTextes[NORMAL]);
+
+    TTF_Quit();
     SDL_Quit();
 
     return EXIT_SUCCESS;
@@ -168,7 +176,7 @@ void carre(float x, float y, Joueur joueur, int choix){
     glVertex2f(0.1, 0);
     glEnd();
     glPopMatrix();
-    //glColor3f(1,1,1);
+    glColor3f(1,1,1);
 }
 
 
