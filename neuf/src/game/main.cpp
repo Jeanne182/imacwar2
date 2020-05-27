@@ -126,78 +126,83 @@ int main(){
 
 
         case PLACEMENT_UNITES:
-        bouton(game.boutonAchat);
 
+        switch (game.etapeAchatUnite) {
 
-        //etatUnite(2, &game);
-        glColor3f(1,1,1);
-        surbrillanceAchat(game.achat_type, game);
-        if(game.achat_type!=SANS_TYPE){
-          etatUnite(game.unites[game.achat_type], &game);
-        }
-
-
-
-        if(game.tour == TOUR_JOUEUR1){
-          for(int i = 0; i<10; i++){
-            for(int j = 0; j<10; j++){
-                if(game.zonePlacement[j][i]==1){
-                  carre(i+1,j+1, game.joueur1, ACHAT_UNITE);
-                }
-            }
+          case ACHAT_UNITE:
+          bouton(game.boutonAchat);
+          //etatUnite(2, &game);
+          glColor3f(1,1,1);
+          surbrillanceAchat(game.achat_type, game);
+          if(game.achat_type!=SANS_TYPE){
+            etatUnite(game.unites[game.achat_type], &game);
           }
-        }
-        else{
-          for(int i = 0; i<10; i++){
-            for(int j = 0; j<10; j++){
-                if(game.zonePlacement[j][i]==2){
-                  carre(i+1,j+1, game.joueur2, ACHAT_UNITE);
+
+          //affichageTexture(descriptionVikingBeast, game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+          // if(game.textureTextes[TEXTE_PV]!=NULL){
+          //   affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
+          // }
+            switch (game.tour) {
+              case TOUR_JOUEUR1:
+                {if(game.textureTextes[TEXTE_PIECESJ1]!=NULL){
+                  glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ1]);
                 }
-            }
-          }
-        }
-        glColor3f(1,1,1);
-
-
-
-        //affichageTexture(descriptionVikingBeast, game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
-        // if(game.textureTextes[TEXTE_PV]!=NULL){
-        //   affichageTextureTextes(game.textureTextes[TEXTE_PV], game.boutonAchat.longueur,game.boutonAchat.hauteur,game.boutonAchat.x,game.boutonAchat.y);
-        // }
-          switch (game.tour) {
-            case TOUR_JOUEUR1:
-              {if(game.textureTextes[TEXTE_PIECESJ1]!=NULL){
-                glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ1]);
-              }
-              char* piecesj1 = conversionTexteDyna(game.joueur1.pieces, "Pièces joueur 1 : ");
-              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
-              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ1], game.textureTextes[TEXTE_PIECESJ1], 1.06, 0.05);
-              affichageTexture(game.textureUnites[VIKINGWOMAN],game.boutonVikingWoman.longueur,game.boutonVikingWoman.hauteur,game.boutonVikingWoman.x,game.boutonVikingWoman.y);
-              affichageTexture(game.textureUnites[VIKINGMAN],game.boutonVikingMan.longueur,game.boutonVikingMan.hauteur,game.boutonVikingMan.x,game.boutonVikingMan.y);
-              affichageTexture(game.textureUnites[VIKINGBEAST],game.boutonVikingBeast.longueur,game.boutonVikingBeast.hauteur,game.boutonVikingBeast.x,game.boutonVikingBeast.y);
-              affichageTexture(game.textureUnites[VIKINGWIZARD],game.boutonVikingWizard.longueur,game.boutonVikingWizard.hauteur,game.boutonVikingWizard.x,game.boutonVikingWizard.y);
-              affichageTexture(game.textureUnites[VIKINGCHIEF],game.boutonVikingChief.longueur,game.boutonVikingChief.hauteur,game.boutonVikingChief.x,game.boutonVikingChief.y);
-              free(piecesj1);}
+                char* piecesj1 = conversionTexteDyna(game.joueur1.pieces, "Pièces joueur 1 : ");
+                creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
+                affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ1], game.textureTextes[TEXTE_PIECESJ1], 1.06, 0.05);
+                affichageTexture(game.textureUnites[VIKINGWOMAN],game.boutonVikingWoman.longueur,game.boutonVikingWoman.hauteur,game.boutonVikingWoman.x,game.boutonVikingWoman.y);
+                affichageTexture(game.textureUnites[VIKINGMAN],game.boutonVikingMan.longueur,game.boutonVikingMan.hauteur,game.boutonVikingMan.x,game.boutonVikingMan.y);
+                affichageTexture(game.textureUnites[VIKINGBEAST],game.boutonVikingBeast.longueur,game.boutonVikingBeast.hauteur,game.boutonVikingBeast.x,game.boutonVikingBeast.y);
+                affichageTexture(game.textureUnites[VIKINGWIZARD],game.boutonVikingWizard.longueur,game.boutonVikingWizard.hauteur,game.boutonVikingWizard.x,game.boutonVikingWizard.y);
+                affichageTexture(game.textureUnites[VIKINGCHIEF],game.boutonVikingChief.longueur,game.boutonVikingChief.hauteur,game.boutonVikingChief.x,game.boutonVikingChief.y);
+                free(piecesj1);}
+                break;
+              case TOUR_JOUEUR2:
+                {if(game.textureTextes[TEXTE_PIECESJ2]!=NULL){
+                  glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
+                }
+                char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
+                creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
+                affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ2], game.textureTextes[TEXTE_PIECESJ2], 1.06, 0.05);
+                affichageTexture(game.textureUnites[DEADKNIGHT],game.boutonDeadKnight.longueur,game.boutonDeadKnight.hauteur,game.boutonDeadKnight.x,game.boutonDeadKnight.y);
+                affichageTexture(game.textureUnites[DEADBEAST],game.boutonDeadBeast.longueur,game.boutonDeadBeast.hauteur,game.boutonDeadBeast.x,game.boutonDeadBeast.y);
+                affichageTexture(game.textureUnites[DEADWIZARD],game.boutonDeadWizard.longueur,game.boutonDeadWizard.hauteur,game.boutonDeadWizard.x,game.boutonDeadWizard.y);
+                affichageTexture(game.textureUnites[DEADMAN],game.boutonDeadMan.longueur,game.boutonDeadMan.hauteur,game.boutonDeadMan.x,game.boutonDeadMan.y);
+                affichageTexture(game.textureUnites[DEADCHIEF],game.boutonDeadChief.longueur,game.boutonDeadChief.hauteur,game.boutonDeadChief.x,game.boutonDeadChief.y);
+                free(piecesj2);}
               break;
-            case TOUR_JOUEUR2:
-              {if(game.textureTextes[TEXTE_PIECESJ2]!=NULL){
-                glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
-              }
-              char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
-              creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
-              affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ2], game.textureTextes[TEXTE_PIECESJ2], 1.06, 0.05);
-              affichageTexture(game.textureUnites[DEADKNIGHT],game.boutonDeadKnight.longueur,game.boutonDeadKnight.hauteur,game.boutonDeadKnight.x,game.boutonDeadKnight.y);
-              affichageTexture(game.textureUnites[DEADBEAST],game.boutonDeadBeast.longueur,game.boutonDeadBeast.hauteur,game.boutonDeadBeast.x,game.boutonDeadBeast.y);
-              affichageTexture(game.textureUnites[DEADWIZARD],game.boutonDeadWizard.longueur,game.boutonDeadWizard.hauteur,game.boutonDeadWizard.x,game.boutonDeadWizard.y);
-              affichageTexture(game.textureUnites[DEADMAN],game.boutonDeadMan.longueur,game.boutonDeadMan.hauteur,game.boutonDeadMan.x,game.boutonDeadMan.y);
-              affichageTexture(game.textureUnites[DEADCHIEF],game.boutonDeadChief.longueur,game.boutonDeadChief.hauteur,game.boutonDeadChief.x,game.boutonDeadChief.y);
-              free(piecesj2);}
-            break;
-          }
+            }
+
+            // case SELECTION_UNITE:
+            // carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
+
+
           break;
 
-        // case SELECTION_UNITE:
-        // carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
+          case CHOIX_EMPLACEMENT:
+          if(game.tour == TOUR_JOUEUR1){
+            for(int i = 0; i<10; i++){
+              for(int j = 0; j<10; j++){
+                  if(game.zonePlacement[j][i]==1){
+                    carre(i+1,j+1, game.joueur1, ACHAT_UNITE);
+                  }
+              }
+            }
+          }
+          else{
+            for(int i = 0; i<10; i++){
+              for(int j = 0; j<10; j++){
+                  if(game.zonePlacement[j][i]==2){
+                    carre(i+1,j+1, game.joueur2, ACHAT_UNITE);
+                  }
+              }
+            }
+          }
+          glColor3f(1,1,1);
+          break;
+
+        }
+        break;
 
         case ACTIONS:
           bouton(game.boutonPasser);
@@ -210,10 +215,11 @@ int main(){
 
 
           if(game.tour == TOUR_JOUEUR1){
-            //if(game.choix == RIEN){
-              //carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
 
-            //}
+            if(game.choix == RIEN){
+              carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
+
+            }
 
               if(game.choix == DEPLACEMENT){
                 zoneSurbrillance(game.joueur1,game.id1, game.map, DEPLACEMENT);
@@ -223,7 +229,11 @@ int main(){
               }
           }
           if(game.tour == TOUR_JOUEUR2){
-            //carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
+
+            if(game.choix == RIEN){
+              carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
+
+            }
               if(game.choix == DEPLACEMENT){
                 zoneSurbrillance(game.joueur2,game.id2, game.map, DEPLACEMENT);
               }
