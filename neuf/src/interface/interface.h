@@ -34,7 +34,9 @@ enum EnumFonds{
 
 enum EnumObstacles{
     OBSTACLE=0,
-    VIDE
+    VIDE,
+    JOUEUR1,
+    JOUEUR2
   };
 
 enum EnumTexturesCarte{
@@ -54,8 +56,7 @@ enum EnumTexturesCarte{
     ARBRE7,
     ARBRE8,
     ARBRE9,
-    JOUEUR1,
-    JOUEUR2
+
   };
 
 enum EnumBoutons{

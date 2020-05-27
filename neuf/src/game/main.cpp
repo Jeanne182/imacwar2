@@ -120,7 +120,14 @@ int main(){
               affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               affichageTexture(game.textureCases[EAUHD],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
+            }
 
+          }
+        }
+
+        for(int i = 0; i<10; i++){
+          for(int j = 0; j<10; j++){
+            switch(game.mapObstacles[j][i]){
               case JOUEUR1:
               affichageTexture(game.textureCases[game.mapInit[j][i]],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
@@ -128,13 +135,11 @@ int main(){
               case JOUEUR2:
               affichageTexture(game.textureCases[game.mapInit[j][i]],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
               break;
-
-
-
             }
-
           }
         }
+
+
       }
 
 
@@ -297,10 +302,7 @@ int main(){
 
           if(game.tour == TOUR_JOUEUR1){
 
-            //if(game.choix == RIEN){
               carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
-
-            //}
 
               if(game.choix == DEPLACEMENT){
                 zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, DEPLACEMENT);
@@ -311,10 +313,8 @@ int main(){
           }
           if(game.tour == TOUR_JOUEUR2){
 
-            //if(game.choix == RIEN){
               carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
 
-            //}
               if(game.choix == DEPLACEMENT){
                 zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, DEPLACEMENT);
               }
@@ -344,9 +344,12 @@ int main(){
           // }
 
           if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10 && game.etapeJeu!= PLACEMENT_UNITES){
-            switch(game.map[game.ySurvol-1][game.xSurvol-1]){
+            switch(game.mapObstacles[game.ySurvol-1][game.xSurvol-1]){
               case JOUEUR1:{
                 zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT);
+
+
+
                 // int xCoord = 0;
                 // int yCoord = 0;
                 // selectionCoordonnee(&xCoord, &yCoord, e, game.surface);
@@ -389,28 +392,26 @@ int main(){
       if(game.etapeJeu != MENU){
         for(int i = 0; i<10; i++){
           for(int j = 0; j<10; j++){
-            switch(game.map[j][i]){
+            switch(game.mapObstacles[j][i]){
 
 
               case JOUEUR1:{
-                if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR1)){
+                int id = selectionIdUnite(i+1, j+1, game.joueur1);
+
+                if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR1 && id != game.id1)){
                   affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 }
-
-                int id = selectionIdUnite(i+1, j+1, game.joueur1);
                 affichageTexture(game.textureUnites[game.joueur1.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 break;
               }
 
 
               case JOUEUR2:{
-                if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR2)){
+                int id = selectionIdUnite(i+1, j+1, game.joueur2);
+                if(game.etapeJeu == PLACEMENT_UNITES || (game.choix == ATTAQUE && game.tour == TOUR_JOUEUR2 && id != game.id2)){
                   affichageTexture(game.textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 }
-                else{
-                  affichageTexture(game.textureCases[game.mapInit[j][i]],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-                }
-                int id = selectionIdUnite(i+1, j+1, game.joueur2);
+
                 affichageTexture(game.textureUnites[game.joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
                 break;
               }
