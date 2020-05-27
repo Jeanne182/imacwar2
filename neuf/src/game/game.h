@@ -45,8 +45,10 @@ typedef struct Game {
   int etapeAchatUnite;
   int achat_type;
 
-
   SDL_Surface* surface;
+
+  SDL_Surface* surfacebouton;
+  GLuint texturebouton;
 
   SDL_Surface* surffond[3];
   GLuint textfond[3];

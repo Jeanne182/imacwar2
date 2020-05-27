@@ -16,6 +16,7 @@ enum Enum_Textes{
   TEXTE_BOUTON_DEPLACEMENT = 0, //Steeve a dit d'init toutes les premieres enums a 0
   TEXTE_BOUTON_ATTAQUE,
   TEXTE_BOUTON_ACHAT,
+  TEXTE_BOUTON_PASSER,
   TEXTE_BOUTON1J,
   TEXTE_BOUTON2J,
   TEXTE_PV,
@@ -27,12 +28,14 @@ enum Enum_Textes{
   TEXTE_PIECESJ1,
   TEXTE_PIECESJ2,
   TEXTE_JOUEUR1,
-  TEXTE_JOUEUR2
+  TEXTE_JOUEUR2,
+  TEXTE_NOM_UNIT
   };
 
   enum Polices{
     TITRES=0, //Steeve a dit d'init toutes les premieres enums a 0
     SOUSTITRES,
+    TITRES_BOUTONS,
     NORMAL
   };
 
@@ -51,4 +54,5 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y); //, float longueur, float largeur, float x, float y
 char* conversionTexteDyna(int valeur, char* phrase);
+char* concatenation(char* phraseUn, char* phraseDeux);
 #endif

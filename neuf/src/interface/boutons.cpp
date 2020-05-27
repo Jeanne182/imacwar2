@@ -11,10 +11,11 @@ void bouton(Bouton bouton){
   float r = bouton.r;
   float g = bouton.g;
   float b = bouton.b;
+  float a = bouton.a;
 
   glPushMatrix();
     glBegin(GL_POLYGON);
-    glColor3f(r,g,b);
+    glColor4f(r,g,b,a);
     glVertex2f(x, y);
     glVertex2f(x + longueur, y);
     glVertex2f(x + longueur, y + hauteur);
