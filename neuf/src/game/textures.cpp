@@ -45,6 +45,7 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
 }
 
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
+  glColor3f(1,1,1);
   glPushMatrix();
 
         glBindTexture(GL_TEXTURE_2D, texture);

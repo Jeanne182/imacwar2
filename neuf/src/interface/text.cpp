@@ -52,6 +52,8 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
   creationTexte(&surfaceTextes[TEXTE_BOUTON_ATTAQUE],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON_ATTAQUE], "Attaque", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON1J], "1 joueur", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON2J], "2 joueurs", SDL_Color{255,255,255});
+  creationTexte(&surfaceTextes[TEXTE_JOUEUR1],  policeTextes[TITRES], &textureTextes[TEXTE_JOUEUR1], "Joueur 1", SDL_Color{199,74,1});
+  creationTexte(&surfaceTextes[TEXTE_JOUEUR2],  policeTextes[TITRES], &textureTextes[TEXTE_JOUEUR2], "Joueur 2", SDL_Color{102, 3 ,84});
 }
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){ //, float longueur, float largeur, float x, float y

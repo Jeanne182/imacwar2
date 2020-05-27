@@ -82,6 +82,8 @@ void initialisationGame(Game *game){
   game->joueur2.tour = JOUEUR2;
   game->joueur2.pieces = 100;
 
+
+
   //Initialisation des unites
   // Gentils :
   game->unites[VIKINGMAN].force = 0.4;

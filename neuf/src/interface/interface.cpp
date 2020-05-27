@@ -124,6 +124,8 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureTextes[TEXTE_PRIX]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ1]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ2]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR1]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR2]);
 
     //SDL_FreeSurface(image);
 

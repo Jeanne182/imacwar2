@@ -25,7 +25,9 @@ enum Enum_Textes{
   TEXTE_RANGE,
   TEXTE_PRIX,
   TEXTE_PIECESJ1,
-  TEXTE_PIECESJ2
+  TEXTE_PIECESJ2,
+  TEXTE_JOUEUR1,
+  TEXTE_JOUEUR2
   };
 
   enum Polices{

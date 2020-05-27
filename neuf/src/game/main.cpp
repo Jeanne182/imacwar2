@@ -139,6 +139,8 @@ int main(){
 
 
         if(game.tour == TOUR_JOUEUR1){
+          glColor3f(1,1,1);
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.08);
           for(int i = 0; i<10; i++){
             for(int j = 0; j<10; j++){
                 if(game.zonePlacement[j][i]==1){
@@ -148,6 +150,7 @@ int main(){
           }
         }
         else{
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.08);
           for(int i = 0; i<10; i++){
             for(int j = 0; j<10; j++){
                 if(game.zonePlacement[j][i]==2){
@@ -407,6 +410,9 @@ int main(){
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_PRIX]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ1]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ2]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_JOUEUR1]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_JOUEUR2]);
+
 
 
 
