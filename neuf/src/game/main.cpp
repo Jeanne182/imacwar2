@@ -146,6 +146,8 @@ int main(){
               case TOUR_JOUEUR1:
                 {if(game.textureTextes[TEXTE_PIECESJ1]!=NULL){
                   glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ1]);
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.08);
+          glColor3f(1,1,1);
                 }
                 char* piecesj1 = conversionTexteDyna(game.joueur1.pieces, "Pièces joueur 1 : ");
                 creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
@@ -160,6 +162,7 @@ int main(){
               case TOUR_JOUEUR2:
                 {if(game.textureTextes[TEXTE_PIECESJ2]!=NULL){
                   glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
+          affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.08);
                 }
                 char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
                 creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
@@ -417,6 +420,9 @@ int main(){
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_PRIX]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ1]);
   SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ2]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_JOUEUR1]);
+  SDL_FreeSurface(&game.surfaceTextes[TEXTE_JOUEUR2]);
+
 
 
 

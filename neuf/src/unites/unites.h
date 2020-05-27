@@ -42,12 +42,12 @@ typedef struct Unite{
 
 typedef struct Joueur{
   int id;
-  char pseudo[MAX];
   int pieces;
   Unite unites[nombreUnitesMAX];
   int nbUnites;
   int nbUnitesInitial;
   int tour;
+
 } Joueur;
 
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
