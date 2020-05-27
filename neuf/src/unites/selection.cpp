@@ -14,15 +14,21 @@ void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
   if (game->etapeJeu != PLACEMENT_UNITES){
     int xOld = unite->coord[0];
     int yOld = unite->coord[1];
-    game->map[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
-    //game->mapObstacles[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
+    //game->map[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
+    if(game->mapInit[yOld-1][xOld-1]!=PLAINE && game->mapInit[yOld-1][xOld-1]!=PLAINECHG && game->mapInit[yOld-1][xOld-1]!=ARBRE2){
+      game->mapObstacles[yOld-1][xOld-1] = OBSTACLE;
+    }
+    else{
+      game->mapObstacles[yOld-1][xOld-1] = VIDE;
+    }
+
   }
-  //cout << x << endl;
-  //cout << y << endl;
+
   unite->coord[0]=x;
   unite->coord[1]=y;
-  game->map[y-1][x-1] = tour;
-  //game->mapObstacles[y-1][x-1] = tour;
+  // game->map[y-1][x-1] = tour;
+  // game->mapObstacles[y-1][x-1] = OBSTACLE;
+  game->mapObstacles[y-1][x-1] = tour;
 }
 
 int selectionIdUnite(int x, int y, Joueur joueur){
@@ -53,7 +59,7 @@ bool verificationCaseLibre(Game* game, int x,int y){
 
 // Vérifie que La créature à attaquer est bien une créature ennemie
 bool verifUniteEnnemie(int tour, Game* game, int x,int y){
-  if(game->map[y-1][x-1]!=tour){
+  if(game->mapObstacles[y-1][x-1]!=tour){
     return false;
     cout << "probl vient unite ennemie" << endl;
   }
