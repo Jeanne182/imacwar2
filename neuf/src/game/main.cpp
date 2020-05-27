@@ -146,9 +146,10 @@ int main(){
               case TOUR_JOUEUR1:
                 {if(game.textureTextes[TEXTE_PIECESJ1]!=NULL){
                   glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ1]);
-          affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.08);
-          glColor3f(1,1,1);
+
                 }
+                glColor3f(1,1,1);
+                affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.08);
                 char* piecesj1 = conversionTexteDyna(game.joueur1.pieces, "Pièces joueur 1 : ");
                 creationTexte(&game.surfaceTextes[TEXTE_PIECESJ1], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
                 affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ1], game.textureTextes[TEXTE_PIECESJ1], 1.06, 0.05);
@@ -162,8 +163,9 @@ int main(){
               case TOUR_JOUEUR2:
                 {if(game.textureTextes[TEXTE_PIECESJ2]!=NULL){
                   glDeleteTextures(1, &game.textureTextes[TEXTE_PIECESJ2]);
-          affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.08);
                 }
+                glColor3f(1,1,1);
+                affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.08);
                 char* piecesj2 = conversionTexteDyna(game.joueur2.pieces, "Pièces joueur 2 : ");
                 creationTexte(&game.surfaceTextes[TEXTE_PIECESJ2], game.policeTextes[SOUSTITRES], &game.textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
                 affichageTextureTextes(&game.surfaceTextes[TEXTE_PIECESJ2], game.textureTextes[TEXTE_PIECESJ2], 1.06, 0.05);
@@ -184,6 +186,9 @@ int main(){
 
           case CHOIX_EMPLACEMENT:
           if(game.tour == TOUR_JOUEUR1){
+            glColor3f(1,1,1);
+            affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.08);
+
             for(int i = 0; i<10; i++){
               for(int j = 0; j<10; j++){
                   if(game.zonePlacement[j][i]==1){
@@ -193,6 +198,8 @@ int main(){
             }
           }
           else{
+            glColor3f(1,1,1);
+            affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.08);
             for(int i = 0; i<10; i++){
               for(int j = 0; j<10; j++){
                   if(game.zonePlacement[j][i]==2){
