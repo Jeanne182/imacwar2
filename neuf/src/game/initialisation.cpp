@@ -153,9 +153,9 @@ void initialisationGame(Game *game){
 
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
-  game->unites[VIKINGCHIEF].distance = 2;
+  //game->unites[VIKINGCHIEF].distance = 2;
   //test
-  //game->unites[VIKINGCHIEF].distance = 10;
+  game->unites[VIKINGCHIEF].distance = 10;
 
   game->unites[VIKINGCHIEF].prix = 50;
   game->unites[VIKINGCHIEF].nom = "Chef viking";
