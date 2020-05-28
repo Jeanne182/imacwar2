@@ -28,8 +28,9 @@ typedef struct Bouton{
 } Bouton;
 
 enum EnumFonds{
-    MENUDEBUT=0,
-    MENUNORMAL
+    IMG_MENUDEBUT=0,
+    IMG_MENUNORMAL,
+    IMG_MENU_FIN
   };
 
 enum EnumObstacles{
@@ -56,7 +57,6 @@ enum EnumTexturesCarte{
     ARBRE7,
     ARBRE8,
     ARBRE9,
-
   };
 
 enum EnumBoutons{
@@ -67,7 +67,9 @@ enum EnumBoutons{
     PASSER,
     MULTIJOUEURS,
     ORDI_MODE,
-    CLIC
+    CLIC,
+    REJOUER,
+    QUITTER
   };
 
 enum EnumUnites{

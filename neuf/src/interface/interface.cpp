@@ -144,14 +144,17 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureTextes[TEXTE_JOUEUR2_GAGNANT]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_EGALITE]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_CARACTERISTIQUES]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_QUITTER]);
+    glDeleteTextures(1, &game->textureTextes[TEXTE_REJOUER]);
 
-
-
-    glDeleteTextures(1,&game->textfond[MENUDEBUT]);
-    glDeleteTextures(1,&game->textfond[MENUNORMAL]);
+    glDeleteTextures(1,&game->textfond[IMG_MENUDEBUT]);
+    glDeleteTextures(1,&game->textfond[IMG_MENUNORMAL]);
+    glDeleteTextures(1,&game->textfond[IMG_MENU_FIN]);
     glDeleteTextures(1,&game->texturebouton);
 
     TTF_CloseFont(game->policeTextes[TITRES]);
+    TTF_CloseFont(game->policeTextes[TITRE_MEDIUM]);
+    TTF_CloseFont(game->policeTextes[TITRES_BOUTONS]);
     TTF_CloseFont(game->policeTextes[SOUSTITRES]);
     TTF_CloseFont(game->policeTextes[NORMAL]);
 
@@ -203,7 +206,6 @@ void carre(float x, float y, Joueur joueur, int choix){
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
   *x = (int)(1+10*(*x)*aspectRatio/(float)surface->w);
   *y = (int)(1+10*(*y)/(float)surface->h);
-
 }
 
 

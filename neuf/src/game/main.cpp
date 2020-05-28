@@ -15,8 +15,10 @@ int main(){
 
   initialisationTextes(game.surfaceTextes, game.policeTextes, game.textureTextes);
 
-  creationTexture(&game.textfond[MENUDEBUT],game.surffond[MENUDEBUT]);
-  creationTexture(&game.textfond[MENUNORMAL],game.surffond[MENUNORMAL]);
+  creationTexture(&game.textfond[IMG_MENUDEBUT],game.surffond[IMG_MENUDEBUT]);
+  creationTexture(&game.textfond[IMG_MENUNORMAL],game.surffond[IMG_MENUNORMAL]);
+  creationTexture(&game.textfond[IMG_MENU_FIN],game.surffond[IMG_MENU_FIN]);
+
   creationTexture(&game.texturebouton,game.surfacebouton);
 
   int loop = 1;
@@ -40,7 +42,7 @@ int main(){
       glColor3f(1,1,1);
 
       if(game.etapeJeu != MENU){
-        affichageTexture(game.textfond[MENUNORMAL],0.875,1,1,0);
+        affichageTexture(game.textfond[IMG_MENUNORMAL],0.875,1,1,0);
         for(int i = 0; i<10; i++){
           for(int j = 0; j<10; j++){
             switch(game.map[j][i]){
@@ -166,7 +168,7 @@ int main(){
 
       switch (game.etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
         case MENU:
-          affichageTexture(game.textfond[MENUDEBUT],game.aspectRatio,1,0,0);
+          affichageTexture(game.textfond[IMG_MENUDEBUT],game.aspectRatio,1,0,0);
           bouton(game.bouton1Joueur);
           bouton(game.bouton2Joueurs);
           affichageTexture(game.texturebouton,game.bouton1Joueur.longueur,game.bouton1Joueur.hauteur,game.bouton1Joueur.x,game.bouton1Joueur.y);
@@ -301,6 +303,7 @@ int main(){
 
 
           if(game.tour == TOUR_JOUEUR1){
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1], game.textureTextes[TEXTE_JOUEUR1], 1.35, 0.05);
 
               carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
 
@@ -312,6 +315,8 @@ int main(){
               }
           }
           if(game.tour == TOUR_JOUEUR2){
+            affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2], game.textureTextes[TEXTE_JOUEUR2], 1.35, 0.05);
+
 
               carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
 
@@ -374,14 +379,23 @@ int main(){
           break;
 
           case FIN_JEU:
-
+            bouton(game.boutonRejouer);
+            bouton(game.boutonQuitter);
+            affichageTexture(game.textfond[IMG_MENU_FIN],game.aspectRatio,1,0,0);
+            affichageTexture(game.texturebouton,game.boutonRejouer.longueur,game.boutonRejouer.hauteur,game.boutonRejouer.x,game.boutonRejouer.y);
+            affichageTexture(game.texturebouton,game.boutonQuitter.longueur,game.boutonQuitter.hauteur,game.boutonQuitter.x,game.boutonQuitter.y);
+            affichageTextureTextes(&game.surfaceTextes[TEXTE_REJOUER], game.textureTextes[TEXTE_REJOUER], (float)game.boutonRejouer.x+0.055, (float)game.boutonRejouer.y+0.01);
+            affichageTextureTextes(&game.surfaceTextes[TEXTE_QUITTER], game.textureTextes[TEXTE_QUITTER], (float)game.boutonQuitter.x+0.055, (float)game.boutonQuitter.y+0.01);
             if(game.joueur1.nbUnites == 0 && game.joueur2.nbUnites != 0){
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR2_GAGNANT], game.textureTextes[TEXTE_JOUEUR2_GAGNANT], 0.42, 0.3);
               cout << "Gagnant : Joueur 2" << endl;
             }
             else if(game.joueur1.nbUnites != 0 && game.joueur2.nbUnites == 0){
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_JOUEUR1_GAGNANT], game.textureTextes[TEXTE_JOUEUR1_GAGNANT], 0.37, 0.3);
               cout << "Gagnant : Joueur 1" << endl;
             }
             else if(game.joueur1.nbUnites == 0 && game.joueur2.nbUnites == 0){
+              affichageTextureTextes(&game.surfaceTextes[TEXTE_EGALITE], game.textureTextes[TEXTE_EGALITE], 0.73, 0.3);
               cout << "Les deux joueurs ont perdus" << endl;
             }
           break;
@@ -389,7 +403,7 @@ int main(){
 
       glColor3f(1,1,1);
 
-      if(game.etapeJeu != MENU){
+      if(game.etapeJeu != MENU  && game.etapeJeu != FIN_JEU){
         for(int i = 0; i<10; i++){
           for(int j = 0; j<10; j++){
             switch(game.mapObstacles[j][i]){
@@ -494,8 +508,8 @@ int main(){
   // je comprends pas pq quand on enleve tout ca il met plus free() invalid pointer
   // faire un for ?
 
-  // SDL_FreeSurface(game.surffond[MENUDEBUT]);
-  // SDL_FreeSurface(game.surffond[MENUNORMAL]);
+  // SDL_FreeSurface(game.surffond[IMG_MENUDEBUT]);
+  // SDL_FreeSurface(game.surffond[IMG_MENUNORMAL]);
   // SDL_FreeSurface(game.surfaceCases[PLAINE]);
   // SDL_FreeSurface(game.surfaceCases[ARBRE]);
   // SDL_FreeSurface(game.surfaceCases[EAU]);
