@@ -57,8 +57,9 @@ void initialisationGame(Game *game){
 
   //Initialisation textures
   game->surfacebouton = IMG_Load("src/img/bouton.png");
-  game->surffond[MENUDEBUT] = IMG_Load("src/img/fond.png");
-  game->surffond[MENUNORMAL] = IMG_Load("src/img/fondlat.png");
+  game->surffond[IMG_MENUDEBUT] = IMG_Load("src/img/fond.png");
+  game->surffond[IMG_MENUNORMAL] = IMG_Load("src/img/fondlat.png");
+  game->surffond[IMG_MENU_FIN] = IMG_Load("src/img/fondfin.png");
   game->surfaceCases[PLAINE] = IMG_Load("src/img/plaine.png");
   game->surfaceCases[PLAINECHG] = IMG_Load("src/img/plainechg.png");
   game->surfaceCases[EAU] = IMG_Load("src/img/eau.png");
@@ -147,9 +148,15 @@ void initialisationGame(Game *game){
 
   game->unites[VIKINGCHIEF].force = 0.6;
   game->unites[VIKINGCHIEF].vie = 100;
+  //test
+  //game->unites[VIKINGCHIEF].vie = 1;
+
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
-  game->unites[VIKINGCHIEF].distance = 20;
+  game->unites[VIKINGCHIEF].distance = 2;
+  //test
+  //game->unites[VIKINGCHIEF].distance = 10;
+
   game->unites[VIKINGCHIEF].prix = 50;
   game->unites[VIKINGCHIEF].nom = "Chef viking";
   game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
@@ -193,9 +200,14 @@ void initialisationGame(Game *game){
 
   game->unites[DEADCHIEF].force = 0.6;
   game->unites[DEADCHIEF].vie = 100;
+  //test
+  //game->unites[DEADCHIEF].vie = 1;
+
   game->unites[DEADCHIEF].defense = 0.6;
   game->unites[DEADCHIEF].zoneDeTir = 2;
   game->unites[DEADCHIEF].distance = 2;
+  //test
+  //game->unites[DEADCHIEF].distance = 10;
   game->unites[DEADCHIEF].prix = 50;
   game->unites[DEADCHIEF].nom = "Agent de la mort";
   game->unites[DEADCHIEF].type = DEADCHIEF;
@@ -220,6 +232,26 @@ void initialisationGame(Game *game){
   game->bouton2Joueurs.b = 0.15;
   game->bouton2Joueurs.a = 0;
   game->bouton2Joueurs.valeur = MULTIJOUEURS;
+
+  game->boutonRejouer.x = 0.8;
+  game->boutonRejouer.y = 0.5;
+  game->boutonRejouer.longueur = 0.3;
+  game->boutonRejouer.hauteur = 0.1;
+  game->boutonRejouer.r = 0.035;
+  game->boutonRejouer.g = 0.32;
+  game->boutonRejouer.b = 0.15;
+  game->boutonRejouer.a = 0;
+  game->boutonRejouer.valeur = REJOUER;
+
+  game->boutonQuitter.x = 0.8; //Rose
+  game->boutonQuitter.y = 0.7;
+  game->boutonQuitter.longueur = 0.3;
+  game->boutonQuitter.hauteur = 0.1;
+  game->boutonQuitter.r = 0.035;
+  game->boutonQuitter.g = 0.32;
+  game->boutonQuitter.b = 0.15;
+  game->boutonQuitter.a = 0;
+  game->boutonQuitter.valeur = QUITTER;
 
 
   game->boutonDeplacement.x = 1.1; //Rose

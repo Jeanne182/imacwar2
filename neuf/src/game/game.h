@@ -30,14 +30,14 @@ enum EnumEtapesJeu{
   SELECTION_UNITE,
   ACTIONS,
   FIN_JEU,
-  MENU
+  MENU,
   };
 
 typedef struct Game {
   Game();
   Joueur joueur1, joueur2;
   Unite unites[10];//Nain, Hobbit, Elfe, Humain, Gandalf, Orque, Smeagol, Urukhai, Nazgul, Saruman;
-  Bouton boutonDeplacement, boutonAttaque, boutonPasser, boutonAchat, bouton1Joueur, bouton2Joueurs;
+  Bouton boutonDeplacement, boutonAttaque, boutonPasser, boutonAchat, bouton1Joueur, bouton2Joueurs, boutonRejouer, boutonQuitter;
   Bouton boutonVikingBeast, boutonVikingWoman, boutonVikingWizard, boutonVikingMan, boutonVikingChief, boutonDeadBeast, boutonDeadKnight, boutonDeadWizard, boutonDeadMan, boutonDeadChief;
   int etapeJeu, modeJeu;
   int tour;
