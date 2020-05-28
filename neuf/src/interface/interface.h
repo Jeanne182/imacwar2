@@ -92,11 +92,12 @@ enum EnumUnites{
 //int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
+void finJeu(Game* game);
 int finProgrammeSDL(Game* game);
 //string texture_path(texturesCarte texture_value);
 void carre(float x, float y, Joueur joueur, int choix);
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
-void surbrillanceAchat(int type, Game game);
+void surbrillanceAchat(int type, Game* game);
 
 /*sprites.cpp*/
 void affichageUnite(Joueur joueur, Game* game);
@@ -110,8 +111,10 @@ int selectionBoutonMenu(Game* game, SDL_Event e);
 int selectionBouton(Game* game, SDL_Event e);
 int selectionBoutonUnite(Game* game, SDL_Event e);
 
-
-
+/* affichage.cpp */
+void affichage(Game* game);
+void affichageCarte(Game* game);
+void initialisationBoutons(Game* game);
 
 /*textures.cpp*/
 

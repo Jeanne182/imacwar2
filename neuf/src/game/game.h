@@ -94,6 +94,8 @@ typedef struct Game {
 
 /* initialisation.cpp */
 void initialisationGame(Game *game);
+void initialisationDynamique(Game *game);
+void enleveUnite(int map[10][10], Joueur joueur1, Joueur joueur2);
 
 /* clics.cpp */
 void gererClic(Game* game, SDL_Event e);

@@ -6,7 +6,7 @@
 /* Dimensions de la fenetre */
 static const unsigned int WINDOW_WIDTH = 1500;
 static const unsigned int WINDOW_HEIGHT = 800;
-static const char WINDOW_TITLE[] = "Imacwar II";
+static const char WINDOW_TITLE[] = "Imac Wars II - Ice Version";
 
 
 /* Nombre de bits par pixel de la fenetre */
@@ -96,6 +96,38 @@ int initialisationSDL(Game* game){
 //     creationTexture(&textureUnites[unite], surfaceUnites[unite]);
 // }
 
+void finJeu(Game* game){
+  //finProgrammeSDL(&game.textureMap[PLAINE]);
+  glDisable(GL_TEXTURE_2D);
+
+
+  // je comprends pas pq quand on enleve tout ca il met plus free() invalid pointer
+  // faire un for ?
+
+  // SDL_FreeSurface(game.surffond[IMG_MENUDEBUT]);
+  // SDL_FreeSurface(game.surffond[IMG_MENUNORMAL]);
+  // SDL_FreeSurface(game.surfaceCases[PLAINE]);
+  // SDL_FreeSurface(game.surfaceCases[ARBRE]);
+  // SDL_FreeSurface(game.surfaceCases[EAU]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON_DEPLACEMENT]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON_ATTAQUE]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON1J]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_BOUTON2J]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_PV]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_FORCE]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_ZONE]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_RANGE]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_PRIX]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ1]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_PIECESJ2]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_JOUEUR1]);
+  // SDL_FreeSurface(&game.surfaceTextes[TEXTE_JOUEUR2]);
+  // SDL_FreeSurface(game.surfacebouton);
+  SDL_FreeSurface(game->surface);
+
+  finProgrammeSDL(game);
+};
+
 int finProgrammeSDL(Game* game){
     /* Liberation des ressources associees a la SDL */
     glDeleteTextures(1, &game->textureCases[PLAINE]);
@@ -173,7 +205,8 @@ void carre(float x, float y, Joueur joueur, int choix){
     if (joueur.id == 1){
       if(choix==ATTAQUE){
         //glColor4f(0.5, 0.42, 0.26,0.4);
-        glColor4f(1, 0.27, 0.003,0.28);
+        //glColor4f(0.56, 0.15, 0.09,0.4);
+        glColor4f(0.1, 0.1, 0.1, 0.2);
       }
       else if(choix==DEPLACEMENT || choix==ACHAT_UNITE){
         glColor4f(0.78, 0.27, 0.003,0.4);
@@ -185,7 +218,8 @@ void carre(float x, float y, Joueur joueur, int choix){
     else {
       if(choix==ATTAQUE){
         //glColor4f(0.55, 0.42, 0.26,0.4);
-        glColor4f(0.65,0.01,0.33,0.28);
+        //glColor4f(0.65,0.01,0.33,0.28);
+        glColor4f(0.1, 0.1, 0.1, 0.2);
       }
       else if(choix==DEPLACEMENT || choix==ACHAT_UNITE){
         glColor4f(0.40,0.01,0.33,0.4);
@@ -211,35 +245,35 @@ void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface){
 }
 
 
-void surbrillanceAchat(int type, Game game){
+void surbrillanceAchat(int type, Game* game){
   if(type==VIKINGMAN){
-    initBoutonUnites(game.boutonVikingMan,0.78, 0.27, 0.003,0.4);
+    initBoutonUnites(game->boutonVikingMan,0.78, 0.27, 0.003,0.4);
   }
   if(type==VIKINGCHIEF){
-    initBoutonUnites(game.boutonVikingChief,0.78, 0.27, 0.003,0.4);
+    initBoutonUnites(game->boutonVikingChief,0.78, 0.27, 0.003,0.4);
   }
   if(type==VIKINGBEAST){
-    initBoutonUnites(game.boutonVikingBeast,0.78, 0.27, 0.003,0.4);
+    initBoutonUnites(game->boutonVikingBeast,0.78, 0.27, 0.003,0.4);
   }
   if(type==VIKINGWIZARD){
-    initBoutonUnites(game.boutonVikingWizard,0.78, 0.27, 0.003,0.4);
+    initBoutonUnites(game->boutonVikingWizard,0.78, 0.27, 0.003,0.4);
   }
   if(type==VIKINGWOMAN){
-    initBoutonUnites(game.boutonVikingWoman,0.78, 0.27, 0.003,0.4);
+    initBoutonUnites(game->boutonVikingWoman,0.78, 0.27, 0.003,0.4);
   }
   if(type==DEADBEAST){
-    initBoutonUnites(game.boutonDeadBeast,0.40,0.01,0.33,0.4);
+    initBoutonUnites(game->boutonDeadBeast,0.40,0.01,0.33,0.4);
   }
   if(type==DEADKNIGHT){
-    initBoutonUnites(game.boutonDeadKnight,0.40,0.01,0.33,0.4);
+    initBoutonUnites(game->boutonDeadKnight,0.40,0.01,0.33,0.4);
   }
   if(type==DEADWIZARD){
-    initBoutonUnites(game.boutonDeadWizard,0.40,0.01,0.33,0.4);
+    initBoutonUnites(game->boutonDeadWizard,0.40,0.01,0.33,0.4);
   }
   if(type==DEADMAN){
-    initBoutonUnites(game.boutonDeadMan,0.40,0.01,0.33,0.4);
+    initBoutonUnites(game->boutonDeadMan,0.40,0.01,0.33,0.4);
   }
   if(type==DEADCHIEF){
-    initBoutonUnites(game.boutonDeadChief,0.40,0.01,0.33,0.4);
+    initBoutonUnites(game->boutonDeadChief,0.40,0.01,0.33,0.4);
   }
 }
