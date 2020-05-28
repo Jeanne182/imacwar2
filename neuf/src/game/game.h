@@ -44,6 +44,7 @@ typedef struct Game {
   int choix;
   int etapeAchatUnite;
   int achat_type;
+  int uniteJouee[10]; // A CHANGER SI ON CHANGE LES SOUS
 
   SDL_Surface* surface;
 

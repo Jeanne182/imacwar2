@@ -89,6 +89,8 @@ void initialisationGame(Game *game){
   //Initialisation de la carte
   game->longueurCarte = 10;
   game->hauteurCarte = 10;
+  initialiseUniteJouee(game->uniteJouee);
+
 
   //Initialisation des joueurs
   game->joueur1.nbUnites=0;
@@ -147,7 +149,7 @@ void initialisationGame(Game *game){
   game->unites[VIKINGCHIEF].vie = 100;
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
-  game->unites[VIKINGCHIEF].distance = 2;
+  game->unites[VIKINGCHIEF].distance = 20;
   game->unites[VIKINGCHIEF].prix = 50;
   game->unites[VIKINGCHIEF].nom = "Chef viking";
   game->unites[VIKINGCHIEF].type = VIKINGCHIEF;

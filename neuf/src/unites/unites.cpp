@@ -165,16 +165,11 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
 
     insertionCoordonnees(game, &joueur->unites[id], xNew, yNew, joueur->tour);
     cout << "case libre" << endl;
-
+    game->uniteJouee[id]=1;
     // Changement de tour
-    if(game->tour == TOUR_JOUEUR2){
-      game->tour = TOUR_JOUEUR1;
-    }
-    else{
-      game->tour = TOUR_JOUEUR2;
-    }
-    game->choix = RIEN;
-    game->etapeJeu = SELECTION_UNITE;
+
+    verificationFinTour(game, joueur->nbUnites);
+
   }
   else{
     cout << "Cette case est déjà occupée, veuillez choisir une autre case OU Votre distance de déplacement n'est pas respectée" << endl;
@@ -187,14 +182,13 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   int idEnnemi=-1;
   selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
 
-  //ERREUR D'ARRONDI REGLEE AVEC CA
+  cout << "x attaque" << xAttaque << endl;
+  cout << "y attaque" << yAttaque << endl;
 
-  // xAttaque = (float)((e.button.x)*game->aspectRatio/(float)game->surface->w);
-  // yAttaque = (float)((e.button.y)/(float)game->surface->h);
 
-  if(verifUniteEnnemie(joueurEnnemi->tour, game, xAttaque, yAttaque)==true && verificationZoneTir(*joueurTour, xAttaque, yAttaque, id, game)==true){//rajouter zone de tire
+  if(verifUniteEnnemie(joueurEnnemi->tour, game->mapObstacles, xAttaque, yAttaque)==true && verificationZoneTir(*joueurTour, xAttaque, yAttaque, id)==true){
     cout << "attaque gooo" << endl;
-
+    game->uniteJouee[id]=1;
     // combat
     idEnnemi = selectionIdUnite(xAttaque, yAttaque, *joueurEnnemi);
     joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
@@ -228,19 +222,18 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
       game->etapeJeu = FIN_JEU;
     }
     else{
-      if(game->tour == TOUR_JOUEUR2){
-        game->tour = TOUR_JOUEUR1;
-      }
-      else{
-        game->tour = TOUR_JOUEUR2;
-      }
-      game->choix = RIEN;
-      game->etapeJeu = SELECTION_UNITE;
+      verificationFinTour(game, joueurTour->nbUnites);
     }
 
   }
   else{
     cout << "Vous attaquez une de vos unites OU La distance de tir n'est pas respectée" << endl;
+  }
+}
+
+void initialiseUniteJouee(int tableau[10]){
+  for(int i=0; i<10 ; i++){
+    tableau[i]=0;
   }
 }
 
@@ -393,7 +386,7 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
   // affichageTexture(vie, 1,0.1,1,0);
 // }
 
-void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
+void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game){
   int x = (int)joueur.unites[id].coord[0];
   int y = (int)joueur.unites[id].coord[1];
   int range =joueur.unites[id].distance;
@@ -414,7 +407,10 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
           //    x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
           //   carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           // }
-          if(map[y-1+j][ x-1 + i]!=OBSTACLE && x-1+i<10 && y-1+j<10){
+          if((map[y-1+j][ x-1 + i]!=OBSTACLE || map[y-1+j][ x-1 + i]!=game->tour) && x-1+i<10 && y-1+j<10){
+            // if((game->tour == TOUR_JOUEUR1 && game->mapObstacles[y-1+j][x-1+i]==JOUEUR2) || (game->tour == TOUR_JOUEUR2 && game->mapObstacles[y-1+j][x-1+i]==JOUEUR1)){
+            //   affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)(x-1+i)/10,(float)(y-1+j)/10);
+            // }
             carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           }
         }
@@ -428,6 +424,10 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix){
       {
         if ((i+j) <= range && (i+j) >= -range && (i-j) <= range && (i-j) >= -range && !(i==0 && j==0))
         {
+          // if((game->tour == TOUR_JOUEUR1 && map[y-1+j][x-1+i]==JOUEUR2) || (game->tour == TOUR_JOUEUR2 && map[y-1+j][x-1+i]==JOUEUR1)){
+          //   cout << "rentre dedans" << endl;
+          //   affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)(x-1+i)/10,(float)(y-1+j)/10);
+          // }
           if(map[y-1+j][ x-1 + i]==VIDE && x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
             carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           }

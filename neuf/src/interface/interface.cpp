@@ -169,7 +169,8 @@ void carre(float x, float y, Joueur joueur, int choix){
     glBegin(GL_POLYGON);
     if (joueur.id == 1){
       if(choix==ATTAQUE){
-        glColor4f(0.5, 0.42, 0.26,0.4);
+        //glColor4f(0.5, 0.42, 0.26,0.4);
+        glColor4f(1, 0.27, 0.003,0.28);
       }
       else if(choix==DEPLACEMENT || choix==ACHAT_UNITE){
         glColor4f(0.78, 0.27, 0.003,0.4);
@@ -180,7 +181,8 @@ void carre(float x, float y, Joueur joueur, int choix){
     }
     else {
       if(choix==ATTAQUE){
-        glColor4f(0.55, 0.42, 0.26,0.4);
+        //glColor4f(0.55, 0.42, 0.26,0.4);
+        glColor4f(0.65,0.01,0.33,0.28);
       }
       else if(choix==DEPLACEMENT || choix==ACHAT_UNITE){
         glColor4f(0.40,0.01,0.33,0.4);
