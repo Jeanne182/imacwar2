@@ -141,6 +141,9 @@ void gererClic(Game* game, SDL_Event e){
                 passerTour(game);
                 cout<<"CHOIX : passer"<<endl;
               }
+              else if(selectionBouton(game, e) == RIEN){
+                game->choix=RIEN;
+              }
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
 
@@ -153,6 +156,9 @@ void gererClic(Game* game, SDL_Event e){
               else if(selectionBouton(game, e) == PASSER){
                 passerTour(game);
                 cout<<"CHOIX : passer"<<endl;
+              }
+              else if(selectionBouton(game, e) == RIEN){
+                game->choix=RIEN;
               }
               cout<<"Prochain tour de jeu:" <<game->tour<<endl;
             break;
@@ -224,6 +230,9 @@ void gererClic(Game* game, SDL_Event e){
                     passerTour(game);
                     cout<<"CHOIX : passer"<<endl;
                   }
+                  else if(selectionBouton(game, e) == RIEN){
+                    game->choix=RIEN;
+                  }
                   cout<<"Prochain tour de jeu:" <<game->tour<<endl;
                 break;
 
@@ -237,6 +246,9 @@ void gererClic(Game* game, SDL_Event e){
                     passerTour(game);
                     cout<<"CHOIX : passer"<<endl;
                   }
+                  else if(selectionBouton(game, e) == RIEN){
+                    game->choix=RIEN;
+                  }
                   cout<<"Prochain tour de jeu:" <<game->tour<<endl;
                 break;
               }
@@ -247,6 +259,15 @@ void gererClic(Game* game, SDL_Event e){
       }
       break;
 
+      case FIN_JEU:
+      if(selectionBouton(game, e) == REJOUER){
+        enleveUnite(game->mapObstacles, game->joueur1, game->joueur2);
+        initialisationDynamique(game);
+      }
+      else if(selectionBouton(game, e) == QUITTER){
+        finJeu(game);
+      }
+      break;
 
 
     default:

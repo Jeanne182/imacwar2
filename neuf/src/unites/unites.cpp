@@ -410,7 +410,7 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* g
           //    x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
           //   carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           // }
-          if((map[y-1+j][ x-1 + i]!=OBSTACLE || map[y-1+j][ x-1 + i]!=game->tour) && x-1+i<10 && y-1+j<10){
+          if(map[y-1+j][ x-1 + i]!=OBSTACLE && map[y-1+j][ x-1 + i]!=game->tour && x-1+i<10 && y-1+j<10){
             // if((game->tour == TOUR_JOUEUR1 && game->mapObstacles[y-1+j][x-1+i]==JOUEUR2) || (game->tour == TOUR_JOUEUR2 && game->mapObstacles[y-1+j][x-1+i]==JOUEUR1)){
             //   affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)(x-1+i)/10,(float)(y-1+j)/10);
             // }

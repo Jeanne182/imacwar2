@@ -90,127 +90,6 @@ void initialisationGame(Game *game){
   //Initialisation de la carte
   game->longueurCarte = 10;
   game->hauteurCarte = 10;
-  initialiseUniteJouee(game->uniteJouee);
-
-
-  //Initialisation des joueurs
-  game->joueur1.nbUnites=0;
-  game->joueur1.nbUnitesInitial=0;
-  game->joueur1.id = 1;
-  game->joueur1.tour = JOUEUR1;
-  game->joueur1.pieces = 100;
-
-  game->joueur2.nbUnites=0;
-  game->joueur2.nbUnitesInitial=0;
-  game->joueur2.id = 2;
-  game->joueur2.tour = JOUEUR2;
-  game->joueur2.pieces = 100;
-
-
-
-  //Initialisation des unites
-  // Gentils :
-  game->unites[VIKINGMAN].force = 0.4;
-  game->unites[VIKINGMAN].vie = 100;
-  game->unites[VIKINGMAN].defense = 0.4;
-  game->unites[VIKINGMAN].zoneDeTir = 2;
-  game->unites[VIKINGMAN].distance = 2;
-  game->unites[VIKINGMAN].prix = 10;
-  game->unites[VIKINGMAN].nom = "Guerrier fauve";
-  game->unites[VIKINGMAN].type = VIKINGMAN;
-
-  game->unites[VIKINGBEAST].force = 0.6;
-  game->unites[VIKINGBEAST].vie = 100;
-  game->unites[VIKINGBEAST].defense = 0.3;
-  game->unites[VIKINGBEAST].zoneDeTir = 1;
-  game->unites[VIKINGBEAST].distance = 2;
-  game->unites[VIKINGBEAST].prix = 20;
-  game->unites[VIKINGBEAST].nom = "Ours des montagnes";
-  game->unites[VIKINGBEAST].type = VIKINGBEAST;
-
-  game->unites[VIKINGWOMAN].force = 0.5;
-  game->unites[VIKINGWOMAN].vie = 100;
-  game->unites[VIKINGWOMAN].defense = 0.5;
-  game->unites[VIKINGWOMAN].zoneDeTir = 1;
-  game->unites[VIKINGWOMAN].distance = 2;
-  game->unites[VIKINGWOMAN].prix = 30;
-  game->unites[VIKINGWOMAN].nom = "Guerrière sanguinaire";
-  game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
-
-  game->unites[VIKINGWIZARD].force = 0.3;
-  game->unites[VIKINGWIZARD].vie = 100;
-  game->unites[VIKINGWIZARD].defense = 0.6;
-  game->unites[VIKINGWIZARD].zoneDeTir = 4;
-  game->unites[VIKINGWIZARD].distance = 4;
-  game->unites[VIKINGWIZARD].prix = 30;
-  game->unites[VIKINGWIZARD].nom = "Mage de feu";
-  game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
-
-  game->unites[VIKINGCHIEF].force = 0.6;
-  game->unites[VIKINGCHIEF].vie = 100;
-  //test
-  //game->unites[VIKINGCHIEF].vie = 1;
-
-  game->unites[VIKINGCHIEF].defense = 0.6;
-  game->unites[VIKINGCHIEF].zoneDeTir = 2;
-  //game->unites[VIKINGCHIEF].distance = 2;
-  //test
-  game->unites[VIKINGCHIEF].distance = 10;
-
-  game->unites[VIKINGCHIEF].prix = 50;
-  game->unites[VIKINGCHIEF].nom = "Chef viking";
-  game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
-
-  //Mechants :
-  game->unites[DEADMAN].force = 0.4;
-  game->unites[DEADMAN].vie = 100;
-  game->unites[DEADMAN].defense = 0.4;
-  game->unites[DEADMAN].zoneDeTir = 2;
-  game->unites[DEADMAN].distance = 2;
-  game->unites[DEADMAN].prix = 10;
-  game->unites[DEADMAN].nom = "Marcheur noir";
-  game->unites[DEADMAN].type = DEADMAN;
-
-  game->unites[DEADBEAST].force = 0.6;
-  game->unites[DEADBEAST].vie = 100;
-  game->unites[DEADBEAST].defense = 0.3;
-  game->unites[DEADBEAST].zoneDeTir = 1;
-  game->unites[DEADBEAST].distance = 2;
-  game->unites[DEADBEAST].prix =20;
-  game->unites[DEADBEAST].nom = "Loup des glaces";
-  game->unites[DEADBEAST].type = DEADBEAST;
-
-  game->unites[DEADKNIGHT].force = 0.5;
-  game->unites[DEADKNIGHT].vie = 100;
-  game->unites[DEADKNIGHT].defense = 0.5;
-  game->unites[DEADKNIGHT].zoneDeTir = 1;
-  game->unites[DEADKNIGHT].distance = 2;
-  game->unites[DEADKNIGHT].prix = 30;
-  game->unites[DEADKNIGHT].nom = "Chevalier noir";
-  game->unites[DEADKNIGHT].type = DEADKNIGHT;
-
-  game->unites[DEADWIZARD].force = 0.3;
-  game->unites[DEADWIZARD].vie = 100;
-  game->unites[DEADWIZARD].defense = 0.6;
-  game->unites[DEADWIZARD].zoneDeTir = 4;
-  game->unites[DEADWIZARD].distance = 4;
-  game->unites[DEADWIZARD].prix = 30;
-  game->unites[DEADWIZARD].nom = "Mage noir";
-  game->unites[DEADWIZARD].type = DEADWIZARD;
-
-  game->unites[DEADCHIEF].force = 0.6;
-  game->unites[DEADCHIEF].vie = 100;
-  //test
-  //game->unites[DEADCHIEF].vie = 1;
-
-  game->unites[DEADCHIEF].defense = 0.6;
-  game->unites[DEADCHIEF].zoneDeTir = 2;
-  game->unites[DEADCHIEF].distance = 2;
-  //test
-  //game->unites[DEADCHIEF].distance = 10;
-  game->unites[DEADCHIEF].prix = 50;
-  game->unites[DEADCHIEF].nom = "Agent de la mort";
-  game->unites[DEADCHIEF].type = DEADCHIEF;
 
   //Initialisation des boutons
   game->bouton1Joueur.x = 0.8;
@@ -356,18 +235,7 @@ void initialisationGame(Game *game){
   game->boutonDeadChief.hauteur = 0.12;
   game->boutonDeadChief.valeur = DEADCHIEF;
 
-  game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement
-  game->modeJeu = ORDI_MODE;
-  game->tour = TOUR_JOUEUR1;
-  game->choix = RIEN;
-  game->etapeAchatUnite = ACHAT_UNITE;
-  game->achat_type = SANS_TYPE;
 
-  game->id1=-1;
-  game->id2=-1;
-  game->idUniteSurvolee=-1;
-  game->xSurvol=-1;
-  game->ySurvol=-1;
   //Initialisation textes
 
 
@@ -385,6 +253,181 @@ void initialisationGame(Game *game){
 
   initialisationTexturesUnites(game->textureUnites, game->surfaceUnites);//à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
 
+  initialisationTextes(game->surfaceTextes, game->policeTextes, game->textureTextes);
+
+  creationTexture(&game->textfond[IMG_MENUDEBUT],game->surffond[IMG_MENUDEBUT]);
+  creationTexture(&game->textfond[IMG_MENUNORMAL],game->surffond[IMG_MENUNORMAL]);
+  creationTexture(&game->textfond[IMG_MENU_FIN],game->surffond[IMG_MENU_FIN]);
+
+  creationTexture(&game->texturebouton,game->surfacebouton);
+
+}
 
 
+
+
+
+
+void initialisationDynamique(Game *game){
+
+  initialiseUniteJouee(game->uniteJouee);
+
+
+  //Initialisation des joueurs
+  game->joueur1.nbUnites=0;
+  game->joueur1.nbUnitesInitial=0;
+  game->joueur1.id = 1;
+  game->joueur1.tour = JOUEUR1;
+  game->joueur1.pieces = 100;
+
+  game->joueur2.nbUnites=0;
+  game->joueur2.nbUnitesInitial=0;
+  game->joueur2.id = 2;
+  game->joueur2.tour = JOUEUR2;
+  game->joueur2.pieces = 100;
+
+
+
+  //Initialisation des unites
+  // Gentils :
+  game->unites[VIKINGMAN].force = 0.4;
+  game->unites[VIKINGMAN].vie = 100;
+  game->unites[VIKINGMAN].defense = 0.4;
+  game->unites[VIKINGMAN].zoneDeTir = 2;
+  game->unites[VIKINGMAN].distance = 2;
+  game->unites[VIKINGMAN].prix = 10;
+  game->unites[VIKINGMAN].nom = "Guerrier fauve";
+  game->unites[VIKINGMAN].type = VIKINGMAN;
+
+  game->unites[VIKINGBEAST].force = 0.6;
+  game->unites[VIKINGBEAST].vie = 100;
+  game->unites[VIKINGBEAST].defense = 0.3;
+  game->unites[VIKINGBEAST].zoneDeTir = 1;
+  game->unites[VIKINGBEAST].distance = 2;
+  game->unites[VIKINGBEAST].prix = 20;
+  game->unites[VIKINGBEAST].nom = "Ours des montagnes";
+  game->unites[VIKINGBEAST].type = VIKINGBEAST;
+
+  game->unites[VIKINGWOMAN].force = 0.5;
+  game->unites[VIKINGWOMAN].vie = 100;
+  game->unites[VIKINGWOMAN].defense = 0.5;
+  game->unites[VIKINGWOMAN].zoneDeTir = 1;
+  game->unites[VIKINGWOMAN].distance = 2;
+  game->unites[VIKINGWOMAN].prix = 30;
+  game->unites[VIKINGWOMAN].nom = "Guerrière sanguinaire";
+  game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
+
+  game->unites[VIKINGWIZARD].force = 0.3;
+  game->unites[VIKINGWIZARD].vie = 100;
+  game->unites[VIKINGWIZARD].defense = 0.6;
+  game->unites[VIKINGWIZARD].zoneDeTir = 4;
+  game->unites[VIKINGWIZARD].distance = 4;
+  game->unites[VIKINGWIZARD].prix = 30;
+  game->unites[VIKINGWIZARD].nom = "Mage de feu";
+  game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
+
+  game->unites[VIKINGCHIEF].force = 0.6;
+  game->unites[VIKINGCHIEF].vie = 100;
+  //test
+  //game->unites[VIKINGCHIEF].vie = 1;
+
+  game->unites[VIKINGCHIEF].defense = 0.6;
+  game->unites[VIKINGCHIEF].zoneDeTir = 2;
+  game->unites[VIKINGCHIEF].distance = 2;
+  //test
+  //game->unites[VIKINGCHIEF].distance = 10;
+
+  game->unites[VIKINGCHIEF].prix = 50;
+  game->unites[VIKINGCHIEF].nom = "Chef viking";
+  game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
+
+  //Mechants :
+  game->unites[DEADMAN].force = 0.4;
+  game->unites[DEADMAN].vie = 100;
+  game->unites[DEADMAN].defense = 0.4;
+  game->unites[DEADMAN].zoneDeTir = 2;
+  game->unites[DEADMAN].distance = 2;
+  game->unites[DEADMAN].prix = 10;
+  game->unites[DEADMAN].nom = "Marcheur noir";
+  game->unites[DEADMAN].type = DEADMAN;
+
+  game->unites[DEADBEAST].force = 0.6;
+  game->unites[DEADBEAST].vie = 100;
+  game->unites[DEADBEAST].defense = 0.3;
+  game->unites[DEADBEAST].zoneDeTir = 1;
+  game->unites[DEADBEAST].distance = 2;
+  game->unites[DEADBEAST].prix =20;
+  game->unites[DEADBEAST].nom = "Loup des glaces";
+  game->unites[DEADBEAST].type = DEADBEAST;
+
+  game->unites[DEADKNIGHT].force = 0.5;
+  game->unites[DEADKNIGHT].vie = 100;
+  game->unites[DEADKNIGHT].defense = 0.5;
+  game->unites[DEADKNIGHT].zoneDeTir = 1;
+  game->unites[DEADKNIGHT].distance = 2;
+  game->unites[DEADKNIGHT].prix = 30;
+  game->unites[DEADKNIGHT].nom = "Chevalier noir";
+  game->unites[DEADKNIGHT].type = DEADKNIGHT;
+
+  game->unites[DEADWIZARD].force = 0.3;
+  game->unites[DEADWIZARD].vie = 100;
+  game->unites[DEADWIZARD].defense = 0.6;
+  game->unites[DEADWIZARD].zoneDeTir = 4;
+  game->unites[DEADWIZARD].distance = 4;
+  game->unites[DEADWIZARD].prix = 30;
+  game->unites[DEADWIZARD].nom = "Mage noir";
+  game->unites[DEADWIZARD].type = DEADWIZARD;
+
+  game->unites[DEADCHIEF].force = 0.6;
+  game->unites[DEADCHIEF].vie = 100;
+  //test
+  //game->unites[DEADCHIEF].vie = 1;
+
+  game->unites[DEADCHIEF].defense = 0.6;
+  game->unites[DEADCHIEF].zoneDeTir = 2;
+  game->unites[DEADCHIEF].distance = 2;
+  //test
+  //game->unites[DEADCHIEF].distance = 10;
+  game->unites[DEADCHIEF].prix = 50;
+  game->unites[DEADCHIEF].nom = "Agent de la mort";
+  game->unites[DEADCHIEF].type = DEADCHIEF;
+
+
+  game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement
+  game->modeJeu = ORDI_MODE;
+  game->tour = TOUR_JOUEUR1;
+  game->choix = RIEN;
+  game->etapeAchatUnite = ACHAT_UNITE;
+  game->achat_type = SANS_TYPE;
+
+  game->id1=-1;
+  game->id2=-1;
+  game->idUniteSurvolee=-1;
+  game->xSurvol=-1;
+  game->ySurvol=-1;
+
+};
+
+
+void enleveUnite(int map[10][10], Joueur joueur1, Joueur joueur2){
+  int id=-1;
+  for(int i = 0; i<10; i++){
+    for(int j = 0; j<10; j++){
+      if(map[j][i]!= VIDE || map[j][i]!=OBSTACLE){
+        if(map[j][i]==JOUEUR1){
+          id = selectionIdUnite(i, j, joueur1);
+          joueur1.unites[id].coord[0]=-1;
+          joueur1.unites[id].coord[1]=-1;
+        }
+        else{
+          id = selectionIdUnite(i, j, joueur2);
+          joueur2.unites[id].coord[0]=-1;
+          joueur2.unites[id].coord[1]=-1;
+        }
+        map[j][i]= VIDE;
+
+      }
+
+    }
+  }
 }

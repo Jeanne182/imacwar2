@@ -76,7 +76,14 @@ int selectionBouton(Game* game, SDL_Event e){
   if (valeurBouton == RIEN){
     valeurBouton = testClicBouton(game, game->boutonPasser, e, RIEN);
   }
+  if (valeurBouton == RIEN){
+    valeurBouton = testClicBouton(game, game->boutonRejouer, e, RIEN);
+  }
+  if (valeurBouton == RIEN){
+    valeurBouton = testClicBouton(game, game->boutonQuitter, e, RIEN);
+  }
   return valeurBouton;
+
 }
 
 int selectionBoutonMenu(Game* game, SDL_Event e){
