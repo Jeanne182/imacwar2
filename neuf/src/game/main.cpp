@@ -305,10 +305,10 @@ int main(){
               carre((int)game.joueur1.unites[game.id1].coord[0],(int)game.joueur1.unites[game.id1].coord[1], game.joueur1, CLIC);
 
               if(game.choix == DEPLACEMENT){
-                zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, DEPLACEMENT);
+                zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, DEPLACEMENT, &game);
               }
               else if(game.choix == ATTAQUE){
-                zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, ATTAQUE);
+                zoneSurbrillance(game.joueur1,game.id1, game.mapObstacles, ATTAQUE, &game);
               }
           }
           if(game.tour == TOUR_JOUEUR2){
@@ -316,10 +316,10 @@ int main(){
               carre((int)game.joueur2.unites[game.id2].coord[0],(int)game.joueur2.unites[game.id2].coord[1], game.joueur2, CLIC);
 
               if(game.choix == DEPLACEMENT){
-                zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, DEPLACEMENT);
+                zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, DEPLACEMENT, &game);
               }
               else if(game.choix == ATTAQUE){
-                zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, ATTAQUE);
+                zoneSurbrillance(game.joueur2,game.id2, game.mapObstacles, ATTAQUE, &game);
               }
           }
           // if(game.tour == TOUR_JOUEUR2 && game.choix == DEPLACEMENT){
@@ -346,7 +346,7 @@ int main(){
           if(game.ySurvol>0 && game.ySurvol<=10 && game.xSurvol>0 && game.xSurvol<=10 && game.etapeJeu!= PLACEMENT_UNITES){
             switch(game.mapObstacles[game.ySurvol-1][game.xSurvol-1]){
               case JOUEUR1:{
-                zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT);
+                zoneSurbrillance(game.joueur1,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT, &game);
 
 
 
@@ -362,7 +362,7 @@ int main(){
                 }
                 break;
               case JOUEUR2:
-                zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT);
+                zoneSurbrillance(game.joueur2,game.idUniteSurvolee, game.mapObstacles, DEPLACEMENT, &game);
                 Unite uniteCoord = game.joueur2.unites[game.idUniteSurvolee];
                 if(game.idUniteSurvolee!=-1){
                   etatUnite(uniteCoord, &game);

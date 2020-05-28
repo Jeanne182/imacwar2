@@ -1,49 +1,53 @@
 A FAIRE :
 
-- peut-être faire une operation de conversion pour que les textes s'affichent proportionnellement
 
-- modifier parametres etatUnite
 
-- annuler selection unite apres avoir cliqué dessus ou pouvoir changer de choix
 
 - Tester quelles bibliothèques sont nécéssaires
 
 - Nettoyer le main
 
 
-- Afficher les etats des unites
 - Clean variables de game
 
 
 - Surbrillance zone de déplacement et d'attaque
 
-- Trouver les fonts
-- Delete textes
+
 - Pouvoir cliquer sur une autre unite meme si on a deja cliqué sur attaque ou déplacement (c'est possible pour l'instant seulement si on a pas encore choisi d'action)
 - Fonction attaque :
 -> Optimiser peut etre ?
 -> Gérer attaque à distance : celui qui attaque à distance ne reçoit pas de blessures en retour (mais hyper puissant donc à voir si on garde)
 
-- Différentes unites :
--> Gérer les prix
--> Affichage des sprites / matrice ?
+
 
 - verfiier où on utilise unite.id
-- Gérer toutes les unités en un tour
+
 
 - Modifier les fonctions qui prennent e en paramètre (Assez urgent)
 
-- Ne faire afficher la zone de surbrillance pour la zone de placement que lorsque le joueur a appuyé sur "achat"
-- Attaque impossible quand l'unité est sur la case du dessus ou d'à côté (quel côté ?)
+
+
+
+
 FAIT :
+
+- Afficher les etats des unites
+
+- Trouver les fonts
+- Delete textes
 -> Valider les formules (perte de force)
 -> Valider où on met les unites mortes
 - Choix des différentes unités en début de partie
-
+- Gérer toutes les unités en un tour
 - Gérer le fait que si on a cliqué sur un bouton mais qu'on change d'avis, ca change l'action
 - Nouvelles unites initialisées
 - Boucle fin de jeu
 - Clic droit / gauche
+- Ne faire afficher la zone de surbrillance pour la zone de placement que lorsque le joueur a appuyé sur "achat"
+- peut-être faire une operation de conversion pour que les textes s'affichent proportionnellement
+- annuler selection unite apres avoir cliqué dessus ou pouvoir changer de choix
+
 - Zone placement en surbrillance
 - Quand on clique sur déplacer ou attaquer, désactiver la surbrillance de l'autre joueur
 - Zone placement en surbrillance

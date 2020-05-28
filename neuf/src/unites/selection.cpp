@@ -10,6 +10,7 @@ void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
   conversionOpenGLRepere(x, y, surface);
 }
 
+
 void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
   if (game->etapeJeu != PLACEMENT_UNITES){
     int xOld = unite->coord[0];
@@ -40,6 +41,47 @@ int selectionIdUnite(int x, int y, Joueur joueur){
     return -1;
 }
 
+// Fonction qui verifie si le joueura encore des unites a jouer
+bool verificationUniteJouee(int tableau[10], int nbUnites){
+  int compteur=0;
+  for(int i=0 ; i<10 ; i++){
+    if(tableau[i]==1){
+      compteur++;
+    }
+  }
+  if (compteur==nbUnites){
+    return true;
+  }
+  return false;
+}
+
+// Fonction qui détermine la fin de tour
+void verificationFinTour(Game* game, int nbUnites){
+  if(verificationUniteJouee(game->uniteJouee, nbUnites)==true){
+    passerTour(game);
+  }
+  else{
+    game->choix = RIEN;
+    game->etapeJeu = SELECTION_UNITE;
+  }
+}
+
+// Fonction qui passe le toor au joueur suivant
+void passerTour(Game* game){
+  initialiseUniteJouee(game->uniteJouee);
+  cout << "unites toutes jouees" << endl;
+  game->etapeJeu=SELECTION_UNITE;
+  game->choix = RIEN;
+  if(game->tour == TOUR_JOUEUR2){
+    game->tour = TOUR_JOUEUR1;
+  }
+  else{
+    game->tour = TOUR_JOUEUR2;
+  }
+
+}
+
+
 
 // Fonction qui, lors du placement des créatures en debut de partie, verifie que le joueur place bien ses créatures dans la zone qui lui est reservee
 bool verificationZone(Joueur joueur, int x, int y, Game* game){
@@ -58,10 +100,10 @@ bool verificationCaseLibre(Game* game, int x,int y){
 }
 
 // Vérifie que La créature à attaquer est bien une créature ennemie
-bool verifUniteEnnemie(int tour, Game* game, int x,int y){
-  if(game->mapObstacles[y-1][x-1]!=tour){
+bool verifUniteEnnemie(int tour, int map[10][10], int x,int y){
+  if(map[y-1][x-1]!=tour){
     return false;
-    cout << "probl vient unite ennemie" << endl;
+    cout << "probl ce n'est pas une unite ennemie" << endl;
   }
   cout<<"unite ennemie selectionnee"<<endl;
   return true;
@@ -76,8 +118,8 @@ bool verificationDistance(Joueur joueur, int x, int y, int id, Game* game){
 }
 
 // Vérifie que La créature a le droit d'attaquer à cet endroit là en fonction de ses caractéristiques
-bool verificationZoneTir(Joueur joueur, int x, int y, int id, Game* game){
-  if(abs(joueur.unites[id].coord[0]-(x-1))+abs(joueur.unites[id].coord[1]-(y-1))>joueur.unites[id].zoneDeTir){
+bool verificationZoneTir(Joueur joueur, int x, int y, int id){
+  if(abs(x-joueur.unites[id].coord[0])+abs(y-joueur.unites[id].coord[1])>joueur.unites[id].zoneDeTir){
     cout<<"zone de tir fausse"<<endl;
     return false;
 
