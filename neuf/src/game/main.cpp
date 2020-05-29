@@ -19,14 +19,14 @@ int main(){
   creationTexture(&game.textfond[MENUNORMAL],game.surffond[MENUNORMAL]);
 
   int loop = 1;
-  //
+
   // int xDepart = 2;
   // int yDepart = 5;
   //
   // int xCible= 7;
   // int yCible= 8;
-  // list<Noeud> chemin = a_star(xDepart, yDepart, xCible, yCible);
-  // caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
+  // Noeud* chemin = a_star(xDepart, yDepart, xCible, yCible, game.map);
+  //caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */
