@@ -17,6 +17,22 @@ void initialisationTexturesCarte(GLuint textureCases[20], SDL_Surface* surfaceCa
     creationTexture(&textureCases[EAUBG], surfaceCases[EAUBG]);
     creationTexture(&textureCases[EAUHG], surfaceCases[EAUHG]);
     creationTexture(&textureCases[EAUHD], surfaceCases[EAUHD]);
+
+    SDL_FreeSurface(surfaceCases[PLAINE]);
+    SDL_FreeSurface(surfaceCases[PLAINECHG]);
+    SDL_FreeSurface(surfaceCases[EAU]);
+    SDL_FreeSurface(surfaceCases[ARBRE]);
+    SDL_FreeSurface(surfaceCases[ARBRE1]);
+    SDL_FreeSurface(surfaceCases[ARBRE2]);
+    SDL_FreeSurface(surfaceCases[ARBRE4]);
+    SDL_FreeSurface(surfaceCases[ARBRE5]);
+    SDL_FreeSurface(surfaceCases[ARBRE6]);
+    SDL_FreeSurface(surfaceCases[ARBRE8]);
+    SDL_FreeSurface(surfaceCases[ARBRE9]);
+    SDL_FreeSurface(surfaceCases[EAUBD]);
+    SDL_FreeSurface(surfaceCases[EAUBG]);
+    SDL_FreeSurface(surfaceCases[EAUHG]);
+    SDL_FreeSurface(surfaceCases[EAUHD]);
 }
 
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]){
@@ -30,6 +46,17 @@ void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surface
     creationTexture(&textureUnites[DEADWIZARD], surfaceUnites[DEADWIZARD]);
     creationTexture(&textureUnites[DEADMAN], surfaceUnites[DEADMAN]);
     creationTexture(&textureUnites[DEADCHIEF], surfaceUnites[DEADCHIEF]);
+
+    SDL_FreeSurface(surfaceUnites[VIKINGMAN]);
+    SDL_FreeSurface(surfaceUnites[VIKINGBEAST]);
+    SDL_FreeSurface(surfaceUnites[VIKINGWOMAN]);
+    SDL_FreeSurface(surfaceUnites[VIKINGWIZARD]);
+    SDL_FreeSurface(surfaceUnites[VIKINGCHIEF]);
+    SDL_FreeSurface(surfaceUnites[DEADBEAST]);
+    SDL_FreeSurface(surfaceUnites[DEADKNIGHT]);
+    SDL_FreeSurface(surfaceUnites[DEADWIZARD]);
+    SDL_FreeSurface(surfaceUnites[DEADMAN]);
+    SDL_FreeSurface(surfaceUnites[DEADCHIEF]);
 }
 
 void creationTexture(GLuint *texture, SDL_Surface* image){
@@ -50,7 +77,6 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
     glTexImage2D(GL_TEXTURE_2D, 0, mode, image->w, image->h, 0, mode, GL_UNSIGNED_BYTE, image->pixels);
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
-
 }
 
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
