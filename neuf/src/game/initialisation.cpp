@@ -24,12 +24,12 @@ Game::Game():mapInit{{ EAU, EAU, PLAINECHG, PLAINE, ARBRE, PLAINE, PLAINE, PLAIN
                     { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
                     { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
                     { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, ARBRE, EAUHG, EAUHD, PLAINE, PLAINE }},
-                mapObstacles{{ OBSTACLE, OBSTACLE, VIDE, VIDE, ARBRE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                mapObstacles{{ OBSTACLE, OBSTACLE, VIDE, VIDE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE },
                                     { OBSTACLE, VIDE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
-                                    { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, PLAINE, VIDE, VIDE, VIDE, VIDE },
-                                    { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, PLAINE, VIDE, VIDE, VIDE, VIDE },
-                                    { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, OBSTACLE, OBSTACLE, OBSTACLE, VIDE, VIDE },
-                                    { VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE },
+                                    { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                                    { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
+                                    { VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE, OBSTACLE, OBSTACLE, OBSTACLE, VIDE },
+                                    { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, OBSTACLE, VIDE, VIDE },
                                     { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, OBSTACLE, VIDE, VIDE },
                                     { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
                                     { VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE, VIDE },
@@ -327,7 +327,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGCHIEF].force = 0.6;
   game->unites[VIKINGCHIEF].vie = 1;
   //test
-  game->unites[VIKINGCHIEF].vie = 1;
+  game->unites[VIKINGCHIEF].vie = 100;
 
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
