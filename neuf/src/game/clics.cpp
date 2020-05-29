@@ -113,7 +113,7 @@ void gererClic(Game* game, SDL_Event e){
                 int xOrdi = game->joueur2.unites[idOrdi].coord[0];
                 int yOrdi = game->joueur2.unites[idOrdi].coord[1];
                 if(game->joueur2.unites[idOrdi].vie!=0){
-                  choixCible(xOrdi, yOrdi,&xCible,&yCible, game->map);
+                  //choixCible(xOrdi, yOrdi,&xCible,&yCible, game->map);
                   // list<Noeud> chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->map);
                   // caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
                   // insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
