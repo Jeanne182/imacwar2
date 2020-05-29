@@ -3,19 +3,35 @@
 
 using namespace std;
 
-bool verificationDansListe(list<Noeud> liste, Noeud noeud){
-  list<Noeud> copyList = liste;
-  Noeud noeudFin;
-  while(!copyList.empty()){
-    noeudFin = copyList.back();
-    if ( noeudFin.x == noeud.x && noeudFin.y == noeud.y){
-      cout <<"Le noeud est dans la liste"<<endl;
+bool verificationDansListe(list<Noeud*> liste, Noeud *noeud){
+  // list<Noeud> copyList = liste;
+  Noeud *noeudFin = NULL;
+  while(!liste.empty()){
+    noeudFin = liste.back();
+    if ( noeudFin->x == noeud->x && noeudFin->y == noeud->y){
+      // cout <<"Le noeud est dans la liste"<<endl;
      return true;
     }
-    copyList.pop_back();
+    liste.pop_back();
    }
    return false;
 }
+
+// void remove(list<Noeud> *liste, Noeud noeud){
+//   list<Noeud> stock;
+//   Noeud last = liste->back();
+//   while(last->x != noeud->x or last->y != noeud->y){
+//     stock.push_back(last);
+//     liste->pop_back();
+//     cout<<"(x,y) : "<<last->x<<" "<<last->y<<endl;
+//   }
+//   cout<<"trouvé"<<endl;
+//   liste->pop_back();
+//   while(!stock.empty()){
+//     liste->push_back(stock.back());
+//     stock.pop_back();
+//   }
+// }
 
 void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   int xOptimal = -1;
@@ -41,15 +57,14 @@ void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   cout<<"La cible a pour coordonnées : ("<<*xCible<<","<<*yCible<<")"<<endl;
 }
 
-
-void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud> chemin){
-  int xChemin = chemin.back().x;
-  int yChemin = chemin.back().y;
+void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud*> chemin){
+  int xChemin = chemin.back()->x;
+  int yChemin = chemin.back()->y;
   cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
   while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
 
-    xChemin = chemin.back().x;
-    yChemin = chemin.back().y;
+    xChemin = chemin.back()->x;
+    yChemin = chemin.back()->y;
     chemin.pop_back();
     cout<<"X3 : " << xChemin <<" Y3 : " << yChemin <<endl;
   }
@@ -58,137 +73,165 @@ void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud> ch
   cout << "x et y séléctionnés : " << *x <<" , "<<*y<<endl;
 }
 
-list<Noeud> a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
+void poids(Noeud *noeud, Noeud *currentNode, int xOrdi, int yOrdi, int xCible, int yCible){
+  noeud->coutDeplacement = currentNode->coutDeplacement + 1; //ERREUR ICI
+  noeud->volDoiseau = abs(noeud->x-xCible) + abs(noeud->y-yCible);
+  noeud->somme = noeud->coutDeplacement + noeud->volDoiseau;
+  noeud->parent = currentNode;
+}
+
+Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
   Noeud startNode;
-  Noeud endNode;
-  Noeud currentNode;
   startNode.x = xOrdi;
   startNode.y = yOrdi;
   startNode.volDoiseau = abs(xOrdi-xCible) + abs(yOrdi-yCible);
   startNode.coutDeplacement = 0;
   startNode.somme = startNode.coutDeplacement + startNode.volDoiseau;
+  startNode.parent = NULL;
 
-  cout <<"Distance vol d'oiseau startNode : " <<startNode.volDoiseau<<endl;
+  Noeud* currentNode;
+  currentNode = &startNode;
 
-  endNode.x = xOrdi;
-  endNode.y = yOrdi;
+  list<Noeud*> openList, closeList;
 
-  currentNode = startNode;
+  int i = 0;
+  while(currentNode->x != xCible || currentNode->y != yCible) {
 
-  list<Noeud> openList, closeList;
-  list<Noeud> result;
-
-  //Placement du noeud de départ dans la closelist
-  closeList.push_back(currentNode);
-
-  //On place les noeuds voisins dans l'openList
-
-
-
-
-  Noeud noeudFin;
-
-  Noeud noeudQualite;
-  noeudQualite = startNode;
-  int i =0;
-  while(currentNode.x != xCible || currentNode.y != yCible) {
     i++;
 
-    if(currentNode.x >0 && currentNode.x<=10 && currentNode.y-1>0 && currentNode.y-1<=10){
-      Noeud noeudHaut;
-      cout<<"Noeud haut"<<endl;
-      noeudHaut.x = currentNode.x;
-      noeudHaut.y = currentNode.y - 1;
-      noeudHaut.terrain = map[noeudHaut.x-1][noeudHaut.y-1];
-      if(!verificationDansListe(openList, noeudHaut) && !verificationDansListe(closeList, noeudHaut) && noeudHaut.terrain == PLAINE){
-        cout<<"Noeud haut"<<endl;
-        openList.push_back(noeudHaut);
+    /*--------------------------------CurrentNode mis dans closeList-----------------------------*/
+    closeList.push_back(currentNode);
+    /*------------------------Insertion des 4 noeuds voisins dans l'openList ----------------------*/
+
+    Noeud* noeudHaut = new Noeud;
+    noeudHaut->x = currentNode->x;
+    noeudHaut->y = currentNode->y - 1;
+    if(noeudHaut->x >0 && noeudHaut->x<=10 && noeudHaut->y>0 && noeudHaut->y<=10){
+      noeudHaut->terrain = map[noeudHaut->y-1][noeudHaut->x-1];
+      poids(noeudHaut, currentNode, xOrdi, yOrdi, xCible, yCible);
+      if(!verificationDansListe(openList, noeudHaut) && !verificationDansListe(closeList, noeudHaut) && noeudHaut->terrain == PLAINE){
+        // cout<<"noeudHaut:"<< noeudHaut->x<<" "<<noeudHaut->y;
+        // cout<<" noeud parent Haut: ("<<noeudHaut->parent->x <<" , "<<noeudHaut->parent->y<<")"<<endl;
+
+        openList.push_front(noeudHaut);
       }
     }
 
-    if(currentNode.x >0 && currentNode.x<=10 && currentNode.y+1>0 && currentNode.y+1<=10){
-      cout<<"Noeud bas"<<endl;
-      Noeud noeudBas;
-      noeudBas.x = currentNode.x;
-      noeudBas.y = currentNode.y + 1;
-      noeudBas.terrain = map[noeudBas.x-1][noeudBas.y-1];
-      if(!verificationDansListe(openList, noeudBas) && !verificationDansListe(closeList, noeudBas) && noeudBas.terrain == PLAINE){
-        cout<<"Noeud bas"<<endl;
-        openList.push_back(noeudBas);
+    Noeud *noeudBas= new Noeud;
+    noeudBas->x = currentNode->x;
+    noeudBas->y = currentNode->y + 1;
+    if(noeudBas->x >0 && noeudBas->x<=10 && noeudBas->y>0 && noeudBas->y<=10){
+      noeudBas->terrain = map[noeudBas->y-1][noeudBas->x-1];
+      poids(noeudBas, currentNode, xOrdi, yOrdi, xCible, yCible);
+      if(!verificationDansListe(openList, noeudBas) && !verificationDansListe(closeList, noeudBas) && noeudBas->terrain == PLAINE){
+        // cout<<"noeudBas:"<< noeudBas->x<<" "<<noeudBas->y;
+        // cout<<"noeud parent Bas: ("<<noeudBas->parent->x <<" , "<<noeudBas->parent->y<<")"<<endl;
+        openList.push_front(noeudBas);
       }
     }
 
-
-    if(currentNode.x+1 >0 && currentNode.x+1<=10 && currentNode.y>0 && currentNode.y<=10){
-      cout<<"Noeud droite"<<endl;
-      Noeud noeudDroite;
-      noeudDroite.x = currentNode.x + 1;
-      noeudDroite.y = currentNode.y;
-      noeudDroite.terrain = map[noeudDroite.x-1][noeudDroite.y-1];
-      if(!verificationDansListe(openList, noeudDroite)&& !verificationDansListe(closeList, noeudDroite) && noeudDroite.terrain == PLAINE){
-        cout<<"Noeud droite"<<endl;
-        openList.push_back(noeudDroite);
+    Noeud *noeudDroite= new Noeud;
+    noeudDroite->x = currentNode->x + 1;
+    noeudDroite->y = currentNode->y;
+    if(noeudDroite->x>0 && noeudDroite->x<=10 && noeudDroite->y>0 && noeudDroite->y<=10){
+      noeudDroite->terrain = map[noeudDroite->y-1][noeudDroite->x-1];
+      poids(noeudDroite, currentNode, xOrdi, yOrdi, xCible, yCible);
+      if(!verificationDansListe(openList, noeudDroite)&& !verificationDansListe(closeList, noeudDroite) && noeudDroite->terrain == PLAINE){
+        // cout<<"noeudDroite:"<< noeudDroite->x<<" "<<noeudDroite->y;
+        // cout<<"noeud parent Droite: ("<<noeudDroite->parent->x <<" , "<<noeudDroite->parent->y<<")"<<endl;
+        openList.push_front(noeudDroite);
       }
     }
 
-    if(currentNode.x-1 >0 && currentNode.x-1<=10 && currentNode.y>0 && currentNode.y<=10){
-      cout<<"Noeud gauche"<<endl;
-      Noeud noeudGauche;
-      noeudGauche.x = currentNode.x - 1;
-      noeudGauche.y = currentNode.y;
-      noeudGauche.terrain = map[noeudGauche.x-1][noeudGauche.y-1];
-      if(!verificationDansListe(openList, noeudGauche) && !verificationDansListe(closeList, noeudGauche) && noeudGauche.terrain == PLAINE)/* && noeudHaut.terrain == PLAINE*/{
-        cout<<"Noeud gauche"<<endl;
-        openList.push_back(noeudGauche);
+    Noeud *noeudGauche= new Noeud;
+    noeudGauche->x = currentNode->x - 1;
+    noeudGauche->y = currentNode->y;
+    if(noeudGauche->x>0 && noeudGauche->x<=10 && noeudGauche->y>0 && noeudGauche->y<=10){
+      noeudGauche->terrain = map[noeudGauche->y-1][noeudGauche->x-1];
+      poids(noeudGauche, currentNode, xOrdi, yOrdi, xCible, yCible);
+      if(!verificationDansListe(openList, noeudGauche) && !verificationDansListe(closeList, noeudGauche) && noeudGauche->terrain == PLAINE){
+        // cout<<"noeudGauche:"<< noeudGauche->x<<""<<noeudGauche->y;
+        // cout<<"noeud parent Gauche: ("<<noeudGauche->parent->x <<" , "<<noeudGauche->parent->y<<")"<<endl;
+        openList.push_front(noeudGauche);
       }
     }
+
+    /*-------------------------------------Vérification OpenList vide -------------------------------------*/
 
     if(openList.empty()){
-      cout <<"OpenList vide"<<endl;
+      // cout <<"OpenList vide"<<endl;
       break;
     }
 
-    cout <<"Valeur qualité : " <<noeudQualite.somme<<endl<<endl;
-    while(!openList.empty()){
-      //coutDeplacement = cout du noeud parent
-      noeudFin = openList.back();
-      noeudFin.coutDeplacement = currentNode.coutDeplacement+1; //ERREUR ICI
-      noeudFin.volDoiseau = abs(noeudFin.x-xCible) + abs(noeudFin.y-yCible);
-      noeudFin.somme = noeudFin.coutDeplacement + noeudFin.volDoiseau;
+    /*----------------------------------- Parcourt de l'OpenList------------------------------*/
+    // cout<< endl<<"COORDONNEES CHEMIN : (" <<currentNode->x <<" , "<<currentNode->y<<")"<<endl<<endl;
+    if(i>1){
+      // cout<<"PARENT CURRENT NODE : ("<<currentNode->parent->x <<" , "<<currentNode->parent->y<<")"<<endl ;
+    }
 
-      cout<<"Noeud traité (x,y)= "<< noeudFin.x << noeudFin.y<<endl ;
-      cout << "xSource : "<<xCible<< "ySource : "<<yCible<<endl;
-      cout <<"coutDeplacement noeud fin : " <<noeudFin.coutDeplacement<<endl;
-      cout <<"volDoiseau noeud fin : " <<noeudFin.volDoiseau<<endl;
-      cout <<"Somme noeud fin : " <<noeudFin.somme<<endl;
-      if(noeudFin.somme <= noeudQualite.somme){
-        cout<<"Plus petite valeur trouvée"<<endl;
-        noeudQualite = noeudFin;
+    currentNode= openList.back();
+
+
+    // list<Noeud*> copyList = openList;
+    for(Noeud *noeud : openList){
+      //noeudFin = copyList.back();
+      // cout<<"Noeud traité (x,y)= "<< noeud->x << noeud->y<< " "<<"parent: ("<<noeud->parent->x <<" , "<<noeud->parent->y<<")"<<endl ;
+      // cout << "xSource : "<<xCible<< "ySource : "<<yCible<<endl;
+      // cout <<"coutDeplacement noeud fin : " <<noeudFin.coutDeplacement<<endl;
+      // cout <<"volDoiseau noeud fin : " <<noeudFin.volDoiseau<<endl;
+      // cout <<"Somme noeud fin : " <<noeudFin.somme<<endl;
+      // cout <<"Somme currentNode : " <<currentNode->somme<<endl<<endl;
+      if(noeud->somme < currentNode->somme){
+        currentNode = noeud;
       }
 
-      cout <<"Valeur qualité : " <<noeudQualite.somme<<endl<<endl;
-      openList.pop_back();
-     }
 
-    Noeud noeudToAdd = noeudQualite;
-    closeList.push_back(noeudQualite);
-    result.push_back(noeudToAdd);
+    }
 
-    currentNode = noeudQualite;
+    openList.remove(currentNode);
+    // while(!copyList.empty()){
+    //
+    //   noeudFin = copyList.back();
+    //   cout<<"Noeud traité (x,y)= "<< noeudFin->x << noeudFin->y<< " "<<"parent: ("<<noeudFin.parent->x <<" , "<<noeudFin.parent->y<<")"<<endl ;
+    //   // cout << "xSource : "<<xCible<< "ySource : "<<yCible<<endl;
+    //   // cout <<"coutDeplacement noeud fin : " <<noeudFin.coutDeplacement<<endl;
+    //   // cout <<"volDoiseau noeud fin : " <<noeudFin.volDoiseau<<endl;
+    //   // cout <<"Somme noeud fin : " <<noeudFin.somme<<endl;
+    //   // cout <<"Somme currentNode : " <<currentNode->somme<<endl<<endl;
+    //   if(noeudFin.somme < currentNode->somme){
+    //     currentNode = &noeudFin;
+    //   }
+    //
+    //   copyList.pop_back();
+    //
+    // }
 
-    cout<< "COORDONNEES CHEMIN : (" <<closeList.back().x <<" , "<<closeList.back().y<<")"<<endl;
+    /* -----------------------Pour retirer le noeud courant de l'openList -----------------------------------*/
+     list<Noeud> stock;
+     // Noeud last = openList.back();
+     // while(last->x != currentNode->x or last->y != currentNode->y){
+     //   stock.push_back(last);
+     //   //cout<<"(x,y) : "<<last->x<<" "<<last->y<<endl;
+     //   openList.pop_back();
+     //   last = openList.back();
+     // }
+     // openList.pop_back();
+     // while(!stock.empty()){
+     //   openList.push_back(stock.back());
+     //   stock.pop_back();
+     // }
+
+
+    // cout<<"noeud parent : ("<<currentNode->parent->x <<" , "<<currentNode->parent->y<<")"<<endl<<endl;
+    if(i==6){
+      // break;
+    }
+
   }
-
-  // int xChemin, yChemin;
-  // while(!closeList.empty()){
-  //   xChemin = closeList.back().x;
-  //   cout<<"X : " << xChemin;
-  //   yChemin = closeList.back().y;
-  //   cout<<" , Y : " << yChemin <<endl;
-  //   cout<<closeList.size()<<endl;
-  //   closeList.pop_back();
-  // }
-
-  return closeList;
-
+  // cout<< endl<<"COORDONNEES CHEMIN : (" <<currentNode->x <<" , "<<currentNode->y<<")"<<endl<<endl;
+  while(currentNode!=NULL){
+    // cout<<currentNode->x<< " "<<currentNode->y<<endl;
+    currentNode = currentNode->parent;
+  }
+  return currentNode;
 }
