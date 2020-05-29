@@ -30,8 +30,40 @@ int main(){
       Uint32 startTime = SDL_GetTicks();
 
       affichage(&game);
+      if(game.tour == TOUR_JOUEUR2 && game.modeJeu == ORDI_MODE){
 
+        switch(game.etapeJeu){
+        case ACTIONS:{
+          for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
+            int xCible = -1;
+            int yCible = -1;
+            int xOrdi = game.joueur2.unites[idOrdi].coord[0];
+            int yOrdi = game.joueur2.unites[idOrdi].coord[1];
+            if(game.joueur2.unites[idOrdi].vie!=0){
+              choixCible(xOrdi, yOrdi,&xCible,&yCible, game.mapObstacles);
+              if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game.joueur2.unites[idOrdi].zoneDeTir)==true){
+                int idEnnemi = selectionIdUnite(xCible, yCible, game.joueur1);
+                cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
+              }
 
+              else{
+                Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
+                caseOptimaleAtteignable(&xOrdi, &yOrdi, game.joueur2.unites[idOrdi].distance, chemin);
+                insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+                cout<<"CHOIX DEPLACEMENT"<<endl;
+              }
+
+            }
+          }
+          game.tour = TOUR_JOUEUR1;
+          // game->joueur2.unites[idOrdi].coord[0] = xOrdi;
+          // game->joueur2.unites[idOrdi].coord[1] = yOrdi;
+          // game->map[yOrdi-1][xOrdi-1]= JOUEUR2;
+          }
+          break;
+          }
+
+      }
 
       /* Boucle traitant les evenements */
       SDL_Event e;

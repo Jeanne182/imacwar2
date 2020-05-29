@@ -232,6 +232,51 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   }
 }
 
+void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game){
+  int xAttaque=-1;
+  int yAttaque=-1;
+  int idEnnemi=-1;
+  selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
+
+  cout << "x attaque" << xAttaque << endl;
+  cout << "y attaque" << yAttaque << endl;
+
+
+
+    cout << "attaque gooo" << endl;
+    game->uniteJouee[id]=1;
+    // combat
+    idEnnemi = selectionIdUnite(xAttaque, yAttaque, *joueurEnnemi);
+    joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
+    //if(distance respectée)
+    joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
+
+    cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
+    cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
+    cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
+    cout << "vie unite tour = " << joueurTour->unites[id].vie<< endl;
+
+    //-----------A OPTIMISER ?----------//
+    // Si une unite ennemie est tuee :
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      joueurEnnemi->nbUnites-=1;
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour); //A voir si on les mets vraiment en (0,0)
+      cout << "L'unite ennemie est morte" << endl;
+    }
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+      joueurTour->unites[id].vie=0;
+      joueurTour->nbUnites-=1;
+      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
+
+      cout << "Votre unite est morte" << endl;
+    }
+    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
+      game->etapeJeu = FIN_JEU;
+    }
+}
+
 void initialiseUniteJouee(int tableau[10]){
   cout << "c'est ok"<< endl;
   for(int i=0; i<10 ; i++){

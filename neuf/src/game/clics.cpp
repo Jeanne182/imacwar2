@@ -106,24 +106,6 @@ void gererClic(Game* game, SDL_Event e){
 
         case TOUR_JOUEUR2:
           switch(game->modeJeu){
-            case ORDI_MODE:{
-              for(int idOrdi=0; idOrdi<game->joueur2.nbUnitesInitial; idOrdi++){
-                int xCible = -1;
-                int yCible = -1;
-                int xOrdi = game->joueur2.unites[idOrdi].coord[0];
-                int yOrdi = game->joueur2.unites[idOrdi].coord[1];
-                if(game->joueur2.unites[idOrdi].vie!=0){
-                  choixCible(xOrdi, yOrdi,&xCible,&yCible, game->map);
-                  // list<Noeud> chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->map);
-                  // caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
-                  // insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
-                }
-              }
-              // game->joueur2.unites[idOrdi].coord[0] = xOrdi;
-              // game->joueur2.unites[idOrdi].coord[1] = yOrdi;
-              // game->map[yOrdi-1][xOrdi-1]= JOUEUR2;
-              }
-              break;
 
             case MULTIJOUEURS:
               switch (game->choix){
