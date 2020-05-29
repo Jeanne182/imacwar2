@@ -227,53 +227,40 @@ void initialiseUniteJouee(int tableau[10]){
   }
 }
 
-// void blabla(Unite unite){
-//   char* pv = conversionTexteDyna(unite.vie, "Points de vie (points): ");
-//   char* force = conversionTexteDyna(unite.force*100, "Force (%) : ");
-//   char* defense = conversionTexteDyna(unite.defense*100, "Défense (%) : ");
-//   char* zone = conversionTexteDyna(unite.zoneDeTir, "Zone de tir (cases) : ");
-//   char* deplacement = conversionTexteDyna(game->joueur1.unites[id].distance, "Distance de déplacement (cases) : ");
-// }
-
-// void etatUnite(SDL_Event e, Game* game){
-//   int x = 0;
-//   int y = 0;
-//   selectionCoordonnee(&x, &y, e, game->surface);
-//   int id = selectionIdUnite(x,y,game->joueur1);
 void etatUnite(Unite unite, Game* game){ //int id,Game* game
   // if(unite != SANS_TYPE){
     // zoneSurbrillance(game->joueur1,id, game->map,DEPLACEMENT);
     // cout<<"Coordonnées unité J1: "<< game->joueur1.unites[id].coord[0] <<" "<< game->joueur1.unites[id].coord[1]<<endl;
 
-    if(game->textureTextes[TEXTE_NOM_UNIT]!=NULL){
+    if(game->textureTextes[TEXTE_NOM_UNIT]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_NOM_UNIT]);
     }
-    if(game->textureTextes[TEXTE_PRIX]!=NULL){
+    if(game->textureTextes[TEXTE_PRIX]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_PRIX]);
     }
-    if(game->textureTextes[TEXTE_PV]!=NULL){
+    if(game->textureTextes[TEXTE_PV]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_PV]);
     }
-    if(game->textureTextes[TEXTE_FORCE]!=NULL){
+    if(game->textureTextes[TEXTE_FORCE]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_FORCE]);
     }
-    if(game->textureTextes[TEXTE_DEFENSE]!=NULL){
+    if(game->textureTextes[TEXTE_DEFENSE]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_DEFENSE]);
     }
-    if(game->textureTextes[TEXTE_ZONE]!=NULL){
+    if(game->textureTextes[TEXTE_ZONE]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_ZONE]);
     }
-    if(game->textureTextes[TEXTE_RANGE]!=NULL){
+    if(game->textureTextes[TEXTE_RANGE]!=0){
       glDeleteTextures(1, &game->textureTextes[TEXTE_RANGE]);
     }
 
-    char* nom = concatenation(unite.nom, "");;
-    char* prix = conversionTexteDyna(unite.prix, "Prix : ");
-    char* pv = conversionTexteDyna(unite.vie, "Points de vie : ");
-    char* force = conversionTexteDyna(unite.force*100, "Force (%) : ");
-    char* defense = conversionTexteDyna(unite.defense*100, "Défense (%) : ");
-    char* zone = conversionTexteDyna(unite.zoneDeTir, "Zone de tir (cases) : ");
-    char* deplacement = conversionTexteDyna(unite.distance, "Capacité de déplacement (cases) : ");
+    char* nom = concatenation(unite.nom, (char*)"");
+    char* prix = conversionTexteDyna(unite.prix, (char*)"Prix : ");
+    char* pv = conversionTexteDyna(unite.vie, (char*)"Points de vie : ");
+    char* force = conversionTexteDyna(unite.force*100, (char*)"Force (%) : ");
+    char* defense = conversionTexteDyna(unite.defense*100, (char*)"Défense (%) : ");
+    char* zone = conversionTexteDyna(unite.zoneDeTir, (char*)"Zone de tir (cases) : ");
+    char* deplacement = conversionTexteDyna(unite.distance, (char*)"Capacité de déplacement (cases) : ");
 
     creationTexte(&game->surfaceTextes[TEXTE_NOM_UNIT], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_NOM_UNIT], nom, SDL_Color{255,255,255});
     creationTexte(&game->surfaceTextes[TEXTE_PV], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
@@ -310,6 +297,7 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
     free(pv);
     free(prix);
     free(nom);
+
   }
   // else{
   //   if(unite != SANS_TYPE){

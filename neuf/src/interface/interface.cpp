@@ -179,10 +179,12 @@ int finProgrammeSDL(Game* game){
     glDeleteTextures(1, &game->textureTextes[TEXTE_QUITTER]);
     glDeleteTextures(1, &game->textureTextes[TEXTE_REJOUER]);
 
-    glDeleteTextures(1,&game->textfond[IMG_MENUDEBUT]);
-    glDeleteTextures(1,&game->textfond[IMG_MENUNORMAL]);
-    glDeleteTextures(1,&game->textfond[IMG_MENU_FIN]);
-    glDeleteTextures(1,&game->texturebouton);
+    glDeleteTextures(1, &game->textfond[IMG_MENUDEBUT]);
+    glDeleteTextures(1, &game->textfond[IMG_MENUNORMAL]);
+    glDeleteTextures(1, &game->textfond[IMG_MENU_FIN]);
+    glDeleteTextures(1, &game->texturebouton);
+
+    SDL_FreeSurface(game->surface);
 
     TTF_CloseFont(game->policeTextes[TITRES]);
     TTF_CloseFont(game->policeTextes[TITRE_MEDIUM]);

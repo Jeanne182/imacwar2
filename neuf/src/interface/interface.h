@@ -56,7 +56,7 @@ enum EnumTexturesCarte{
     ARBRE6,
     ARBRE7,
     ARBRE8,
-    ARBRE9,
+    ARBRE9
   };
 
 enum EnumBoutons{
@@ -94,6 +94,7 @@ void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
 void finJeu(Game* game);
 int finProgrammeSDL(Game* game);
+
 //string texture_path(texturesCarte texture_value);
 void carre(float x, float y, Joueur joueur, int choix);
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);

@@ -286,8 +286,6 @@ void initialisationDynamique(Game *game){
   game->joueur2.tour = JOUEUR2;
   game->joueur2.pieces = 100;
 
-
-
   //Initialisation des unites
   // Gentils :
   game->unites[VIKINGMAN].force = 0.4;
@@ -296,7 +294,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGMAN].zoneDeTir = 2;
   game->unites[VIKINGMAN].distance = 2;
   game->unites[VIKINGMAN].prix = 10;
-  game->unites[VIKINGMAN].nom = "Guerrier fauve";
+  game->unites[VIKINGMAN].nom = (char*)"Guerrier fauve";
   game->unites[VIKINGMAN].type = VIKINGMAN;
 
   game->unites[VIKINGBEAST].force = 0.6;
@@ -305,7 +303,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGBEAST].zoneDeTir = 1;
   game->unites[VIKINGBEAST].distance = 2;
   game->unites[VIKINGBEAST].prix = 20;
-  game->unites[VIKINGBEAST].nom = "Ours des montagnes";
+  game->unites[VIKINGBEAST].nom = (char*)"Ours des montagnes";
   game->unites[VIKINGBEAST].type = VIKINGBEAST;
 
   game->unites[VIKINGWOMAN].force = 0.5;
@@ -314,7 +312,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWOMAN].zoneDeTir = 1;
   game->unites[VIKINGWOMAN].distance = 2;
   game->unites[VIKINGWOMAN].prix = 30;
-  game->unites[VIKINGWOMAN].nom = "Guerrière sanguinaire";
+  game->unites[VIKINGWOMAN].nom = (char*)"Guerrière sanguinaire";
   game->unites[VIKINGWOMAN].type = VIKINGWOMAN;
 
   game->unites[VIKINGWIZARD].force = 0.3;
@@ -323,22 +321,22 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWIZARD].zoneDeTir = 4;
   game->unites[VIKINGWIZARD].distance = 4;
   game->unites[VIKINGWIZARD].prix = 30;
-  game->unites[VIKINGWIZARD].nom = "Mage de feu";
+  game->unites[VIKINGWIZARD].nom = (char*)"Mage de feu";
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
   game->unites[VIKINGCHIEF].force = 0.6;
   game->unites[VIKINGCHIEF].vie = 1;
   //test
-  //game->unites[VIKINGCHIEF].vie = 1;
+  game->unites[VIKINGCHIEF].vie = 1;
 
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
-  game->unites[VIKINGCHIEF].distance = 2;
+  //game->unites[VIKINGCHIEF].distance = 2;
   //test
-  //game->unites[VIKINGCHIEF].distance = 10;
+  game->unites[VIKINGCHIEF].distance = 10;
 
   game->unites[VIKINGCHIEF].prix = 50;
-  game->unites[VIKINGCHIEF].nom = "Chef viking";
+  game->unites[VIKINGCHIEF].nom = (char*)"Chef viking";
   game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
 
   //Mechants :
@@ -348,7 +346,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADMAN].zoneDeTir = 2;
   game->unites[DEADMAN].distance = 2;
   game->unites[DEADMAN].prix = 10;
-  game->unites[DEADMAN].nom = "Marcheur noir";
+  game->unites[DEADMAN].nom = (char*)"Marcheur noir";
   game->unites[DEADMAN].type = DEADMAN;
 
   game->unites[DEADBEAST].force = 0.6;
@@ -357,7 +355,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADBEAST].zoneDeTir = 1;
   game->unites[DEADBEAST].distance = 2;
   game->unites[DEADBEAST].prix =20;
-  game->unites[DEADBEAST].nom = "Loup des glaces";
+  game->unites[DEADBEAST].nom = (char*)"Loup des glaces";
   game->unites[DEADBEAST].type = DEADBEAST;
 
   game->unites[DEADKNIGHT].force = 0.5;
@@ -366,7 +364,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADKNIGHT].zoneDeTir = 1;
   game->unites[DEADKNIGHT].distance = 2;
   game->unites[DEADKNIGHT].prix = 30;
-  game->unites[DEADKNIGHT].nom = "Chevalier noir";
+  game->unites[DEADKNIGHT].nom = (char*)"Chevalier noir";
   game->unites[DEADKNIGHT].type = DEADKNIGHT;
 
   game->unites[DEADWIZARD].force = 0.3;
@@ -375,7 +373,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADWIZARD].zoneDeTir = 4;
   game->unites[DEADWIZARD].distance = 4;
   game->unites[DEADWIZARD].prix = 30;
-  game->unites[DEADWIZARD].nom = "Mage noir";
+  game->unites[DEADWIZARD].nom = (char*)"Mage noir";
   game->unites[DEADWIZARD].type = DEADWIZARD;
 
   game->unites[DEADCHIEF].force = 0.6;
@@ -389,7 +387,7 @@ void initialisationDynamique(Game *game){
   //test
   //game->unites[DEADCHIEF].distance = 10;
   game->unites[DEADCHIEF].prix = 50;
-  game->unites[DEADCHIEF].nom = "Agent de la mort";
+  game->unites[DEADCHIEF].nom = (char*)"Agent de la mort";
   game->unites[DEADCHIEF].type = DEADCHIEF;
 
 

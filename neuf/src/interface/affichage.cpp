@@ -2,9 +2,7 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
-
 #include "game/a_star.h"
-
 #include <cstring>
 
 
@@ -69,11 +67,11 @@ void affichage(Game* game){
       // }
         switch (game->tour) {
           case TOUR_JOUEUR1:{
-            if(game->textureTextes[TEXTE_PIECESJ1]!=NULL){
+            if(game->textureTextes[TEXTE_PIECESJ1]!=0){
               glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ1]);
             }
             affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.05);
-            char* piecesj1 = conversionTexteDyna(game->joueur1.pieces, "Pièces joueur 1 : ");
+            char* piecesj1 = conversionTexteDyna(game->joueur1.pieces, (char*)"Pièces joueur 1 : ");
             creationTexte(&game->surfaceTextes[TEXTE_PIECESJ1], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PIECESJ1], piecesj1 , SDL_Color{255,255,255});
             affichageTextureTextes(&game->surfaceTextes[TEXTE_PIECESJ1], game->textureTextes[TEXTE_PIECESJ1], 1.5, 0.53);
             affichageTexture(game->textureUnites[VIKINGWOMAN],game->boutonVikingWoman.longueur,game->boutonVikingWoman.hauteur,game->boutonVikingWoman.x,game->boutonVikingWoman.y);
@@ -84,11 +82,11 @@ void affichage(Game* game){
             free(piecesj1);}
             break;
           case TOUR_JOUEUR2:{
-            if(game->textureTextes[TEXTE_PIECESJ2]!=NULL){
+            if(game->textureTextes[TEXTE_PIECESJ2]!=0){
               glDeleteTextures(1, &game->textureTextes[TEXTE_PIECESJ2]);
             }
             affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.05);
-            char* piecesj2 = conversionTexteDyna(game->joueur2.pieces, "Pièces joueur 2 : ");
+            char* piecesj2 = conversionTexteDyna(game->joueur2.pieces, (char*)"Pièces joueur 2 : ");
             creationTexte(&game->surfaceTextes[TEXTE_PIECESJ2], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PIECESJ2], piecesj2 , SDL_Color{255,255,255});
             affichageTextureTextes(&game->surfaceTextes[TEXTE_PIECESJ2], game->textureTextes[TEXTE_PIECESJ2], 1.5, 0.53);
             affichageTexture(game->textureUnites[DEADKNIGHT],game->boutonDeadKnight.longueur,game->boutonDeadKnight.hauteur,game->boutonDeadKnight.x,game->boutonDeadKnight.y);
@@ -218,7 +216,6 @@ void affichage(Game* game){
       //       break;
       //   }
       // }
-
       if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10 && game->etapeJeu!= PLACEMENT_UNITES){
         switch(game->mapObstacles[game->ySurvol-1][game->xSurvol-1]){
           case JOUEUR1:{
@@ -390,7 +387,6 @@ void affichageCarte(Game* game){
         affichageTexture(game->textureCases[EAUHD],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
         break;
       }
-
     }
   }
 
