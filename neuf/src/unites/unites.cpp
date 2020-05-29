@@ -169,7 +169,6 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
     // Changement de tour
 
     verificationFinTour(game, joueur->nbUnites);
-
   }
   else{
     cout << "Cette case est déjà occupée, veuillez choisir une autre case OU Votre distance de déplacement n'est pas respectée" << endl;
@@ -232,21 +231,10 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   }
 }
 
-void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game){
-  int xAttaque=-1;
-  int yAttaque=-1;
-  int idEnnemi=-1;
-  selectionCoordonnee(&xAttaque, &yAttaque, e, game->surface);
+void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game){
 
-  cout << "x attaque" << xAttaque << endl;
-  cout << "y attaque" << yAttaque << endl;
+  cout << "attaque gooo" << endl;
 
-
-
-    cout << "attaque gooo" << endl;
-    game->uniteJouee[id]=1;
-    // combat
-    idEnnemi = selectionIdUnite(xAttaque, yAttaque, *joueurEnnemi);
     joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
     //if(distance respectée)
     joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;

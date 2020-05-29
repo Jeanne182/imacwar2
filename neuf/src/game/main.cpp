@@ -3,7 +3,7 @@
 #include "game/game.h"
 #include "interface/text.h"
 #include "game/a_star.h"
-
+#include <GL/glut.h>
 #include <cstring>
 
 
@@ -44,21 +44,20 @@ int main(){
               if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game.joueur2.unites[idOrdi].zoneDeTir)==true){
                 int idEnnemi = selectionIdUnite(xCible, yCible, game.joueur1);
                 cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
+                attaqueOrdi(&game.joueur2, &game.joueur1, idOrdi, idEnnemi, &game);
               }
 
               else{
                 Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
                 caseOptimaleAtteignable(&xOrdi, &yOrdi, game.joueur2.unites[idOrdi].distance, chemin);
-                insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+                glutTimerFunc(60,(void*)insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2), 1);
+                // insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
                 cout<<"CHOIX DEPLACEMENT"<<endl;
               }
 
             }
           }
           game.tour = TOUR_JOUEUR1;
-          // game->joueur2.unites[idOrdi].coord[0] = xOrdi;
-          // game->joueur2.unites[idOrdi].coord[1] = yOrdi;
-          // game->map[yOrdi-1][xOrdi-1]= JOUEUR2;
           }
           break;
           }
