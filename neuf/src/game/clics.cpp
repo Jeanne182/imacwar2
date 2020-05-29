@@ -40,50 +40,34 @@ void gererClic(Game* game, SDL_Event e){
         case TOUR_JOUEUR1:
         cout <<"joueur1"<<endl;
 
-          // if(verificationUniteJouee(game->uniteJouee, game->joueur1)==false){
-          //   initialiseUniteJouee(game->uniteJouee);
-          //   game->etapeJeu=SELECTION_UNITE;
-          //   game->tour= TOUR_JOUEUR2;
-          // }
-          // else{
-            if(selectionIdUnite(game->x, game->y, game->joueur1) != -1){
-              if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur1)]==1){
-                game->etapeJeu = SELECTION_UNITE;
-                cout<<"Unité deja jouee" <<endl;
-              }
-              else{
-                game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
-                game->etapeJeu = ACTIONS;
-                cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
-              }
-
+          if(selectionIdUnite(game->x, game->y, game->joueur1) != -1){
+            if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur1)]==1){
+              game->etapeJeu = SELECTION_UNITE;
+              cout<<"Unité deja jouee" <<endl;
             }
-          // }
+            else{
+              game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
+              game->etapeJeu = ACTIONS;
+              cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
+            }
+          }
 
           break;
 
         case TOUR_JOUEUR2:
         cout <<"joueur2"<<endl;
 
-        // if(verificationUniteJouee(game->uniteJouee, game->joueur2)==false){
-        //   initialiseUniteJouee(game->uniteJouee);
-        //   game->etapeJeu=SELECTION_UNITE;
-        //   game->tour= TOUR_JOUEUR1;
-        // }
-        // else{
-          if(selectionIdUnite(game->x, game->y, game->joueur2) != -1){
-            if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur2)]==1){
-              game->etapeJeu = SELECTION_UNITE;
-              cout<<"Unité deja jouee" <<endl;
-            }
-            else{
-              game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
-              game->etapeJeu = ACTIONS;
-              cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
-            }
-
+        if(selectionIdUnite(game->x, game->y, game->joueur2) != -1){
+          if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur2)]==1){
+            game->etapeJeu = SELECTION_UNITE;
+            cout<<"Unité deja jouee" <<endl;
           }
-        // }
+          else{
+            game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
+            game->etapeJeu = ACTIONS;
+            cout<<"Unité selectionnée, etape jeu :" << game->etapeJeu<<endl;
+          }
+        }
 
           break;
 
@@ -102,65 +86,18 @@ void gererClic(Game* game, SDL_Event e){
           switch (game->choix){
 
             case RIEN:
-
-              if(selectionBouton(game, e) == DEPLACEMENT){
-                game->choix = DEPLACEMENT;
-                cout<<"CHOIX : déplacement"<<endl;
-              }
-              else if(selectionBouton(game, e) == ATTAQUE){
-                game->choix = ATTAQUE;
-                cout<<"CHOIX : attaque"<<endl;
-              }
-              else if(selectionBouton(game, e) == PASSER){
-                passerTour(game);
-                cout<<"CHOIX : passer"<<endl;
-              }
-              else{
-                selectionCoordonnee(&game->x,&game->y, e, game->surface);
-                if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur1)]==1){
-                  game->etapeJeu = SELECTION_UNITE;
-                  cout<<"Unité deja jouee" <<endl;
-                }
-                else{
-                  if(game->id1 != selectionIdUnite(game->x, game->y, game->joueur1)){
-                    game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
-
-
-                }
-                }
-              }
-              break;
+              case_rien(game, e, game->joueur1, 1);
+            break;
 
             case DEPLACEMENT:
               deplacement(&game->joueur1, game->id1, e, game);
-              if(selectionBouton(game, e) == ATTAQUE){
-                game->choix = ATTAQUE;
-                cout<<"CHOIX : attaque"<<endl;
-              }
-              else if(selectionBouton(game, e) == PASSER){
-                passerTour(game);
-                cout<<"CHOIX : passer"<<endl;
-              }
-              else if(selectionBouton(game, e) == RIEN){
-                game->choix=RIEN;
-              }
-              cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+              case_deplacement(game, e);
+
             break;
 
             case ATTAQUE:
               attaque(&game->joueur1, &game->joueur2, game->id1, e, game);
-              if(selectionBouton(game, e) == DEPLACEMENT){
-                game->choix = DEPLACEMENT;
-                cout<<"CHOIX : déplacement"<<endl;
-              }
-              else if(selectionBouton(game, e) == PASSER){
-                passerTour(game);
-                cout<<"CHOIX : passer"<<endl;
-              }
-              else if(selectionBouton(game, e) == RIEN){
-                game->choix=RIEN;
-              }
-              cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+              case_attaque(game, e);
             break;
 
           }
@@ -192,64 +129,17 @@ void gererClic(Game* game, SDL_Event e){
               switch (game->choix){
 
                 case RIEN:
-
-                  if(selectionBouton(game, e) == DEPLACEMENT){
-                    game->choix = DEPLACEMENT;
-                    cout<<"CHOIX : déplacement"<<endl;
-                  }
-                  else if(selectionBouton(game, e) == ATTAQUE){
-                    game->choix = ATTAQUE;
-                    cout<<"CHOIX : attaque"<<endl;
-                  }
-                  else if(selectionBouton(game, e) == PASSER){
-                    passerTour(game);
-                    cout<<"CHOIX : passer"<<endl;
-                  }
-                  else{
-                    selectionCoordonnee(&game->x,&game->y, e, game->surface);
-                    if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur2)]==1){
-                      game->etapeJeu = SELECTION_UNITE;
-                      cout<<"Unité deja jouee" <<endl;
-                    }
-                    else{
-                      if(game->id2 != selectionIdUnite(game->x, game->y, game->joueur2)){
-                        game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
-                      }
-                    }
-
-                  }
-                  break;
+                  case_rien(game, e, game->joueur2, 2);
+                break;
 
                 case DEPLACEMENT:
                   deplacement(&game->joueur2, game->id2, e, game);
-                  if(selectionBouton(game, e) == ATTAQUE){
-                    game->choix = ATTAQUE;
-                    cout<<"CHOIX : attaque"<<endl;
-                  }
-                  else if(selectionBouton(game, e) == PASSER){
-                    passerTour(game);
-                    cout<<"CHOIX : passer"<<endl;
-                  }
-                  else if(selectionBouton(game, e) == RIEN){
-                    game->choix=RIEN;
-                  }
-                  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+                  case_deplacement(game, e);
                 break;
 
                 case ATTAQUE:
                   attaque(&game->joueur2, &game->joueur1, game->id2, e, game);
-                  if(selectionBouton(game, e) == DEPLACEMENT){
-                    game->choix = DEPLACEMENT;
-                    cout<<"CHOIX : déplacement"<<endl;
-                  }
-                  else if(selectionBouton(game, e) == PASSER){
-                    passerTour(game);
-                    cout<<"CHOIX : passer"<<endl;
-                  }
-                  else if(selectionBouton(game, e) == RIEN){
-                    game->choix=RIEN;
-                  }
-                  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+                  case_attaque(game, e);
                 break;
               }
               break;
@@ -274,4 +164,73 @@ void gererClic(Game* game, SDL_Event e){
       break;
 
   }
+}
+
+void case_rien(Game* game, SDL_Event e, Joueur joueur, int id){
+  if(selectionBouton(game, e) == DEPLACEMENT){
+    game->choix = DEPLACEMENT;
+    cout<<"CHOIX : déplacement"<<endl;
+  }
+  else if(selectionBouton(game, e) == ATTAQUE){
+    game->choix = ATTAQUE;
+    cout<<"CHOIX : attaque"<<endl;
+  }
+  else if(selectionBouton(game, e) == PASSER){
+    passerTour(game);
+    cout<<"CHOIX : passer"<<endl;
+  }
+  else{
+    selectionCoordonnee(&game->x,&game->y, e, game->surface);
+    if(game->uniteJouee[selectionIdUnite(game->x, game->y, joueur)]==1){
+      game->etapeJeu = SELECTION_UNITE;
+      cout<<"Unité deja jouee" <<endl;
+    }
+    else{
+      if(id==1){
+        if(game->id1 != selectionIdUnite(game->x, game->y, joueur)){
+          game->id1 = selectionIdUnite(game->x, game->y, joueur);
+        }
+      }
+      else{
+        if(game->id2 != selectionIdUnite(game->x, game->y, joueur)){
+          game->id2 = selectionIdUnite(game->x, game->y, joueur);
+        }
+      }
+
+    }
+  }
+}
+
+
+
+void case_deplacement(Game* game, SDL_Event e){
+  if(selectionBouton(game, e) == ATTAQUE){
+    game->choix = ATTAQUE;
+    cout<<"CHOIX : attaque"<<endl;
+  }
+  else if(selectionBouton(game, e) == PASSER){
+    passerTour(game);
+    cout<<"CHOIX : passer"<<endl;
+  }
+  else if(selectionBouton(game, e) == RIEN){
+    game->choix=RIEN;
+  }
+  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
+}
+
+
+
+void case_attaque(Game* game, SDL_Event e){
+  if(selectionBouton(game, e) == DEPLACEMENT){
+    game->choix = DEPLACEMENT;
+    cout<<"CHOIX : déplacement"<<endl;
+  }
+  else if(selectionBouton(game, e) == PASSER){
+    passerTour(game);
+    cout<<"CHOIX : passer"<<endl;
+  }
+  else if(selectionBouton(game, e) == RIEN){
+    game->choix=RIEN;
+  }
+  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
 }
