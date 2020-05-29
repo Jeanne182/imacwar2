@@ -312,7 +312,7 @@ void affichageCarte(Game* game){
   affichageTexture(game->textfond[IMG_MENUNORMAL],0.875,1,1,0);
   for(int i = 0; i<10; i++){
     for(int j = 0; j<10; j++){
-      switch(game->map[j][i]){
+      switch(game->mapInit[j][i]){
         case PLAINE:
         affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
         break;

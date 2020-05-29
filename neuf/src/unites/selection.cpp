@@ -66,7 +66,7 @@ void verificationFinTour(Game* game, int nbUnites){
   }
 }
 
-// Fonction qui passe le toor au joueur suivant
+// Fonction qui passe le tour au joueur suivant
 void passerTour(Game* game){
   initialiseUniteJouee(game->uniteJouee);
   for(int i=0; i<10;i++){
@@ -131,8 +131,8 @@ bool verificationZoneTir(Joueur joueur, int x, int y, int id){
   return true;
 }
 
-bool verificationPrix(Joueur joueur, Unite unite){
-  if(joueur.pieces - unite.prix >= 0){
+bool verificationPrix(int pieces, Unite unite){
+  if(pieces - unite.prix >= 0){
     return true;
   }
   cout << "Pas assez de pieces pour l'acheter" << endl;

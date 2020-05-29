@@ -69,25 +69,11 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
   switch (game->etapeAchatUnite) {
     case ACHAT_UNITE:
       if (game->tour == TOUR_JOUEUR1){
-        if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(game->joueur1, game->unites[game->achat_type])==true){
-          cout<<"ETAPE : achat"<<endl;
-          game->etapeAchatUnite = CHOIX_EMPLACEMENT;
-        }
-        else {
-          game->achat_type = selectionBoutonUnite(game, e);
-
-
-        }
+        case_achat(game, e, game->joueur1.pieces);
       }
       else {
         if(game->modeJeu ==MULTIJOUEURS){
-          if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(game->joueur2, game->unites[game->achat_type])==true){
-            cout<<"ETAPE : achat"<<endl;
-            game->etapeAchatUnite = CHOIX_EMPLACEMENT;
-          }
-          else {
-            game->achat_type = selectionBoutonUnite(game, e);
-          }
+          case_achat(game, e, game->joueur2.pieces);
         }
         else {game->etapeAchatUnite = CHOIX_EMPLACEMENT;}
       }
@@ -98,36 +84,20 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
       case CHOIX_EMPLACEMENT:
         if (game->tour == TOUR_JOUEUR1){
           if(placementUnite(&game->joueur1, e, game, game->achat_type)==true){
-            if(game->joueur2.pieces==0){
-              game->tour = TOUR_JOUEUR1;
-            }
-            else{
-              game->tour = TOUR_JOUEUR2;
-            }
-            game->achat_type = SANS_TYPE;
-            game->etapeAchatUnite = ACHAT_UNITE;
-
+            finAchat(game, game->joueur2.pieces, TOUR_JOUEUR1, TOUR_JOUEUR2);
           }
         }
         else {
           if(game->modeJeu == MULTIJOUEURS){
             if(placementUnite(&game->joueur2, e, game, game->achat_type)==true){
-              if(game->joueur1.pieces==0){
-                game->tour = TOUR_JOUEUR2;
-              }
-              else{
-                game->tour = TOUR_JOUEUR1;
-              }
-              game->achat_type = SANS_TYPE;
-              game->etapeAchatUnite = ACHAT_UNITE;
-
+              finAchat(game, game->joueur1.pieces, TOUR_JOUEUR2, TOUR_JOUEUR1);
             }
           }
 
           else{ /////JOUEUR = ORDI
             int rand_unite = rand()%5 + 5;
             cout<<"rand_unite : "<< rand_unite<<endl;
-            while (verificationPrix(game->joueur2, game->unites[rand_unite])==false){
+            while (verificationPrix(game->joueur2.pieces, game->unites[rand_unite])==false){
               rand_unite = rand()%5 + 5;
               cout<<"rand_unite : "<< rand_unite<<endl;
             }
@@ -140,20 +110,36 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
               cout<<"x,y: "<< rand_x<< ", "<<rand_y<<" puis ";
             }
             cout<<endl;
-            if(game->joueur1.pieces==0){
-              game->tour = TOUR_JOUEUR2;
-            }
-            else{
-              game->tour = TOUR_JOUEUR1;
-            }
-            game->achat_type = SANS_TYPE;
-            game->etapeAchatUnite = ACHAT_UNITE;
-
+            finAchat(game, game->joueur1.pieces, TOUR_JOUEUR2, TOUR_JOUEUR1);
           }
         }
       break;
     }
 }
+
+void case_achat(Game* game, SDL_Event e, int pieces){
+  if(selectionBouton(game, e) == ACHAT && game->achat_type != SANS_TYPE && verificationPrix(pieces, game->unites[game->achat_type])==true){
+    cout<<"ETAPE : achat"<<endl;
+    game->etapeAchatUnite = CHOIX_EMPLACEMENT;
+  }
+  else {
+    game->achat_type = selectionBoutonUnite(game, e);
+  }
+}
+
+void finAchat(Game* game, int pieces, int memeJoueur, int autreJoueur){
+  if(pieces==0){
+    game->tour = memeJoueur;
+  }
+  else{
+    game->tour = autreJoueur;
+  }
+  game->achat_type = SANS_TYPE;
+  game->etapeAchatUnite = ACHAT_UNITE;
+
+}
+
+
 
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
   int xNew=-1;
@@ -205,11 +191,12 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
       joueurEnnemi->nbUnites-=1;
-      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour); //A voir si on les mets vraiment en (0,0)
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour);
       cout << "L'unite ennemie est morte" << endl;
     }
     // Si une unite du joueur est tuee :
     if (joueurTour->unites[id].vie<=0){
+      game->uniteJouee[id]=0;
       joueurTour->unites[id].vie=0;
       joueurTour->nbUnites-=1;
       insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
