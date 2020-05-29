@@ -32,8 +32,8 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
   creationTexte(&surfaceTextes[TEXTE_PLACEMENT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_PLACEMENT], "Placez votre guerrier", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_SELECTION],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_SELECTION], "Sélectionnez un de vos guerriers", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_ACTION],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_ACTION], "Choisissez une action à effectuer", SDL_Color{255,255,255});
-  creationTexte(&surfaceTextes[TEXTE_JOUEUR1_GAGNANT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_JOUEUR1_GAGNANT], "Bravo, votre place est assurée au Valhalla, vous vous êtes bien battus guerriers", SDL_Color{1,74,199});
-  creationTexte(&surfaceTextes[TEXTE_JOUEUR2_GAGNANT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_JOUEUR2_GAGNANT], "L'armée des morts a triomphé sur le Bien, Loki se repaît de cette victoire", SDL_Color{94, 0 ,46});
+  creationTexte(&surfaceTextes[TEXTE_JOUEUR1_GAGNANT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_JOUEUR1_GAGNANT], "Bravo, votre place est assurée au Valhalla, vous vous êtes bien battus guerriers !", SDL_Color{1,74,199});
+  creationTexte(&surfaceTextes[TEXTE_JOUEUR2_GAGNANT],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_JOUEUR2_GAGNANT], "L'armée des morts a triomphé sur le Bien, Loki se repaît de cette victoire !", SDL_Color{94, 0 ,46});
   creationTexte(&surfaceTextes[TEXTE_EGALITE],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_EGALITE], "Personne ne gagne aujourd'hui", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_CARACTERISTIQUES],  policeTextes[TITRE_MEDIUM], &textureTextes[TEXTE_CARACTERISTIQUES], "Caractéristiques de l'unité", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_REJOUER],  policeTextes[TITRES], &textureTextes[TEXTE_REJOUER], "Rejouer", SDL_Color{63,63,63});
