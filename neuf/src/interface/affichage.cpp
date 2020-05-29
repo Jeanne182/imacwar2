@@ -3,7 +3,7 @@
 #include "game/game.h"
 #include "interface/text.h"
 
-//#include "game/a_star.h"
+#include "game/a_star.h"
 
 #include <cstring>
 
