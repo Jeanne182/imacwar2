@@ -33,7 +33,7 @@ void gererClic(Game* game, SDL_Event e){
 
     //Partie du jeu où les joueurs sélectionnent l'unité avec laquelle ils vont agir
     case SELECTION_UNITE:
-      //sélection des coordonnées d'une unité du joueur dont c'est le tour
+      //selection des coordonnées d'une unité du joueur dont c'est le tour
       selectionCoordonnee(&game->x,&game->y, e, game->surface);
       switch(game->tour){
 
