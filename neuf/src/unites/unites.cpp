@@ -10,6 +10,8 @@ IMAC 1 - Projet Prog&Algo S1
 #include "interface/interface.h"
 #include "interface/text.h"
 #include "game/game.h"
+// #include "joueur_ordi/a_star.h"
+// #include "joueur_ordi/joueur_ordi.h"
 #include <iostream>
 
 using namespace std;
@@ -43,27 +45,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
     return false;
 }
 
-bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite){
 
-    int id = joueur->nbUnites;
-    if(joueur->nbUnites <= 3){
-      Unite unite;
-      unite = game->unites[typeUnite];
-
-      if(verificationZone(*joueur, x, y, game)==true && verificationCaseLibre(game, x, y)==true){
-
-        insertionCoordonnees(game, &unite, x, y, joueur->tour);
-        joueur->unites[id] = unite;
-        joueur->nbUnites ++;
-        joueur->nbUnitesInitial++;
-        joueur->pieces -= unite.prix;
-        cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
-        return true;
-      }
-    }
-    cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
-    return false;
-}
 
 void placementUnitesJoueurs(Game* game, SDL_Event e){
   switch (game->etapeAchatUnite) {
@@ -94,24 +76,24 @@ void placementUnitesJoueurs(Game* game, SDL_Event e){
             }
           }
 
-          else{ /////JOUEUR = ORDI
-            int rand_unite = rand()%5 + 5;
-            cout<<"rand_unite : "<< rand_unite<<endl;
-            while (verificationPrix(game->joueur2.pieces, game->unites[rand_unite])==false){
-              rand_unite = rand()%5 + 5;
-              cout<<"rand_unite : "<< rand_unite<<endl;
-            }
-            int rand_x = rand()%10 + 1; //?
-            int rand_y = rand()%10 + 1; //?
-
-            while(placementUniteOrdi(&game->joueur2, rand_x, rand_y, game, rand_unite)==false){
-              rand_x = rand()%10 + 1; //?
-              rand_y = rand()%10 + 1;
-              cout<<"x,y: "<< rand_x<< ", "<<rand_y<<" puis ";
-            }
-            cout<<endl;
-            finAchat(game, game->joueur1.pieces, TOUR_JOUEUR2, TOUR_JOUEUR1);
-          }
+          // else{ /////JOUEUR = ORDI
+          //   int rand_unite = rand()%5 + 5;
+          //   cout<<"rand_unite : "<< rand_unite<<endl;
+          //   while (verificationPrix(game->joueur2.pieces, game->unites[rand_unite])==false){
+          //     rand_unite = rand()%5 + 5;
+          //     cout<<"rand_unite : "<< rand_unite<<endl;
+          //   }
+          //   int rand_x = rand()%10 + 1; //?
+          //   int rand_y = rand()%10 + 1; //?
+          //
+          //   while(placementUniteOrdi(&game->joueur2, rand_x, rand_y, game, rand_unite)==false){
+          //     rand_x = rand()%10 + 1; //?
+          //     rand_y = rand()%10 + 1;
+          //     cout<<"x,y: "<< rand_x<< ", "<<rand_y<<" puis ";
+          //   }
+          //   cout<<endl;
+          //   finAchat(game, game->joueur1.pieces, TOUR_JOUEUR2, TOUR_JOUEUR1);
+          // }
         }
       break;
     }
@@ -218,39 +200,10 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   }
 }
 
-void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game){
 
-  cout << "attaque gooo" << endl;
 
-    joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
-    //if(distance respectée)
-    joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
 
-    cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
-    cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
-    cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
-    cout << "vie unite tour = " << joueurTour->unites[id].vie<< endl;
 
-    //-----------A OPTIMISER ?----------//
-    // Si une unite ennemie est tuee :
-    if (joueurEnnemi->unites[idEnnemi].vie<=0){
-      joueurEnnemi->unites[idEnnemi].vie=0;
-      joueurEnnemi->nbUnites-=1;
-      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour); //A voir si on les mets vraiment en (0,0)
-      cout << "L'unite ennemie est morte" << endl;
-    }
-    // Si une unite du joueur est tuee :
-    if (joueurTour->unites[id].vie<=0){
-      joueurTour->unites[id].vie=0;
-      joueurTour->nbUnites-=1;
-      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
-
-      cout << "Votre unite est morte" << endl;
-    }
-    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
-      game->etapeJeu = FIN_JEU;
-    }
-}
 
 void initialiseUniteJouee(int tableau[10]){
   for(int i=0; i<10 ; i++){

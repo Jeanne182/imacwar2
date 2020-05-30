@@ -1,4 +1,4 @@
-#include "game/a_star.h"
+#include "joueur_ordi/a_star.h"
 #include "interface/interface.h"
 
 using namespace std;
@@ -17,53 +17,6 @@ bool verificationDansListe(list<Noeud*> liste, Noeud *noeud){
    return false;
 }
 
-void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
-  int xOptimal = -1;
-  int yOptimal = -1;
-  for(int i = 0; i<10; i++){
-    for(int j=0; j<10; j++){
-      if(map[j][i]==JOUEUR1){
-        if(xOptimal==-1){
-          xOptimal = i+1;
-          yOptimal = j+1;
-        }
-        else{
-          if(abs(xOptimal-xOrdi)+abs(yOptimal-yOrdi)>abs(i+1-xOrdi)+abs(j+1-yOrdi)){
-            xOptimal = i+1;
-            yOptimal = j+1;
-          }
-        }
-      }
-    }
-  }
-  *xCible = xOptimal;
-  *yCible = yOptimal;
-  cout<<"La cible a pour coordonnées : ("<<*xCible<<","<<*yCible<<")"<<endl;
-}
-
-bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque){
-  if(abs(xCible-xOrdi)+abs(yCible-yOrdi)>zoneAttaque){
-    cout<<"Cible hors zone d'attaque"<<endl;
-    return false;
-  }
-  cout<<"Cible dans zone d'attaque"<<endl;
-  return true;
-}
-
-void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, Noeud* chemin){
-  int xChemin = chemin->x;
-  int yChemin = chemin->y;
-  // cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
-  while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
-    chemin = chemin->parent;
-    xChemin = chemin->x;
-    yChemin = chemin->y;
-    // cout<<"X3 : " << xChemin <<" Y3 : " << yChemin <<endl;
-  }
-  *x = xChemin;
-  *y = yChemin;
-  cout << "x et y séléctionnés : " << *x <<" , "<<*y<<endl;
-}
 
 void poids(Noeud *noeud, Noeud *currentNode, int xOrdi, int yOrdi, int xCible, int yCible){
   noeud->coutDeplacement = currentNode->coutDeplacement + 1; //ERREUR ICI

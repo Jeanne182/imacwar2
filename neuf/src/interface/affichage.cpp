@@ -2,7 +2,8 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
-#include "game/a_star.h"
+#include "joueur_ordi/a_star.h"
+#include "joueur_ordi/joueur_ordi.h"
 #include <cstring>
 
 

@@ -2,8 +2,8 @@
 #include "interface/interface.h"
 #include "game/game.h"
 #include "interface/text.h"
-#include "game/a_star.h"
-#include <GL/glut.h>
+#include "joueur_ordi/a_star.h"
+#include "joueur_ordi/joueur_ordi.h"
 #include <cstring>
 
 
@@ -14,16 +14,7 @@ int main(){
   initialisationGame(&game);
   initialisationDynamique(&game);
 
-
   int loop = 1;
-
-  // int xDepart = 2;
-  // int yDepart = 5;
-  //
-  // int xCible= 7;
-  // int yCible= 8;
-  // Noeud* chemin = a_star(xDepart, yDepart, xCible, yCible, game.map);
-  //caseOptimaleAtteignable(&xDepart, &yDepart, 3, chemin);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */
@@ -36,52 +27,14 @@ int main(){
         }
         switch(game.etapeJeu){
         case ACTIONS:{
-
-            int idOrdi = 0;
-            while(game.joueur2.unites[idOrdi].vie ==0 || game.uniteJouee[idOrdi] ==1 || idOrdi>game.joueur2.nbUnitesInitial){
-              idOrdi++;
-            }
-
-            game.uniteJouee[idOrdi]=1;
-            cout << "idOrdi : "<<idOrdi<<endl<<endl;
-          // for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
-
-            int xCible = -1;
-            int yCible = -1;
-            int xOrdi = game.joueur2.unites[idOrdi].coord[0];
-            int yOrdi = game.joueur2.unites[idOrdi].coord[1];
-            if(game.joueur2.unites[idOrdi].vie!=0){
-              choixCible(xOrdi, yOrdi,&xCible,&yCible, game.mapObstacles);
-              if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game.joueur2.unites[idOrdi].zoneDeTir)==true){
-                int idEnnemi = selectionIdUnite(xCible, yCible, game.joueur1);
-                cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
-                attaqueOrdi(&game.joueur2, &game.joueur1, idOrdi, idEnnemi, &game);
-                SDL_Delay(1000);
-              }
-
-              else{
-                Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
-                caseOptimaleAtteignable(&xOrdi, &yOrdi, game.joueur2.unites[idOrdi].distance, chemin);
-
-                insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
-                SDL_Delay(1000);
-                cout<<"CHOIX DEPLACEMENT"<<endl;
-              }
-
-            }
-
-          // }
-          if (verificationUniteJouee(game.uniteJouee,game.joueur2.nbUnites)==true){
-            initialiseUniteJouee(game.uniteJouee);
-            game.tour = TOUR_JOUEUR1;
-            game.etapeJeu= SELECTION_UNITE;
-            game.choix= RIEN;
-          }
-
-          // game.tour = TOUR_JOUEUR1;
+          choixActionsOrdi(&game);
           }
           break;
-          }
+        case PLACEMENT_UNITES:{
+          choixPlacementUniteOrdi(&game);
+        }
+          break;
+        }
 
       }
 
@@ -134,12 +87,6 @@ int main(){
                   finJeu(&game);
                 }
               break;
-            // case SDL_MOUSEMOTION:
-            //   cout<<"Coucou"<<endl;
-            //   break;
-
-            // default:
-            //       break;
           }
       }
 
