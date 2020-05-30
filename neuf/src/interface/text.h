@@ -13,7 +13,7 @@
 using namespace std;
 
 enum Enum_Textes{
-    TEXTE_BOUTON_DEPLACEMENT = 0, 
+    TEXTE_BOUTON_DEPLACEMENT = 0,
     TEXTE_BOUTON_ATTAQUE,
     TEXTE_BOUTON_ACHAT,
     TEXTE_BOUTON_PASSER,
@@ -41,7 +41,9 @@ enum Enum_Textes{
     TEXTE_REJOUER,
     TEXTE_QUITTER,
     TEXTE_ATTAQUE,
-    TEXTE_DEPLACEMENT
+    TEXTE_DEPLACEMENT,
+    TEXTE_PV_PERDUS_J1,
+    TEXTE_PV_PERDUS_J2
   };
 
   enum Polices{

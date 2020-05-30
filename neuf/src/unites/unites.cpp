@@ -400,3 +400,9 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* g
   }
 
 }
+
+// char* pvmoins(float pvAvant, float pvApres){
+//   float pvPerdus = pvAvant - pvApres;
+//   char* textePvPerdus = conversionTexteDyna(pvPerdus, (char*)"- ");
+//   return textePvPerdus;
+// }

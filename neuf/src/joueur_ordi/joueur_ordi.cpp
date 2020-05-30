@@ -3,6 +3,7 @@
 #include "interface/interface.h"
 #include "unites/unites.h"
 #include "interface/text.h"
+
 #include "game/game.h"
 
 
@@ -86,7 +87,9 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
     if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
       game->etapeJeu = FIN_JEU;
     }
+
 }
+
 void choixPlacementUniteOrdi(Game *game){
   int rand_unite = rand()%5 + 5;
   // int rand_unite = 5;
@@ -118,7 +121,7 @@ void choixActionsOrdi(Game *game){
       idOrdi++;
     }
 
-    game->uniteJouee[idOrdi]=1;
+    game->uniteJouee[idOrdi]=1; //steeve a dit de le bouger dans la boucle
     cout << "idOrdi : "<<idOrdi<<endl<<endl;
   // for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
 
@@ -131,20 +134,60 @@ void choixActionsOrdi(Game *game){
       if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game->joueur2.unites[idOrdi].zoneDeTir)==true){
         int idEnnemi = selectionIdUnite(xCible, yCible, game->joueur1);
         cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
+
+        float pvAvantEnnemi = game->joueur1.unites[idEnnemi].vie;
+        float pvAvantOrdi = game->joueur2.unites[idOrdi].vie;
+        //if(frame%10 == 0){
         attaqueOrdi(&game->joueur2, &game->joueur1, idOrdi, idEnnemi, game);
-        SDL_Delay(1000);
+        //}
+        float pvApresEnnemi = game->joueur1.unites[idEnnemi].vie;
+        float pvApresOrdi = game->joueur2.unites[idOrdi].vie;
+
         carre(xCible, yCible, game->joueur1, DEPLACEMENT);
         carre(xOrdi, yOrdi, game->joueur2, DEPLACEMENT);
+        if(game->textureTextes[TEXTE_PV_PERDUS_J1]!=0){
+          glDeleteTextures(1, &game->textureTextes[TEXTE_PV_PERDUS_J1]);
+        }
+        if(game->textureTextes[TEXTE_PV_PERDUS_J2]!=0){
+          glDeleteTextures(1, &game->textureTextes[TEXTE_PV_PERDUS_J2]);
+        }
+
+        // char* textePvPerdusEnnemis = pvmoins(pvAvantEnnemi, pvApresEnnemi);
+        // char* textePvPerdusOrdi = pvmoins(pvAvantOrdi, pvApresOrdi);
+
+        float pvPerdusEnnemis = pvAvantEnnemi - pvApresEnnemi;
+        char* textePvPerdusEnnemis = conversionTexteDyna(pvPerdusEnnemis, (char*)"- ");
+        float pvPerdusOrdi = pvAvantOrdi - pvApresOrdi;
+        char* textePvPerdusOrdi = conversionTexteDyna(pvPerdusOrdi, (char*)"- ");
+        //return textePvPerdus;
+
+        creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_J1], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_J1], textePvPerdusEnnemis , SDL_Color{1,74,199});
+        creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_J2], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_J2], textePvPerdusOrdi , SDL_Color{94, 0 ,46});
+        //
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_J1], game->textureTextes[TEXTE_PV_PERDUS_J1], game->joueur1.unites[idEnnemi].coord[0]/10 - 0.11 , game->joueur1.unites[idEnnemi].coord[1]/10 - 0.12);
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_J2], game->textureTextes[TEXTE_PV_PERDUS_J2], game->joueur2.unites[idOrdi].coord[0]/10 - 0.11 , game->joueur2.unites[idOrdi].coord[1]/10 - 0.12);
+
         affichageTextureTextes(&game->surfaceTextes[TEXTE_ATTAQUE], game->textureTextes[TEXTE_ATTAQUE], 1.18, 0.35);
+
+        free(textePvPerdusEnnemis);
+        free(textePvPerdusOrdi);
+
       }
 
       else{
-        Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-        caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
-        carre(xOrdi, yOrdi, game->joueur2, DEPLACEMENT);
-        affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
-        insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
-        SDL_Delay(1000);
+        // Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
+        // SDL_Delay(1000);
+        // caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
+        //
+        // carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);
+        // affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
+        // insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+
+        cout<<"frame"<<frame<<endl;
+        //if(frame%10 == 0){
+          //game->uniteJouee[idOrdi]=1;
+          deplacementOrdi(xOrdi, yOrdi, xCible, yCible, idOrdi, game);
+        //}
         cout<<"CHOIX DEPLACEMENT"<<endl;
       }
 
@@ -159,11 +202,20 @@ void choixActionsOrdi(Game *game){
   }
 
   // game.tour = TOUR_JOUEUR1;
+}
 
+void deplacementOrdi(int xOrdi, int yOrdi, int xCible, int yCible, int idOrdi, Game* game){
+  Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
+  caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
+  //if(frame%10 == 0){
+    carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);
+  //}
+
+  affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
+  insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
 }
 
 bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite){
-
     int id = joueur->nbUnites;
     if(joueur->nbUnites <= 3){
       Unite unite;

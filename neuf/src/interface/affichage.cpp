@@ -169,9 +169,8 @@ void affichage(Game* game){
       affichageTexture(game->texturebouton,game->boutonPasser.longueur,game->boutonPasser.hauteur,game->boutonPasser.x,game->boutonPasser.y);
       affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game->textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game->boutonDeplacement.x+0.035, (float)game->boutonDeplacement.y+0.020); //, 1.5, 0.02, 0,0
       affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_ATTAQUE], game->textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game->boutonAttaque.x+0.08, (float)game->boutonAttaque.y+0.020); //, 1.5, 0.02, 0,0
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_PASSER], game->textureTextes[TEXTE_BOUTON_PASSER], (float)game->boutonPasser.x+0.09, (float)game->boutonPasser.y+0.020); //, 1.5, 0.02, 0,0
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_PASSER], game->textureTextes[TEXTE_BOUTON_PASSER], (float)game->boutonPasser.x+0.043, (float)game->boutonPasser.y+0.020); //, 1.5, 0.02, 0,0
     }
-
       if(game->tour == TOUR_JOUEUR1){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.05);
           if(game->idUniteSurvolee==-1 && game->id1!=-1){
@@ -306,6 +305,7 @@ void affichage(Game* game){
             }
 
             affichageTexture(game->textureUnites[game->joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
+        
             break;
           }
 

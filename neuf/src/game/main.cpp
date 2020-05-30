@@ -19,19 +19,17 @@ int main(){
       Uint32 startTime = SDL_GetTicks();
 
       affichage(&game);
+
       if(game.tour == TOUR_JOUEUR2 && game.modeJeu == ORDI_MODE){
         if(game.etapeJeu==SELECTION_UNITE){
           game.etapeJeu=ACTIONS;
         }
         switch(game.etapeJeu){
-        case ACTIONS:{
+        case ACTIONS:
           choixActionsOrdi(&game);
-
-          }
           break;
-        case PLACEMENT_UNITES:{
+        case PLACEMENT_UNITES:
           choixPlacementUniteOrdi(&game);
-        }
           break;
         }
 
@@ -99,6 +97,7 @@ int main(){
       if(elapsedTime < game.framerate_milliseconds){
           SDL_Delay(game.framerate_milliseconds - elapsedTime);
       }
+      frame++;
   }
 
 
