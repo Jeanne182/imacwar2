@@ -100,6 +100,8 @@ void enleveUnite(int map[10][10], Joueur joueur1, Joueur joueur2);
 
 /* clics.cpp */
 void gererClic(Game* game, SDL_Event e);
+void case_selection(Game* game, Joueur joueur, int id);
+void case_actions(Game* game, Joueur* joueurTour, Joueur* joueurEnnemi, int num, SDL_Event e, int id);
 void case_rien(Game* game, SDL_Event e, Joueur joueur, int id);
 void case_deplacement(Game* game, SDL_Event e);
 void case_attaque(Game* game, SDL_Event e);
