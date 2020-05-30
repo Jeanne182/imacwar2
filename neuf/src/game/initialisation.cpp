@@ -327,7 +327,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGCHIEF].force = 0.6;
   game->unites[VIKINGCHIEF].vie = 1;
   //test
-  game->unites[VIKINGCHIEF].vie = 100;
+  game->unites[VIKINGCHIEF].vie = 1;
 
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
@@ -411,7 +411,7 @@ void enleveUnite(int map[10][10], Joueur joueur1, Joueur joueur2){
   int id=-1;
   for(int i = 0; i<10; i++){
     for(int j = 0; j<10; j++){
-      if(map[j][i]!= VIDE || map[j][i]!=OBSTACLE){
+      if(map[j][i]!= VIDE && map[j][i]!=OBSTACLE){
         if(map[j][i]==JOUEUR1){
           id = selectionIdUnite(i, j, joueur1);
           joueur1.unites[id].coord[0]=0;
