@@ -17,22 +17,6 @@ bool verificationDansListe(list<Noeud*> liste, Noeud *noeud){
    return false;
 }
 
-// void remove(list<Noeud> *liste, Noeud noeud){
-//   list<Noeud> stock;
-//   Noeud last = liste->back();
-//   while(last->x != noeud->x or last->y != noeud->y){
-//     stock.push_back(last);
-//     liste->pop_back();
-//     cout<<"(x,y) : "<<last->x<<" "<<last->y<<endl;
-//   }
-//   cout<<"trouvé"<<endl;
-//   liste->pop_back();
-//   while(!stock.empty()){
-//     liste->push_back(stock.back());
-//     stock.pop_back();
-//   }
-// }
-
 void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   int xOptimal = -1;
   int yOptimal = -1;
@@ -57,16 +41,24 @@ void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   cout<<"La cible a pour coordonnées : ("<<*xCible<<","<<*yCible<<")"<<endl;
 }
 
-void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, list<Noeud*> chemin){
-  int xChemin = chemin.back()->x;
-  int yChemin = chemin.back()->y;
-  cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
-  while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
+bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque){
+  if(abs(xCible-xOrdi)+abs(yCible-yOrdi)>zoneAttaque){
+    cout<<"Cible hors zone d'attaque"<<endl;
+    return false;
+  }
+  cout<<"Cible dans zone d'attaque"<<endl;
+  return true;
+}
 
-    xChemin = chemin.back()->x;
-    yChemin = chemin.back()->y;
-    chemin.pop_back();
-    cout<<"X3 : " << xChemin <<" Y3 : " << yChemin <<endl;
+void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, Noeud* chemin){
+  int xChemin = chemin->x;
+  int yChemin = chemin->y;
+  // cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
+  while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
+    chemin = chemin->parent;
+    xChemin = chemin->x;
+    yChemin = chemin->y;
+    // cout<<"X3 : " << xChemin <<" Y3 : " << yChemin <<endl;
   }
   *x = xChemin;
   *y = yChemin;
@@ -109,7 +101,7 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
     if(noeudHaut->x >0 && noeudHaut->x<=10 && noeudHaut->y>0 && noeudHaut->y<=10){
       noeudHaut->terrain = map[noeudHaut->y-1][noeudHaut->x-1];
       poids(noeudHaut, currentNode, xOrdi, yOrdi, xCible, yCible);
-      if(!verificationDansListe(openList, noeudHaut) && !verificationDansListe(closeList, noeudHaut) && noeudHaut->terrain == PLAINE){
+      if(!verificationDansListe(openList, noeudHaut) && !verificationDansListe(closeList, noeudHaut) && noeudHaut->terrain == VIDE){
         // cout<<"noeudHaut:"<< noeudHaut->x<<" "<<noeudHaut->y;
         // cout<<" noeud parent Haut: ("<<noeudHaut->parent->x <<" , "<<noeudHaut->parent->y<<")"<<endl;
 
@@ -123,7 +115,7 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
     if(noeudBas->x >0 && noeudBas->x<=10 && noeudBas->y>0 && noeudBas->y<=10){
       noeudBas->terrain = map[noeudBas->y-1][noeudBas->x-1];
       poids(noeudBas, currentNode, xOrdi, yOrdi, xCible, yCible);
-      if(!verificationDansListe(openList, noeudBas) && !verificationDansListe(closeList, noeudBas) && noeudBas->terrain == PLAINE){
+      if(!verificationDansListe(openList, noeudBas) && !verificationDansListe(closeList, noeudBas) && noeudBas->terrain == VIDE){
         // cout<<"noeudBas:"<< noeudBas->x<<" "<<noeudBas->y;
         // cout<<"noeud parent Bas: ("<<noeudBas->parent->x <<" , "<<noeudBas->parent->y<<")"<<endl;
         openList.push_front(noeudBas);
@@ -136,7 +128,7 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
     if(noeudDroite->x>0 && noeudDroite->x<=10 && noeudDroite->y>0 && noeudDroite->y<=10){
       noeudDroite->terrain = map[noeudDroite->y-1][noeudDroite->x-1];
       poids(noeudDroite, currentNode, xOrdi, yOrdi, xCible, yCible);
-      if(!verificationDansListe(openList, noeudDroite)&& !verificationDansListe(closeList, noeudDroite) && noeudDroite->terrain == PLAINE){
+      if(!verificationDansListe(openList, noeudDroite)&& !verificationDansListe(closeList, noeudDroite) && noeudDroite->terrain == VIDE){
         // cout<<"noeudDroite:"<< noeudDroite->x<<" "<<noeudDroite->y;
         // cout<<"noeud parent Droite: ("<<noeudDroite->parent->x <<" , "<<noeudDroite->parent->y<<")"<<endl;
         openList.push_front(noeudDroite);
@@ -149,7 +141,7 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
     if(noeudGauche->x>0 && noeudGauche->x<=10 && noeudGauche->y>0 && noeudGauche->y<=10){
       noeudGauche->terrain = map[noeudGauche->y-1][noeudGauche->x-1];
       poids(noeudGauche, currentNode, xOrdi, yOrdi, xCible, yCible);
-      if(!verificationDansListe(openList, noeudGauche) && !verificationDansListe(closeList, noeudGauche) && noeudGauche->terrain == PLAINE){
+      if(!verificationDansListe(openList, noeudGauche) && !verificationDansListe(closeList, noeudGauche) && noeudGauche->terrain == VIDE){
         // cout<<"noeudGauche:"<< noeudGauche->x<<""<<noeudGauche->y;
         // cout<<"noeud parent Gauche: ("<<noeudGauche->parent->x <<" , "<<noeudGauche->parent->y<<")"<<endl;
         openList.push_front(noeudGauche);
@@ -229,9 +221,5 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
 
   }
   // cout<< endl<<"COORDONNEES CHEMIN : (" <<currentNode->x <<" , "<<currentNode->y<<")"<<endl<<endl;
-  while(currentNode!=NULL){
-    // cout<<currentNode->x<< " "<<currentNode->y<<endl;
-    currentNode = currentNode->parent;
-  }
   return currentNode;
 }

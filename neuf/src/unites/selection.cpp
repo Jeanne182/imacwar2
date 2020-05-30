@@ -81,7 +81,7 @@ void passerTour(Game* game){
   else{
     game->tour = TOUR_JOUEUR2;
   }
-
+  
 }
 
 

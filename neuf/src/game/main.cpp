@@ -3,7 +3,7 @@
 #include "game/game.h"
 #include "interface/text.h"
 #include "game/a_star.h"
-
+#include <GL/glut.h>
 #include <cstring>
 
 
@@ -30,8 +30,64 @@ int main(){
       Uint32 startTime = SDL_GetTicks();
 
       affichage(&game);
+      if(game.tour == TOUR_JOUEUR2 && game.modeJeu == ORDI_MODE){
 
+        switch(game.etapeJeu){
+        case ACTIONS:{
 
+            int idOrdi = 0;
+            while(game.joueur2.unites[idOrdi].vie ==0 || game.uniteJouee[idOrdi] ==1 || idOrdi>game.joueur2.nbUnitesInitial){
+              idOrdi++;
+            }
+
+            game.uniteJouee[idOrdi]=1;
+            cout << "idOrdi : "<<idOrdi<<endl<<endl;
+          // for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
+
+            int xCible = -1;
+            int yCible = -1;
+            int xOrdi = game.joueur2.unites[idOrdi].coord[0];
+            int yOrdi = game.joueur2.unites[idOrdi].coord[1];
+            if(game.joueur2.unites[idOrdi].vie!=0){
+              choixCible(xOrdi, yOrdi,&xCible,&yCible, game.mapObstacles);
+              if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game.joueur2.unites[idOrdi].zoneDeTir)==true){
+                int idEnnemi = selectionIdUnite(xCible, yCible, game.joueur1);
+                cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
+                attaqueOrdi(&game.joueur2, &game.joueur1, idOrdi, idEnnemi, &game);
+              }
+
+              else{
+                Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
+                caseOptimaleAtteignable(&xOrdi, &yOrdi, game.joueur2.unites[idOrdi].distance, chemin);
+
+                insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+                SDL_Delay(1000);
+                cout<<"CHOIX DEPLACEMENT"<<endl;
+              }
+
+            }
+
+          // }
+          int compteurUnites=0;
+          for(int j=0; j<game.joueur2.nbUnitesInitial; j++){
+            if(game.uniteJouee[j]==1){
+              compteurUnites++;
+
+            }
+          }
+          cout << "COMPTEUR UNITE : "<<compteurUnites<<endl<<endl;
+          if(compteurUnites==game.joueur2.nbUnites){
+            for(int j=0; j<game.joueur2.nbUnitesInitial; j++){
+              game.uniteJouee[j]==0;
+            }
+            game.tour = TOUR_JOUEUR1;
+          }
+          // game.tour = TOUR_JOUEUR1;
+          }
+          break;
+          }
+
+      }
 
       /* Boucle traitant les evenements */
       SDL_Event e;

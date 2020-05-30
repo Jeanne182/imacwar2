@@ -155,7 +155,6 @@ void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game){
     // Changement de tour
 
     verificationFinTour(game, joueur->nbUnites);
-
   }
   else{
     cout << "Cette case est déjà occupée, veuillez choisir une autre case OU Votre distance de déplacement n'est pas respectée" << endl;
@@ -217,6 +216,40 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
   else{
     cout << "Vous attaquez une de vos unites OU La distance de tir n'est pas respectée" << endl;
   }
+}
+
+void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game){
+
+  cout << "attaque gooo" << endl;
+
+    joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
+    //if(distance respectée)
+    joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
+
+    cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
+    cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
+    cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
+    cout << "vie unite tour = " << joueurTour->unites[id].vie<< endl;
+
+    //-----------A OPTIMISER ?----------//
+    // Si une unite ennemie est tuee :
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      joueurEnnemi->nbUnites-=1;
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour); //A voir si on les mets vraiment en (0,0)
+      cout << "L'unite ennemie est morte" << endl;
+    }
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+      joueurTour->unites[id].vie=0;
+      joueurTour->nbUnites-=1;
+      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
+
+      cout << "Votre unite est morte" << endl;
+    }
+    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
+      game->etapeJeu = FIN_JEU;
+    }
 }
 
 void initialiseUniteJouee(int tableau[10]){
