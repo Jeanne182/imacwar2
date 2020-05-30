@@ -34,7 +34,16 @@ int main(){
 
         switch(game.etapeJeu){
         case ACTIONS:{
-          for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
+
+            int idOrdi = 0;
+            while(game.joueur2.unites[idOrdi].vie ==0 || game.uniteJouee[idOrdi] ==1 || idOrdi>game.joueur2.nbUnitesInitial){
+              idOrdi++;
+            }
+
+            game.uniteJouee[idOrdi]=1;
+            cout << "idOrdi : "<<idOrdi<<endl<<endl;
+          // for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
+
             int xCible = -1;
             int yCible = -1;
             int xOrdi = game.joueur2.unites[idOrdi].coord[0];
@@ -50,14 +59,30 @@ int main(){
               else{
                 Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
                 caseOptimaleAtteignable(&xOrdi, &yOrdi, game.joueur2.unites[idOrdi].distance, chemin);
-                glutTimerFunc(60,(void*)insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2), 1);
-                // insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+
+                insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+                SDL_Delay(1000);
                 cout<<"CHOIX DEPLACEMENT"<<endl;
               }
 
             }
+
+          // }
+          int compteurUnites=0;
+          for(int j=0; j<game.joueur2.nbUnitesInitial; j++){
+            if(game.uniteJouee[j]==1){
+              compteurUnites++;
+
+            }
           }
-          game.tour = TOUR_JOUEUR1;
+          cout << "COMPTEUR UNITE : "<<compteurUnites<<endl<<endl;
+          if(compteurUnites==game.joueur2.nbUnites){
+            for(int j=0; j<game.joueur2.nbUnitesInitial; j++){
+              game.uniteJouee[j]==0;
+            }
+            game.tour = TOUR_JOUEUR1;
+          }
+          // game.tour = TOUR_JOUEUR1;
           }
           break;
           }
