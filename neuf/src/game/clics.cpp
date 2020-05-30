@@ -41,16 +41,7 @@ void gererClic(Game* game, SDL_Event e){
         case TOUR_JOUEUR1:
         cout <<"joueur1"<<endl;
         case_selection(game, game->joueur1, 1);
-          // if(selectionIdUnite(game->x, game->y, game->joueur1) != -1){
-          //   if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur1)]==1){
-          //     game->etapeJeu = SELECTION_UNITE;
-          //     cout<<"Unité deja jouee" <<endl;
-          //   }
-          //   else{
-          //     game->id1 = selectionIdUnite(game->x, game->y, game->joueur1);
-          //     game->etapeJeu = ACTIONS;
-          //   }
-          // }
+
 
           break;
 
@@ -68,7 +59,6 @@ void gererClic(Game* game, SDL_Event e){
           }
         }
 
-
           break;
 
         default:
@@ -82,18 +72,14 @@ void gererClic(Game* game, SDL_Event e){
       switch(game->tour){
 
         case TOUR_JOUEUR1:
-
         case_actions(game, &game->joueur1, &game->joueur2, 1, e, game->id1);
-
           break;
 
         case TOUR_JOUEUR2:
           switch(game->modeJeu){
 
             case MULTIJOUEURS:
-
               case_actions(game, &game->joueur2, &game->joueur1, 2, e, game->id2);
-
               break;
           }
           break;
