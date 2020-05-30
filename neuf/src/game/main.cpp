@@ -97,7 +97,7 @@ int main(){
       if(elapsedTime < game.framerate_milliseconds){
           SDL_Delay(game.framerate_milliseconds - elapsedTime);
       }
-      frame++;
+      //frame++;
   }
 
 

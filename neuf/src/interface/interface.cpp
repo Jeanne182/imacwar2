@@ -17,7 +17,7 @@ static const float GL_VIEW_SIZE =1.;
 /* Nombre minimal de millisecondes separant le rendu de deux images */
 static const Uint32 FRAMERATE_MILLISECONDS = 1000 / 60;
 
-int frame = 0;
+//int frame = 0;
 //-------------------------------------- Fonctions concernant la grille --------------------------------------//
 
 
