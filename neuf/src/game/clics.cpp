@@ -173,27 +173,35 @@ void case_rien(Game* game, SDL_Event e, Joueur joueur, int id){
     cout<<"CHOIX : passer"<<endl;
   }
   else if(selectionBouton(game, e) == RIEN){
-    //Fanny : j'en suis ici
     selectionCoordonnee(&game->x,&game->y, e, game->surface);
-    if(game->uniteJouee[selectionIdUnite(game->x, game->y, joueur)]==1){
+    if(selectionIdUnite(game->x, game->y, joueur)==-1){
+      game->choix=RIEN;
+      game->etapeJeu = SELECTION_UNITE;
+      cout<<"Selection dans le vide" <<endl;
+    }
+    else {
+      if(game->uniteJouee[selectionIdUnite(game->x, game->y, joueur)]==1){
       game->choix=RIEN;
       game->etapeJeu = SELECTION_UNITE;
       cout<<"Unité deja jouee" <<endl;
-    }
-    else{
-      if(id==1){
-        if(game->id1 != selectionIdUnite(game->x, game->y, joueur)){
-          game->id1 = selectionIdUnite(game->x, game->y, joueur);
-        }
       }
       else{
-        if(game->id2 != selectionIdUnite(game->x, game->y, joueur)){
-          game->id2 = selectionIdUnite(game->x, game->y, joueur);
+        if(id==1){
+          if(game->id1 != selectionIdUnite(game->x, game->y, joueur)){
+            game->id1 = selectionIdUnite(game->x, game->y, joueur);
+          }
         }
-      }
+        else{
+          if(game->id2 != selectionIdUnite(game->x, game->y, joueur)){
+            game->id2 = selectionIdUnite(game->x, game->y, joueur);
+          }
+        }
 
+      }
     }
   }
+
+
 }
 
 
