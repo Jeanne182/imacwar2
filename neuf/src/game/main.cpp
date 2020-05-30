@@ -3,13 +3,10 @@
 #include "game/game.h"
 #include "interface/text.h"
 #include "game/a_star.h"
-#include <GL/glut.h>
 #include <cstring>
 
 
 int main(){
-
-
   Game game;
   initialisationGame(&game);
   initialisationDynamique(&game);
@@ -52,18 +49,22 @@ int main(){
             int yOrdi = game.joueur2.unites[idOrdi].coord[1];
             if(game.joueur2.unites[idOrdi].vie!=0){
               choixCible(xOrdi, yOrdi,&xCible,&yCible, game.mapObstacles);
+
               if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game.joueur2.unites[idOrdi].zoneDeTir)==true){
                 int idEnnemi = selectionIdUnite(xCible, yCible, game.joueur1);
                 cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
                 attaqueOrdi(&game.joueur2, &game.joueur1, idOrdi, idEnnemi, &game);
                 SDL_Delay(1000);
+                carre(xCible, yCible, game.joueur1, DEPLACEMENT);
+                carre(xOrdi, yOrdi, game.joueur2, DEPLACEMENT);
+                affichageTextureTextes(&game.surfaceTextes[TEXTE_ATTAQUE], game.textureTextes[TEXTE_ATTAQUE], 1.18, 0.35);
               }
 
               else{
                 Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
                 caseOptimaleAtteignable(&xOrdi, &yOrdi, game.joueur2.unites[idOrdi].distance, chemin);
-
                 insertionCoordonnees(&game, &game.joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+                affichageTextureTextes(&game.surfaceTextes[TEXTE_DEPLACEMENT], game.textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
                 SDL_Delay(1000);
                 cout<<"CHOIX DEPLACEMENT"<<endl;
               }
