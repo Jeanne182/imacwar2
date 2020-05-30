@@ -69,11 +69,8 @@ void verificationFinTour(Game* game, int nbUnites){
 // Fonction qui passe le tour au joueur suivant
 void passerTour(Game* game){
   initialiseUniteJouee(game->uniteJouee);
-  for(int i=0; i<10;i++){
-    cout <<game->uniteJouee[i] << endl;
-  }
-  cout << "unites toutes jouees" << endl;
   game->etapeJeu=SELECTION_UNITE;
+
   game->choix = RIEN;
   if(game->tour == TOUR_JOUEUR2){
     game->tour = TOUR_JOUEUR1;
@@ -81,7 +78,7 @@ void passerTour(Game* game){
   else{
     game->tour = TOUR_JOUEUR2;
   }
-  
+
 }
 
 

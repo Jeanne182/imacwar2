@@ -31,7 +31,9 @@ int main(){
 
       affichage(&game);
       if(game.tour == TOUR_JOUEUR2 && game.modeJeu == ORDI_MODE){
-
+        if(game.etapeJeu==SELECTION_UNITE){
+          game.etapeJeu=ACTIONS;
+        }
         switch(game.etapeJeu){
         case ACTIONS:{
 
@@ -54,6 +56,7 @@ int main(){
                 int idEnnemi = selectionIdUnite(xCible, yCible, game.joueur1);
                 cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
                 attaqueOrdi(&game.joueur2, &game.joueur1, idOrdi, idEnnemi, &game);
+                SDL_Delay(1000);
               }
 
               else{
@@ -68,20 +71,13 @@ int main(){
             }
 
           // }
-          int compteurUnites=0;
-          for(int j=0; j<game.joueur2.nbUnitesInitial; j++){
-            if(game.uniteJouee[j]==1){
-              compteurUnites++;
-
-            }
-          }
-          cout << "COMPTEUR UNITE : "<<compteurUnites<<endl<<endl;
-          if(compteurUnites==game.joueur2.nbUnites){
-            for(int j=0; j<game.joueur2.nbUnitesInitial; j++){
-              game.uniteJouee[j]==0;
-            }
+          if (verificationUniteJouee(game.uniteJouee,game.joueur2.nbUnites)==true){
+            initialiseUniteJouee(game.uniteJouee);
             game.tour = TOUR_JOUEUR1;
+            game.etapeJeu= SELECTION_UNITE;
+            game.choix= RIEN;
           }
+
           // game.tour = TOUR_JOUEUR1;
           }
           break;

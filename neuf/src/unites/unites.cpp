@@ -253,7 +253,6 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
 }
 
 void initialiseUniteJouee(int tableau[10]){
-  cout << "c'est ok"<< endl;
   for(int i=0; i<10 ; i++){
     tableau[i]=0;
 
