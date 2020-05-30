@@ -141,12 +141,15 @@ void affichage(Game* game){
     case SELECTION_UNITE:
       switch (game->tour){
         case TOUR_JOUEUR1:
-          affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
-          affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.4);
+            affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
+            affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.4);
+
         break;
         case TOUR_JOUEUR2:
+        if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.4);
+        }
         break;
 
       }
@@ -154,10 +157,12 @@ void affichage(Game* game){
     break;
 
     case ACTIONS:
+
+    if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
       bouton(game->boutonPasser);
       bouton(game->boutonDeplacement);
       bouton(game->boutonAttaque);
-      glColor3f(1,1,1);
+
       affichageTextureTextes(&game->surfaceTextes[TEXTE_ACTION], game->textureTextes[TEXTE_ACTION], 1.2, 0.2);
       affichageTexture(game->texturebouton,game->boutonAttaque.longueur,game->boutonAttaque.hauteur,game->boutonAttaque.x,game->boutonAttaque.y);
       affichageTexture(game->texturebouton,game->boutonDeplacement.longueur,game->boutonDeplacement.hauteur,game->boutonDeplacement.x,game->boutonDeplacement.y);
@@ -165,7 +170,7 @@ void affichage(Game* game){
       affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game->textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game->boutonDeplacement.x+0.035, (float)game->boutonDeplacement.y+0.020); //, 1.5, 0.02, 0,0
       affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_ATTAQUE], game->textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game->boutonAttaque.x+0.08, (float)game->boutonAttaque.y+0.020); //, 1.5, 0.02, 0,0
       affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_PASSER], game->textureTextes[TEXTE_BOUTON_PASSER], (float)game->boutonPasser.x+0.09, (float)game->boutonPasser.y+0.020); //, 1.5, 0.02, 0,0
-
+    }
 
       if(game->tour == TOUR_JOUEUR1){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.05);
@@ -183,7 +188,9 @@ void affichage(Game* game){
           }
       }
       if(game->tour == TOUR_JOUEUR2){
-        affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.05);
+        if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
+          affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.05);
+        }
         if(game->idUniteSurvolee==-1 && game->id2!=-1){
           etatUnite(game->joueur2.unites[game->id2], game);
         }

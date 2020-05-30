@@ -38,6 +38,8 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
   creationTexte(&surfaceTextes[TEXTE_CARACTERISTIQUES],  policeTextes[TITRE_MEDIUM], &textureTextes[TEXTE_CARACTERISTIQUES], (char*)"Caractéristiques de l'unité", SDL_Color{255,255,255});
   creationTexte(&surfaceTextes[TEXTE_REJOUER],  policeTextes[TITRES], &textureTextes[TEXTE_REJOUER], (char*)"Rejouer", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_QUITTER],  policeTextes[TITRES], &textureTextes[TEXTE_QUITTER], (char*)"Quitter", SDL_Color{63,63,63});
+  creationTexte(&surfaceTextes[TEXTE_ATTAQUE],  policeTextes[TITRES], &textureTextes[TEXTE_ATTAQUE], (char*)"L'ennemi attaque", SDL_Color{255, 255 ,255}); //
+  creationTexte(&surfaceTextes[TEXTE_DEPLACEMENT],  policeTextes[TITRES], &textureTextes[TEXTE_DEPLACEMENT], (char*)"L'ennemi se déplace", SDL_Color{255, 255 ,255}); //
 }
 
 void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){ //, float longueur, float largeur, float x, float y

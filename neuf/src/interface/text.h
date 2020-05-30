@@ -39,7 +39,9 @@ enum Enum_Textes{
     TEXTE_EGALITE,
     TEXTE_CARACTERISTIQUES,
     TEXTE_REJOUER,
-    TEXTE_QUITTER
+    TEXTE_QUITTER,
+    TEXTE_ATTAQUE,
+    TEXTE_DEPLACEMENT
   };
 
   enum Polices{

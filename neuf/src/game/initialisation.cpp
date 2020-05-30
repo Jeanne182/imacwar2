@@ -325,7 +325,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
   game->unites[VIKINGCHIEF].force = 0.6;
-  game->unites[VIKINGCHIEF].vie = 1;
+  //game->unites[VIKINGCHIEF].vie = 1;
   //test
   game->unites[VIKINGCHIEF].vie = 100;
 
