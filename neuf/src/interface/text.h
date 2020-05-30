@@ -13,7 +13,7 @@
 using namespace std;
 
 enum Enum_Textes{
-    TEXTE_BOUTON_DEPLACEMENT = 0, //Steeve a dit d'init toutes les premieres enums a 0
+    TEXTE_BOUTON_DEPLACEMENT = 0, 
     TEXTE_BOUTON_ATTAQUE,
     TEXTE_BOUTON_ACHAT,
     TEXTE_BOUTON_PASSER,

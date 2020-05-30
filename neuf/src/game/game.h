@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include <math.h>
 
 #include <SDL/SDL.h>
 #include <GL/gl.h>
