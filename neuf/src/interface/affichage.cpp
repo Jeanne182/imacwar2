@@ -226,24 +226,20 @@ void affichage(Game* game){
       if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10 && game->etapeJeu!= PLACEMENT_UNITES){
         switch(game->mapObstacles[game->ySurvol-1][game->xSurvol-1]){
           case JOUEUR1:{
-            if(game->modeJeu==MULTIJOUEURS){
-              zoneSurbrillance(game->joueur1,game->idUniteSurvolee, game->mapObstacles, DEPLACEMENT, game);
+            zoneSurbrillance(game->joueur1,game->idUniteSurvolee, game->mapObstacles, DEPLACEMENT, game);
+            // int xCoord = 0;
+            // int yCoord = 0;
+            // selectionCoordonnee(&xCoord, &yCoord, e, game->surface);
+            // int id = selectionIdUnite(xCoord,yCoord,game->joueur1);
+              Unite uniteCoord = game->joueur1.unites[game->idUniteSurvolee];
+              if(game->idUniteSurvolee!=-1){
+
+                etatUnite(uniteCoord, game);
+              }
+          }
 
 
-
-              // int xCoord = 0;
-              // int yCoord = 0;
-              // selectionCoordonnee(&xCoord, &yCoord, e, game->surface);
-              // int id = selectionIdUnite(xCoord,yCoord,game->joueur1);
-                Unite uniteCoord = game->joueur1.unites[game->idUniteSurvolee];
-                if(game->idUniteSurvolee!=-1){
-
-                  etatUnite(uniteCoord, game);
-                }
-            }
-
-            }
-            break;
+          break;
           case JOUEUR2:
             zoneSurbrillance(game->joueur2,game->idUniteSurvolee, game->mapObstacles, DEPLACEMENT, game);
             Unite uniteCoord = game->joueur2.unites[game->idUniteSurvolee];
@@ -305,7 +301,7 @@ void affichage(Game* game){
             }
 
             affichageTexture(game->textureUnites[game->joueur2.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
-        
+
             break;
           }
 
