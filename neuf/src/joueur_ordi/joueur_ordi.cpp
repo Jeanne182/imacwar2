@@ -2,6 +2,7 @@
 #include "joueur_ordi/joueur_ordi.h"
 #include "interface/interface.h"
 #include "unites/unites.h"
+#include "interface/text.h"
 #include "game/game.h"
 
 
@@ -132,12 +133,16 @@ void choixActionsOrdi(Game *game){
         cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
         attaqueOrdi(&game->joueur2, &game->joueur1, idOrdi, idEnnemi, game);
         SDL_Delay(1000);
+        carre(xCible, yCible, game->joueur1, DEPLACEMENT);
+        carre(xOrdi, yOrdi, game->joueur2, DEPLACEMENT);
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_ATTAQUE], game->textureTextes[TEXTE_ATTAQUE], 1.18, 0.35);
       }
 
       else{
         Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
         caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
-
+        carre(xOrdi, yOrdi, game->joueur2, DEPLACEMENT);
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
         insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
         SDL_Delay(1000);
         cout<<"CHOIX DEPLACEMENT"<<endl;

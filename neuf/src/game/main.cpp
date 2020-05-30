@@ -26,10 +26,7 @@ int main(){
         switch(game.etapeJeu){
         case ACTIONS:{
           choixActionsOrdi(&game);
-                carre(xCible, yCible, game.joueur1, DEPLACEMENT);
-                carre(xOrdi, yOrdi, game.joueur2, DEPLACEMENT);
-                affichageTextureTextes(&game.surfaceTextes[TEXTE_ATTAQUE], game.textureTextes[TEXTE_ATTAQUE], 1.18, 0.35);
-                affichageTextureTextes(&game.surfaceTextes[TEXTE_DEPLACEMENT], game.textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
+
           }
           break;
         case PLACEMENT_UNITES:{
