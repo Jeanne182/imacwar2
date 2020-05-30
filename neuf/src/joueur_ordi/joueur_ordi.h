@@ -27,6 +27,7 @@ bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque);
 bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite);
 void choixActionsOrdi(Game *game);
 void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game);
-void choixPlacementUniteOrdi(Game *game); 
+void choixPlacementUniteOrdi(Game *game);
+void deplacementOrdi(int xOrdi, int yOrdi, int xCible, int yCible, int idOrdi, Game* game);
 
 #endif

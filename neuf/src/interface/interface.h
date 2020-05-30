@@ -6,6 +6,8 @@ IMAC 1 - Projet Prog&Algo S1
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+
+
 #include <iostream>
 
 #include <stdlib.h>
@@ -17,6 +19,7 @@ IMAC 1 - Projet Prog&Algo S1
 #include <stdio.h>
 #include <SDL/SDL_image.h>
 
+extern int frame;
 // Déclarations des variables
 struct Game;
 struct Joueur;

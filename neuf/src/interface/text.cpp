@@ -25,7 +25,7 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
   creationTexte(&surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], policeTextes[TITRES_BOUTONS], &textureTextes[TEXTE_BOUTON_DEPLACEMENT], (char*)"Déplacement", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_BOUTON_ATTAQUE],  policeTextes[TITRES_BOUTONS], &textureTextes[TEXTE_BOUTON_ATTAQUE], (char*)"Attaque", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_BOUTON_ACHAT],  policeTextes[TITRES_BOUTONS], &textureTextes[TEXTE_BOUTON_ACHAT], (char*)"Achat", SDL_Color{63,63,63});
-  creationTexte(&surfaceTextes[TEXTE_BOUTON_PASSER],  policeTextes[TITRES_BOUTONS], &textureTextes[TEXTE_BOUTON_PASSER], (char*)"Passer", SDL_Color{63,63,63});
+  creationTexte(&surfaceTextes[TEXTE_BOUTON_PASSER],  policeTextes[TITRES_BOUTONS], &textureTextes[TEXTE_BOUTON_PASSER], (char*)"Passer le tour", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_BOUTON1J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON1J], (char*)"1 joueur", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_BOUTON2J],  policeTextes[TITRES], &textureTextes[TEXTE_BOUTON2J], (char*)"2 joueurs", SDL_Color{63,63,63});
   creationTexte(&surfaceTextes[TEXTE_CHOIX],  policeTextes[SOUSTITRES], &textureTextes[TEXTE_CHOIX], (char*)"Veuillez constituer votre armée", SDL_Color{255,255,255});

@@ -155,9 +155,9 @@ void initialisationGame(Game *game){
   game->boutonAttaque.a = 0;
   game->boutonAttaque.valeur = ATTAQUE;
 
-  game->boutonPasser.x = 1.29;
+  game->boutonPasser.x = 1.27;
   game->boutonPasser.y = 0.45;
-  game->boutonPasser.longueur =0.3;
+  game->boutonPasser.longueur =0.35;
   game->boutonPasser.hauteur =0.1;
   game->boutonPasser.r = 1;
   game->boutonPasser.g = 0;
@@ -325,9 +325,9 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
   game->unites[VIKINGCHIEF].force = 0.6;
-  //game->unites[VIKINGCHIEF].vie = 1;
+  game->unites[VIKINGCHIEF].vie = 1;
   //test
-  game->unites[VIKINGCHIEF].vie = 100;
+  //game->unites[VIKINGCHIEF].vie = 100;
 
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
