@@ -27,6 +27,9 @@ int main(){
         switch(game.etapeJeu){
 
         case PLACEMENT_UNITES:
+        cout << "sousj1: " << game.joueur1.pieces << endl;
+        cout << "sousj2: " << game.joueur2.pieces << endl;
+
           choixPlacementUniteOrdi(&game);
           break;
         case ACTIONS:

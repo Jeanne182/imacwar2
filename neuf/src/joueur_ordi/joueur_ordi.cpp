@@ -129,6 +129,7 @@ void choixPlacementUniteOrdi(Game *game){
   cout<<"rand_unite : "<< rand_unite<<endl;
   while (verificationPrix(game->joueur2.pieces, game->unites[rand_unite])==false){
     rand_unite = rand()%5 + 5;
+    
     cout <<"Pieces joueur : "<<game->joueur2.pieces<<endl;
     cout<<"rand_unite : "<< rand_unite<<endl<<endl;
   }
@@ -235,7 +236,7 @@ void choixActionsOrdi(Game *game){
 
 bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite){
     int id = joueur->nbUnites;
-    if(joueur->nbUnites <= 3){
+
       Unite unite;
       unite = game->unites[typeUnite];
 
@@ -249,7 +250,7 @@ bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite)
         cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
         return true;
       }
-    }
+
     cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
     return false;
 }
