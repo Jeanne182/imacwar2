@@ -207,7 +207,8 @@ void choixActionsOrdi(Game *game){
         //   //   break;
         //   // }
         // }
-        //if(cheminCible.x != xOrdi && cheminCible.y != yOrdi){
+
+        if(cheminCible.x != xOrdi || cheminCible.y != yOrdi){
           Noeud copyChemin = cheminCible;
           cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
           affichageChemin(&copyChemin, xCible, yCible);
@@ -218,7 +219,7 @@ void choixActionsOrdi(Game *game){
           insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, game->joueur2.tour);
 
           cout<<"CHOIX DEPLACEMENT"<<endl;
-      //  }
+       }
 
 
 
