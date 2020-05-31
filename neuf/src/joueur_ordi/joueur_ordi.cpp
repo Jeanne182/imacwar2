@@ -171,6 +171,9 @@ void choixActionsOrdi(Game *game){
 
       else{
         Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
+        Noeud copyChemin = *chemin;
+        cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
+        affichageChemin(&copyChemin, xCible, yCible); 
         SDL_Delay(1000);
         caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
         carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);

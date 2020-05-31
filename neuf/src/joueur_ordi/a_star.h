@@ -33,6 +33,7 @@ typedef struct Noeud{
 bool verificationDansListe(list<Noeud*> liste, Noeud *noeud);
 void poids(Noeud *noeud, Noeud *currentNode, int xOrdi, int yOrdi, int xCible, int yCible);
 Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]);
+void affichageChemin(Noeud* chemin,int xCible,int yCible); 
 
 
 #endif

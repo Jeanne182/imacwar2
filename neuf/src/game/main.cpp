@@ -13,6 +13,15 @@ int main(){
   initialisationDynamique(&game);
 
   int loop = 1;
+  int xOrdi = 8;
+  int yOrdi = 1;
+  int xCible= 3;
+  int yCible =8;
+  Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
+  Noeud copyChemin = *chemin;
+  cout<<"lastNode :("<<chemin->x<<"'"<<chemin->y<<")"<<endl;
+  cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
+  affichageChemin(&copyChemin, xCible, yCible);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */
