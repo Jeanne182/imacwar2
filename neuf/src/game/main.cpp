@@ -13,15 +13,25 @@ int main(){
   initialisationDynamique(&game);
 
   int loop = 1;
-  int xOrdi = 8;
-  int yOrdi = 1;
-  int xCible= 3;
-  int yCible =8;
-  Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
-  Noeud copyChemin = *chemin;
-  cout<<"lastNode :("<<chemin->x<<"'"<<chemin->y<<")"<<endl;
-  cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
-  affichageChemin(&copyChemin, xCible, yCible);
+  // int xOrdi = 8;
+  // int yOrdi = 1;
+  // int xCible= 3;
+  // int yCible =8;
+  // Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game.mapObstacles);
+  // Noeud copy = *chemin;
+  // cout<<"lastNode :("<<chemin->x<<"'"<<chemin->y<<")"<<endl;
+  // cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
+  //
+  // cout<< "Last Node("<<chemin->x<<","<<chemin->y<<")";
+  // cout<<"Chemin prédéfini : ";
+  // cout<< "("<<chemin->x<<","<<chemin->y<<")";
+  // while(chemin->x != xOrdi && chemin->y != yOrdi){
+  //   chemin=chemin->parent;
+  //
+  // }
+  // cout<<endl<<endl;
+
+  // affichageChemin(&copy, xOrdi, yOrdi);
 
   while(loop){
       /* Recuperation du temps au debut de la boucle */
@@ -34,11 +44,12 @@ int main(){
           game.etapeJeu=ACTIONS;
         }
         switch(game.etapeJeu){
-        case ACTIONS:
-          choixActionsOrdi(&game);
-          break;
+
         case PLACEMENT_UNITES:
           choixPlacementUniteOrdi(&game);
+          break;
+        case ACTIONS:
+          choixActionsOrdi(&game);
           break;
         }
 
@@ -62,26 +73,9 @@ int main(){
             game.idUniteSurvolee = selectionIdUnite(game.xSurvol, game.ySurvol,game.joueur2);
           }
 
-          // int xCoord = 0;
-          // int yCoord = 0;
-          // selectionCoordonnee(&xCoord, &yCoord, e, game.surface);
-          // int id = selectionIdUnite(xCoord,yCoord,game.joueur1);
-          // Unite uniteCoord = game.joueur1.unites[id];
-          // if(id!=-1){
-          //   etatUnite(uniteCoord, &game);
-          // }
-
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
               if (e.button.button == SDL_BUTTON_LEFT){
-                cout<<"e.button " <<e.button.x<<" "<<e.button.y<<endl<<endl;
-                // float xTest = 0;
-                // float yTest = 0;
-                // //selectionCoordonnee(&xTest, &yTest, e, game.surface);
-                // //cout<<"Test"<<xTest<<" "<<yTest<<endl;
-                // xTest = (float)(1+10*(e.button.x)*game.aspectRatio/(float)game.surface->w);
-                // yTest = (float)(1+10*(e.button.y)/(float)game.surface->h);
-                // cout<<"Test"<<xTest<<" "<<yTest<<endl<<endl;
 
                 gererClic(&game,e);
               }
