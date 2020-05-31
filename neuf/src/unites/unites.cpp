@@ -353,7 +353,6 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* g
   int x = (int)joueur.unites[id].coord[0];
   int y = (int)joueur.unites[id].coord[1];
   int range =joueur.unites[id].distance;
-  cout << "map obsrclaes :"<<tour<<endl;
   if(choix==ATTAQUE){
     range=joueur.unites[id].zoneDeTir;
     for (int i = -range; i <= range; i++)
