@@ -198,16 +198,16 @@ void choixActionsOrdi(Game *game){
 
       else{
         Noeud cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-        int i=0;
-        while(cheminCible.x == xOrdi && cheminCible.y == yOrdi){
-          i++;
-          nouvelleCible(xOrdi, yOrdi, &xCible,&yCible, game->mapObstacles);
-          cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-          if(i==4){ //A modifier, ça casse la boucle dès qu'il y a 4 rangées d'obstacles autour de l'unité cible
-            break;
-          }
-        }
-        if(cheminCible.x != xOrdi && cheminCible.y != yOrdi){
+        //int i=0;
+        // if(cheminCible.x == xOrdi && cheminCible.y == yOrdi){
+        //   //i++;
+        //   //nouvelleCible(xOrdi, yOrdi, &xCible,&yCible, game->mapObstacles);
+        //   cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
+        //   // if(i==4){ //A modifier, ça casse la boucle dès qu'il y a 4 rangées d'obstacles autour de l'unité cible
+        //   //   break;
+        //   // }
+        // }
+        //if(cheminCible.x != xOrdi && cheminCible.y != yOrdi){
           Noeud copyChemin = cheminCible;
           cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
           affichageChemin(&copyChemin, xCible, yCible);
@@ -218,7 +218,7 @@ void choixActionsOrdi(Game *game){
           insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, game->joueur2.tour);
 
           cout<<"CHOIX DEPLACEMENT"<<endl;
-        }
+      //  }
 
 
 

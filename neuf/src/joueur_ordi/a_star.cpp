@@ -107,7 +107,7 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
       cout <<"OpenList vide"<<endl;
       *currentNode = startNode;
       return currentNode;
-      // break;
+      //break;
     }
 
     /*----------------------------------- Parcourt de l'OpenList----------------------------------*/
