@@ -31,7 +31,7 @@ const int nombreUnitesMAX =15;
 
 struct Game;
 typedef struct Unite{
-  int id;
+  //int id;
   int vie;
   int type;
   float force;

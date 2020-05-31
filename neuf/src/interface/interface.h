@@ -119,6 +119,8 @@ int selectionBoutonUnite(Game* game, SDL_Event e);
 void affichage(Game* game);
 void affichageCarte(Game* game);
 void initialisationBoutons(Game* game);
+void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame);
+void case_survol(Joueur joueur, Game* game, int tour);
 
 /*textures.cpp*/
 
