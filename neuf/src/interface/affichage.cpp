@@ -243,17 +243,12 @@ void affichage(Game* game){
             }
 
             break;
-            // int xCoord = 0;
-            // int yCoord = 0;
-            // selectionCoordonnee(&xCoord, &yCoord, e, game->surface);
-            // int id = selectionIdUnite(xCoord,yCoord,game->joueur1);
-
           }
 
 
           break;
           case JOUEUR2:
-          case_survol(game->joueur2, game);
+            case_survol(game->joueur2, game);
 
             break;
         }
@@ -429,7 +424,7 @@ void initialisationBoutons(Game* game){
 
 void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame){
 
-  if(game->etapeJeu == PLACEMENT_UNITES || (game->choix == ATTAQUE && game->tour == TOUR_JOUEUR1 && id != idgame)){
+  if(game->etapeJeu == PLACEMENT_UNITES /*|| (game->choix == ATTAQUE && game->tour == TOUR_JOUEUR1 && id != idgame)*/){
     affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
   }
   affichageTexture(game->textureUnites[joueur.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
