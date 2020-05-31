@@ -216,6 +216,9 @@ void carre(float x, float y, Joueur joueur, int choix){
       else if(choix==CLIC){
         glColor4f(0.78, 0.27, 0.003,0.55);
       }
+      else if(choix==UNITE_PAS_JOUEE){
+        glColor4f(0.78, 0.27, 0.003,0.20);
+      }
     }
     else {
       if(choix==ATTAQUE){
@@ -228,6 +231,9 @@ void carre(float x, float y, Joueur joueur, int choix){
       }
       else if(choix==CLIC){
         glColor4f(0.40,0.01,0.33,0.55);
+      }
+      else if(choix==UNITE_PAS_JOUEE){
+        glColor4f(0.40,0.01,0.33,0.20);
       }
     }
     glVertex2f(0.1, 0.1);
