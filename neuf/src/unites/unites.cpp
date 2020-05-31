@@ -135,6 +135,7 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
 
     if (joueurTour->unites[id].vie<=0){
       joueurTour->unites[id].vie=0;
+      game->uniteJouee[id]=0;
     }
 
     int pvApresEnnemi = joueurEnnemi->unites[idEnnemi].vie;
@@ -182,11 +183,11 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
     }
 
     // Changement de tour
-    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
-      game->etapeJeu = FIN_JEU;
+    if(joueurTour->nbUnites != 0 && joueurEnnemi->nbUnites != 0){
+      verificationFinTour(game, joueurTour->nbUnites);
     }
     else{
-      verificationFinTour(game, joueurTour->nbUnites);
+      game->etapeJeu=FIN_JEU;
     }
 
   }

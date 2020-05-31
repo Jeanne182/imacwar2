@@ -290,7 +290,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWOMAN].force = 0.5;
   game->unites[VIKINGWOMAN].vie = 100;
   game->unites[VIKINGWOMAN].defense = 0.5;
-  game->unites[VIKINGWOMAN].zoneDeTir = 1;
+  game->unites[VIKINGWOMAN].zoneDeTir = 2;
   game->unites[VIKINGWOMAN].distance = 2;
   game->unites[VIKINGWOMAN].prix = 30;
   game->unites[VIKINGWOMAN].nom = (char*)"Guerrière sanguinaire";
@@ -300,7 +300,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWIZARD].vie = 100;
   game->unites[VIKINGWIZARD].defense = 0.6;
   game->unites[VIKINGWIZARD].zoneDeTir = 3;
-  game->unites[VIKINGWIZARD].distance = 4;
+  game->unites[VIKINGWIZARD].distance = 3;
   game->unites[VIKINGWIZARD].prix = 30;
   game->unites[VIKINGWIZARD].nom = (char*)"Mage de feu";
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
@@ -336,7 +336,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADKNIGHT].force = 0.5;
   game->unites[DEADKNIGHT].vie = 100;
   game->unites[DEADKNIGHT].defense = 0.5;
-  game->unites[DEADKNIGHT].zoneDeTir = 1;
+  game->unites[DEADKNIGHT].zoneDeTir = 2;
   game->unites[DEADKNIGHT].distance = 2;
   game->unites[DEADKNIGHT].prix = 30;
   game->unites[DEADKNIGHT].nom = (char*)"Chevalier noir";
@@ -346,7 +346,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADWIZARD].vie = 100;
   game->unites[DEADWIZARD].defense = 0.6;
   game->unites[DEADWIZARD].zoneDeTir = 3;
-  game->unites[DEADWIZARD].distance = 4;
+  game->unites[DEADWIZARD].distance = 3;
   game->unites[DEADWIZARD].prix = 30;
   game->unites[DEADWIZARD].nom = (char*)"Mage noir";
   game->unites[DEADWIZARD].type = DEADWIZARD;
