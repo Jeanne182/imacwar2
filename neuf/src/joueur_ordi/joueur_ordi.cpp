@@ -41,8 +41,8 @@ bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque){
 }
 
 void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, Noeud* chemin){
-  int xChemin = chemin->x;
-  int yChemin = chemin->y;
+  int xChemin = chemin->parent->x;
+  int yChemin = chemin->parent->y;
   // cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
   while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
     chemin = chemin->parent;
@@ -84,7 +84,9 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
 
       cout << "Votre unite est morte" << endl;
     }
-    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
+    cout<<"Nb unite joueurOrdi : "<<joueurTour->nbUnites<< "nb unites joueur1 : "<<joueurEnnemi->nbUnites<<endl;
+    if(joueurTour->nbUnites = 0 || joueurEnnemi->nbUnites == 0){
+      cout<<"FIN JEU"<<endl;
       game->etapeJeu = FIN_JEU;
     }
 
@@ -170,12 +172,12 @@ void choixActionsOrdi(Game *game){
       }
 
       else{
-        Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-        Noeud copyChemin = *chemin;
+        Noeud cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
+        Noeud copyChemin = cheminCible;
         cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
-        affichageChemin(&copyChemin, xCible, yCible); 
+        affichageChemin(&copyChemin, xOrdi, yOrdi);
         SDL_Delay(1000);
-        caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
+        caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, &cheminCible);
         carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);
         affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
         insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
@@ -196,9 +198,6 @@ void choixActionsOrdi(Game *game){
   // game.tour = TOUR_JOUEUR1;
 }
 
-// void deplacementOrdi(int xOrdi, int yOrdi, int xCible, int yCible, int idOrdi, Game* game){
-//
-// }
 
 bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite){
     int id = joueur->nbUnites;
