@@ -73,14 +73,14 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
       joueurEnnemi->nbUnites-=1;
-      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour); //A voir si on les mets vraiment en (0,0)
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour); //A voir si on les mets vraiment en (0,0)
       cout << "L'unite ennemie est morte" << endl;
     }
     // Si une unite du joueur est tuee :
     if (joueurTour->unites[id].vie<=0){
       joueurTour->unites[id].vie=0;
       joueurTour->nbUnites-=1;
-      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
+      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
 
       cout << "Votre unite est morte" << endl;
     }
@@ -173,12 +173,12 @@ void choixActionsOrdi(Game *game){
         Noeud* chemin = a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
         Noeud copyChemin = *chemin;
         cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
-        affichageChemin(&copyChemin, xCible, yCible); 
+        affichageChemin(&copyChemin, xCible, yCible);
         SDL_Delay(1000);
         caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, chemin);
         carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);
         affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
-        insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, JOUEUR2);
+        insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, game->joueur2.tour);
 
         cout<<"CHOIX DEPLACEMENT"<<endl;
       }

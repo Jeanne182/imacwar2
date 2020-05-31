@@ -120,7 +120,7 @@ void affichage(Game* game);
 void affichageCarte(Game* game);
 void initialisationBoutons(Game* game);
 void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame);
-void case_survol(Joueur joueur, Game* game, int tour);
+void case_survol(Joueur joueur, Game* game);
 
 /*textures.cpp*/
 

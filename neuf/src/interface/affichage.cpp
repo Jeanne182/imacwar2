@@ -179,12 +179,15 @@ void affichage(Game* game){
 
           carre((int)game->joueur1.unites[game->id1].coord[0],(int)game->joueur1.unites[game->id1].coord[1], game->joueur1, CLIC);
 
+
           if(game->choix == DEPLACEMENT){
-            zoneSurbrillance(game->joueur1,game->id1, game->mapObstacles, DEPLACEMENT, game, JOUEUR1);
+            zoneSurbrillance(game->joueur1,game->id1, game->mapObstacles, DEPLACEMENT, game);
           }
           else if(game->choix == ATTAQUE){
-            zoneSurbrillance(game->joueur1,game->id1, game->mapObstacles, ATTAQUE, game, JOUEUR1);
+            zoneSurbrillance(game->joueur1,game->id1, game->mapObstacles, ATTAQUE, game);
           }
+
+
       }
       if(game->tour == TOUR_JOUEUR2){
         if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
@@ -196,12 +199,15 @@ void affichage(Game* game){
 
           carre((int)game->joueur2.unites[game->id2].coord[0],(int)game->joueur2.unites[game->id2].coord[1], game->joueur2, CLIC);
 
-          if(game->choix == DEPLACEMENT){
-            zoneSurbrillance(game->joueur2, game->id2, game->mapObstacles, DEPLACEMENT, game, JOUEUR2);
+          if(game->modeJeu==MULTIJOUEURS){
+            if(game->choix == DEPLACEMENT){
+              zoneSurbrillance(game->joueur2, game->id2, game->mapObstacles, DEPLACEMENT, game);
+            }
+            else if(game->choix == ATTAQUE){
+              zoneSurbrillance(game->joueur2, game->id2, game->mapObstacles, ATTAQUE, game);
+            }
           }
-          else if(game->choix == ATTAQUE){
-            zoneSurbrillance(game->joueur2, game->id2, game->mapObstacles, ATTAQUE, game, JOUEUR2);
-          }
+
       }
       // if(game->tour == TOUR_JOUEUR2 && game->choix == DEPLACEMENT){
       //   zoneSurbrillance(game->joueur2,game->id2, game->map, DEPLACEMENT);
@@ -226,8 +232,14 @@ void affichage(Game* game){
       if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10 && game->etapeJeu!= PLACEMENT_UNITES){
         switch(game->mapObstacles[game->ySurvol-1][game->xSurvol-1]){
           case JOUEUR1:{
-            if(game->modeJeu!=ORDI_MODE && game->tour!=TOUR_JOUEUR2){
-              case_survol(game->joueur1, game, JOUEUR1);
+            if(game->modeJeu==ORDI_MODE && game->tour==TOUR_JOUEUR2){
+              Unite uniteCoord = game->joueur1.unites[game->idUniteSurvolee];
+              if(game->idUniteSurvolee!=-1){
+                etatUnite(uniteCoord, game);
+              }
+            }
+            else{
+              case_survol(game->joueur1, game);
             }
 
             break;
@@ -241,7 +253,7 @@ void affichage(Game* game){
 
           break;
           case JOUEUR2:
-          case_survol(game->joueur2, game, JOUEUR2);
+          case_survol(game->joueur2, game);
 
             break;
         }
@@ -423,8 +435,8 @@ void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame){
   affichageTexture(game->textureUnites[joueur.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
 }
 
-void case_survol(Joueur joueur, Game* game, int tour){
-  zoneSurbrillance(joueur,game->idUniteSurvolee, game->mapObstacles, DEPLACEMENT, game, tour);
+void case_survol(Joueur joueur, Game* game){
+  zoneSurbrillance(joueur,game->idUniteSurvolee, game->mapObstacles, DEPLACEMENT, game);
   Unite uniteCoord = joueur.unites[game->idUniteSurvolee];
   if(game->idUniteSurvolee!=-1){
     etatUnite(uniteCoord, game);
