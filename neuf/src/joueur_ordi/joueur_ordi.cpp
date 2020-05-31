@@ -234,7 +234,7 @@ void choixActionsOrdi(Game *game){
     }
   }
 
-  if (compteur == game->joueur2.nbUnites){
+  if (compteur >= game->joueur2.nbUnites){
     initialiseUniteJouee(game->uniteJouee);
     game->tour = TOUR_JOUEUR1;
     if(game->joueur1.nbUnites !=0 && game->joueur2.nbUnites !=0 ){
