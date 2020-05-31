@@ -37,6 +37,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite){
       joueur->nbUnites ++;
       joueur->nbUnitesInitial++;
       joueur->pieces -= unite.prix;
+      cout << "joueur tour :" << joueur->tour <<endl;
       cout << "Pieces du joueur après achat : " << joueur->pieces  << endl;
       return true;
     }
@@ -172,7 +173,7 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
       joueurEnnemi->nbUnites-=1;
-      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, game->tour);
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
       cout << "L'unite ennemie est morte" << endl;
     }
     // Si une unite du joueur est tuee :
@@ -180,7 +181,7 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
       game->uniteJouee[id]=0;
       joueurTour->unites[id].vie=0;
       joueurTour->nbUnites-=1;
-      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, game->tour);
+      insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
 
       cout << "Votre unite est morte" << endl;
     }
@@ -349,11 +350,11 @@ void etatUnite(Unite unite, Game* game){ //int id,Game* game
   // affichageTexture(vie, 1,0.1,1,0);
 // }
 
-void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game, int tour){
+void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game){
   int x = (int)joueur.unites[id].coord[0];
   int y = (int)joueur.unites[id].coord[1];
   int range =joueur.unites[id].distance;
-  //cout << "joueur : " << joueur.id << " tour : " <<tour<<endl;
+
   if(choix==ATTAQUE){
     range=joueur.unites[id].zoneDeTir;
     for (int i = -range; i <= range; i++)
@@ -371,12 +372,22 @@ void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* g
           //    x-1+i<10 && y-1+j<10){ // PENSER A CHANGER LA TAILLE DU TABLEAU
           //   carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
           // }
-          if(map[y-1+j][ x-1 + i]!=OBSTACLE && map[y-1+j][ x-1 + i]!=tour && x-1+i<10 && y-1+j<10){
+          if(game->modeJeu==MULTIJOUEURS){
+            if((map[y-1+j][ x-1 + i]!=OBSTACLE && map[y-1+j][ x-1 + i]!=joueur.tour) && x-1+i<10 && y-1+j<10){
+              //cout << "coord carte : " << x-1+i << " : " << y-1+j << endl;
+              carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
+            }
+          }
+          else{
+            if((map[y-1+j][ x-1 + i]!=OBSTACLE && map[y-1+j][ x-1 + i]!=JOUEUR1) && x-1+i<10 && y-1+j<10){
+              carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
+          }
+
 
             // if((game->tour == TOUR_JOUEUR1 && game->mapObstacles[y-1+j][x-1+i]==JOUEUR2) || (game->tour == TOUR_JOUEUR2 && game->mapObstacles[y-1+j][x-1+i]==JOUEUR1)){
             //   affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)(x-1+i)/10,(float)(y-1+j)/10);
             // }
-            carre(joueur.unites[id].coord[0]+i,joueur.unites[id].coord[1]+j,joueur, choix);
+
           }
         }
       }

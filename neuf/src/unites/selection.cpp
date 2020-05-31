@@ -30,6 +30,7 @@ void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
   // game->map[y-1][x-1] = tour;
   // game->mapObstacles[y-1][x-1] = OBSTACLE;
   game->mapObstacles[y-1][x-1] = tour;
+  
 }
 
 int selectionIdUnite(int x, int y, Joueur joueur){
