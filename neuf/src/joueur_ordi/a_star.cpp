@@ -17,6 +17,19 @@ bool verificationDansListe(list<Noeud*> liste, Noeud *noeud){
    return false;
 }
 
+void affichageChemin(Noeud* chemin,int xCible,int yCible){
+  // int x = chemin.push_back().x;
+  // int y = chemin.push_back().y;
+  cout<< "Last Node("<<chemin->x<<","<<chemin->y<<")";
+  cout<<"Chemin prédéfini : ";
+  while(chemin->x != xCible && chemin->y != yCible){
+
+    cout<< "("<<chemin->x<<","<<chemin->y<<")";
+    chemin=chemin->parent;
+  }
+  cout<<endl<<endl;
+}
+
 
 void poids(Noeud *noeud, Noeud *currentNode, int xOrdi, int yOrdi, int xCible, int yCible){
   noeud->coutDeplacement = currentNode->coutDeplacement + 1; //ERREUR ICI
@@ -152,7 +165,7 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
     // }
 
     /* -----------------------Pour retirer le noeud courant de l'openList -----------------------------------*/
-     list<Noeud> stock;
+     // list<Noeud> stock;
      // Noeud last = openList.back();
      // while(last->x != currentNode->x or last->y != currentNode->y){
      //   stock.push_back(last);
@@ -168,11 +181,9 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
 
 
     // cout<<"noeud parent : ("<<currentNode->parent->x <<" , "<<currentNode->parent->y<<")"<<endl<<endl;
-    if(i==6){
-      // break;
-    }
 
   }
   // cout<< endl<<"COORDONNEES CHEMIN : (" <<currentNode->x <<" , "<<currentNode->y<<")"<<endl<<endl;
+  // affichageChemin(currentNode,xCible,yCible);
   return currentNode;
 }
