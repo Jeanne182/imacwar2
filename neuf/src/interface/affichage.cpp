@@ -144,12 +144,26 @@ void affichage(Game* game){
     case SELECTION_UNITE:
       switch (game->tour){
         case TOUR_JOUEUR1:
+          for(int i=0; i<game->joueur1.nbUnitesInitial;i++){
+            if(game->uniteJouee[i]==0){
+              carre((int)game->joueur1.unites[i].coord[0],(int)game->joueur1.unites[i].coord[1], game->joueur1, UNITE_PAS_JOUEE);
+            }
+          }
             affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
             affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.4);
 
         break;
         case TOUR_JOUEUR2:
-        if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
+        if(game->modeJeu==MULTIJOUEURS){
+          for(int i=0; i<game->joueur2.nbUnitesInitial;i++){
+            if(game->uniteJouee[i]==0){
+              carre((int)game->joueur2.unites[i].coord[0],(int)game->joueur2.unites[i].coord[1], game->joueur2, UNITE_PAS_JOUEE);
+              affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
+              affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.4);
+            }
+          }
+        }
+        else if(game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.4);
         }

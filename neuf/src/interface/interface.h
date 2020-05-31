@@ -72,7 +72,8 @@ enum EnumBoutons{
     ORDI_MODE,
     CLIC,
     REJOUER,
-    QUITTER
+    QUITTER,
+    UNITE_PAS_JOUEE
   };
 
 enum EnumUnites{
