@@ -105,7 +105,9 @@ Noeud* a_star(int xOrdi,int yOrdi, int xCible, int yCible, int map[10][10]){
     /*-------------------------------------Vérification OpenList vide ----------------------------*/
     if(openList.empty()){
       cout <<"OpenList vide"<<endl;
-      break;
+      *currentNode = startNode;
+      return currentNode;
+      // break;
     }
 
     /*----------------------------------- Parcourt de l'OpenList----------------------------------*/

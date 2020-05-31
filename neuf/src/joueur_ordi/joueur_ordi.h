@@ -22,5 +22,6 @@ void choixActionsOrdi(Game *game);
 void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game);
 void choixPlacementUniteOrdi(Game *game);
 void deplacementOrdi(int xOrdi, int yOrdi, int xCible, int yCible, int idOrdi, Game* game);
+void nouvelleCible(int xOrdi, int yOrdi, int *xCible, int *yCible, int map[10][10]);
 
 #endif

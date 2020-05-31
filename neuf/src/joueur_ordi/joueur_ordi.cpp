@@ -198,16 +198,30 @@ void choixActionsOrdi(Game *game){
 
       else{
         Noeud cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-        Noeud copyChemin = cheminCible;
-        cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
-        affichageChemin(&copyChemin, xCible, yCible);
-        SDL_Delay(1000);
-        caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, &cheminCible);
-        carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);
-        affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
-        insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, game->joueur2.tour);
+        int xStock = xCible;
+        int yStock = yCible;
+        while(cheminCible.x == xOrdi && cheminCible.y == yOrdi){
+          nouvelleCible(xOrdi, yOrdi, &xCible,&yCible, game->mapObstacles);
+          cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
+          // if (abs(xStock-xOrdi)+abs(yStock-yOrdi)>=abs(xCible-xOrdi)+abs(yCible-yOrdi)){
+          //   break;
+          // }
+        }
+        if(cheminCible.x != xOrdi && cheminCible.y != yOrdi){
+          Noeud copyChemin = cheminCible;
+          cout<<"uniteOrdi :("<<xOrdi<<"'"<<yOrdi<<")"<<endl;
+          affichageChemin(&copyChemin, xCible, yCible);
+          SDL_Delay(1000);
+          caseOptimaleAtteignable(&xOrdi, &yOrdi, game->joueur2.unites[idOrdi].distance, &cheminCible);
+          carre(game->joueur2.unites[idOrdi].coord[0], game->joueur2.unites[idOrdi].coord[1], game->joueur2, DEPLACEMENT);
+          affichageTextureTextes(&game->surfaceTextes[TEXTE_DEPLACEMENT], game->textureTextes[TEXTE_DEPLACEMENT], 1.18, 0.35);
+          insertionCoordonnees(game, &game->joueur2.unites[idOrdi], xOrdi, yOrdi, game->joueur2.tour);
 
-        cout<<"CHOIX DEPLACEMENT"<<endl;
+          cout<<"CHOIX DEPLACEMENT"<<endl;
+        }
+
+
+
       }
 
     }
@@ -250,4 +264,36 @@ bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite)
 
     cout << "Vous êtes hors de votre zone de placement, veuillez placer votre unité dans votre zone." << endl;
     return false;
+}
+
+void nouvelleCible(int xOrdi, int yOrdi, int *xCible, int *yCible, int map[10][10]){
+  int xHaut = *xCible;
+  int yHaut = *yCible - 1;
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xHaut-xOrdi)+abs(yHaut-yOrdi) && map[yHaut-1][xHaut-1] == VIDE){
+    *xCible = xHaut;
+    *yCible = yHaut;
+  }
+
+  int xBas = *xCible;
+  int yBas = *yCible + 1;
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xBas-xOrdi)+abs(yBas-yOrdi) && map[yBas-1][xBas-1] == VIDE){
+    *xCible = xBas;
+    *yCible = yBas;
+  }
+
+  int xDroite = *xCible + 1;
+  int yDroite = *yCible;
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xDroite-xOrdi)+abs(yDroite-yOrdi)/* && map[yDroite-1][xDroite-1] == VIDE*/){
+    *xCible = xDroite;
+    *yCible = yDroite;
+  }
+
+  int xGauche = *xCible - 1;
+  int yGauche = *yCible;
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xGauche-xOrdi)+abs(yGauche-yOrdi) && map[yDroite-1][xDroite-1] == VIDE){
+    *xCible = xGauche;
+    *yCible = yGauche;
+  }
+
+  cout <<"Nouvelle case cible : (" << *xCible<<","<<*yCible<<")"<<endl;
 }
