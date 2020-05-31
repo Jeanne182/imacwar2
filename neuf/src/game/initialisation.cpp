@@ -4,16 +4,7 @@
 #include "interface/text.h"
 using namespace std;
 
-// Game::Game():map{{ EAU, EAU, PLAINECHG, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-//                  { EAU, PLAINECHG, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-//                  { PLAINECHG, PLAINE, ARBRE1, ARBRE2, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, ARBRE4, ARBRE6, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, ARBRE7, ARBRE9, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUHG, EAUHD, ARBRE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, EAUBG, EAUBD, PLAINE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
-//                  { PLAINE, PLAINE, PLAINE, PLAINE, ARBRE, ARBRE, EAUHG, EAUHD, PLAINE, PLAINE }},
+
 Game::Game():mapInit{{ EAU, EAU, PLAINECHG, PLAINE, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
                     { EAU, PLAINECHG, ARBRE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
                     { PLAINECHG, PLAINE, ARBRE1, ARBRE2, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE, PLAINE },
@@ -325,9 +316,9 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
   game->unites[VIKINGCHIEF].force = 0.6;
-  //game->unites[VIKINGCHIEF].vie = 1;
+  game->unites[VIKINGCHIEF].vie = 1;
   //test
-  game->unites[VIKINGCHIEF].vie = 100;
+  //game->unites[VIKINGCHIEF].vie = 100;
 
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;

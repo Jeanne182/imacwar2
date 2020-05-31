@@ -15,6 +15,7 @@ void affichage(Game* game){
   glColor3f(1,1,1);
 
   if(game->etapeJeu != MENU && game->etapeJeu != FIN_JEU){
+
     affichageCarte(game);
   }
 
@@ -158,10 +159,10 @@ void affichage(Game* game){
           for(int i=0; i<game->joueur2.nbUnitesInitial;i++){
             if(game->uniteJouee[i]==0){
               carre((int)game->joueur2.unites[i].coord[0],(int)game->joueur2.unites[i].coord[1], game->joueur2, UNITE_PAS_JOUEE);
-              affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
-              affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.4);
             }
           }
+          affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
+          affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.4);
         }
         else if(game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
@@ -255,7 +256,7 @@ void affichage(Game* game){
       break;
 
       case FIN_JEU:
-        cout<<"On est rentrés dans la case Fin jeu"<<endl; 
+        cout<<"On est rentrés dans la case Fin jeu"<<endl;
         bouton(game->boutonRejouer);
         bouton(game->boutonQuitter);
         affichageTexture(game->textfond[IMG_MENU_FIN],game->aspectRatio,1,0,0);
