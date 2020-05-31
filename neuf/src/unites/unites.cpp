@@ -159,27 +159,94 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
     game->uniteJouee[id]=1;
     // combat
     idEnnemi = selectionIdUnite(xAttaque, yAttaque, *joueurEnnemi);
+
+    int pvAvantEnnemi = joueurEnnemi->unites[idEnnemi].vie;
+    int pvAvantAmi = joueurTour->unites[id].vie;
+    cout<<"ennemi"<< pvAvantEnnemi<<" ami"<<pvAvantAmi<<endl;
+
     joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
     //if(distance respectée)
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      // joueurEnnemi->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
+      cout << "L'unite ennemie est morte" << endl;
+    }
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+    //  game->uniteJouee[id]=0;
+      joueurTour->unites[id].vie=0;
+      // joueurTour->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
+
+      cout << "Votre unite est morte" << endl;
+    }
+
     joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
+
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      // joueurEnnemi->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
+      cout << "L'unite ennemie est morte" << endl;
+    }
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+    //  game->uniteJouee[id]=0;
+      joueurTour->unites[id].vie=0;
+      // joueurTour->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
+
+      cout << "Votre unite est morte" << endl;
+    }
+
+    int pvApresEnnemi = joueurEnnemi->unites[idEnnemi].vie;
+    int pvApresAmi = joueurTour->unites[id].vie;
+
+
+    // carre(xCible, yCible, game->joueur1, DEPLACEMENT);
+    // carre(xOrdi, yOrdi, game->joueur2, DEPLACEMENT);
+
+    if(game->textureTextes[TEXTE_PV_PERDUS_J1]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_PV_PERDUS_J1]);
+    }
+    if(game->textureTextes[TEXTE_PV_PERDUS_J2]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_PV_PERDUS_J2]);
+    }
+
+    int pvPerdusEnnemisMulti = pvAvantEnnemi - pvApresEnnemi;
+    char* textePvPerdusEnnemisMulti = conversionTexteDyna(pvPerdusEnnemisMulti, (char*)"- ");
+    int pvPerdusAmi = pvAvantAmi - pvApresAmi;
+    char* textePvPerdusAmi = conversionTexteDyna(pvPerdusAmi, (char*)"- ");
+
+    //
+    creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_J1], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_J1], textePvPerdusEnnemisMulti , SDL_Color{0,0,0});
+    creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_J2], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_J2], textePvPerdusAmi , SDL_Color{0, 0 ,0});
+    affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_J1], game->textureTextes[TEXTE_PV_PERDUS_J1], joueurEnnemi->unites[idEnnemi].coord[0]/10 - 0.11 , joueurEnnemi->unites[idEnnemi].coord[1]/10 - 0.12);
+    affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_J2], game->textureTextes[TEXTE_PV_PERDUS_J2], joueurTour->unites[id].coord[0]/10 - 0.11 ,joueurTour->unites[id].coord[1]/10 - 0.12);
+    affichageTextureTextes(&game->surfaceTextes[TEXTE_ATTAQUE], game->textureTextes[TEXTE_ATTAQUE], 1.18, 0.35);
+
+    free(textePvPerdusEnnemisMulti);
+    free(textePvPerdusAmi);
 
     cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
     cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
     cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
     cout << "vie unite tour = " << joueurTour->unites[id].vie<< endl;
 
+      cout<<"ennemi"<< pvApresEnnemi<<" ami"<<pvApresAmi<<endl;
     //-----------A OPTIMISER ?----------//
     // Si une unite ennemie est tuee :
-    if (joueurEnnemi->unites[idEnnemi].vie<=0){
-      joueurEnnemi->unites[idEnnemi].vie=0;
+    if (joueurEnnemi->unites[idEnnemi].vie==0){
+      //joueurEnnemi->unites[idEnnemi].vie=0;
       joueurEnnemi->nbUnites-=1;
       insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
       cout << "L'unite ennemie est morte" << endl;
     }
     // Si une unite du joueur est tuee :
-    if (joueurTour->unites[id].vie<=0){
+    if (joueurTour->unites[id].vie==0){
       game->uniteJouee[id]=0;
-      joueurTour->unites[id].vie=0;
+      //joueurTour->unites[id].vie=0;
       joueurTour->nbUnites-=1;
       insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
 

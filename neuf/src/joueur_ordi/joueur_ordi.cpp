@@ -60,8 +60,39 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
   cout << "attaque gooo" << endl;
 
     joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
-    //if(distance respectée)
+
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      // joueurEnnemi->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
+      cout << "L'unite ennemie est morte" << endl;
+    }
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+    //  game->uniteJouee[id]=0;
+      joueurTour->unites[id].vie=0;
+      // joueurTour->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
+
+      cout << "Votre unite est morte" << endl;
+    }
     joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
+
+    if (joueurEnnemi->unites[idEnnemi].vie<=0){
+      joueurEnnemi->unites[idEnnemi].vie=0;
+      // joueurEnnemi->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
+      cout << "L'unite ennemie est morte" << endl;
+    }
+    // Si une unite du joueur est tuee :
+    if (joueurTour->unites[id].vie<=0){
+    //  game->uniteJouee[id]=0;
+      joueurTour->unites[id].vie=0;
+      // joueurTour->nbUnites-=1;
+      // insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
+
+      cout << "Votre unite est morte" << endl;
+    }
 
     cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
     cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
@@ -70,15 +101,15 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
 
     //-----------A OPTIMISER ?----------//
     // Si une unite ennemie est tuee :
-    if (joueurEnnemi->unites[idEnnemi].vie<=0){
-      joueurEnnemi->unites[idEnnemi].vie=0;
+    if (joueurEnnemi->unites[idEnnemi].vie==0){
+      //joueurEnnemi->unites[idEnnemi].vie=0;
       joueurEnnemi->nbUnites-=1;
       insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour); //A voir si on les mets vraiment en (0,0)
       cout << "L'unite ennemie est morte" << endl;
     }
     // Si une unite du joueur est tuee :
-    if (joueurTour->unites[id].vie<=0){
-      joueurTour->unites[id].vie=0;
+    if (joueurTour->unites[id].vie==0){
+      //joueurTour->unites[id].vie=0;
       joueurTour->nbUnites-=1;
       insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
 
@@ -137,37 +168,37 @@ void choixActionsOrdi(Game *game){
         int idEnnemi = selectionIdUnite(xCible, yCible, game->joueur1);
         cout<<"CHOIX ATTAQUE, idEnnemi : "<<idEnnemi<<endl;
 
-        float pvAvantEnnemi = game->joueur1.unites[idEnnemi].vie;
-        float pvAvantOrdi = game->joueur2.unites[idOrdi].vie;
+        int pvAvantJoueur = game->joueur1.unites[idEnnemi].vie;
+        int pvAvantOrdi = game->joueur2.unites[idOrdi].vie;
 
         attaqueOrdi(&game->joueur2, &game->joueur1, idOrdi, idEnnemi, game);
 
-        float pvApresEnnemi = game->joueur1.unites[idEnnemi].vie;
-        float pvApresOrdi = game->joueur2.unites[idOrdi].vie;
+        int pvApresJoueur = game->joueur1.unites[idEnnemi].vie;
+        int pvApresOrdi = game->joueur2.unites[idOrdi].vie;
 
         carre(xCible, yCible, game->joueur1, DEPLACEMENT);
         carre(xOrdi, yOrdi, game->joueur2, DEPLACEMENT);
 
-        if(game->textureTextes[TEXTE_PV_PERDUS_J1]!=0){
+        if(game->textureTextes[TEXTE_PV_PERDUS_JOUEUR]!=0){
           glDeleteTextures(1, &game->textureTextes[TEXTE_PV_PERDUS_J1]);
         }
-        if(game->textureTextes[TEXTE_PV_PERDUS_J2]!=0){
+        if(game->textureTextes[TEXTE_PV_PERDUS_ORDI]!=0){
           glDeleteTextures(1, &game->textureTextes[TEXTE_PV_PERDUS_J2]);
         }
 
-        float pvPerdusEnnemis = pvAvantEnnemi - pvApresEnnemi;
-        char* textePvPerdusEnnemis = conversionTexteDyna(pvPerdusEnnemis, (char*)"- ");
+        float pvPerdusJoueur = pvAvantJoueur - pvApresJoueur;
+        char* textePvPerdusJoueur = conversionTexteDyna(pvPerdusJoueur, (char*)"- ");
         float pvPerdusOrdi = pvAvantOrdi - pvApresOrdi;
         char* textePvPerdusOrdi = conversionTexteDyna(pvPerdusOrdi, (char*)"- ");
 
         //
-        creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_J1], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_J1], textePvPerdusEnnemis , SDL_Color{1,74,199});
-        creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_J2], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_J2], textePvPerdusOrdi , SDL_Color{94, 0 ,46});
-        affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_J1], game->textureTextes[TEXTE_PV_PERDUS_J1], game->joueur1.unites[idEnnemi].coord[0]/10 - 0.11 , game->joueur1.unites[idEnnemi].coord[1]/10 - 0.12);
-        affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_J2], game->textureTextes[TEXTE_PV_PERDUS_J2], game->joueur2.unites[idOrdi].coord[0]/10 - 0.11 , game->joueur2.unites[idOrdi].coord[1]/10 - 0.12);
+        creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_JOUEUR], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_JOUEUR], textePvPerdusJoueur, SDL_Color{0,0,0});
+        creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_ORDI], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_ORDI], textePvPerdusOrdi , SDL_Color{0, 0 ,0});
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_JOUEUR], game->textureTextes[TEXTE_PV_PERDUS_JOUEUR], game->joueur1.unites[idEnnemi].coord[0]/10 - 0.11 , game->joueur1.unites[idEnnemi].coord[1]/10 - 0.12);
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_ORDI], game->textureTextes[TEXTE_PV_PERDUS_ORDI], game->joueur2.unites[idOrdi].coord[0]/10 - 0.11 , game->joueur2.unites[idOrdi].coord[1]/10 - 0.12);
         affichageTextureTextes(&game->surfaceTextes[TEXTE_ATTAQUE], game->textureTextes[TEXTE_ATTAQUE], 1.18, 0.35);
 
-        free(textePvPerdusEnnemis);
+        free(textePvPerdusJoueur);
         free(textePvPerdusOrdi);
       }
 

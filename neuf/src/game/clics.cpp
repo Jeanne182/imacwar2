@@ -137,6 +137,7 @@ void case_actions(Game* game, Joueur* joueurTour, Joueur* joueurEnnemi, int num,
     break;
 
     case ATTAQUE:
+    
       attaque(joueurTour, joueurEnnemi, id, e, game);
       case_attaque(game, e);
     break;
