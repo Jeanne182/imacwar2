@@ -1,5 +1,7 @@
 #include "interface/interface.h"
 using namespace std;
+
+/* Créer les textures pour la carte puis les free */
 void initialisationTexturesCarte(GLuint textureCases[20], SDL_Surface* surfaceCases[20]){
     creationTexture(&textureCases[PLAINE], surfaceCases[PLAINE]);
     creationTexture(&textureCases[PLAINECHG], surfaceCases[PLAINECHG]);
@@ -35,6 +37,8 @@ void initialisationTexturesCarte(GLuint textureCases[20], SDL_Surface* surfaceCa
     SDL_FreeSurface(surfaceCases[EAUHD]);
 }
 
+
+/* Créer les textures pour les unites puis les free */
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]){
     creationTexture(&textureUnites[VIKINGMAN], surfaceUnites[VIKINGMAN]);
     creationTexture(&textureUnites[VIKINGBEAST], surfaceUnites[VIKINGBEAST]);
@@ -59,8 +63,9 @@ void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surface
     SDL_FreeSurface(surfaceUnites[DEADCHIEF]);
 }
 
+
 void creationTexture(GLuint *texture, SDL_Surface* image){
-  //SDL_Surface* image = IMG_Load(chemin_image);
+
   if(image==NULL){
     printf("L'image de la carte n'a pas pu se charger");
     exit(1);
@@ -75,9 +80,9 @@ void creationTexture(GLuint *texture, SDL_Surface* image){
     else mode = GL_RGB;
 
     glTexImage2D(GL_TEXTURE_2D, 0, mode, image->w, image->h, 0, mode, GL_UNSIGNED_BYTE, image->pixels);
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
 
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y){
   glColor3f(1,1,1);

@@ -1,11 +1,3 @@
-/*
-Fanny Joseph
-Jeanne Lebigre
-Mattéo Popoff
-
-IMAC 1 - Projet Prog&Algo S2
-*/
-
 #ifndef A_STAR_H
 #define A_STAR_H
 

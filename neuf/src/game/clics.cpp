@@ -8,6 +8,7 @@ using namespace std;
 
 void gererClic(Game* game, SDL_Event e){
   switch(game->etapeJeu){
+    /* Menu du jeu : propose jeu en multijoueur ou contre l'ordinateur */
     case MENU:
       if(selectionBoutonMenu(game, e) == MULTIJOUEURS){
         game->etapeJeu = PLACEMENT_UNITES;
@@ -19,47 +20,38 @@ void gererClic(Game* game, SDL_Event e){
       }
       break;
 
-    //Première partie du jeu : placement des unités :
+    /* Première partie du jeu : placement des unités après les avoir acheté */
     case PLACEMENT_UNITES:
 
       placementUnitesJoueurs(game, e);
-
-      cout<<game->etapeJeu<<endl;
-
       if(game->joueur1.pieces==0 && game->joueur2.pieces==0){
         game->etapeJeu = SELECTION_UNITE;
         game->tour = TOUR_JOUEUR1;
       }
       break;
 
-    //Partie du jeu où les joueurs sélectionnent l'unité avec laquelle ils vont agir
+    /* Partie du jeu où les joueurs sélectionnent l'unité avec laquelle ils vont agir */
     case SELECTION_UNITE:
-      //selection des coordonnées d'une unité du joueur dont c'est le tour
+      /* Selection des coordonnées d'une unité du joueur dont c'est le tour */
       selectionCoordonnee(&game->x,&game->y, e, game->surface);
+
       switch(game->tour){
 
         case TOUR_JOUEUR1:
-        cout <<"joueur1"<<endl;
+        cout <<"C'est au tour du joueur 1"<<endl;
+        /* Selection d'une unite qui n'a pas encore été jouée */
         case_selection(game, game->joueur1, 1);
 
 
-          break;
+        break;
 
         case TOUR_JOUEUR2:
+        cout <<"C'est au tour du joueur 2"<<endl;
+        /* Selection d'une unite qui n'a pas encore été jouée */
         if(game->modeJeu==MULTIJOUEURS){
-          if(selectionIdUnite(game->x, game->y, game->joueur2) != -1){
-            if(game->uniteJouee[selectionIdUnite(game->x, game->y, game->joueur2)]==1){
-              game->etapeJeu = SELECTION_UNITE;
-              cout<<"Unité deja jouee" <<endl;
-            }
-            else{
-              game->id2 = selectionIdUnite(game->x, game->y, game->joueur2);
-              game->etapeJeu = ACTIONS;
-            }
-          }
+          case_selection(game, game->joueur2, 2);
         }
-
-          break;
+        break;
 
         default:
           break;
@@ -67,7 +59,7 @@ void gererClic(Game* game, SDL_Event e){
 
       break;
 
-    //Partie du jeu où les joueurs attaquent et se déplacent :
+    /* Partie du jeu où les joueurs attaquent et se déplacent */
     case ACTIONS:
       switch(game->tour){
 
@@ -87,8 +79,11 @@ void gererClic(Game* game, SDL_Event e){
       }
       break;
 
+      /* Fin du jeu, un menu propose de rejouer ou de quitter */
       case FIN_JEU:
+
       if(selectionBouton(game, e) == REJOUER){
+        /* Remet la carte à jour en enlevant les unités encore dessus et réinitialise les variables */
         enleveUnite(game->mapObstacles, game->joueur1, game->joueur2);
         initialisationDynamique(game);
       }
@@ -137,7 +132,7 @@ void case_actions(Game* game, Joueur* joueurTour, Joueur* joueurEnnemi, int num,
     break;
 
     case ATTAQUE:
-    
+
       attaque(joueurTour, joueurEnnemi, id, e, game);
       case_attaque(game, e);
     break;
@@ -145,7 +140,7 @@ void case_actions(Game* game, Joueur* joueurTour, Joueur* joueurEnnemi, int num,
   }
 }
 
-
+/* Permet d'éviter les erreurs si le joueur ne clique pas au bon endroit */
 void case_rien(Game* game, SDL_Event e, Joueur joueur, int id){
   if(selectionBouton(game, e) == DEPLACEMENT){
     game->choix = DEPLACEMENT;
@@ -187,12 +182,10 @@ void case_rien(Game* game, SDL_Event e, Joueur joueur, int id){
       }
     }
   }
-
-
 }
 
 
-
+/* Permet de changer de choix malgré le clic sur une action */
 void case_deplacement(Game* game, SDL_Event e){
   if(selectionBouton(game, e) == ATTAQUE){
     game->choix = ATTAQUE;
@@ -205,11 +198,10 @@ void case_deplacement(Game* game, SDL_Event e){
   else if(selectionBouton(game, e) == RIEN){
     game->choix=RIEN;
   }
-  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
 }
 
 
-
+/* Permet de changer de choix malgré le clic sur une action */
 void case_attaque(Game* game, SDL_Event e){
   if(selectionBouton(game, e) == DEPLACEMENT){
     game->choix = DEPLACEMENT;
@@ -222,5 +214,4 @@ void case_attaque(Game* game, SDL_Event e){
   else if(selectionBouton(game, e) == RIEN){
     game->choix=RIEN;
   }
-  cout<<"Prochain tour de jeu:" <<game->tour<<endl;
 }

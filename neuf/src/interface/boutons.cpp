@@ -3,6 +3,8 @@
 #include "game/game.h"
 using namespace std;
 
+
+/* Initialise les boutons d'actions / Menu */
 void bouton(Bouton bouton){
   float x = bouton.x;
   float y = bouton.y;
@@ -24,7 +26,7 @@ void bouton(Bouton bouton){
   glPopMatrix();
 }
 
-
+/* Initialise les boutons des unités pour l'achat */
 void initBoutonUnites(Bouton bouton, float r, float g, float b, float a){
   float x = bouton.x;
   float y = bouton.y;
@@ -42,28 +44,21 @@ void initBoutonUnites(Bouton bouton, float r, float g, float b, float a){
   glPopMatrix();
 }
 
+/* Vérifie si le joueur a bien cliqué sur un bouton */
 int testClicBouton(Game* game, Bouton bouton, SDL_Event e, int erreur){
-  //selectionCoordonnee(&game->x, &game->y, e, game->surface);
-  //ERREUR D'ARRONDI REGLEE AVEC CA
   float newX = 0;
   float newY = 0;
-  //selectionCoordonnee(&xTest, &yTest, e, game.surface);
-
   newX = (float)((e.button.x)*game->aspectRatio/(float)game->surface->w);
   newY = (float)((e.button.y)/(float)game->surface->h);
 
 
-  // float newX = (float)(game->x - 1)/10;
-  // float newY = (float)(game->y - 1)/10;
-
   if(newX >= bouton.x && newX <= bouton.x + bouton.longueur && newY >= bouton.y && newY <= bouton.y + bouton.hauteur){
-      cout << "test clic bouton :" << bouton.valeur << endl;
     return bouton.valeur;
   }
   return erreur;
 }
 
-
+/* Teste sur quel bouton le joueur a cliqué */
 int selectionBouton(Game* game, SDL_Event e){
   int valeurBouton=RIEN;
   valeurBouton = testClicBouton(game, game->boutonDeplacement, e, RIEN);

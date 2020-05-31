@@ -3,10 +3,28 @@
 #include "interface/interface.h"
 #include "unites/unites.h"
 #include "interface/text.h"
-
 #include "game/game.h"
 
+/* Appelle les fonctions spécifiques au joueur ordinateur */
+void tour_Ordi(Game* game){
+  if(game->tour == TOUR_JOUEUR2 && game->modeJeu == ORDI_MODE){
+    if(game->etapeJeu==SELECTION_UNITE){
+      game->etapeJeu=ACTIONS;
+    }
+    switch(game->etapeJeu){
 
+    case PLACEMENT_UNITES:
+      choixPlacementUniteOrdi(game);
+      break;
+    case ACTIONS:
+      choixActionsOrdi(game);
+      break;
+    }
+
+  }
+}
+
+/* Choisi la cible à attaquer */
 void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   int xOptimal = -1;
   int yOptimal = -1;
@@ -31,6 +49,8 @@ void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   cout<<"La cible a pour coordonnées : ("<<*xCible<<","<<*yCible<<")"<<endl;
 }
 
+
+/* Regarde si la cible à attaquer se trouve dans sa zone de déplacement */
 bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque){
   if(abs(xCible-xOrdi)+abs(yCible-yOrdi)>zoneAttaque){
     cout<<"Cible hors zone d'attaque"<<endl;
@@ -40,82 +60,66 @@ bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque){
   return true;
 }
 
+
+/* Si cible hors de la zone : choisi la case la plus proche dans sa zone de placement */
 void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, Noeud* chemin){
   int xChemin = chemin->parent->x;
   int yChemin = chemin->parent->y;
-  // cout<<"X : " << xChemin <<" , Y : " << yChemin <<endl;
   while(abs(*x-xChemin)+abs(*y-yChemin) > zoneDeplacement){
     chemin = chemin->parent;
     xChemin = chemin->x;
     yChemin = chemin->y;
-    // cout<<"X3 : " << xChemin <<" Y3 : " << yChemin <<endl;
   }
   *x = xChemin;
   *y = yChemin;
   cout << "x et y séléctionnés : " << *x <<" , "<<*y<<endl;
 }
 
+
 void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game){
 
-  cout << "attaque gooo" << endl;
+  cout << "L'ordinateur attaque" << endl;
 
+  /* L'ennemi perd des pv en premier */
     joueurEnnemi->unites[idEnnemi].vie -= (joueurTour->unites[id].force*(1 - joueurEnnemi->unites[idEnnemi].defense))*joueurTour->unites[id].vie;
 
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
-      // joueurEnnemi->nbUnites-=1;
-      // insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
-      cout << "L'unite ennemie est morte" << endl;
     }
-    // Si une unite du joueur est tuee :
     if (joueurTour->unites[id].vie<=0){
-    //  game->uniteJouee[id]=0;
       joueurTour->unites[id].vie=0;
-      // joueurTour->nbUnites-=1;
-      // insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
-
-      cout << "Votre unite est morte" << endl;
     }
+
+    /* L'attaquant perd ensuite des pv */
     joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
 
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
-      // joueurEnnemi->nbUnites-=1;
-      // insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
-      cout << "L'unite ennemie est morte" << endl;
     }
-    // Si une unite du joueur est tuee :
     if (joueurTour->unites[id].vie<=0){
-    //  game->uniteJouee[id]=0;
       joueurTour->unites[id].vie=0;
-      // joueurTour->nbUnites-=1;
-      // insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
-
-      cout << "Votre unite est morte" << endl;
     }
 
-    cout << "force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
-    cout << "vie unite ennemie = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
-    cout << "force unite tour = " << joueurTour->unites[id].force<< endl;
-    cout << "vie unite tour = " << joueurTour->unites[id].vie<< endl;
+    cout << "Force unite ennemie = " << joueurEnnemi->unites[idEnnemi].force<< endl;
+    cout << "Vie unite ennemie post combat = " << joueurEnnemi->unites[idEnnemi].vie<< endl;
+    cout << "Force unite attaquante = " << joueurTour->unites[id].force<< endl;
+    cout << "Vie unite attaquante post combat = " << joueurTour->unites[id].vie<< endl;
 
-    //-----------A OPTIMISER ?----------//
-    // Si une unite ennemie est tuee :
+    // Si une unite ennemie a été tuee :
     if (joueurEnnemi->unites[idEnnemi].vie==0){
-      //joueurEnnemi->unites[idEnnemi].vie=0;
       joueurEnnemi->nbUnites-=1;
-      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour); //A voir si on les mets vraiment en (0,0)
+      insertionCoordonnees(game, &joueurEnnemi->unites[idEnnemi], 0, 0, joueurEnnemi->tour);
       cout << "L'unite ennemie est morte" << endl;
     }
-    // Si une unite du joueur est tuee :
+    // Si une unite du joueur a été tuee :
     if (joueurTour->unites[id].vie==0){
-      //joueurTour->unites[id].vie=0;
       joueurTour->nbUnites-=1;
       insertionCoordonnees(game, &joueurTour->unites[id], 0, 0, joueurTour->tour);
-
       cout << "Votre unite est morte" << endl;
     }
-    cout<<"Nb unite joueurOrdi : "<<joueurTour->nbUnites<< "nb unites joueur1 : "<<joueurEnnemi->nbUnites<<endl;
+
+    cout<<"Nb unite joueurOrdi : "<<joueurTour->nbUnites<< "/ Nb unites joueur1 : "<<joueurEnnemi->nbUnites<<endl;
+
     if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
       cout<<"FIN JEU"<<endl;
       game->etapeJeu = FIN_JEU;
@@ -123,25 +127,21 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
 
 }
 
+/* L'ordinateur place aléatoirement ses unités */
 void choixPlacementUniteOrdi(Game *game){
   int rand_unite = rand()%5 + 5;
-  // int rand_unite = 5;
-  cout<<"rand_unite : "<< rand_unite<<endl;
+
   while (verificationPrix(game->joueur2.pieces, game->unites[rand_unite])==false){
     rand_unite = rand()%5 + 5;
-    
-    cout <<"Pieces joueur : "<<game->joueur2.pieces<<endl;
-    cout<<"rand_unite : "<< rand_unite<<endl<<endl;
   }
-  int rand_x = rand()%10 + 1; //?
-  int rand_y = rand()%10 + 1; //?
+  int rand_x = rand()%10 + 1;
+  int rand_y = rand()%10 + 1;
 
   while(placementUniteOrdi(&game->joueur2, rand_x, rand_y, game, rand_unite)==false){
-    rand_x = rand()%10 + 1; //?
+    rand_x = rand()%10 + 1;
     rand_y = rand()%10 + 1;
-    cout<<"x,y: "<< rand_x<< ", "<<rand_y<<" puis ";
   }
-  cout<<endl;
+
   finAchat(game, game->joueur1.pieces, TOUR_JOUEUR2, TOUR_JOUEUR1);
   if(game->joueur1.pieces ==0 && game->joueur2.pieces==0){
     game->etapeJeu= SELECTION_UNITE;
@@ -149,20 +149,19 @@ void choixPlacementUniteOrdi(Game *game){
   }
 }
 
+/* L'ordinateur décide s'il peut attaquer ou s'il va devoir se déplacer */
 void choixActionsOrdi(Game *game){
     int idOrdi = 0;
     while(game->joueur2.unites[idOrdi].vie ==0 || game->uniteJouee[idOrdi] ==1 || idOrdi>game->joueur2.nbUnitesInitial){
       idOrdi++;
     }
 
-    game->uniteJouee[idOrdi]=1; //steeve a dit de le bouger dans la boucle
-    cout << "idOrdi : "<<idOrdi<<endl<<endl;
-  // for(int idOrdi=0; idOrdi<game.joueur2.nbUnitesInitial; idOrdi++){
-
+    game->uniteJouee[idOrdi]=1;
     int xCible = -1;
     int yCible = -1;
     int xOrdi = game->joueur2.unites[idOrdi].coord[0];
     int yOrdi = game->joueur2.unites[idOrdi].coord[1];
+
     if(game->joueur2.unites[idOrdi].vie!=0){
       choixCible(xOrdi, yOrdi,&xCible,&yCible, game->mapObstacles);
       if(cibleInZone(xOrdi, yOrdi,xCible,yCible, game->joueur2.unites[idOrdi].zoneDeTir)==true){
@@ -192,7 +191,7 @@ void choixActionsOrdi(Game *game){
         float pvPerdusOrdi = pvAvantOrdi - pvApresOrdi;
         char* textePvPerdusOrdi = conversionTexteDyna(pvPerdusOrdi, (char*)"- ");
 
-        //
+
         creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_JOUEUR], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_JOUEUR], textePvPerdusJoueur, SDL_Color{0,0,0});
         creationTexte(&game->surfaceTextes[TEXTE_PV_PERDUS_ORDI], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_PV_PERDUS_ORDI], textePvPerdusOrdi , SDL_Color{0, 0 ,0});
         affichageTextureTextes(&game->surfaceTextes[TEXTE_PV_PERDUS_JOUEUR], game->textureTextes[TEXTE_PV_PERDUS_JOUEUR], game->joueur1.unites[idEnnemi].coord[0]/10 - 0.11 , game->joueur1.unites[idEnnemi].coord[1]/10 - 0.12);
@@ -219,18 +218,16 @@ void choixActionsOrdi(Game *game){
 
     }
 
-  // }
+
   if (verificationUniteJouee(game->uniteJouee,game->joueur2.nbUnites)==true){
     initialiseUniteJouee(game->uniteJouee);
     game->tour = TOUR_JOUEUR1;
     if(game->joueur1.nbUnites !=0 && game->joueur2.nbUnites !=0 ){
       game->etapeJeu= SELECTION_UNITE;
     }
-
     game->choix= RIEN;
   }
 
-  // game.tour = TOUR_JOUEUR1;
 }
 
 
