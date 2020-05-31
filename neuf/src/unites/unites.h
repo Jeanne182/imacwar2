@@ -31,7 +31,7 @@ const int nombreUnitesMAX =15;
 
 struct Game;
 typedef struct Unite{
-  int id;
+  //int id;
   int vie;
   int type;
   float force;
@@ -82,7 +82,7 @@ void initialiseUniteJouee(int tableau[10]);
 // void etatUnite(int id, Game* game);
 void etatUnite(Unite unite, Game* game);
 char* pvmoins(float pvAvant, float pvApres);
-void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game);
+void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game, int tour);
 // bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite);
 
 // void choixActionsOrdi(Game *game);

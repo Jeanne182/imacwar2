@@ -13,7 +13,7 @@ void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]){
   for(int i = 0; i<10; i++){
     for(int j=0; j<10; j++){
       if(map[j][i]==JOUEUR1){
-        if(xOptimal==-1){
+        if(xOptimal==-1 && yOptimal==-1){
           xOptimal = i+1;
           yOptimal = j+1;
         }
