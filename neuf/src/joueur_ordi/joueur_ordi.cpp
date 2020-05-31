@@ -86,16 +86,10 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
     }
-    if (joueurTour->unites[id].vie<=0){
-      joueurTour->unites[id].vie=0;
-    }
 
     /* L'attaquant perd ensuite des pv */
     joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
 
-    if (joueurEnnemi->unites[idEnnemi].vie<=0){
-      joueurEnnemi->unites[idEnnemi].vie=0;
-    }
     if (joueurTour->unites[id].vie<=0){
       joueurTour->unites[id].vie=0;
     }
@@ -152,7 +146,7 @@ void choixPlacementUniteOrdi(Game *game){
 /* L'ordinateur décide s'il peut attaquer ou s'il va devoir se déplacer */
 void choixActionsOrdi(Game *game){
     int idOrdi = 0;
-    while(game->joueur2.unites[idOrdi].vie ==0 || game->uniteJouee[idOrdi] ==1 || idOrdi>game->joueur2.nbUnitesInitial){
+    while((game->joueur2.unites[idOrdi].vie <=0 || game->uniteJouee[idOrdi] ==1) && idOrdi<game->joueur2.nbUnitesInitial-1){
       idOrdi++;
     }
 
@@ -218,8 +212,14 @@ void choixActionsOrdi(Game *game){
 
     }
 
+  int compteur =0;
+  for(int i=0; i<game->joueur2.nbUnitesInitial;i++){
+    if(game->uniteJouee[i]==1){
+      compteur++;
+    }
+  }
 
-  if (verificationUniteJouee(game->uniteJouee,game->joueur2.nbUnites)==true){
+  if (compteur == game->joueur2.nbUnites){
     initialiseUniteJouee(game->uniteJouee);
     game->tour = TOUR_JOUEUR1;
     if(game->joueur1.nbUnites !=0 && game->joueur2.nbUnites !=0 ){

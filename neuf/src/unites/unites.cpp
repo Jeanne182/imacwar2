@@ -129,16 +129,10 @@ void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game
     if (joueurEnnemi->unites[idEnnemi].vie<=0){
       joueurEnnemi->unites[idEnnemi].vie=0;
     }
-    if (joueurTour->unites[id].vie<=0){
-      joueurTour->unites[id].vie=0;
-    }
 
     /* L'attaquant perd ensuite des pv */
     joueurTour->unites[id].vie -= (joueurEnnemi->unites[idEnnemi].force*(1 - joueurTour->unites[id].defense))*joueurEnnemi->unites[idEnnemi].vie;
 
-    if (joueurEnnemi->unites[idEnnemi].vie<=0){
-      joueurEnnemi->unites[idEnnemi].vie=0;
-    }
     if (joueurTour->unites[id].vie<=0){
       joueurTour->unites[id].vie=0;
     }
