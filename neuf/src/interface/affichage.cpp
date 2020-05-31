@@ -226,7 +226,10 @@ void affichage(Game* game){
       if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10 && game->etapeJeu!= PLACEMENT_UNITES){
         switch(game->mapObstacles[game->ySurvol-1][game->xSurvol-1]){
           case JOUEUR1:{
-            case_survol(game->joueur1, game, JOUEUR1);
+            if(game->modeJeu!=ORDI_MODE && game->tour!=TOUR_JOUEUR2){
+              case_survol(game->joueur1, game, JOUEUR1);
+            }
+
             break;
             // int xCoord = 0;
             // int yCoord = 0;
