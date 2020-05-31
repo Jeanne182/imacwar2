@@ -16,7 +16,7 @@ void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
   if (game->etapeJeu != PLACEMENT_UNITES){
     int xOld = unite->coord[0];
     int yOld = unite->coord[1];
-    if(game->mapInit[yOld-1][xOld-1]!=PLAINE && game->mapInit[yOld-1][xOld-1]!=PLAINECHG && game->mapInit[yOld-1][xOld-1]!=ARBRE2){
+    if(game->mapInit[yOld-1][xOld-1]!=PLAINE && game->mapInit[yOld-1][xOld-1]!=PLAINECHG && game->mapInit[yOld-1][xOld-1]!=ARBRE2 && game->mapInit[yOld-1][xOld-1]!=ARBRE1){
       game->mapObstacles[yOld-1][xOld-1] = OBSTACLE;
     }
     else{
@@ -40,8 +40,11 @@ int selectionIdUnite(int x, int y, Joueur joueur){
     return -1;
 }
 
+
+
 // Fonction qui verifie si le joueura encore des unites a jouer
 bool verificationUniteJouee(int tableau[10], int nbUnites){
+  cout << "nbUnite restantes :"<<nbUnites << endl;
   int compteur=0;
   for(int i=0 ; i<10 ; i++){
     if(tableau[i]==1){
@@ -49,6 +52,7 @@ bool verificationUniteJouee(int tableau[10], int nbUnites){
     }
   }
   if (compteur==nbUnites){
+    cout << "compteur " << compteur << endl;
     return true;
   }
   return false;
@@ -68,8 +72,6 @@ void verificationFinTour(Game* game, int nbUnites){
 // Fonction qui passe le tour au joueur suivant
 void passerTour(Game* game){
   initialiseUniteJouee(game->uniteJouee);
-  game->etapeJeu=SELECTION_UNITE;
-
   game->choix = RIEN;
   if(game->tour == TOUR_JOUEUR2){
     game->tour = TOUR_JOUEUR1;
@@ -77,7 +79,7 @@ void passerTour(Game* game){
   else{
     game->tour = TOUR_JOUEUR2;
   }
-
+  game->etapeJeu=SELECTION_UNITE;
 }
 
 
