@@ -1,4 +1,3 @@
-
 #include "unites/unites.h"
 #include "interface/interface.h"
 #include "interface/text.h"
@@ -6,8 +5,8 @@
 
 using namespace std;
 
-void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* contenu, SDL_Color couleur) { //char* cheminFont, int taille,
 
+void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* contenu, SDL_Color couleur) {
     SDL_Surface* sText =  TTF_RenderUTF8_Blended(police, contenu, couleur);
     if (sText == NULL){
       fprintf(stderr, "Echec de la création du texte");
@@ -16,8 +15,8 @@ void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, c
     creationTexture(textureTexte, sText);
     texte->w = sText->w; texte->h = sText->h;
     SDL_FreeSurface(sText);
-
 }
+
 
 void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]){ //changer la taille du tableau
   creationTexte(&surfaceTextes[TEXTE_JOUEUR1], policeTextes[TITRES], &textureTextes[TEXTE_JOUEUR1], (char*)"Joueur 1", SDL_Color{1,74,199});
@@ -42,7 +41,7 @@ void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes
   creationTexte(&surfaceTextes[TEXTE_DEPLACEMENT],  policeTextes[TITRES], &textureTextes[TEXTE_DEPLACEMENT], (char*)"L'ennemi se déplace", SDL_Color{255, 255 ,255}); //
 }
 
-void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){ //, float longueur, float largeur, float x, float y
+void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y){
   float w = (float)surface->w/1000;
   float h = (float)surface->h/1000;
   glColor3f(1,1,1);
@@ -84,13 +83,3 @@ char* concatenation(char* phraseUn, char* phraseDeux){
   strcat(result, phraseDeux);
   return result;
 }
-
-// void affichageTextesStatiques(){
-//
-// }
-
-//void texteEtatUnite()
-
-// void deleteText(Text* text) {
-//
-// }

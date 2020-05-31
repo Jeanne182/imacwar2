@@ -1,12 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-
 #include <iostream>
 #include <stdlib.h>
-
 #include <math.h>
-
 #include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -17,12 +14,10 @@
 
 using namespace std;
 
-// Délacrations des variables
 
 // Déclarations des structures
 enum EnumEtapesJeu{
-  //MENU
-  PLACEMENT_UNITES=0, //Steeve a dit d'init toutes les premieres enums a 0
+  PLACEMENT_UNITES=0,
   ACHAT_UNITE,
   CHOIX_EMPLACEMENT,
   TOURS_DE_JEU,
@@ -37,7 +32,7 @@ enum EnumEtapesJeu{
 typedef struct Game {
   Game();
   Joueur joueur1, joueur2;
-  Unite unites[10];//Nain, Hobbit, Elfe, Humain, Gandalf, Orque, Smeagol, Urukhai, Nazgul, Saruman;
+  Unite unites[10];
   Bouton boutonDeplacement, boutonAttaque, boutonPasser, boutonAchat, bouton1Joueur, bouton2Joueurs, boutonRejouer, boutonQuitter;
   Bouton boutonVikingBeast, boutonVikingWoman, boutonVikingWizard, boutonVikingMan, boutonVikingChief, boutonDeadBeast, boutonDeadKnight, boutonDeadWizard, boutonDeadMan, boutonDeadChief;
   int etapeJeu, modeJeu;
@@ -45,10 +40,9 @@ typedef struct Game {
   int choix;
   int etapeAchatUnite;
   int achat_type;
-  int uniteJouee[10]; // A CHANGER SI ON CHANGE LES SOUS
+  int uniteJouee[10];
 
   SDL_Surface* surface;
-
   SDL_Surface* surfacebouton;
   GLuint texturebouton;
 
@@ -63,26 +57,21 @@ typedef struct Game {
 
   //textes
   GLuint textureTextes[100];
-  SDL_Surface surfaceTextes[100]; // parce que steevaditquevallaitmieux que ce soit pas un pointeur de surface
+  SDL_Surface surfaceTextes[100];
   TTF_Font* policeTextes[100];
-  // SDL_Surface *texte;
-  // TTF_Font *police;
+
 
   int longueurCarte, hauteurCarte;
   int window_width, window_height;
   int bit_per_pixel;
   float aspectRatio;
-
   Uint32 framerate_milliseconds;
 
+  //map
   int mapInit[10][10];
-  //int map[10][10];
   int zonePlacement[10][10];
   int mapObstacles[10][10];
 
-
-
-  //A enlever ??
   int x , y;
   int xSurvol, ySurvol;
   int id1, id2;

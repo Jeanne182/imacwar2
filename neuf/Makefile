@@ -6,7 +6,7 @@ BINDIR	= bin/
 SRCDIR	= src/
 OBJDIR	= obj/
 
-main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)sprites.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o $(OBJDIR)textures.o $(OBJDIR)text.o $(OBJDIR)affichage.o $(OBJDIR)a_star.o $(OBJDIR)joueur_ordi.o
+main: $(OBJDIR)main.o $(OBJDIR)unites.o $(OBJDIR)interface.o $(OBJDIR)selection.o $(OBJDIR)boutons.o $(OBJDIR)initialisation.o $(OBJDIR)clics.o $(OBJDIR)textures.o $(OBJDIR)text.o $(OBJDIR)affichage.o $(OBJDIR)a_star.o $(OBJDIR)joueur_ordi.o
 		$(CC) -o $(BINDIR)$@ $^ $(LDFLAGS)
 		./$(BINDIR)$@
 
@@ -19,8 +19,6 @@ $(OBJDIR)unites.o: src/unites/unites.cpp src/unites/unites.h
 $(OBJDIR)interface.o: src/interface/interface.cpp src/interface/interface.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
-$(OBJDIR)sprites.o: src/interface/sprites.cpp src/interface/interface.h
-	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 $(OBJDIR)selection.o: src/unites/selection.cpp src/unites/unites.h
 	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)

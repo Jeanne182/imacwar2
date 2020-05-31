@@ -3,7 +3,7 @@
 #include "game/game.h"
 using namespace std;
 
-
+/* Selectionne les coordonées du clic de la souris et les convertit dans le repere de la carte */
 void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
   *x = e.button.x;
   *y = e.button.y;
@@ -11,28 +11,26 @@ void selectionCoordonnee(int* x, int* y, SDL_Event e, SDL_Surface* surface){
 }
 
 
+/* Associe les coordonnées à une unité et modifie la carte obstacles */
 void insertionCoordonnees(Game* game, Unite* unite, int x, int y, int tour){
   if (game->etapeJeu != PLACEMENT_UNITES){
     int xOld = unite->coord[0];
     int yOld = unite->coord[1];
-    //game->map[yOld-1][xOld-1] = game->mapInit[yOld-1][xOld-1];
     if(game->mapInit[yOld-1][xOld-1]!=PLAINE && game->mapInit[yOld-1][xOld-1]!=PLAINECHG && game->mapInit[yOld-1][xOld-1]!=ARBRE2){
       game->mapObstacles[yOld-1][xOld-1] = OBSTACLE;
     }
     else{
       game->mapObstacles[yOld-1][xOld-1] = VIDE;
     }
-
   }
 
   unite->coord[0]=x;
   unite->coord[1]=y;
-  // game->map[y-1][x-1] = tour;
-  // game->mapObstacles[y-1][x-1] = OBSTACLE;
   game->mapObstacles[y-1][x-1] = tour;
-  
 }
 
+
+/* Selection l'id d'une unité en focntion de ses coordonnées */
 int selectionIdUnite(int x, int y, Joueur joueur){
   for(int compteur = 0; compteur < joueur.nbUnitesInitial ; compteur++){
       if (joueur.unites[compteur].coord[0]==x && joueur.unites[compteur].coord[1]==y){
@@ -83,7 +81,6 @@ void passerTour(Game* game){
 }
 
 
-
 // Fonction qui, lors du placement des créatures en debut de partie, verifie que le joueur place bien ses créatures dans la zone qui lui est reservee
 bool verificationZone(Joueur joueur, int x, int y, Game* game){
   if (joueur.id!=game->zonePlacement[y-1][x-1]){
@@ -104,9 +101,9 @@ bool verificationCaseLibre(Game* game, int x,int y){
 bool verifUniteEnnemie(int tour, int map[10][10], int x,int y){
   if(map[y-1][x-1]!=tour){
     return false;
-    cout << "probl ce n'est pas une unite ennemie" << endl;
+    cout << "Ce n'est pas une unite ennemie" << endl;
   }
-  cout<<"unite ennemie selectionnee"<<endl;
+  cout<<"Unite ennemie selectionnee"<<endl;
   return true;
 }
 

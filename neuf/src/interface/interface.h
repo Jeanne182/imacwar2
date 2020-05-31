@@ -1,17 +1,8 @@
-/*
-
-IMAC 1 - Projet Prog&Algo S1
-*/
-
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-
-
 #include <iostream>
-
 #include <stdlib.h>
-
 #include <SDL/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -20,11 +11,13 @@ IMAC 1 - Projet Prog&Algo S1
 #include <SDL/SDL_image.h>
 
 extern int frame;
+
 // Déclarations des variables
 struct Game;
 struct Joueur;
+struct Unite;
 
-// Déclarations des structures
+// Déclarations des structures et des enum
 
 typedef struct Bouton{
   float r, g, b, a, x, y, hauteur, longueur, valeur;
@@ -44,7 +37,7 @@ enum EnumObstacles{
   };
 
 enum EnumTexturesCarte{
-    PLAINE=0, //Steeve a dit d'init toutes les premieres enums a 0
+    PLAINE=0,
     PLAINECHG,
     EAU,
     EAUHG,
@@ -63,7 +56,7 @@ enum EnumTexturesCarte{
   };
 
 enum EnumBoutons{
-    RIEN=0,//Steeve a dit d'init toutes les premieres enums a 0
+    RIEN=0,
     ACHAT,
     DEPLACEMENT,
     ATTAQUE,
@@ -77,7 +70,7 @@ enum EnumBoutons{
   };
 
 enum EnumUnites{
-    VIKINGMAN=0,//Steeve a dit d'init toutes les premieres enums a 0
+    VIKINGMAN=0,
     VIKINGWOMAN,
     VIKINGBEAST,
     VIKINGWIZARD,
@@ -89,23 +82,20 @@ enum EnumUnites{
     DEADCHIEF,
     SANS_TYPE
   };
+
+
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 
 /* interface.cpp */
-//int affichageInterface();
 void reshape(SDL_Surface** surface, unsigned int width, unsigned int height);
 int initialisationSDL(Game* game);
 void finJeu(Game* game);
 int finProgrammeSDL(Game* game);
-
-//string texture_path(texturesCarte texture_value);
 void carre(float x, float y, Joueur joueur, int choix);
 void conversionOpenGLRepere(int* x, int* y, SDL_Surface* surface);
 void surbrillanceAchat(int type, Game* game);
-
-/*sprites.cpp*/
-void affichageUnite(Joueur joueur, Game* game);
+void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game);
 
 
 /* boutons.cpp */
@@ -122,12 +112,13 @@ void affichageCarte(Game* game);
 void initialisationBoutons(Game* game);
 void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame);
 void case_survol(Joueur joueur, Game* game);
+void etatUnite(Unite unite, Game* game);
 
 /*textures.cpp*/
-
-void initialisationTexturesCarte(GLuint textureCases[20], SDL_Surface* surfaceCases[20]);  //à placer
+void initialisationTexturesCarte(GLuint textureCases[20], SDL_Surface* surfaceCases[20]);
 void initialisationTexturesUnites(GLuint textureUnites[10], SDL_Surface* surfaceUnites[10]);
 void creationTexture(GLuint *texture, SDL_Surface* image);
 void affichageTexture(GLuint texture, float longueur, float largeur, float x, float y);
+
 
 #endif

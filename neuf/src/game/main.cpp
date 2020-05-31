@@ -20,24 +20,7 @@ int main(){
 
       affichage(&game);
 
-      if(game.tour == TOUR_JOUEUR2 && game.modeJeu == ORDI_MODE){
-        if(game.etapeJeu==SELECTION_UNITE){
-          game.etapeJeu=ACTIONS;
-        }
-        switch(game.etapeJeu){
-
-        case PLACEMENT_UNITES:
-        cout << "sousj1: " << game.joueur1.pieces << endl;
-        cout << "sousj2: " << game.joueur2.pieces << endl;
-
-          choixPlacementUniteOrdi(&game);
-          break;
-        case ACTIONS:
-          choixActionsOrdi(&game);
-          break;
-        }
-
-      }
+      tour_Ordi(&game);
 
       /* Boucle traitant les evenements */
       SDL_Event e;
@@ -51,6 +34,7 @@ int main(){
               break;
           }
 
+          /* Récupère l'id de l'unité survolée en continu */
           selectionCoordonnee(&game.xSurvol, &game.ySurvol, e, game.surface);
           game.idUniteSurvolee = selectionIdUnite(game.xSurvol, game.ySurvol,game.joueur1);
           if(game.idUniteSurvolee==-1){
@@ -60,7 +44,6 @@ int main(){
           switch(e.type) {
             case SDL_MOUSEBUTTONDOWN:
               if (e.button.button == SDL_BUTTON_LEFT){
-
                 gererClic(&game,e);
               }
 

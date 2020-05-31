@@ -1,11 +1,3 @@
-/*
-Fanny Joseph
-Jeanne Lebigre
-Mattéo Popoff
-
-IMAC 1 - Projet Prog&Algo S2
-*/
-
 #ifndef JOEUR_ORDI_H
 #define JOEUR_ORDI_H
 
@@ -21,6 +13,7 @@ using namespace std;
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 /* joueur_ordi.cpp */
+void tour_Ordi(Game* game);
 void choixCible(int xOrdi,int yOrdi, int *xCible, int *yCible, int map[10][10]);
 void caseOptimaleAtteignable(int *x, int *y, int zoneDeplacement, Noeud* chemin);
 bool cibleInZone(int xOrdi,int yOrdi, int xCible, int yCible, int zoneAttaque);

@@ -49,27 +49,22 @@ enum Enum_Textes{
   };
 
   enum Polices{
-    TITRES=0, //Steeve a dit d'init toutes les premieres enums a 0
+    TITRES=0,
     SOUSTITRES,
     TITRE_MEDIUM,
     TITRES_BOUTONS,
     NORMAL
   };
 
-// typedef struct Texte {
-//     TTF_Font *font; // Police de caractère
-//     SDL_Surface *text; // Contenu du texte
-//     SDL_Color color; // Couleur du texte
-//     GLuint texture;
-// } Texte;
+
 
 //----------------------------------------------------------------- Prototypes des fonctions-------------------------------------------------------------//
 
 /*text.cpp*/
 void creationTexte(SDL_Surface* texte, TTF_Font* police, GLuint *textureTexte, char* contenu, SDL_Color couleur);
 void initialisationTextes(SDL_Surface surfaceTextes[100], TTF_Font* policeTextes[100], GLuint textureTextes[100]);
-
-void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y); //, float longueur, float largeur, float x, float y
+void affichageTextureTextes(SDL_Surface* surface, GLuint texture, float x, float y); 
 char* conversionTexteDyna(int valeur, char* phrase);
 char* concatenation(char* phraseUn, char* phraseDeux);
+
 #endif

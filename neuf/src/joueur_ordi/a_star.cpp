@@ -3,13 +3,12 @@
 
 using namespace std;
 
+
 bool verificationDansListe(list<Noeud*> liste, Noeud *noeud){
-  // list<Noeud> copyList = liste;
   Noeud *noeudFin = NULL;
   while(!liste.empty()){
     noeudFin = liste.back();
     if ( noeudFin->x == noeud->x && noeudFin->y == noeud->y){
-      // cout <<"Le noeud est dans la liste"<<endl;
      return true;
     }
     liste.pop_back();
@@ -17,6 +16,8 @@ bool verificationDansListe(list<Noeud*> liste, Noeud *noeud){
    return false;
 }
 
+
+/* Pas utilisée mais utile pour repérer le chemin dans le terminal */
 void affichageChemin(Noeud* chemin,int xOrdi,int yOrdi){
   cout<< "Cible : ("<<chemin->x<<","<<chemin->y<<")";
   cout<<"Chemin prédéfini : ";
@@ -31,7 +32,7 @@ void affichageChemin(Noeud* chemin,int xOrdi,int yOrdi){
 
 
 void poids(Noeud *noeud, Noeud *currentNode, int xOrdi, int yOrdi, int xCible, int yCible){
-  noeud->coutDeplacement = currentNode->coutDeplacement + 1; //ERREUR ICI
+  noeud->coutDeplacement = currentNode->coutDeplacement + 1;
   noeud->volDoiseau = abs(noeud->x-xCible) + abs(noeud->y-yCible);
   noeud->somme = noeud->coutDeplacement + noeud->volDoiseau;
   noeud->parent = currentNode;

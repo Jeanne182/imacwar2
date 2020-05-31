@@ -1,11 +1,3 @@
-/*
-Fanny Joseph
-Jeanne Lebigre
-Mattéo Popoff
-
-IMAC 1 - Projet Prog&Algo S1
-*/
-
 #ifndef UNITES_H
 #define UNITES_H
 
@@ -76,16 +68,7 @@ bool placementUnite(Joueur *joueur, SDL_Event e, Game* game, int typeUnite);
 void placementUnitesJoueurs(Game* game, SDL_Event e);
 void deplacement(Joueur* joueur, int id, SDL_Event e, Game* game);
 void attaque(Joueur *joueurTour, Joueur *joueurEnnemi, int id, SDL_Event e, Game* game);
-// void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi, Game* game);
 void initialiseUniteJouee(int tableau[10]);
-//void etatUnite(SDL_Event e, Game* game);
-// void etatUnite(int id, Game* game);
-void etatUnite(Unite unite, Game* game);
-void zoneSurbrillance(Joueur joueur, int id, int map[10][10], int choix, Game* game);
-// bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite);
-
-// void choixActionsOrdi(Game *game);
-
 
 
 #endif

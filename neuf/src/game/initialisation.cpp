@@ -34,11 +34,11 @@ Game::Game():mapInit{{ EAU, EAU, PLAINECHG, PLAINE, ARBRE, PLAINE, PLAINE, PLAIN
                                           { 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
                                           { 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 },
                                           { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 },
-                                          { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }},xSurvol(0),ySurvol(0){} //Steeve a dit de rajouter ca
+                                          { 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 }},xSurvol(0),ySurvol(0){}
 
 
 void initialisationGame(Game *game){
-  initialisationSDL(game);//Steeve a dit de le mettre la ca
+  initialisationSDL(game);
   //fenetre
   game->window_width = 1500;
   game->window_height = 800;
@@ -93,7 +93,7 @@ void initialisationGame(Game *game){
   game->bouton1Joueur.a = 0;
   game->bouton1Joueur.valeur = ORDI_MODE;
 
-  game->bouton2Joueurs.x = 0.8; //Rose
+  game->bouton2Joueurs.x = 0.8;
   game->bouton2Joueurs.y = 0.8;
   game->bouton2Joueurs.longueur = 0.3;
   game->bouton2Joueurs.hauteur = 0.1;
@@ -113,7 +113,7 @@ void initialisationGame(Game *game){
   game->boutonRejouer.a = 0;
   game->boutonRejouer.valeur = REJOUER;
 
-  game->boutonQuitter.x = 0.8; //Rose
+  game->boutonQuitter.x = 0.8;
   game->boutonQuitter.y = 0.7;
   game->boutonQuitter.longueur = 0.3;
   game->boutonQuitter.hauteur = 0.1;
@@ -124,7 +124,7 @@ void initialisationGame(Game *game){
   game->boutonQuitter.valeur = QUITTER;
 
 
-  game->boutonDeplacement.x = 1.1; //Rose
+  game->boutonDeplacement.x = 1.1;
   game->boutonDeplacement.y = 0.3;
   game->boutonDeplacement.longueur = 0.3;
   game->boutonDeplacement.hauteur = 0.1;
@@ -134,13 +134,11 @@ void initialisationGame(Game *game){
   game->boutonDeplacement.a = 0;
   game->boutonDeplacement.valeur = DEPLACEMENT;
 
-  //game->boutonAttaque.x = 1.5;
-  //game->boutonAttaque.y = 0.8;
   game->boutonAttaque.x = 1.48;
   game->boutonAttaque.y = 0.3;
   game->boutonAttaque.longueur = 0.3;
   game->boutonAttaque.hauteur = 0.1;
-  game->boutonAttaque.r = 0; //bleu
+  game->boutonAttaque.r = 0;
   game->boutonAttaque.g = 0;
   game->boutonAttaque.b = 1;
   game->boutonAttaque.a = 0;
@@ -228,22 +226,18 @@ void initialisationGame(Game *game){
 
 
   //Initialisation textes
-
-
   game->policeTextes[TITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 35);
   game->policeTextes[TITRE_MEDIUM] = TTF_OpenFont("src/fonts/anirm.ttf", 30);
   game->policeTextes[TITRES_BOUTONS] = TTF_OpenFont("src/fonts/anirm.ttf", 25);
-  game->policeTextes[SOUSTITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20); //Steeve a dit de l'initialiser ici
+  game->policeTextes[SOUSTITRES] = TTF_OpenFont("src/fonts/anirm.ttf", 20);
   game->policeTextes[NORMAL] = TTF_OpenFont("src/fonts/normal.ttf", 25);
 
 
 
   reshape(&game->surface, game->window_width, game->window_height);
 
-  initialisationTexturesCarte(game->textureCases, game->surfaceCases); //Steeve a dit de mettre ce deux fonctions ici car avant on le faisait ailleurs, ce qui est pas super logique au final je crois
-
-  initialisationTexturesUnites(game->textureUnites, game->surfaceUnites);//à appeler à condition que l'unité se trouve dans les unités choisies par le joueur
-
+  initialisationTexturesCarte(game->textureCases, game->surfaceCases);
+  initialisationTexturesUnites(game->textureUnites, game->surfaceUnites);
   initialisationTextes(game->surfaceTextes, game->policeTextes, game->textureTextes);
 
   creationTexture(&game->textfond[IMG_MENUDEBUT],game->surffond[IMG_MENUDEBUT]);
@@ -255,14 +249,10 @@ void initialisationGame(Game *game){
 }
 
 
-
-
-
-
+/* Initialisation des variables nécéssaires pour pouvoir rejouer */
 void initialisationDynamique(Game *game){
 
   initialiseUniteJouee(game->uniteJouee);
-
 
   //Initialisation des joueurs
   game->joueur1.nbUnites=0;
@@ -291,7 +281,7 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGBEAST].force = 0.6;
   game->unites[VIKINGBEAST].vie = 100;
   game->unites[VIKINGBEAST].defense = 0.3;
-  game->unites[VIKINGBEAST].zoneDeTir = 1;
+  game->unites[VIKINGBEAST].zoneDeTir = 2;
   game->unites[VIKINGBEAST].distance = 2;
   game->unites[VIKINGBEAST].prix = 20;
   game->unites[VIKINGBEAST].nom = (char*)"Ours des montagnes";
@@ -309,23 +299,17 @@ void initialisationDynamique(Game *game){
   game->unites[VIKINGWIZARD].force = 0.3;
   game->unites[VIKINGWIZARD].vie = 100;
   game->unites[VIKINGWIZARD].defense = 0.6;
-  game->unites[VIKINGWIZARD].zoneDeTir = 4;
+  game->unites[VIKINGWIZARD].zoneDeTir = 3;
   game->unites[VIKINGWIZARD].distance = 4;
   game->unites[VIKINGWIZARD].prix = 30;
   game->unites[VIKINGWIZARD].nom = (char*)"Mage de feu";
   game->unites[VIKINGWIZARD].type = VIKINGWIZARD;
 
   game->unites[VIKINGCHIEF].force = 0.6;
-  game->unites[VIKINGCHIEF].vie = 1;
-  //test
-  //game->unites[VIKINGCHIEF].vie = 100;
-
+  game->unites[VIKINGCHIEF].vie = 100;
   game->unites[VIKINGCHIEF].defense = 0.6;
   game->unites[VIKINGCHIEF].zoneDeTir = 2;
-  //game->unites[VIKINGCHIEF].distance = 2;
-  //test
-  game->unites[VIKINGCHIEF].distance = 10;
-
+  game->unites[VIKINGCHIEF].distance = 2;
   game->unites[VIKINGCHIEF].prix = 50;
   game->unites[VIKINGCHIEF].nom = (char*)"Chef viking";
   game->unites[VIKINGCHIEF].type = VIKINGCHIEF;
@@ -343,7 +327,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADBEAST].force = 0.6;
   game->unites[DEADBEAST].vie = 100;
   game->unites[DEADBEAST].defense = 0.3;
-  game->unites[DEADBEAST].zoneDeTir = 1;
+  game->unites[DEADBEAST].zoneDeTir = 2;
   game->unites[DEADBEAST].distance = 2;
   game->unites[DEADBEAST].prix =20;
   game->unites[DEADBEAST].nom = (char*)"Loup des glaces";
@@ -361,7 +345,7 @@ void initialisationDynamique(Game *game){
   game->unites[DEADWIZARD].force = 0.3;
   game->unites[DEADWIZARD].vie = 100;
   game->unites[DEADWIZARD].defense = 0.6;
-  game->unites[DEADWIZARD].zoneDeTir = 4;
+  game->unites[DEADWIZARD].zoneDeTir = 3;
   game->unites[DEADWIZARD].distance = 4;
   game->unites[DEADWIZARD].prix = 30;
   game->unites[DEADWIZARD].nom = (char*)"Mage noir";
@@ -369,20 +353,15 @@ void initialisationDynamique(Game *game){
 
   game->unites[DEADCHIEF].force = 0.6;
   game->unites[DEADCHIEF].vie = 100;
-  //test
-  //game->unites[DEADCHIEF].vie = 1;
-
   game->unites[DEADCHIEF].defense = 0.6;
   game->unites[DEADCHIEF].zoneDeTir = 2;
   game->unites[DEADCHIEF].distance = 2;
-  //test
-  //game->unites[DEADCHIEF].distance = 10;
   game->unites[DEADCHIEF].prix = 50;
   game->unites[DEADCHIEF].nom = (char*)"Agent de la mort";
   game->unites[DEADCHIEF].type = DEADCHIEF;
 
 
-  game->etapeJeu = MENU; //0 pour préparation, 1 pour attaque/déplacement
+  game->etapeJeu = MENU;
   game->modeJeu = ORDI_MODE;
   game->tour = TOUR_JOUEUR1;
   game->choix = RIEN;
@@ -398,6 +377,7 @@ void initialisationDynamique(Game *game){
 };
 
 
+/* Remet la carte à jour s'il restait des unités desssus */
 void enleveUnite(int map[10][10], Joueur joueur1, Joueur joueur2){
   int id=-1;
   for(int i = 0; i<10; i++){
@@ -416,7 +396,6 @@ void enleveUnite(int map[10][10], Joueur joueur1, Joueur joueur2){
         map[j][i]= VIDE;
 
       }
-
     }
   }
 }

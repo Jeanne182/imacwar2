@@ -6,36 +6,24 @@
 #include "joueur_ordi/joueur_ordi.h"
 #include <cstring>
 
-
+/* Code de dessin pour tout ce qui est statique, ne dépendant pas des clics */
 void affichage(Game* game){
-  /* Placer ici le code de dessin */
+
   glClear(GL_COLOR_BUFFER_BIT);
   glMatrixMode(GL_MODELVIEW);
 
   glColor3f(1,1,1);
 
   if(game->etapeJeu != MENU && game->etapeJeu != FIN_JEU){
-
     affichageCarte(game);
   }
 
-  if(game->etapeJeu ==FIN_JEU){
-    cout<<"On est bien à la fin du jeu"<<endl;
-  }
 
-  // for(int x=0; x<=10; x++){
-  //   for(int y=0; y<=10; y++){
-  //     if(game->map[y-1][x-1]==PLAINE){
-  //       carre(x,y,game->joueur1);
-  //     }
-  //   }
-  // }
-
-  //affichageTexture(texteDeplacement, game->boutonDeplacement.longueur, game->boutonDeplacement.hauteur,game->boutonDeplacement.x,game->boutonDeplacement.y);
   initialisationBoutons(game);
+
   glColor3f(1,1,1);
 
-  switch (game->etapeJeu) { //Tous les trucs statiques qui ne dépendent pas des clics,
+  switch (game->etapeJeu) {
     case MENU:
       affichageTexture(game->textfond[IMG_MENUDEBUT],game->aspectRatio,1,0,0);
       bouton(game->bouton1Joueur);
@@ -50,7 +38,6 @@ void affichage(Game* game){
 
     case PLACEMENT_UNITES:
 
-
     switch (game->etapeAchatUnite) {
 
       case ACHAT_UNITE:
@@ -59,17 +46,12 @@ void affichage(Game* game){
       affichageTexture(game->texturebouton,game->boutonAchat.longueur,game->boutonAchat.hauteur,game->boutonAchat.x,game->boutonAchat.y);
       affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_ACHAT], game->textureTextes[TEXTE_BOUTON_ACHAT], (float)game->boutonAchat.x+0.07, (float)game->boutonAchat.y+0.01);
 
-      //etatUnite(2, &game);
       glColor3f(1,1,1);
       surbrillanceAchat(game->achat_type, game);
       if(game->achat_type!=SANS_TYPE){
         etatUnite(game->unites[game->achat_type], game);
       }
 
-      //affichageTexture(descriptionVikingBeast, game->boutonAchat.longueur,game->boutonAchat.hauteur,game->boutonAchat.x,game->boutonAchat.y);
-      // if(game->textureTextes[TEXTE_PV]!=NULL){
-      //   affichageTextureTextes(game->textureTextes[TEXTE_PV], game->boutonAchat.longueur,game->boutonAchat.hauteur,game->boutonAchat.x,game->boutonAchat.y);
-      // }
         switch (game->tour) {
           case TOUR_JOUEUR1:{
             if(game->textureTextes[TEXTE_PIECESJ1]!=0){
@@ -103,17 +85,10 @@ void affichage(Game* game){
           break;
         }
 
-
-
-
-
-        // carre((int)game->joueur1.unites[game->id1].coord[0],(int)game->joueur1.unites[game->id1].coord[1], game->joueur1, CLIC);
-
-
       break;
 
-
       case CHOIX_EMPLACEMENT:
+
       affichageTextureTextes(&game->surfaceTextes[TEXTE_PLACEMENT], game->textureTextes[TEXTE_PLACEMENT], 1.28, 0.12);
       if(game->tour == TOUR_JOUEUR1){
         glColor3f(1,1,1);
@@ -142,7 +117,9 @@ void affichage(Game* game){
 
     }
     break;
+
     case SELECTION_UNITE:
+
       switch (game->tour){
         case TOUR_JOUEUR1:
           for(int i=0; i<game->joueur1.nbUnitesInitial;i++){
@@ -150,10 +127,11 @@ void affichage(Game* game){
               carre((int)game->joueur1.unites[i].coord[0],(int)game->joueur1.unites[i].coord[1], game->joueur1, UNITE_PAS_JOUEE);
             }
           }
-            affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
-            affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.4);
+          affichageTextureTextes(&game->surfaceTextes[TEXTE_SELECTION], game->textureTextes[TEXTE_SELECTION], 1.2, 0.5);
+          affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.4);
 
         break;
+
         case TOUR_JOUEUR2:
         if(game->modeJeu==MULTIJOUEURS){
           for(int i=0; i<game->joueur2.nbUnitesInitial;i++){
@@ -197,16 +175,14 @@ void affichage(Game* game){
 
           carre((int)game->joueur1.unites[game->id1].coord[0],(int)game->joueur1.unites[game->id1].coord[1], game->joueur1, CLIC);
 
-
           if(game->choix == DEPLACEMENT){
             zoneSurbrillance(game->joueur1,game->id1, game->mapObstacles, DEPLACEMENT, game);
           }
           else if(game->choix == ATTAQUE){
             zoneSurbrillance(game->joueur1,game->id1, game->mapObstacles, ATTAQUE, game);
           }
-
-
       }
+
       if(game->tour == TOUR_JOUEUR2){
         if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2], game->textureTextes[TEXTE_JOUEUR2], 1.35, 0.05);
@@ -225,7 +201,6 @@ void affichage(Game* game){
               zoneSurbrillance(game->joueur2, game->id2, game->mapObstacles, ATTAQUE, game);
             }
           }
-
       }
 
       if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10 && game->etapeJeu!= PLACEMENT_UNITES){
@@ -240,7 +215,6 @@ void affichage(Game* game){
             else{
               case_survol(game->joueur1, game);
             }
-
             break;
           }
 
@@ -256,7 +230,7 @@ void affichage(Game* game){
       break;
 
       case FIN_JEU:
-        cout<<"On est rentrés dans la case Fin jeu"<<endl;
+
         bouton(game->boutonRejouer);
         bouton(game->boutonQuitter);
         affichageTexture(game->textfond[IMG_MENU_FIN],game->aspectRatio,1,0,0);
@@ -266,15 +240,12 @@ void affichage(Game* game){
         affichageTextureTextes(&game->surfaceTextes[TEXTE_QUITTER], game->textureTextes[TEXTE_QUITTER], (float)game->boutonQuitter.x+0.055, (float)game->boutonQuitter.y+0.01);
         if(game->joueur1.nbUnites == 0 && game->joueur2.nbUnites != 0){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR2_GAGNANT], game->textureTextes[TEXTE_JOUEUR2_GAGNANT], 0.42, 0.3);
-          cout << "Gagnant : Joueur 2" << endl;
         }
         else if(game->joueur1.nbUnites != 0 && game->joueur2.nbUnites == 0){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1_GAGNANT], game->textureTextes[TEXTE_JOUEUR1_GAGNANT], 0.37, 0.3);
-          cout << "Gagnant : Joueur 1" << endl;
         }
         else if(game->joueur1.nbUnites == 0 && game->joueur2.nbUnites == 0){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_EGALITE], game->textureTextes[TEXTE_EGALITE], 0.73, 0.3);
-          cout << "Les deux joueurs ont perdus" << endl;
         }
       break;
   }
@@ -300,14 +271,12 @@ void affichage(Game* game){
             break;
           }
 
-
-
         }
-
       }
     }
   }
 }
+
 
 void affichageCarte(Game* game){
   affichageTexture(game->textfond[IMG_MENUNORMAL],0.875,1,1,0);
@@ -409,6 +378,7 @@ void affichageCarte(Game* game){
   }
 }
 
+
 void initialisationBoutons(Game* game){
   initBoutonUnites(game->boutonVikingWoman, 0, 0, 0, 0);
   initBoutonUnites(game->boutonVikingMan, 0, 0, 0, 0);
@@ -422,9 +392,9 @@ void initialisationBoutons(Game* game){
   initBoutonUnites(game->boutonDeadChief, 0, 0, 0, 0);
 }
 
-void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame){
 
-  if(game->etapeJeu == PLACEMENT_UNITES /*|| (game->choix == ATTAQUE && game->tour == TOUR_JOUEUR1 && id != idgame)*/){
+void case_joueur(Joueur joueur, Game* game, int id, int i, int j, int idgame){
+  if(game->etapeJeu == PLACEMENT_UNITES){
     affichageTexture(game->textureCases[PLAINE],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
   }
   affichageTexture(game->textureUnites[joueur.unites[id].type],(float)1/10,(float)1/10,(float)i/10,(float)j/10);
@@ -436,4 +406,76 @@ void case_survol(Joueur joueur, Game* game){
   if(game->idUniteSurvolee!=-1){
     etatUnite(uniteCoord, game);
   }
+}
+
+
+/* Affiche l'état des unités */
+void etatUnite(Unite unite, Game* game){
+
+    if(game->textureTextes[TEXTE_NOM_UNIT]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_NOM_UNIT]);
+    }
+    if(game->textureTextes[TEXTE_PRIX]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_PRIX]);
+    }
+    if(game->textureTextes[TEXTE_PV]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_PV]);
+    }
+    if(game->textureTextes[TEXTE_FORCE]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_FORCE]);
+    }
+    if(game->textureTextes[TEXTE_DEFENSE]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_DEFENSE]);
+    }
+    if(game->textureTextes[TEXTE_ZONE]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_ZONE]);
+    }
+    if(game->textureTextes[TEXTE_RANGE]!=0){
+      glDeleteTextures(1, &game->textureTextes[TEXTE_RANGE]);
+    }
+
+    char* nom = concatenation(unite.nom, (char*)"");
+    char* prix = conversionTexteDyna(unite.prix, (char*)"Prix : ");
+    char* pv = conversionTexteDyna(unite.vie, (char*)"Points de vie : ");
+    char* force = conversionTexteDyna(unite.force*100, (char*)"Force (%) : ");
+    char* defense = conversionTexteDyna(unite.defense*100, (char*)"Défense (%) : ");
+    char* zone = conversionTexteDyna(unite.zoneDeTir, (char*)"Zone de tir (cases) : ");
+    char* deplacement = conversionTexteDyna(unite.distance, (char*)"Capacité de déplacement (cases) : ");
+
+    creationTexte(&game->surfaceTextes[TEXTE_NOM_UNIT], game->policeTextes[SOUSTITRES], &game->textureTextes[TEXTE_NOM_UNIT], nom, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_PV], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PV], pv, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_FORCE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_FORCE], force, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_DEFENSE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_DEFENSE], defense, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_ZONE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_ZONE], zone, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_RANGE], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_RANGE], deplacement, SDL_Color{255,255,255});
+    creationTexte(&game->surfaceTextes[TEXTE_PRIX], game->policeTextes[NORMAL], &game->textureTextes[TEXTE_PRIX], prix, SDL_Color{255,255,255});
+
+    if(game->etapeJeu == PLACEMENT_UNITES){
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_NOM_UNIT], game->textureTextes[TEXTE_NOM_UNIT], 1.1, 0.53);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PRIX], game->textureTextes[TEXTE_PRIX], 1.1, 0.58);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.61);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.64);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.67);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.70);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.73);
+    }
+    else{
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_CARACTERISTIQUES], game->textureTextes[TEXTE_CARACTERISTIQUES], 1.1, 0.63);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_NOM_UNIT], game->textureTextes[TEXTE_NOM_UNIT], 1.1, 0.7);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_PV], game->textureTextes[TEXTE_PV], 1.1, 0.75);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_FORCE], game->textureTextes[TEXTE_FORCE], 1.1, 0.78);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_DEFENSE], game->textureTextes[TEXTE_DEFENSE], 1.1, 0.81);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_ZONE], game->textureTextes[TEXTE_ZONE], 1.1, 0.84);
+      affichageTextureTextes(&game->surfaceTextes[TEXTE_RANGE], game->textureTextes[TEXTE_RANGE], 1.1, 0.87);
+    }
+
+
+    free(deplacement);
+    free(zone);
+    free(defense);
+    free(force);
+    free(pv);
+    free(prix);
+    free(nom);
+
 }
