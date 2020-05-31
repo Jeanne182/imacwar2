@@ -85,7 +85,7 @@ void attaqueOrdi(Joueur *joueurTour, Joueur *joueurEnnemi, int id, int idEnnemi,
       cout << "Votre unite est morte" << endl;
     }
     cout<<"Nb unite joueurOrdi : "<<joueurTour->nbUnites<< "nb unites joueur1 : "<<joueurEnnemi->nbUnites<<endl;
-    if(joueurTour->nbUnites = 0 || joueurEnnemi->nbUnites == 0){
+    if(joueurTour->nbUnites == 0 || joueurEnnemi->nbUnites == 0){
       cout<<"FIN JEU"<<endl;
       game->etapeJeu = FIN_JEU;
     }
@@ -191,7 +191,10 @@ void choixActionsOrdi(Game *game){
   if (verificationUniteJouee(game->uniteJouee,game->joueur2.nbUnites)==true){
     initialiseUniteJouee(game->uniteJouee);
     game->tour = TOUR_JOUEUR1;
-    game->etapeJeu= SELECTION_UNITE;
+    if(game->joueur1.nbUnites !=0 && game->joueur2.nbUnites !=0 ){
+      game->etapeJeu= SELECTION_UNITE;
+    }
+
     game->choix= RIEN;
   }
 

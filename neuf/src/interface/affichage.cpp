@@ -14,10 +14,13 @@ void affichage(Game* game){
 
   glColor3f(1,1,1);
 
-  if(game->etapeJeu != MENU){
+  if(game->etapeJeu != MENU && game->etapeJeu != FIN_JEU){
     affichageCarte(game);
   }
 
+  if(game->etapeJeu ==FIN_JEU){
+    cout<<"On est bien à la fin du jeu"<<endl;
+  }
 
   // for(int x=0; x<=10; x++){
   //   for(int y=0; y<=10; y++){
@@ -158,19 +161,19 @@ void affichage(Game* game){
 
     case ACTIONS:
 
-    if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
-      bouton(game->boutonPasser);
-      bouton(game->boutonDeplacement);
-      bouton(game->boutonAttaque);
+      if((game->modeJeu == ORDI_MODE && game->tour == TOUR_JOUEUR1) || game->modeJeu == MULTIJOUEURS){
+        bouton(game->boutonPasser);
+        bouton(game->boutonDeplacement);
+        bouton(game->boutonAttaque);
 
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_ACTION], game->textureTextes[TEXTE_ACTION], 1.2, 0.2);
-      affichageTexture(game->texturebouton,game->boutonAttaque.longueur,game->boutonAttaque.hauteur,game->boutonAttaque.x,game->boutonAttaque.y);
-      affichageTexture(game->texturebouton,game->boutonDeplacement.longueur,game->boutonDeplacement.hauteur,game->boutonDeplacement.x,game->boutonDeplacement.y);
-      affichageTexture(game->texturebouton,game->boutonPasser.longueur,game->boutonPasser.hauteur,game->boutonPasser.x,game->boutonPasser.y);
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game->textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game->boutonDeplacement.x+0.035, (float)game->boutonDeplacement.y+0.020); //, 1.5, 0.02, 0,0
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_ATTAQUE], game->textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game->boutonAttaque.x+0.08, (float)game->boutonAttaque.y+0.020); //, 1.5, 0.02, 0,0
-      affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_PASSER], game->textureTextes[TEXTE_BOUTON_PASSER], (float)game->boutonPasser.x+0.043, (float)game->boutonPasser.y+0.020); //, 1.5, 0.02, 0,0
-    }
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_ACTION], game->textureTextes[TEXTE_ACTION], 1.2, 0.2);
+        affichageTexture(game->texturebouton,game->boutonAttaque.longueur,game->boutonAttaque.hauteur,game->boutonAttaque.x,game->boutonAttaque.y);
+        affichageTexture(game->texturebouton,game->boutonDeplacement.longueur,game->boutonDeplacement.hauteur,game->boutonDeplacement.x,game->boutonDeplacement.y);
+        affichageTexture(game->texturebouton,game->boutonPasser.longueur,game->boutonPasser.hauteur,game->boutonPasser.x,game->boutonPasser.y);
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_DEPLACEMENT], game->textureTextes[TEXTE_BOUTON_DEPLACEMENT], (float)game->boutonDeplacement.x+0.035, (float)game->boutonDeplacement.y+0.020); //, 1.5, 0.02, 0,0
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_ATTAQUE], game->textureTextes[TEXTE_BOUTON_ATTAQUE], (float)game->boutonAttaque.x+0.08, (float)game->boutonAttaque.y+0.020); //, 1.5, 0.02, 0,0
+        affichageTextureTextes(&game->surfaceTextes[TEXTE_BOUTON_PASSER], game->textureTextes[TEXTE_BOUTON_PASSER], (float)game->boutonPasser.x+0.043, (float)game->boutonPasser.y+0.020); //, 1.5, 0.02, 0,0
+      }
       if(game->tour == TOUR_JOUEUR1){
           affichageTextureTextes(&game->surfaceTextes[TEXTE_JOUEUR1], game->textureTextes[TEXTE_JOUEUR1], 1.35, 0.05);
           if(game->idUniteSurvolee==-1 && game->id1!=-1){
@@ -209,26 +212,7 @@ void affichage(Game* game){
           }
 
       }
-      // if(game->tour == TOUR_JOUEUR2 && game->choix == DEPLACEMENT){
-      //   zoneSurbrillance(game->joueur2,game->id2, game->map, DEPLACEMENT);
-      // }
-      // if(game->tour == TOUR_JOUEUR1 && game->choix == ATTAQUE){
-      //   zoneSurbrillance(game->joueur1,game->id1, game->map, ATTAQUE);
-      // }
-      // if(game->tour == TOUR_JOUEUR2 && game->choix == ATTAQUE){
-      //   zoneSurbrillance(game->joueur2,game->id2, game->map, ATTAQUE);
-      // }
 
-      // if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10){
-      //   switch(game->map[game->ySurvol-1][game->xSurvol-1]){
-      //     case JOUEUR1:
-      //       zoneSurbrillance(game->joueur1,game->idUniteSurvolee, game->map, DEPLACEMENT);
-      //       break;
-      //     case JOUEUR2:
-      //       zoneSurbrillance(game->joueur2,game->idUniteSurvolee, game->map, DEPLACEMENT);
-      //       break;
-      //   }
-      // }
       if(game->ySurvol>0 && game->ySurvol<=10 && game->xSurvol>0 && game->xSurvol<=10 && game->etapeJeu!= PLACEMENT_UNITES){
         switch(game->mapObstacles[game->ySurvol-1][game->xSurvol-1]){
           case JOUEUR1:{
@@ -257,6 +241,7 @@ void affichage(Game* game){
       break;
 
       case FIN_JEU:
+        cout<<"On est rentrés dans la case Fin jeu"<<endl; 
         bouton(game->boutonRejouer);
         bouton(game->boutonQuitter);
         affichageTexture(game->textfond[IMG_MENU_FIN],game->aspectRatio,1,0,0);
