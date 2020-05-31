@@ -198,14 +198,14 @@ void choixActionsOrdi(Game *game){
 
       else{
         Noeud cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-        int xStock = xCible;
-        int yStock = yCible;
+        int i=0;
         while(cheminCible.x == xOrdi && cheminCible.y == yOrdi){
+          i++;
           nouvelleCible(xOrdi, yOrdi, &xCible,&yCible, game->mapObstacles);
           cheminCible = *a_star(xOrdi,yOrdi, xCible, yCible, game->mapObstacles);
-          // if (abs(xStock-xOrdi)+abs(yStock-yOrdi)>=abs(xCible-xOrdi)+abs(yCible-yOrdi)){
-          //   break;
-          // }
+          if(i==4){ //A modifier, ça casse la boucle dès qu'il y a 4 rangées d'obstacles autour de l'unité cible
+            break;
+          }
         }
         if(cheminCible.x != xOrdi && cheminCible.y != yOrdi){
           Noeud copyChemin = cheminCible;
@@ -269,14 +269,14 @@ bool placementUniteOrdi(Joueur *joueur, int x, int y, Game* game, int typeUnite)
 void nouvelleCible(int xOrdi, int yOrdi, int *xCible, int *yCible, int map[10][10]){
   int xHaut = *xCible;
   int yHaut = *yCible - 1;
-  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xHaut-xOrdi)+abs(yHaut-yOrdi) && map[yHaut-1][xHaut-1] == VIDE){
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xHaut-xOrdi)+abs(yHaut-yOrdi)/* && map[yHaut-1][xHaut-1] == VIDE*/){
     *xCible = xHaut;
     *yCible = yHaut;
   }
 
   int xBas = *xCible;
   int yBas = *yCible + 1;
-  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xBas-xOrdi)+abs(yBas-yOrdi) && map[yBas-1][xBas-1] == VIDE){
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xBas-xOrdi)+abs(yBas-yOrdi)/* && map[yBas-1][xBas-1] == VIDE*/){
     *xCible = xBas;
     *yCible = yBas;
   }
@@ -290,7 +290,7 @@ void nouvelleCible(int xOrdi, int yOrdi, int *xCible, int *yCible, int map[10][1
 
   int xGauche = *xCible - 1;
   int yGauche = *yCible;
-  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xGauche-xOrdi)+abs(yGauche-yOrdi) && map[yDroite-1][xDroite-1] == VIDE){
+  if(abs(*xCible-xOrdi)+abs(*yCible-yOrdi)>abs(xGauche-xOrdi)+abs(yGauche-yOrdi)/* && map[yDroite-1][xDroite-1] == VIDE*/){
     *xCible = xGauche;
     *yCible = yGauche;
   }
